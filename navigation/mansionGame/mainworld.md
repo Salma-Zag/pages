@@ -6,40 +6,46 @@ permalink: /gamify/mansionGame
 
 <div id="gameContainer">
     <div id="promptDropDown" class="promptDropDown" style="z-index: 9999"></div>
-    <canvas id='gameCanvas'></canvas>
+    <canvas id="gameCanvas"></canvas>
 </div>
 
+<!-- Put config variables in a script block processed by Jekyll -->
+<script>
+    // Jekyll/Liquid variables CAN be used here, because this is inline script in HTML
+    window.gameConfig = {
+        baseurl: "{{ site.baseurl }}",
+        pythonURI: "{{ site.baseurl }}/assets/js/api/config.js",
+        globalBackground: "{{ site.baseurl }}/assets/images/mansion_main_photo.png"
+    };
+</script>
+
 <script type="module">
-    // Mansion Game assets locations
-    import Game from "{{site.baseurl}}/assets/js/mansionGame/GameEngine/Game.js";
-    import GameLevel1 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel1.js";
-    import GameLevel2 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel2.js";
-    import GameLevel3 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel3.js";
-    import GameLevel4 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel4.js";
-    import GameLevel5 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel5.js";
-    import GameLevel6 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel6.js";
-    import { pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+    // Build paths using window.gameConfig (which was set by Liquid in the previous script)
+    import Game from "/assets/js/mansionGame/GameEngine/Game.js";
+    import GameLevel1 from "/assets/js/mansionGame/mansionLevel1.js";
+    import GameLevel2 from "/assets/js/mansionGame/mansionLevel2.js";
+    import GameLevel3 from "/assets/js/mansionGame/mansionLevel3.js";
+    import GameLevel4 from "/assets/js/mansionGame/mansionLevel4.js";
+    import GameLevel5 from "/assets/js/mansionGame/mansionLevel5.js";
+    import GameLevel6 from "/assets/js/mansionGame/mansionLevel6.js";
+    import { pythonURI, javaURI, fetchOptions } from '/assets/js/api/config.js';
 
-    const gameLevelClasses = [GameLevel1, GameLevel2, GameLevel3, GameLevel4, GameLevel5, GameLevel6 ];
+    const gameLevelClasses = [ GameLevel1, GameLevel2, GameLevel3, GameLevel4, GameLevel5, GameLevel6 ];
 
-    // Web Server Environment data
     const environment = {
-        path:"{{site.baseurl}}",
+        path: window.gameConfig.baseurl,
         pythonURI: pythonURI,
         javaURI: javaURI,
         fetchOptions: fetchOptions,
         gameContainer: document.getElementById("gameContainer"),
         gameCanvas: document.getElementById("gameCanvas"),
-        gameLevelClasses: gameLevelClasses
-        ,
-        // Global photographic background for the entire game. Replace with your local image if desired.
+        gameLevelClasses: gameLevelClasses,
         globalBackgroundData: {
-            src: "{{site.baseurl}}/assets/images/mansion_main_photo.png",
+            src: window.gameConfig.globalBackground,
             mode: 'cover',
             crossOrigin: 'anonymous'
         }
+    };
 
-    }
-    // Launch Mansion Game
     Game.main(environment);
 </script>
