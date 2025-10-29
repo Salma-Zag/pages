@@ -68,7 +68,7 @@ Your rocket is approaching the landing pad! Execute the correct key sequences to
       <h2 style="color: #00ff00;">🎉 SUCCESSFUL LANDING! 🎉</h2>
       <div style="font-size: 100px; margin: 30px 0;">🚀✅</div>
       <p style="font-size: 20px;">The rocket has touched down safely!</p>
-      <p>You have made it back to Earth, and you will now restore the lost knowledge! Great work!/p>
+      <p>You have made it back to Earth, and you will now restore the lost knowledge! Great work!</p>
     </div>
 
     <div id="game-over-screen" style="display: none; text-align: center; color: white;">
@@ -127,7 +127,6 @@ const possibleKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'
     winScreen: document.getElementById('win-screen'),
     gameOverScreen: document.getElementById('game-over-screen'),
     startBtn: document.getElementById('startBtn'),
-    playAgainBtn: document.getElementById('playAgainBtn'),
     restartBtn: document.getElementById('restartBtn'),
     sequenceDisplay: document.getElementById('sequence'),
     playerInputDisplay: document.getElementById('player-input'),
@@ -331,7 +330,6 @@ const possibleKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'
 
   // Event listeners
   elements.startBtn.addEventListener('click', startGame);
-  elements.playAgainBtn.addEventListener('click', startGame);
   elements.restartBtn.addEventListener('click', startGame);
   document.addEventListener('keydown', handleKeyPress);
 
