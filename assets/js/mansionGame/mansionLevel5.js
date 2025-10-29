@@ -1,6 +1,7 @@
 // To build GameLevels, each contains GameObjects from below imports
 import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
+import Projectile from './GameEngine/Projectile.js';
 // import GameControl from './GameEngine/GameControl.js'
 
 
@@ -34,66 +35,87 @@ class MansionLevel5 {
         pixels: {height: 2400, width: 3600},
         orientation: {rows: 2, columns: 3},
 		down: {row: 1, start: 0, columns: 3},
-		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
-		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
+		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/4},
+		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/4},
 		left: {row: 0, start: 0, columns: 3},
 		right: {row: 1, start: 0, columns: 3},
 		up: {row: 1, start: 0, columns: 3},
-		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
-		upRight: {row: 1, start: 0, columns: 3, rotate: -Math.PI/16},
+		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/4},
+		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/-4},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
-	// const sprite_src_r2d2 = path + "/images/gamify/r2_idle.png";
-	// const sprite_greet_r2d2 = "Hi I am R2D2. Leave this planet and help defend the rebel base on Hoth!";
-	// const sprite_data_r2d2 = {
-	// 	id: 'StarWarsR2D2',
-	// 	greeting: sprite_greet_r2d2,
-	// 	src: sprite_src_r2d2,
-	// 	SCALE_FACTOR: 8,
-	// 	ANIMATION_RATE: 100,
-	// 	pixels: {width: 505, height: 223},
-	// 	INIT_POSITION: { x: (width * 1 / 4), y: (height * 3 / 4)},
-	// 	orientation: {rows: 1, columns: 3 },
-	// 	down: {row: 0, start: 0, columns: 3 },
-	// 	hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
-	// 	// Add dialogues array for random messages
-	// 	dialogues: [
-	// 		"Beep boop! I have important data about the Death Star plans.",
-	// 		"The rebels need your help on Hoth. The Empire is approaching!",
-	// 		"I've served with Jedi Knights and rebel heroes across the galaxy.",
-	// 		"Whrrrr... bleep! Translation: Want to fly an X-Wing fighter?",
-	// 		"My counterpart C-3PO always worries too much.",
-	// 		"I've calculated the odds of success at approximately 647 to 1.",
-	// 		"The Force is strong with this one... I can sense it.",
-	// 		"Imperial forces are on high alert. We must be cautious."
-	// 	],
-	// 	reaction: function() {
-	// 		// Use dialogue system instead of alert
-	// 		if (this.dialogueSystem) {
-	// 			this.showReactionDialogue();
-	// 		} else {
-	// 			console.log(sprite_greet_r2d2);
-	// 		}
-	// 	},
-	// 	interact: function() {
-	// 		// KEEP ORIGINAL GAME-IN-GAME FUNCTIONALITY
-	// 		// Set a primary game reference from the game environment
-	// 		let primaryGame = gameEnv.gameControl;
-	// 		let levelArray = [GameLevelStarWars];
-	// 		let gameInGame = new GameControl(gameEnv.game, levelArray);
-	// 		primaryGame.pause();
+	const player = Player(sprite_data_player, gameEnv);
 
-	// 		// Start the new game
-	// 		gameInGame.start();
+	const src_laser = path + "/images/gamify/laser_bolt.png"; // be sure to include the path
+    const data_laser = {
+        id: 'AT-AT-Laser-1',
+        greeting: "Simulate explosive action!",
+        // define image/sprite data
+        src: src_laser,
+        pixels: {height: 500, width: 500}, // height and width of the image
+        orientation: {rows: 1, columns: 1 }, // normalized rows and columns in the sprite
+        // define size, position, adjustments for hitbox
+        SCALE_FACTOR: 30,  // Start small
+        INIT_POSITION_RATIO: { x: 1 / 1.78, y: 1 / 3.3 }, // Ratios for initial position
+        hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
+        // define animation properties
+        TRANSLATE_SCALE_FACTOR: 10, // Grow to this size at end translation
+        TRANSLATE_POSITION_RATIO: { x: 1 / 2.78, y: 1 / 2.9 }, // Ratios for translate position
+        TRANSLATE_SIMULATION: {miliseconds: 500 }, // 1 second
+        down: {row: 0, start: 0, columns: 3, spin: 4},  // down is default
+	};
 
-	// 		// Setup return to main game after mini-game ends
-	// 		gameInGame.gameOver = function() {
-	// 			primaryGame.resume();
-	// 		};
-	// 	}
-	// };
+	shootLaser() 
+	{
+		// const currentTime = Date.now()
+		// if (currentTime - this.lastShotTime < this.shootCooldown) return
+
+		// this.lastShotTime = currentTime
+
+		console.log("Shooting laser");
+
+		const laserData = {
+			...this.data_laser,
+			id: `Laser-${Math.random().toString(36).substring(2, 9)}`,
+			INIT_POSITION: {
+			x: player.position.x + player.width / 2 - 10,
+			y: player.position.y - 20,
+			},
+		}
+
+		const laser = new Projectile(laserData, gameEnv)
+
+		laser.velocity = { x: 0, y: -10 }
+
+		laser.update = function () {
+			this.position.y += this.velocity.y
+
+			if (this.position.y < -this.height) {
+				const index = this.gameEnv.gameObjects.indexOf(this)
+				if (index !== -1) {
+					this.gameEnv.gameObjects.splice(index, 1)
+					this.destroy()
+				}
+				return
+			}
+
+			this.draw()
+		}
+
+		// this.lasers.push(laser)
+		// this.gameEnv.gameObjects.push(laser)
+	}
+
+	bindShootKey() 
+	{
+		window.addEventListener("keydown", (event) => {
+			if (event.code === "Space") {
+				shootLaser()
+			}
+		})
+	}
 
 	// List of objects defnitions for this level
 	this.classes = [
