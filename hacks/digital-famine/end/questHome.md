@@ -27,7 +27,7 @@ lxdData:
       Categories: ["end", "Flask", "Spring", "Databases"]
       Video: "/digital-famine/end/submodule_2-video"
       Lessons: "/digital-famine/end/submodule_2/"
-      Image: "/images/digital-famine/end.svg"
+      Image: "/images/digital-famine/Planet2-Scene.jpg"
       Alt: "end Submodule 2"
     - Title: "Submodule 3"
       Genre: "Project Creation"
