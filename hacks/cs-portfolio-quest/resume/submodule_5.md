@@ -65,7 +65,7 @@ date: 2025-10-21
     to { transform: rotate(360deg); }
   }
   
-  /* Ensure cool beenz inputs have light backgrounds */
+  /* Ensure cool beenz sigma inputs have light backgrounds */
   input, textarea {
     background-color: white !important;
     color: #1f2937 !important;
