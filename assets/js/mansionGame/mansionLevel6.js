@@ -367,7 +367,7 @@ class MansionLevel6 {
             SCALE_FACTOR: 6,
             ANIMATION_RATE: 100,
             pixels: {width: 2029, height: 2025},
-            INIT_POSITION: {x: (width * 37 / 80), y: (height / 8)},
+            INIT_POSITION: {x: (width * 37 / 50), y: (height / 8)},
             orientation: {rows: 1, columns: 1},
             down: {row: 0, start: 0, columns: 1},
             hitbox: {widthPercentage: 0.1, heightPercentage: 0.2}
@@ -379,6 +379,7 @@ class MansionLevel6 {
             {class: Player, data: sprite_data_mc},
             {class: Npc, data: sprite_data_zombie},
             {class: Npc, data: sprite_data_bossdoor},
+            {class: Npc, data: sprite_data_chair}
         ];
 
     };
