@@ -172,7 +172,6 @@ date: 2025-10-21
   <!-- Bottom Navigation -->
   <div class="flex justify-between mt-4">
     <button id="prevBtn" class="px-3 py-2 border rounded" disabled>Previous</button>
-    <!-- Removed the redundant "Next" button -->
     <button
       id="nextModuleBtnNav"
       data-href="/cs-portfolio-quest/resume/submodule_4/"
@@ -244,8 +243,13 @@ document.addEventListener('DOMContentLoaded', () => {
     nextModuleBtnNav.classList.toggle('hidden', !onLast);
     nextModuleBtnNav.disabled = !state.submitted;
 
+    if (onLast) {
+      nextModuleBtnNav.classList.toggle('bg-green-600', !!state.submitted);
+      nextModuleBtnNav.classList.toggle('bg-red-600', !state.submitted);
+      updateResumePreview(); 
+    }
+
     persist();
-    if (onLast) updateResumePreview();
   }
 
   prevBtn.addEventListener('click', ()=>showStep(state.step-1));
@@ -297,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function initDragDrop(){
     itemsPool.innerHTML = "";
-    [goodZone, badZone].forEach(z=>z.innerHTML = z.innerHTML); // keep headers
     const shuffled = [...dragDropItems].sort(()=>Math.random()-0.5);
     shuffled.forEach((item, idx)=>{
       const div = document.createElement('div');
@@ -445,6 +448,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --------- STEP 5: Preview / Save / Submit ----------
   function updateResumePreview(){
+    if (!resumePreview) return;
+
     const parts = [];
 
     // Header (summary only in this module)
@@ -466,10 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
       parts.push(`<div class="text-sm text-gray-500">Add at least one experience.</div>`);
     }
 
-    html += `</div>`; // linkedin-content
-
-    linkedinPreview.innerHTML = html;
-    showStep(4);
+    resumePreview.innerHTML = parts.join("\n");
   }
 
   function renderBullets(text){
@@ -480,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   saveDraftBtn?.addEventListener('click', ()=>{
-    persist();
+    persist();            
     updateResumePreview();
     saveMessage.textContent = "Draft saved on this device.";
     saveMessage.className = "text-sm mt-1 text-green-700";
@@ -498,7 +500,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ok){
       saveMessage.textContent = "Submitted! Your information has been received.";
       saveMessage.className = "text-sm mt-1 text-green-700";
-      // enable and turn the Next Module button green
       nextModuleBtnNav.disabled = false;
       nextModuleBtnNav.classList.remove('bg-red-600');
       nextModuleBtnNav.classList.add('bg-green-600');
@@ -510,8 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function submitFinal(payload){
     console.log("Would submit:", payload);
-    //FOR BACKEND LATER
-    // await fetch("/api/resume/module3/submit", { method:"POST", headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
     return true;
   }
 
@@ -525,16 +524,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function restore(){
     try{
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) { // initial state
+      if (!raw) { 
         addExperience();
         return;
       }
       const s = JSON.parse(raw);
-      state.step = 0;               // always start on Step 1
+      state.step = 0;               
       state.submitted = !!s.submitted;
       state.summary = s.summary || "";
       state.experiences = Array.isArray(s.experiences) ? s.experiences : [];
-      summaryEl.value = state.summary;
+      if (summaryEl) summaryEl.value = state.summary;
       renderExperiences();
     }catch(e){
       addExperience();
