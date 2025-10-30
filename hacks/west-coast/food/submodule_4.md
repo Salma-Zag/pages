@@ -23,85 +23,49 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
 
 ---
 
-<style>
-.sq-card {border-radius:.6rem;padding:1rem;background:white;box-shadow:0 6px 18px rgba(0,0,0,.06);margin-bottom:1rem;}
-.sq-terminal {background:#0a0f1c;color:#d1fae5;padding:.75rem;border-radius:.5rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:.9rem;white-space:pre-wrap;overflow:auto;}
-.sq-btn {background:#0f766e;color:white;border:none;padding:.5rem .75rem;border-radius:.375rem;cursor:pointer;}
-.sq-run {background:#14b8a6;}
-.progress-tracker {background:rgba(13,148,136,.15);border:2px solid rgba(13,148,136,.3);padding:1rem;border-radius:.75rem;margin:1rem 0;color:#e2e8f0;}
-.task-complete {color:#10b981;font-weight:bold;}
-</style>
 
-<div class="progress-tracker">
-  <h3 style="color:#2dd4bf;">🎯 Seattle Progress Tracker</h3>
-  <div id="progress-display">
-    <div id="task-archive">🗃️ Task 1: Archive Dish – <span class="status">Incomplete</span></div>
-    <div id="task-harddelete">🗑️ Task 2: Hard Delete Cascade – <span class="status">Incomplete</span></div>
-    <div id="task-analytics">📊 Task 3: Analytics Dashboard – <span class="status">Incomplete</span></div>
-    <div id="task-seed">🌱 Task 4: Seed Seattle Dishes – <span class="status">Incomplete</span></div>
-    <div id="task-view">👀 Task 5: View Archived/Active Lists – <span class="status">Incomplete</span></div>
-  </div>
-</div>
+Final stop! In Seattle, learners **archive or delete dishes** (like *Clam Chowder in a Sourdough Bread Bowl*) and run **analytics** to uncover menu insights across cities.
 
 ---
 
-## 🧠 Concept Refresher
+## 🧭 Lesson Story: “Sustainable Cleanup with Clam Chowder”
 
-**Soft Delete (`deleted_at`)**
-- Marks a record as archived instead of removing it.  
-- Lets you toggle visibility between *active* and *archived* records.
+Welcome to Seattle! Imagine standing on a misty pier, holding a warm bowl of **clam chowder in sourdough bread**.  
+This city’s challenge is about **data cleanup** — learning when to *archive*, *delete*, or *analyze* your data responsibly.
 
-**Hard Delete**
-- Permanently removes the record and linked rows (e.g., `dish_ingredients`).
-
-**Analytics (GROUP BY)**
-- Aggregates data for insights: top ingredients, average calories by city, dish counts per category.
+Think of data cleanup like composting and recycling:
+- Some data (old menu items) should be **archived** — saved but hidden.
+- Some must be **deleted** — safely and permanently.
+- And before deleting, you might want to **analyze** — to find trends before it’s gone.
 
 ---
 
-## ⚙️ Mock Backend Extensions
+## 🧠 Learning Focus
 
-```html
-<style>
-.sq-card{border-radius:.6rem;padding:1rem;background:white;box-shadow:0 6px 18px rgba(0,0,0,.06);margin-bottom:1rem;}
-.sq-terminal{background:#0b1020;color:#d1fae5;padding:.75rem;border-radius:.5rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;font-size:.9rem;white-space:pre-wrap;overflow:auto;}
-.sq-btn{background:#0f766e;color:white;border:none;padding:.5rem .75rem;border-radius:.375rem;cursor:pointer;}
-.sq-run{background:#14b8a6;}
-.sq-toast{position:fixed;right:1rem;top:1rem;background:#064e3b;color:#d1fae5;padding:.6rem 1rem;border-radius:.5rem;font-weight:600;display:none;z-index:9999;}
-.progress-tracker{background:linear-gradient(135deg,rgba(13,148,136,.15),rgba(14,116,144,.15));border:2px solid rgba(13,148,136,.3);padding:1rem;border-radius:.75rem;margin:1rem 0;color:#e2e8f0;}
-.task-complete{color:#10b981!important;font-weight:bold;}
-.unlock-notification{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#14b8a6,#0f766e);color:white;padding:24px 48px;border-radius:16px;font-weight:600;font-size:18px;z-index:10000;box-shadow:0 20px 60px rgba(16,185,129,.4);display:none;text-align:center;}
-</style>
+| Concept | Description | Example |
+|:--------|:-------------|:--------|
+| **Soft Delete** | Hides data by setting `deleted_at` instead of removing it | Archiving clam chowder when the restaurant closes |
+| **Hard Delete** | Permanently removes data, including related rows | Removing chowder + bread bowl + clam records |
+| **Cascading Delete** | Automatically removes child rows when parent is deleted | Deleting a dish also deletes its ingredients link |
+| **Archival Strategy** | Keep inactive data accessible to admins | “Archived list” in admin view |
+| **GROUP BY (Analytics)** | Summarize and report data | Average calories by city, top ingredients, dish counts |
 
-<!-- Progress Tracker -->
-<div class="progress-tracker">
-  <h3 style="color:#2dd4bf;">🎯 Seattle Progress Tracker</h3>
-  <div id="progress-display">
-    <div id="task-archive">🗃️ Task 1: Archive Dish – <span class="status">Incomplete</span></div>
-    <div id="task-harddelete">🗑️ Task 2: Hard Delete Cascade – <span class="status">Incomplete</span></div>
-    <div id="task-analytics">📊 Task 3: Analytics Dashboard – <span class="status">Incomplete</span></div>
-    <div id="task-seed">🌱 Task 4: Seed Seattle Dishes – <span class="status">Incomplete</span></div>
-    <div id="task-view">👀 Task 5: View Archived/Active Lists – <span class="status">Incomplete</span></div>
-  </div>
-  <div style="margin-top:1rem;padding:.75rem;background:rgba(13,148,136,.15);border-radius:.5rem;">
-    <strong>Completion: <span id="completion-percentage">0%</span></strong>
-    <div style="background:rgba(55,65,81,.5);height:8px;border-radius:4px;margin-top:.5rem;">
-      <div id="progress-bar" style="background:linear-gradient(90deg,#10b981,#0d9488);height:100%;border-radius:4px;width:0%;transition:width .3s ease;"></div>
-    </div>
-  </div>
-</div>
+---
 
-<div class="sq-toast" id="sqToast">Seattle +20 XP</div>
-<div id="unlockNotification" class="unlock-notification">
-  🎉 CRUD Complete!<br><small style="opacity:.9;font-size:14px;">Congratulations, Cleanup Crew!</small>
-</div>
+## 🔍 SQL Reference Snippets
 
+**Soft Delete (Update instead of Delete):**
+```sql
+UPDATE dishes
+SET deleted_at = CURRENT_TIMESTAMP
+WHERE id = 1;
 
 <script>
 (function(){
   if(!window.MockAPIInstance)return;
   const api=window.MockAPIInstance;
 
+  // --- Soft Delete (Archive) ---
   api.softDeleteDish=async id=>{
     const dish=api.db.dishes.find(d=>d.id===id);
     if(!dish)return{status:404,body:{error:"Not found"}};
@@ -110,6 +74,7 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
     return{status:200,body:dish};
   };
 
+  // --- Hard Delete (Cascade) ---
   api.hardDeleteDish=async id=>{
     const dish=api.db.dishes.find(d=>d.id===id);
     if(!dish)return{status:404,body:{error:"Not found"}};
@@ -119,6 +84,7 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
     return{status:200,body:{message:"Deleted with cascade"}};
   };
 
+  // --- Analytics (GROUP BY Demo) ---
   api.getAnalytics=async()=>{
     const active=api.db.dishes.filter(d=>!d.deleted_at);
     const archived=api.db.dishes.filter(d=>d.deleted_at);
@@ -133,13 +99,6 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
 })();
 </script>
 
-
-<div class="sq-card">
-  <div class="sq-label">Archive a dish by ID → sets <code>deleted_at</code></div>
-  <input id="archive-id" class="sq-field" placeholder="enter dish id"/>
-  <button class="sq-btn sq-run" onclick="runArchive()">Archive Dish</button>
-  <pre id="terminal-archive" class="sq-terminal"></pre>
-</div>
 <script>
 async function runArchive(){
   clearTerm('terminal-archive');
@@ -151,16 +110,7 @@ async function runArchive(){
     completeTask('archive');
   }else logTo('terminal-archive','❌ Error',res.body);
 }
-</script>
 
-
-<div class="sq-card">
-  <div class="sq-label">Hard delete dish and linked ingredients</div>
-  <input id="hard-id" class="sq-field" placeholder="enter dish id"/>
-  <button class="sq-btn sq-run" onclick="runHard()">Hard Delete</button>
-  <pre id="terminal-hard" class="sq-terminal"></pre>
-</div>
-<script>
 async function runHard(){
   clearTerm('terminal-hard');
   const id=document.getElementById('hard-id').value.trim();
@@ -171,15 +121,7 @@ async function runHard(){
     completeTask('harddelete');
   }else logTo('terminal-hard','❌ Error',res.body);
 }
-</script>
 
-
-<div class="sq-card">
-  <div class="sq-label">Run aggregated analytics queries (GROUP BY demo)</div>
-  <button class="sq-btn sq-run" onclick="runAnalytics()">Run Analytics</button>
-  <pre id="terminal-analytics" class="sq-terminal"></pre>
-</div>
-<script>
 async function runAnalytics(){
   clearTerm('terminal-analytics');
   const res=await MockAPIInstance.getAnalytics();
@@ -189,14 +131,7 @@ async function runAnalytics(){
     completeTask('analytics');
   }else logTo('terminal-analytics','❌ Error',res.body);
 }
-</script>
 
-
-<div class="sq-card">
-  <button class="sq-btn sq-run" onclick="seedSeattle()">Seed Seattle Dishes</button>
-  <pre id="terminal-seedsea" class="sq-terminal"></pre>
-</div>
-<script>
 async function seedSeattle(){
   clearTerm('terminal-seedsea');
   const seed=[
@@ -211,14 +146,7 @@ async function seedSeattle(){
     completeTask('seed');
   }else logTo('terminal-seedsea','❌ Seed failed',res);
 }
-</script>
 
-
-<div class="sq-card">
-  <button class="sq-btn sq-run" onclick="viewSeattle()">View Active & Archived</button>
-  <pre id="terminal-viewsea" class="sq-terminal"></pre>
-</div>
-<script>
 async function viewSeattle(){
   clearTerm('terminal-viewsea');
   const dishes=await MockAPIInstance.getDishes({city:'sea'});
@@ -231,56 +159,6 @@ async function viewSeattle(){
   showToast('View updated');
   completeTask('view');
 }
-</script>
-
-<script>
-(function(){
-  window.taskProgress={archive:false,harddelete:false,analytics:false,seed:false,view:false};
-
-  function loadTaskProgress(){
-    const saved=localStorage.getItem('sea_task_progress');
-    if(saved)try{Object.assign(window.taskProgress,JSON.parse(saved));}catch{}
-    updateProgressDisplay();
-  }
-  function saveTaskProgress(){localStorage.setItem('sea_task_progress',JSON.stringify(window.taskProgress));}
-  window.completeTask=function(t){
-    if(!window.taskProgress[t]){
-      window.taskProgress[t]=true;saveTaskProgress();updateProgressDisplay();checkModuleCompletion();
-    }
-  };
-  function updateProgressDisplay(){
-    const tasks=['archive','harddelete','analytics','seed','view'];let done=0;
-    tasks.forEach(x=>{
-      const el=document.getElementById(`task-${x}`);if(!el)return;
-      const s=el.querySelector('.status');
-      if(window.taskProgress[x]){s.textContent='Complete ✅';s.className='status task-complete';done++;}
-      else{s.textContent='Incomplete';s.className='status';}
-    });
-    const pct=Math.round((done/tasks.length)*100);
-    document.getElementById('completion-percentage').textContent=`${pct}%`;
-    document.getElementById('progress-bar').style.width=`${pct}%`;
-  }
-  function checkModuleCompletion(){
-    if(Object.values(window.taskProgress).every(Boolean)){
-      document.getElementById('unlockNotification').style.display='block';
-      setTimeout(()=>document.getElementById('unlockNotification').style.display='none',4000);
-      unlockNextCity();
-    }
-  }
-  function unlockNextCity(){
-    try{
-      const saved=localStorage.getItem('mchopiee_city_progress');
-      let gp={unlockedCities:[0,1,2,3],completedCities:[],totalCitiesCompleted:0};
-      if(saved)gp=JSON.parse(saved);
-      if(!gp.completedCities.includes(3)){gp.completedCities.push(3);gp.totalCitiesCompleted++;}
-      localStorage.setItem('mchopiee_city_progress',JSON.stringify(gp));
-    }catch(e){console.error(e);}
-  }
-  window.showToast=(txt,ms=2000)=>{const b=document.getElementById('sqToast');b.textContent=txt;b.style.display='block';setTimeout(()=>b.style.display='none',ms);};
-  window.logTo=(id,...p)=>{const e=document.getElementById(id);if(!e)return;const t=p.map(a=>typeof a==='object'?JSON.stringify(a,null,2):String(a)).join(' ');e.textContent+=(e.textContent?'\n':'')+t;e.scrollTop=e.scrollHeight;};
-  window.clearTerm=id=>{const e=document.getElementById(id);if(e)e.textContent='';};
-  loadTaskProgress();
-})();
 </script>
 
 <script>
