@@ -96,7 +96,6 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
   🎉 CRUD Complete!<br><small style="opacity:.9;font-size:14px;">Congratulations, Cleanup Crew!</small>
 </div>
 
-
 <script>
 (function(){
   if(!window.MockAPIInstance)return;
@@ -133,7 +132,6 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
 })();
 </script>
 
-
 <div class="sq-card">
   <div class="sq-label">Archive a dish by ID → sets <code>deleted_at</code></div>
   <input id="archive-id" class="sq-field" placeholder="enter dish id"/>
@@ -152,7 +150,6 @@ async function runArchive(){
   }else logTo('terminal-archive','❌ Error',res.body);
 }
 </script>
-
 
 <div class="sq-card">
   <div class="sq-label">Hard delete dish and linked ingredients</div>
@@ -173,7 +170,6 @@ async function runHard(){
 }
 </script>
 
-
 <div class="sq-card">
   <div class="sq-label">Run aggregated analytics queries (GROUP BY demo)</div>
   <button class="sq-btn sq-run" onclick="runAnalytics()">Run Analytics</button>
@@ -190,7 +186,6 @@ async function runAnalytics(){
   }else logTo('terminal-analytics','❌ Error',res.body);
 }
 </script>
-
 
 <div class="sq-card">
   <button class="sq-btn sq-run" onclick="seedSeattle()">Seed Seattle Dishes</button>
@@ -212,7 +207,6 @@ async function seedSeattle(){
   }else logTo('terminal-seedsea','❌ Seed failed',res);
 }
 </script>
-
 
 <div class="sq-card">
   <button class="sq-btn sq-run" onclick="viewSeattle()">View Active & Archived</button>
