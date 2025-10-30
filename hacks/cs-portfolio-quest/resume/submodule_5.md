@@ -1,13 +1,13 @@
 ---
-layout: post
-title: "Submodule 5: LinkedIn Profile Builder"
-description: "Build your professional LinkedIn profile with AI assistance"
+layout: cs-portfolio-lesson
+title: "Submodule 5"
+description: "Submodule 5 of Resume Building Mini-Quest"
 permalink: /cs-portfolio-quest/resume/submodule_5/
 parent: "Resume Building"
 team: "Grinders"
 submodule: 5
 categories: [CSP, Submodule, ResumeBuilding]
-tags: [resume, submodule, grinders, linkedin]
+tags: [resume, submodule, grinders]
 author: "Grinders Team"
 date: 2025-10-21
 ---
@@ -82,156 +82,102 @@ date: 2025-10-21
   }
 </style>
 
-<div class="max-w-5xl mx-auto p-6">
-  <div class="bg-blue-50 border-l-4 border-blue-600 p-4 mb-6">
-    <div class="flex justify-between items-start">
-      <div class="flex-1">
-        <h1 class="text-3xl font-bold text-blue-900 mb-2">LinkedIn Profile Builder</h1>
-        <p class="text-gray-700">Create a professional LinkedIn profile with AI assistance. Follow the steps below to build your complete profile.</p>
-      </div>
-      <button onclick="fillDummyData()" class="ml-4 px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition">
-        Demo Mode
-      </button>
+<div class="max-w-3xl mx-auto p-4">
+  <div class="flex justify-between items-start mb-2">
+    <div class="flex-1">
+      <h1 class="text-2xl font-bold mb-2">LinkedIn Profile Builder</h1>
+      <p class="text-gray-600 mb-4">Create a professional LinkedIn profile with AI assistance. Follow the steps to build your complete profile.</p>
     </div>
+    <button onclick="fillDummyData()" class="px-3 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700">
+      Demo
+    </button>
   </div>
 
-  <!-- Progress Steps -->
-  <div id="progressSteps" class="mb-6">
-    <div class="flex justify-between items-center">
-      <div class="flex-1 text-center">
-        <div id="step1indicator" class="w-10 h-10 mx-auto bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mb-2">1</div>
-        <p class="text-sm font-medium">Basic Info</p>
-      </div>
-      <div class="flex-1 border-t-2 border-gray-300 mx-4 mt-5"></div>
-      <div class="flex-1 text-center">
-        <div id="step2indicator" class="w-10 h-10 mx-auto bg-gray-300 text-white rounded-full flex items-center justify-center font-bold mb-2">2</div>
-        <p class="text-sm font-medium">About You</p>
-      </div>
-      <div class="flex-1 border-t-2 border-gray-300 mx-4 mt-5"></div>
-      <div class="flex-1 text-center">
-        <div id="step3indicator" class="w-10 h-10 mx-auto bg-gray-300 text-white rounded-full flex items-center justify-center font-bold mb-2">3</div>
-        <p class="text-sm font-medium">Experience</p>
-      </div>
-      <div class="flex-1 border-t-2 border-gray-300 mx-4 mt-5"></div>
-      <div class="flex-1 text-center">
-        <div id="step4indicator" class="w-10 h-10 mx-auto bg-gray-300 text-white rounded-full flex items-center justify-center font-bold mb-2">4</div>
-        <p class="text-sm font-medium">Review</p>
-      </div>
+  <!-- Progress -->
+  <div class="border rounded p-3 mb-4">
+    <div class="flex justify-between text-sm">
+      <span>Progress</span><span id="progressLabel">Step 1 / 4</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded h-2 mt-2">
+      <div id="progressBar" class="bg-blue-600 h-2 rounded" style="width:25%"></div>
     </div>
   </div>
 
   <!-- Step 1: Basic Information -->
-  <div id="step1" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm">
-    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 1: Basic Information</h2>
-    <p class="text-gray-600 mb-6">Let's start with your basic information. This will appear at the top of your LinkedIn profile.</p>
-    
-    <div class="space-y-4">
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">Full Name (Required)</label>
-        <input id="fullName" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="John Smith">
-        <p class="text-xs text-gray-500 mt-1">Use your real name as it appears on official documents</p>
-      </div>
-      
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">Professional Headline (Required)</label>
-        <input id="headline" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="Computer Science Student at UC San Diego">
-        <p class="text-xs text-gray-500 mt-1">This appears directly below your name. Include your current role or student status</p>
-      </div>
-      
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">Location</label>
-        <input id="location" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="San Diego, California">
-        <p class="text-xs text-gray-500 mt-1">City and state/country where you're based</p>
-      </div>
-      
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">Skills (comma-separated)</label>
-        <input id="skills" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="Python, JavaScript, React, Machine Learning, Data Analysis">
-        <p class="text-xs text-gray-500 mt-1">List your technical and professional skills separated by commas</p>
-      </div>
-
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">Education</label>
-        <textarea id="education" rows="2" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="B.S. Computer Science, UC San Diego, Expected Graduation: 2026"></textarea>
-        <p class="text-xs text-gray-500 mt-1">Include degree, school name, and graduation year</p>
-      </div>
+  <section id="step1" data-step="0" class="space-y-3">
+    <h2 class="text-xl font-semibold">Step 1: Basic Information</h2>
+    <p class="text-gray-600">Let's start with your basic information. This will appear at the top of your LinkedIn profile.</p>
+    <div>
+      <label class="block text-sm font-medium">Full Name *</label>
+      <input id="fullName" class="w-full border rounded px-3 py-2" placeholder="John Smith">
     </div>
-
-    <button onclick="goToStep(2)" class="mt-6 px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
-      Continue to Step 2
-    </button>
-  </div>
+    <div>
+      <label class="block text-sm font-medium">Professional Headline *</label>
+      <input id="headline" class="w-full border rounded px-3 py-2" placeholder="Computer Science Student at UC San Diego">
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Location</label>
+      <input id="location" class="w-full border rounded px-3 py-2" placeholder="San Diego, California">
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Skills (comma-separated)</label>
+      <input id="skills" class="w-full border rounded px-3 py-2" placeholder="Python, JavaScript, React, Machine Learning">
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Education</label>
+      <textarea id="education" rows="2" class="w-full border rounded px-3 py-2" placeholder="B.S. Computer Science, UC San Diego, Expected 2026"></textarea>
+    </div>
+  </section>
 
   <!-- Step 2: About Section -->
-  <div id="step2" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm hidden">
-    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 2: Tell Us About Yourself</h2>
-    <p class="text-gray-600 mb-6">Describe your background, interests, and career goals. Our AI will use this to create a professional "About" section for your LinkedIn profile.</p>
-    
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
-      <p class="text-sm font-medium text-blue-900 mb-1">Tips for this section:</p>
-      <p class="text-sm text-gray-700">Include what you're studying, what you're passionate about, key projects you've worked on, and what you're looking for (internships, job opportunities, networking).</p>
-    </div>
-
+  <section id="step2" data-step="1" class="space-y-3 hidden">
+    <h2 class="text-xl font-semibold">Step 2: Tell Us About Yourself</h2>
+    <p class="text-gray-600">Describe your background, interests, and career goals. Our AI will use this to create your About section.</p>
+    <details class="border rounded p-3">
+      <summary class="font-medium cursor-pointer">Tips for this section</summary>
+      <p class="text-sm mt-2">Include what you're studying, what you're passionate about, key projects you've worked on, and what you're looking for (internships, job opportunities, networking).</p>
+    </details>
     <div>
-      <label class="block text-sm font-semibold mb-2 text-gray-700">About You (Required)</label>
-      <textarea id="aboutPrompt" rows="5" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="I'm a junior computer science student passionate about machine learning and web development. I've built several projects including a React-based task manager and a Python data analysis tool. I'm interested in software engineering internships and love collaborating on open-source projects..."></textarea>
-      <p class="text-xs text-gray-500 mt-1">Write 3-5 sentences about yourself. Be specific and authentic.</p>
+      <label class="block text-sm font-medium">About You *</label>
+      <textarea id="aboutPrompt" rows="5" class="w-full border rounded px-3 py-2" placeholder="I'm a junior CS student passionate about machine learning and web development..."></textarea>
     </div>
-
-    <div class="flex gap-4 mt-6">
-      <button onclick="goToStep(1)" class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">
-        Back
-      </button>
-      <button onclick="goToStep(3)" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
-        Continue to Step 3
-      </button>
-    </div>
-  </div>
+  </section>
 
   <!-- Step 3: Experience -->
-  <div id="step3" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm hidden">
-    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 3: Your Experience</h2>
-    <p class="text-gray-600 mb-6">Share your work experience, internships, projects, and achievements. Our AI will format this into a professional experience section.</p>
-    
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
-      <p class="text-sm font-medium text-blue-900 mb-1">Tips for this section:</p>
-      <p class="text-sm text-gray-700">Include job titles, company names, dates, and what you accomplished. Use action verbs like "developed," "led," "built," "designed." Mention specific technologies used and measurable results.</p>
-    </div>
-
+  <section id="step3" data-step="2" class="space-y-3 hidden">
+    <h2 class="text-xl font-semibold">Step 3: Your Experience</h2>
+    <p class="text-gray-600">Share your work experience, internships, projects, and achievements. Our AI will format this professionally.</p>
+    <details class="border rounded p-3">
+      <summary class="font-medium cursor-pointer">Tips for this section</summary>
+      <p class="text-sm mt-2">Include job titles, company names, dates, and what you accomplished. Use action verbs like "developed," "led," "built." Mention technologies and results.</p>
+    </details>
     <div>
-      <label class="block text-sm font-semibold mb-2 text-gray-700">Experience & Projects (Required)</label>
-      <textarea id="experiencePrompt" rows="6" class="w-full border-2 border-gray-300 rounded px-4 py-3 focus:border-blue-500 focus:outline-none" placeholder="Software Engineering Intern at TechCorp (Summer 2024): Developed a React dashboard that improved user engagement by 30%. Built REST APIs using Node.js and Express...
-
-Personal Project - Task Manager App: Created a full-stack web app using React and Firebase. Implemented user authentication and real-time data sync..."></textarea>
-      <p class="text-xs text-gray-500 mt-1">Include internships, jobs, volunteer work, and significant projects</p>
+      <label class="block text-sm font-medium">Experience & Projects *</label>
+      <textarea id="experiencePrompt" rows="6" class="w-full border rounded px-3 py-2" placeholder="Software Intern at TechCorp (Summer 2024): Built a React dashboard..."></textarea>
     </div>
+    <button onclick="generateProfile()" id="generateBtn" class="px-3 py-2 border rounded">
+      <span id="generateIcon">Generate Profile</span>
+    </button>
+    <div id="statusMessage" class="mt-3 p-3 rounded hidden"></div>
+  </section>
 
-    <div class="flex gap-4 mt-6">
-      <button onclick="goToStep(2)" class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">
-        Back
-      </button>
-      <button onclick="generateProfile()" id="generateBtn" class="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition">
-        <span id="generateIcon">Generate My Profile</span>
-      </button>
-    </div>
-    
-    <div id="statusMessage" class="mt-4 p-4 rounded hidden"></div>
+  <!-- Nav -->
+  <div class="flex justify-between mt-4">
+    <button id="prevBtn" class="px-3 py-2 border rounded" onclick="prevStep()" disabled>Previous</button>
+    <button id="nextBtn" class="px-3 py-2 border rounded" onclick="nextStep()">Next</button>
   </div>
 
-  <!-- Step 4: Review (LinkedIn Preview) -->
-  <div id="step4" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm hidden">
-    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 4: Your LinkedIn Profile</h2>
-    <p class="text-gray-600 mb-6">Your profile is ready! Review it below and copy sections to paste into LinkedIn.</p>
-
-    <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded">
-      <p class="text-base font-semibold text-green-900 mb-2">Next Steps:</p>
-      <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
-        <li>Review your generated profile below</li>
-        <li>Click the "Copy" button for each section</li>
-        <li>Go to LinkedIn.com and log into your account</li>
-        <li>Click on "Me" then "View profile"</li>
-        <li>Click the pencil icon next to each section to edit</li>
-        <li>Paste the copied content from this tool</li>
+  <!-- Step 4: Review -->
+  <section id="step4" data-step="3" class="space-y-3 hidden">
+    <h2 class="text-xl font-semibold">Step 4: Your LinkedIn Profile</h2>
+    <p class="text-gray-600">Your profile is ready! Copy sections to paste into LinkedIn.</p>
+    <div class="border rounded p-3">
+      <div class="font-medium mb-2">How to use this:</div>
+      <ol class="list-decimal ml-5 text-sm space-y-1">
+        <li>Click "Copy" for each section below</li>
+        <li>Go to LinkedIn.com and login</li>
+        <li>Click "Me" then "View profile"</li>
+        <li>Edit each section and paste</li>
       </ol>
     </div>
 
@@ -312,7 +258,7 @@ Personal Project - Task Manager App: Created a full-stack web app using React an
 <script>
 // Configuration
 const API_KEY = 'AIzaSyACXPXKEgZ_9P6ikvDiFnNpDZe1cXUR3jY';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-latest:generateContent';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 const STORAGE_KEY = 'linkedin_profile_v3';
 
 let currentStep = 1;
