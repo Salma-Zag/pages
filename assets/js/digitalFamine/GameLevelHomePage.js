@@ -244,7 +244,9 @@ class GameLevelHomePage {
               action: () => {
                 this.progression.cyber = true;
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
-                window.location.href = '/digital-famine/cyber/';
+                console.log('Traveling to Cyber Planet...');
+                this.debugProgress();
+                window.location.href = '/digital-famine/cybersecurity-game/';
               },
               primary: true
             }]);
