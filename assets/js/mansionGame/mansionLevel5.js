@@ -46,51 +46,40 @@ class MansionLevel5 {
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
-	const sprite_src_nomad = path + "/images/gamify/zombieNpc.png"; // be sure to include the path
+	const sprite_src_nomad = path + "/images/gamify/zombieNpc.png";
 	const sprite_data_nomad = {
 			id: 'ZombieSurvivalNpc',
-			greeting: "Hi I am Da dude. Start zombe surival",
+			greeting: "Hi I am Da dude. Start zombie surival",
 			src: sprite_src_nomad,
-			SCALE_FACTOR: 10,  // Adjust this based on your scaling needs
+			SCALE_FACTOR: 10,
 			ANIMATION_RATE: 100,
 			pixels: {height: 307, width: 813},
 			INIT_POSITION: { x: (width * 3 / 4), y: (height * 3 / 4)},
-			orientation: {rows: 3, columns: 7 },
-			down: {row: 1, start: 0, columns: 6 },  // This is the stationary npc, down is default 
+			orientation: {rows: 3, columns: 7},
+			down: {row: 1, start: 0, columns: 7},
+			left: {row: 0, start: 0, columns: 7},
+			right: {row: 2, start: 0, columns: 7},
+			up: {row: 1, start: 0, columns: 7}, // fallback to down row if no up animation
 			hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
-			/* Interact function
-			*  This function is called when the player interacts with the NPC
-			*  It attempts to run a mini-game only if the required references exist.
-			*/
 			interact: function() {
-			  // Safely check for required globals/objects before using them.
-			  if (!gameEnv || !gameEnv.gameControl) {
-				console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
-				return;
-			  }
-
-			  // Only attempt to launch the mini-game if GameControl and GameLevelStarWars are defined.
-			  if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
-				// Set a primary game reference from the game environment
-				let primaryGame = gameEnv.gameControl;
-				// Define the game in game level
-				let levelArray = [GameLevelStarWars];
-				// Define a new GameControl instance with the StarWars level
-				let gameInGame = new GameControl(path, levelArray);
-				// Pause the primary game 
-				primaryGame.pause();
-				// Start the game in game
-				gameInGame.start();
-				// Setup "callback" function to allow transition from game in game to the underlying game
-				gameInGame.gameOver = function() {
-				  // Call .resume on primary game
-				  primaryGame.resume();
-				};
-			  } else {
-				console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
-			  }
+				if (!gameEnv || !gameEnv.gameControl) {
+					console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
+					return;
+				}
+				if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
+					let primaryGame = gameEnv.gameControl;
+					let levelArray = [GameLevelStarWars];
+					let gameInGame = new GameControl(path, levelArray);
+					primaryGame.pause();
+					gameInGame.start();
+					gameInGame.gameOver = function() {
+						primaryGame.resume();
+					};
+				} else {
+					console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
+				}
 			}
-		  };
+	};
 	// const sprite_src_r2d2 = path + "/images/gamify/r2_idle.png";
 	// const sprite_greet_r2d2 = "Hi I am R2D2. Leave this planet and help defend the rebel base on Hoth!";
 	// const sprite_data_r2d2 = {
