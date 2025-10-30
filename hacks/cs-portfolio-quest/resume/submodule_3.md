@@ -510,8 +510,58 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   async function submitFinal(payload){
-    console.log("Would submit:", payload);
-    return true;
+    // Build resume payload in required format
+    function buildResumePayload(p){
+      const exp = Array.isArray(p.experiences) ? p.experiences : [];
+      return {
+        professionalSummary: p.summary || "",
+        experiences: exp.map(e => ({
+          jobTitle: e.title || "",
+          company: e.company || "",
+          dates: e.dates || "",
+          description: (e.bullets || "")
+        }))
+      };
+    }
+    function determineApiUrl(){
+      if (window.location.hostname === 'localhost') return 'http://localhost:8585/api/resume/me';
+      if (window.location.hostname === 'pages.opencodingsociety.com') return 'https://spring.opencodingsociety.com/api/resume/me';
+      return '';
+    }
+
+    const resume = buildResumePayload(payload);
+    const url = determineApiUrl();
+    if (!url){
+      console.error('Unknown host for resume submission');
+      return false;
+    }
+
+    // Use the exact then/catch style requested, wrap to return boolean
+    return new Promise((resolve) => {
+      fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(resume)
+      })
+        .then(async res => {
+          if (!res.ok) {
+            // Throw just the status code if failure
+            throw res.status;
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log("Success:", data);
+          resolve(true);
+        })
+        .catch(code => {
+          console.error("Request failed with status code:", code);
+          resolve(false);
+        });
+    });
   }
 
   // --------- Persistence ----------
