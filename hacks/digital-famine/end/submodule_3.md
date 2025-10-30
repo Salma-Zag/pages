@@ -213,81 +213,11 @@ date: 2025-10-21
   })();
   </script>
   
-  <script>
-  // Robust runtime loader: tries multiple candidate URLs (Liquid-rendered + plain paths)
-  // and shows an on-page diagnostic box with attempts and results.
-  (function(){
-    const renderedBase = '{{ "/images/digital-famine" | relative_url }}';
-    // plain fallback candidates in case Liquid wasn't rendered or path differences exist
-    const fallbacks = [
-      renderedBase,                      // likely: /images/digital-famine
-      '/images/digital-famine',          // absolute fallback
-      '/hacks/digital-famine/end'        // repo-relative fallback (raw file view)
-    ];
-
-    const candidatesFor = (name)=> fallbacks.map(b=> b + '/' + name);
-
-    // create a small diagnostic overlay
-    function createDiag(){
-      let d = document.getElementById('b64Diag');
-      if(d) return d;
-      d = document.createElement('div');
-      d.id = 'b64Diag';
-      d.style.position='fixed'; d.style.right='12px'; d.style.top='12px'; d.style.zIndex=99999;
-      d.style.background='rgba(0,0,0,0.75)'; d.style.color='#fff'; d.style.padding='8px 12px'; d.style.borderRadius='8px';
-      d.style.fontSize='13px'; d.style.maxWidth='360px'; d.style.maxHeight='60vh'; d.style.overflow='auto';
-      d.innerHTML = '<strong>Image loader</strong><div id="b64DiagBody" style="margin-top:6px;font-size:12px"></div>';
-      document.body.appendChild(d);
-      return d;
-    }
-
-    function logDiag(msg, ok){
-      const body = document.getElementById('b64DiagBody') || createDiag().querySelector('#b64DiagBody');
-      const el = document.createElement('div'); el.textContent = msg; el.style.opacity = ok? '0.9':'0.7';
-      el.style.marginTop='6px'; if(!ok) el.style.color='#ff9b9b'; body.appendChild(el);
-    }
-
-    async function findAndApply(name, applyFn){
-      const cands = candidatesFor(name);
-      for(const u of cands){
-        try{
-          logDiag('Trying: ' + u);
-          const r = await fetch(u, {cache:'no-cache'});
-          if(r.ok){
-            const txt = (await r.text()).trim();
-            if(txt && txt.startsWith('data:image')){
-              applyFn(txt);
-              logDiag('OK: ' + u, true);
-              return true;
-            } else {
-              logDiag('Fetched but no data URI (len=' + (txt?txt.length:0) + '): ' + u, false);
-            }
-          } else {
-            logDiag('HTTP ' + r.status + ' for ' + u, false);
-          }
-        }catch(e){ logDiag('Fetch error for ' + u + ': ' + (e && e.message ? e.message : e), false); }
-      }
-      logDiag('All candidates failed for ' + name, false);
-      return false;
-    }
-
-    async function tryLoadAll(){
-      const diag = createDiag();
-      const bgDone = await findAndApply('end-3.png.b64', txt=>{
-        const root = document.querySelector('.game-root'); if(root) root.style.backgroundImage = 'url(' + txt + ')';
-      });
-      const spDone = await findAndApply('end-3-computer.png.b64', txt=>{
-        const img = document.querySelector('#computerSprite img'); if(img) img.src = txt;
-      });
-
-      if(bgDone && spDone){ logDiag('Both assets applied from .b64 (if found)', true); }
-      else logDiag('Fallbacks exhausted; original relative_url references and diagnostic loader will still run.', false);
-    }
-
-    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tryLoadAll);
-    else tryLoadAll();
-  })();
-  </script>
+  <!-- Note: runtime .b64 loader was removed. The page relies on the existing
+       Jekyll-resolved `relative_url` references for the PNGs and the
+       diagnostic loader earlier in this file which preloads the PNGs and reports
+       failures. If you need an alternative fallback, tell me and I can add a
+       canvas-based PNG->dataURI converter at runtime instead. -->
 (function(){
   const sprite = document.getElementById('computerSprite');
   const modal = document.getElementById('quizModal');
