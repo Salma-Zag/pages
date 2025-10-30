@@ -146,7 +146,7 @@ class GameLevelHomePage {
         SCALE_FACTOR: 9,
         STEP_FACTOR: 1000,
         ANIMATION_RATE: 10,
-        INIT_POSITION: { x: 0, y: height - (height/CHILLGUY_SCALE_FACTOR) }, 
+        INIT_POSITION: { x: 0, y: 275 - (275/CHILLGUY_SCALE_FACTOR) }, 
         pixels: {height: 512, width: 256},
         orientation: {rows: 4, columns: 2},
         right: {row: 3, start: 0, columns: 2},
@@ -202,7 +202,7 @@ class GameLevelHomePage {
         SCALE_FACTOR: 5,
         ANIMATION_RATE: 1,
         pixels: {height: 512, width: 512},
-        INIT_POSITION: { x: (width * 0.15), y: (height * 0.15) },
+        INIT_POSITION: { x: (width * 0.30), y: (height * 0.70) },
         orientation: {rows: 1, columns: 1 },
         down: {row: 0, start: 0, columns: 1 },
         hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
@@ -262,7 +262,7 @@ class GameLevelHomePage {
         SCALE_FACTOR: 4,
         ANIMATION_RATE: 1,
         pixels: {height: 512, width: 512},
-        INIT_POSITION: { x: (width * 0.25), y: (height * 0.75) },
+        INIT_POSITION: { x: (width * 0.65), y: (height * 0.20) },
         orientation: {rows: 1, columns: 1 },
         down: {row: 0, start: 0, columns: 1 },
         hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
@@ -299,7 +299,7 @@ class GameLevelHomePage {
               action: () => {
                 this.progression.medialit = true;
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
-                window.location.href = '/digital-famine/media/';
+                window.location.href = '/digital-famine/medialit/';
               },
               primary: true
             }]);
@@ -315,7 +315,7 @@ class GameLevelHomePage {
         SCALE_FACTOR: 4,
         ANIMATION_RATE: 1,
         pixels: {height: 512, width: 512},
-        INIT_POSITION: { x: (width * 0.55), y: (height * 0.25) },
+        INIT_POSITION: { x: (width * 0.75), y: (height * 0.75) },
         orientation: {rows: 1, columns: 1 },
         down: {row: 0, start: 0, columns: 1 },
         hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
@@ -368,7 +368,7 @@ class GameLevelHomePage {
         SCALE_FACTOR: 4,
         ANIMATION_RATE: 1,
         pixels: {height: 512, width: 512},
-        INIT_POSITION: { x: (width * 0.55), y: (height * 0.75) },
+        INIT_POSITION: { x: (width * 0.15), y: (height * 0.25) },
         orientation: {rows: 1, columns: 1 },
         down: {row: 0, start: 0, columns: 1 },
         hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
@@ -401,7 +401,7 @@ class GameLevelHomePage {
         SCALE_FACTOR: 4,
         ANIMATION_RATE: 1,
         pixels: {height: 512, width: 512},
-        INIT_POSITION: { x: (width * 0.82), y: (height * 0.5) },
+        INIT_POSITION: { x: (width * 0.01), y: (height * 0.75) },
         orientation: {rows: 1, columns: 1 },
         down: {row: 0, start: 0, columns: 1 },
         hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },

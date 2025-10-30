@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Autopilot Crash"
+microblog: True
 description: "Task 3 of the End Quest: Fix the crash of the autopilot element of the rocketship to get home safe."
 permalink: /digital-famine/end/submodule_3/
 parent: "End Quest"
@@ -211,6 +212,12 @@ date: 2025-10-21
     }catch(e){ console.error('Image diagnostic error', e); }
   })();
   </script>
+  
+  <!-- Note: runtime .b64 loader was removed. The page relies on the existing
+       Jekyll-resolved `relative_url` references for the PNGs and the
+       diagnostic loader earlier in this file which preloads the PNGs and reports
+       failures. If you need an alternative fallback, tell me and I can add a
+       canvas-based PNG->dataURI converter at runtime instead. -->
 (function(){
   const sprite = document.getElementById('computerSprite');
   const modal = document.getElementById('quizModal');

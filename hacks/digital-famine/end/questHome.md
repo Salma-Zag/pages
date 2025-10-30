@@ -25,14 +25,14 @@ lxdData:
       Level: 2
       Description: "This submodule will test you on your media literacy! You will need to apply all your knowledge learned in the media literacy planet to identify fake information in a multiple choice style quiz. You will be able to gather all parts needed to fix the information sector of the ship at the end of the quiz."
       Categories: ["end", "Flask", "Spring", "Databases"]
-      Video: "/digital-famine/end/submodule_2-video"
+      Video: "/digital-famine/end/submodule_3.md/"
       Lessons: "/digital-famine/end/submodule_2/"
-      Image: "/images/digital-famine/Planet2-Scene.jpg"
-      Alt: "end Submodule 2"
-    - Title: "Submodule 3"
+      Image: "/images/digital-famine/end-3.png"
+      Alt: "End Submodule 2"
+    - Title: "Autopilot Crash"
       Genre: "Project Creation"
       Level: 3
-      Description: "Team-defined end development module"
+      Description: "Fix the crash of the autopilot element of the rocketship to get home safe."
       Categories: ["end", "Flask", "Spring", "Databases"]
       Video: "/digital-famine/end/submodule_3-video"
       Lessons: "/digital-famine/end/submodule_3/"
