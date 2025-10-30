@@ -13,6 +13,7 @@ date: 2025-10-21
 microblog: True
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,10 +35,7 @@ microblog: True
             transition: background-color 0.3s ease;
         }
 
-        body.light-mode {
-            background: #f5f5f5;
-            color: #000000;
-        }
+
 
         .container {
             max-width: 1200px;
@@ -53,10 +51,7 @@ microblog: True
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        body.light-mode header {
-            background: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+
 
         h1 {
             font-size: 2.5em;
@@ -69,27 +64,7 @@ microblog: True
             font-size: 1.1em;
         }
 
-        body.light-mode .subtitle {
-            color: #475569;
-        }
 
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #0ea5e9;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            z-index: 1000;
-        }
-
-        .theme-toggle:hover {
-            background: #0284c7;
-        }
 
         .learning-section {
             background: #16213e;
@@ -99,10 +74,7 @@ microblog: True
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        body.light-mode .learning-section {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+
 
         .learning-section h2 {
             color: #0ea5e9;
@@ -114,11 +86,6 @@ microblog: True
             color: #e2e8f0;
             line-height: 1.6;
             margin-bottom: 10px;
-    }
-
-        body.light-mode .learning-section p,
-        body.light-mode .learning-section li {
-            color: #000000;
         }
 
         .learning-section ul {
@@ -137,10 +104,7 @@ microblog: True
             border: 2px solid #0ea5e9;
         }
 
-        body.light-mode .code-editor {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
+
 
         .button-group {
             display: flex;
@@ -159,12 +123,12 @@ microblog: True
             font-size: 1em;
             font-weight: bold;
             transition: all 0.3s ease;
-     }
+        }
 
         button:hover {
             background: #0284c7;
             transform: translateY(-2px);
-    }
+        }
 
         .output {
             background: #0f172a;
@@ -178,11 +142,7 @@ microblog: True
             white-space: pre-wrap;
         }
 
-        body.light-mode .output {
-            background: #f8fafc;
-            color: #000000;
-            border-color: #0ea5e9;
-        }
+
 
         .stadium-grid {
             display: grid;
@@ -195,16 +155,12 @@ microblog: True
             background: #1e293b;
             padding: 20px;
             border-radius: 12px;
-            
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid #334155;
         }
 
-        body.light-mode .stadium-card {
-            background: #ffffff;
-            border-color: #cbd5e1;
-        }
+
 
         .stadium-card:hover {
             transform: translateY(-5px);
@@ -220,11 +176,9 @@ microblog: True
         .stadium-card p {
             color: #94a3b8;
             margin: 8px 0;
-         }
-
-        body.light-mode .stadium-card p {
-            color: #475569;
         }
+
+
 
         .input-group {
             margin: 15px 0;
@@ -237,9 +191,7 @@ microblog: True
             font-weight: 600;
         }
 
-        body.light-mode .input-group label {
-            color: #000000;
-        }
+
 
         input[type="text"], select {
             width: 100%;
@@ -292,6 +244,10 @@ microblog: True
         strong {
             color: #0ea5e9;
         }
+
+        body.light-mode strong {
+            color: #0284c7;
+        }
     </style>
 </head>
 <body>
@@ -323,35 +279,30 @@ microblog: True
                     <h3>Lumen Field</h3>
                     <p><strong>Team:</strong> Seattle Seahawks</p>
                     <p><strong>Sport:</strong> Football (NFL)</p>
-
                 </div>
 
                 <div class="stadium-card" onclick="selectStadium('baseball')">
                     <h3>T-Mobile Park</h3>
                     <p><strong>Team:</strong> Seattle Mariners</p>
                     <p><strong>Sport:</strong> Baseball (MLB)</p>
-
                 </div>
 
                 <div class="stadium-card" onclick="selectStadium('hockey')">
                     <h3>Climate Pledge Arena</h3>
                     <p><strong>Team:</strong> Seattle Kraken</p>
                     <p><strong>Sport:</strong> Ice Hockey (NHL)</p>
-
                 </div>
 
                 <div class="stadium-card" onclick="selectStadium('college')">
                     <h3>Husky Stadium</h3>
                     <p><strong>Team:</strong> Washington Huskies</p>
                     <p><strong>Sport:</strong> College Football</p>
-
                 </div>
 
                 <div class="stadium-card" onclick="selectStadium('cricket')">
                     <h3>Marymoor Park</h3>
                     <p><strong>Team:</strong> Seattle Orcas</p>
                     <p><strong>Sport:</strong> Cricket (MLC)</p>
-                
                 </div>
             </div>
         </div>
@@ -565,7 +516,6 @@ microblog: True
                 output.textContent = 'Team\'s response:\n\n' + response;
             }, 800);
         }
-   
     </script>
 </body>
 </html>
