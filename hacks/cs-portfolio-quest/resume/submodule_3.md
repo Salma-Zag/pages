@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <input data-f="dates" data-i="${i}" class="w-full border rounded px-3 py-2" placeholder="Jun 2024 – Aug 2024" value="${escapeHtml(ex.dates)}">
         </div>
         <div class="mt-2">
-          <label class="block text-sm font-medium">Bullets * (use “•” on separate lines)</label>
+          <label class="block text-sm font-medium">Bullets * (use “-” on separate lines)</label>
           <textarea data-f="bullets" data-i="${i}" rows="3" class="w-full border rounded px-3 py-2" placeholder="• Developed X that reduced Y by Z%\n• Led 3 people to launch ...\n• Optimized SQL queries ...">${escapeHtml(ex.bullets)}</textarea>
         </div>
       `;
