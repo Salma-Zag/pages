@@ -20,7 +20,7 @@ lxdData:
       Lessons: "/digital-famine/end/submodule_1/"
       Image: "/images/digital-famine/Planet1-Scene.jpg"
       Alt: "End Submodule 1"
-    - Title: "Submodule 2"
+    - Title: "Alien Cyberattack"
       Genre: "Project Creation"
       Level: 2
       Description: "This submodule will test you on your media literacy! You will need to apply all your knowledge learned in the media literacy planet to identify fake information in a multiple choice style quiz. You will be able to gather all parts needed to fix the information sector of the ship at the end of the quiz."
