@@ -1,7 +1,7 @@
 ---
-layout: cs-portfolio-lesson
-title: "Submodule 5"
-description: "Submodule 5 of Resume Building Mini-Quest"
+layout: post
+title: "Submodule 5: LinkedIn Profile Builder"
+description: "Build your professional LinkedIn profile with AI assistance"
 permalink: /cs-portfolio-quest/resume/submodule_5/
 parent: "Resume Building"
 team: "Grinders"
@@ -15,11 +15,16 @@ date: 2025-10-21
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <style>
+  body {
+    background-color: #f9fafb;
+  }
+  
   .linkedin-header {
     background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
     height: 120px;
     position: relative;
   }
+  
   .linkedin-profile-photo {
     width: 120px;
     height: 120px;
@@ -35,27 +40,45 @@ date: 2025-10-21
     font-size: 2.5em;
     color: #0077b5;
     font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
+  
   .skill-badge {
     display: inline-block;
     background: #dbeafe;
     color: #1e40af;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 16px;
     font-size: 0.875rem;
     margin: 4px;
+    font-weight: 500;
   }
+  
   .loading {
     display: inline-block;
     width: 16px;
     height: 16px;
-    border: 3px solid #f3f4f6;
+    border: 3px solid #e5e7eb;
     border-top-color: #3b82f6;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
+  
   @keyframes spin {
     to { transform: rotate(360deg); }
+  }
+  
+  /* Ensure inputs have light backgrounds */
+  input, textarea {
+    background-color: white !important;
+    color: #1f2937 !important;
+  }
+  
+  input:focus, textarea:focus {
+    background-color: white !important;
+    border-color: #3b82f6 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
   }
 </style>
 
@@ -98,9 +121,9 @@ date: 2025-10-21
   </div>
 
   <!-- Step 1: Basic Information -->
-  <div id="step1" class="border rounded-lg p-6 mb-4 bg-white shadow">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Step 1: Basic Information</h2>
-    <p class="text-gray-600 mb-4">Let's start with your basic information. This will appear at the top of your LinkedIn profile.</p>
+  <div id="step1" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm">
+    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 1: Basic Information</h2>
+    <p class="text-gray-600 mb-6">Let's start with your basic information. This will appear at the top of your LinkedIn profile.</p>
     
     <div class="space-y-4">
       <div>
@@ -140,12 +163,13 @@ date: 2025-10-21
   </div>
 
   <!-- Step 2: About Section -->
-  <div id="step2" class="border rounded-lg p-6 mb-4 bg-white shadow hidden">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Step 2: Tell Us About Yourself</h2>
-    <p class="text-gray-600 mb-4">Describe your background, interests, and career goals. Our AI will use this to create a professional "About" section for your LinkedIn profile.</p>
+  <div id="step2" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm hidden">
+    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 2: Tell Us About Yourself</h2>
+    <p class="text-gray-600 mb-6">Describe your background, interests, and career goals. Our AI will use this to create a professional "About" section for your LinkedIn profile.</p>
     
-    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
-      <p class="text-sm text-gray-700"><strong>Tips:</strong> Include what you're studying, what you're passionate about, key projects you've worked on, and what you're looking for (internships, job opportunities, networking).</p>
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
+      <p class="text-sm font-medium text-blue-900 mb-1">Tips for this section:</p>
+      <p class="text-sm text-gray-700">Include what you're studying, what you're passionate about, key projects you've worked on, and what you're looking for (internships, job opportunities, networking).</p>
     </div>
 
     <div>
@@ -165,12 +189,13 @@ date: 2025-10-21
   </div>
 
   <!-- Step 3: Experience -->
-  <div id="step3" class="border rounded-lg p-6 mb-4 bg-white shadow hidden">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Step 3: Your Experience</h2>
-    <p class="text-gray-600 mb-4">Share your work experience, internships, projects, and achievements. Our AI will format this into a professional experience section.</p>
+  <div id="step3" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm hidden">
+    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 3: Your Experience</h2>
+    <p class="text-gray-600 mb-6">Share your work experience, internships, projects, and achievements. Our AI will format this into a professional experience section.</p>
     
-    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
-      <p class="text-sm text-gray-700"><strong>Tips:</strong> Include job titles, company names, dates, and what you accomplished. Use action verbs like "developed," "led," "built," "designed." Mention specific technologies used and measurable results.</p>
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
+      <p class="text-sm font-medium text-blue-900 mb-1">Tips for this section:</p>
+      <p class="text-sm text-gray-700">Include job titles, company names, dates, and what you accomplished. Use action verbs like "developed," "led," "built," "designed." Mention specific technologies used and measurable results.</p>
     </div>
 
     <div>
@@ -194,12 +219,12 @@ Personal Project - Task Manager App: Created a full-stack web app using React an
   </div>
 
   <!-- Step 4: Review (LinkedIn Preview) -->
-  <div id="step4" class="border rounded-lg p-6 mb-4 bg-white shadow hidden">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Step 4: Your LinkedIn Profile</h2>
+  <div id="step4" class="border border-gray-200 rounded-lg p-8 mb-4 bg-white shadow-sm hidden">
+    <h2 class="text-2xl font-bold mb-3 text-gray-900">Step 4: Your LinkedIn Profile</h2>
     <p class="text-gray-600 mb-6">Your profile is ready! Review it below and copy sections to paste into LinkedIn.</p>
 
-    <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
-      <p class="font-semibold text-green-800 mb-2">Next Steps:</p>
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded">
+      <p class="text-base font-semibold text-green-900 mb-2">Next Steps:</p>
       <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
         <li>Review your generated profile below</li>
         <li>Click the "Copy" button for each section</li>
@@ -211,58 +236,58 @@ Personal Project - Task Manager App: Created a full-stack web app using React an
     </div>
 
     <!-- LinkedIn Preview -->
-    <div class="border-2 border-gray-300 rounded-lg overflow-hidden mb-6">
+    <div class="border border-gray-300 rounded-xl overflow-hidden mb-6 shadow-md bg-white">
       <!-- LinkedIn Header -->
       <div class="linkedin-header"></div>
       <div class="linkedin-profile-photo" id="profilePhoto">?</div>
       
       <!-- Profile Content -->
-      <div class="px-6 pt-16 pb-6 bg-white">
-        <div class="mb-6">
+      <div class="px-8 pt-20 pb-8">
+        <div class="mb-8">
           <h1 id="previewName" class="text-3xl font-bold text-gray-900"></h1>
           <p id="previewHeadline" class="text-lg text-gray-700 mt-2"></p>
-          <p id="previewLocation" class="text-gray-500 mt-1"></p>
+          <p id="previewLocation" class="text-gray-600 text-sm mt-2"></p>
         </div>
 
         <!-- About Section -->
-        <div class="border-2 border-gray-200 rounded-lg p-5 mb-5 bg-gray-50">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-xl font-bold text-gray-800">About</h3>
-            <button onclick="copySection('about')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-medium">
-              Copy
+        <div class="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="text-xl font-bold text-gray-900">About</h3>
+            <button onclick="copySection('about')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold transition">
+              Copy Section
             </button>
           </div>
           <p id="previewAbout" class="text-gray-700 whitespace-pre-wrap leading-relaxed"></p>
         </div>
 
         <!-- Experience Section -->
-        <div class="border-2 border-gray-200 rounded-lg p-5 mb-5 bg-gray-50">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-xl font-bold text-gray-800">Experience</h3>
-            <button onclick="copySection('experience')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-medium">
-              Copy
+        <div class="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="text-xl font-bold text-gray-900">Experience</h3>
+            <button onclick="copySection('experience')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold transition">
+              Copy Section
             </button>
           </div>
           <p id="previewExperience" class="text-gray-700 whitespace-pre-wrap leading-relaxed"></p>
         </div>
 
         <!-- Skills Section -->
-        <div class="border-2 border-gray-200 rounded-lg p-5 mb-5 bg-gray-50">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-xl font-bold text-gray-800">Skills</h3>
-            <button onclick="copySection('skills')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-medium">
-              Copy
+        <div class="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="text-xl font-bold text-gray-900">Skills</h3>
+            <button onclick="copySection('skills')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold transition">
+              Copy Section
             </button>
           </div>
           <div id="previewSkills" class="flex flex-wrap gap-2"></div>
         </div>
 
         <!-- Education Section -->
-        <div class="border-2 border-gray-200 rounded-lg p-5 mb-5 bg-gray-50">
-          <div class="flex justify-between items-start mb-3">
-            <h3 class="text-xl font-bold text-gray-800">Education</h3>
-            <button onclick="copySection('education')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-medium">
-              Copy
+        <div class="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="text-xl font-bold text-gray-900">Education</h3>
+            <button onclick="copySection('education')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold transition">
+              Copy Section
             </button>
           </div>
           <p id="previewEducation" class="text-gray-700 whitespace-pre-wrap leading-relaxed"></p>
@@ -286,8 +311,8 @@ Personal Project - Task Manager App: Created a full-stack web app using React an
 
 <script>
 // Configuration
-const API_KEY = 'AIzaSyBRQH3NCC1m3UGfm_mbl2b3aHGJkcAZtms';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+const API_KEY = 'AIzaSyACXPXKEgZ_9P6ikvDiFnNpDZe1cXUR3jY';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-latest:generateContent';
 const STORAGE_KEY = 'linkedin_profile_v3';
 
 let currentStep = 1;
@@ -306,29 +331,6 @@ window.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('input, textarea').forEach(el => {
   el.addEventListener('input', saveToLocal);
 });
-
-// Fill form with dummy data for testing
-function fillDummyData() {
-  const dummyData = {
-    fullName: 'Alex Johnson',
-    headline: 'Computer Science Student at UC San Diego | Aspiring Software Engineer',
-    location: 'San Diego, California',
-    skills: 'Python, JavaScript, React, Node.js, SQL, Git, Machine Learning, Data Structures, Algorithms',
-    aboutPrompt: 'I am a junior computer science student at UC San Diego with a strong passion for full-stack development and artificial intelligence. I have completed several personal projects including a task management web app using React and Firebase, and a machine learning model for predicting housing prices. I love solving complex problems and building applications that make a real impact. I am currently seeking software engineering internships for Summer 2025 where I can apply my skills and continue learning from experienced professionals.',
-    experiencePrompt: 'Software Engineering Intern at TechStart Inc (June 2024 - August 2024): Developed and deployed a customer analytics dashboard using React and Node.js that improved data visibility for the sales team by 40%. Collaborated with senior engineers to optimize database queries, reducing load times by 25%. Implemented RESTful APIs and integrated third-party payment processing.\n\nWeb Development Teaching Assistant at UC San Diego (September 2023 - Present): Assist 150+ students in learning HTML, CSS, JavaScript, and React. Hold weekly office hours and grade assignments. Created supplementary tutorial videos that have been viewed over 500 times.\n\nPersonal Project - TaskFlow App: Built a full-stack task management application with user authentication, real-time updates using WebSockets, and a responsive design. Deployed on AWS using Docker containers.',
-    education: 'B.S. Computer Science, University of California San Diego\nExpected Graduation: June 2026\nGPA: 3.7/4.0\nRelevant Coursework: Data Structures, Algorithms, Software Engineering, Database Systems, Machine Learning'
-  };
-  
-  Object.keys(dummyData).forEach(key => {
-    const el = document.getElementById(key);
-    if (el) {
-      el.value = dummyData[key];
-    }
-  });
-  
-  saveToLocal();
-  showMessage('Demo data loaded! You can now proceed through the steps.', 'success');
-}
 
 // Load saved data from localStorage
 function loadSavedData() {
