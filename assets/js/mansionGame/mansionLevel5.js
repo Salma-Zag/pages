@@ -36,7 +36,7 @@ class MansionLevel5 {
         orientation: {rows: 2, columns: 3},
 		down: {row: 1, start: 0, columns: 3},
 		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
-		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
+		downLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
 		left: {row: 0, start: 0, columns: 3},
 		right: {row: 1, start: 0, columns: 3},
 		up: {row: 1, start: 0, columns: 3},
