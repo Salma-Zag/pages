@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Autopilot Crash"
+microblog: True
 description: "Task 3 of the End Quest: Fix the crash of the autopilot element of the rocketship to get home safe."
 permalink: /digital-famine/end/submodule_3/
 parent: "End Quest"
