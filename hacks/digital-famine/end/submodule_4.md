@@ -15,11 +15,12 @@ date: 2025-10-24
 
 # Submodule 4
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Defense Training Quiz</title>
+    <title>Digital Famine: Mission Control</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom theme configuration -->
@@ -39,7 +40,7 @@ date: 2025-10-24
                     },
                     boxShadow: {
                         'cyber-glow': '0 0 15px rgba(56, 189, 248, 0.5)',
-                        'cyber-success': '0 0 15px rgba(16, 185, 129, 0.5)',
+                        'cyber-success': '0 0 15px rgba(16, 189, 129, 0.5)',
                         'cyber-error': '0 0 15px rgba(239, 68, 68, 0.5)',
                     }
                 }
@@ -85,7 +86,7 @@ date: 2025-10-24
             box-shadow: 0 0 10px #ef4444;
         }
         
-        /* Input styling for the bonus game */
+        /* Input styling for the final sequence game */
         .cyber-input {
             background-color: #0f172a;
             border: 2px solid #38bdf8;
@@ -95,19 +96,19 @@ date: 2025-10-24
             font-weight: bold;
             letter-spacing: 0.5rem;
             box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+            padding: 0.5rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Main Quiz Container -->
+    <!-- Phase 1: Quiz Container (Missions 1, 2, 3) -->
     <div id="quiz-container" class="terminal-card rounded-xl p-8 w-full">
-        <!-- Header -->
         <div class="text-center mb-6">
             <h1 class="text-3xl font-bold text-cyber-blue tracking-wider mb-2">
-                <span class="text-cyber-green">INITIATE</span>: Cyber Defense Protocol
+                <span class="text-cyber-green">PHASE 1:</span> Cyber Defense Protocol
             </h1>
-            <p class="text-sm text-gray-400 border-b border-cyber-blue/30 pb-3">Mission: Test Core Cybersecurity Knowledge</p>
+            <p class="text-sm text-gray-400 border-b border-cyber-blue/30 pb-3">Mission: Validate knowledge from Submodules 1, 2, & 3</p>
         </div>
 
         <!-- Question Display -->
@@ -143,15 +144,18 @@ date: 2025-10-24
         <!-- Result Screen (Initially hidden) -->
         <div id="result-screen" class="hidden text-center p-8 bg-cyber-dark rounded-xl border-4 border-cyber-blue/80 shadow-cyber-glow">
             <h2 id="result-title" class="text-4xl font-extrabold mb-4 text-cyber-green">MISSION COMPLETE</h2>
-            <p id="result-message" class="text-xl text-cyber-text mb-6">You secured 0 out of 10 core systems.</p>
-            <!-- Button will be updated by JS based on success/failure -->
-            <button id="reset-btn" class="cyber-button bg-cyber-blue/90 text-cyber-dark font-bold py-3 px-8 rounded-lg shadow-cyber-glow border border-cyber-blue"
-                    onclick="resetQuiz()">
-                RE-INITIALIZE PROTOCOL
+            <p id="result-message" class="text-xl text-cyber-text mb-6">Secured 0 out of 10 core systems.</p>
+            <div id="fragment-display" class="mb-6 text-left p-4 bg-cyber-dark/50 rounded-lg hidden">
+                <p class="text-lg font-semibold text-cyber-blue mb-2">Code Fragments Secured:</p>
+                <!-- Fragments will be inserted here -->
+            </div>
+            <button id="next-phase-btn" class="cyber-button bg-cyber-blue/90 text-cyber-dark font-bold py-3 px-8 rounded-lg shadow-cyber-glow border border-cyber-blue"
+                    onclick="startFinalSequence()">
+                PROCEED TO FINAL SEQUENCE
             </button>
         </div>
 
-        <!-- Custom Feedback Modal (Alert Replacement) -->
+        <!-- Custom Feedback Modal -->
         <div id="feedback-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
             <div id="modal-content" class="bg-cyber-dark p-8 rounded-xl border-4 border-gray-700 max-w-sm text-center">
                 <h3 id="modal-title" class="text-2xl font-bold mb-3">Feedback</h3>
@@ -164,76 +168,88 @@ date: 2025-10-24
         </div>
     </div>
     
-    <!-- Bonus Mission Container (Initially hidden) -->
-    <div id="bonus-container" class="terminal-card rounded-xl p-8 w-full hidden">
+    <!-- Phase 2: Final Sequence Vault (Mission 4) -->
+    <div id="vault-container" class="terminal-card rounded-xl p-8 w-full hidden">
         <div class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-cyber-green tracking-wider mb-2">
-                BONUS MISSION: DATA CORE BREACH
+            <h1 class="text-3xl font-bold text-cyber-red tracking-wider mb-2">
+                <span class="text-cyber-blue">PHASE 2:</span> Final Sequence - Vault Unlock
             </h1>
-            <p class="text-sm text-gray-400 border-b border-cyber-green/30 pb-3">Objective: Crack the 4-Digit Code to Secure the Core</p>
+            <p class="text-sm text-gray-400 border-b border-cyber-red/30 pb-3">Objective: Synthesize the 4-Digit PIN from the Fragments</p>
+        </div>
+
+        <div id="vault-fragment-hint" class="text-sm text-gray-400 text-center mb-4 p-3 bg-cyber-dark/50 rounded">
+            <p><strong>Fragments Secured:</strong></p>
+            <p>ALPHA-**7**X9K, BRAVO-**4**M8Q, CHARLIE-**2**N5P</p>
+            <p class="text-cyber-red font-bold mt-2">PIN Structure: [Alpha Digit] [Bravo Digit] [Charlie Digit] [Total Missions (4)]</p>
         </div>
 
         <div class="text-center mb-6">
-            <label for="code-input" class="text-xl text-cyber-blue block mb-4">ENTER 4-DIGIT CODE</label>
-            <input type="text" id="code-input" maxlength="4" class="cyber-input w-2/3 p-2 rounded-lg" pattern="[0-9]{4}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" />
+            <label for="pin-input" class="text-xl text-cyber-blue block mb-4">ENTER 4-DIGIT VAULT PIN</label>
+            <input type="text" id="pin-input" maxlength="4" class="cyber-input w-2/3 p-2 rounded-lg" pattern="[0-9]{4}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" />
         </div>
         
         <div class="flex justify-center mb-6">
-            <button id="code-submit-btn" class="cyber-button bg-cyber-blue/90 text-cyber-dark font-bold py-3 px-8 rounded-lg shadow-cyber-glow border border-cyber-blue"
-                    onclick="checkCode()">
-                SUBMIT CODE
+            <button id="pin-submit-btn" class="cyber-button bg-cyber-green/90 text-cyber-dark font-bold py-3 px-8 rounded-lg shadow-cyber-success border border-cyber-green"
+                    onclick="checkVaultPin()">
+                INITIATE UNLOCK PROTOCOL
             </button>
         </div>
 
-        <!-- Feedback Area -->
-        <div id="code-feedback" class="p-4 bg-cyber-dark/50 rounded-lg border border-gray-700">
-            <p id="code-message" class="text-center text-cyber-text mt-4">Crack the 4-digit security code. Digits 0-9 allowed.</p>
-            <p class="text-center text-sm text-gray-500 mt-2">
-                Attempts Left: <span id="code-attempts" class="text-lg text-cyber-red font-bold">5</span>
-            </p>
+        <!-- Vault Status/Feedback Area -->
+        <div id="vault-feedback" class="p-4 bg-cyber-dark/50 rounded-lg border border-gray-700">
+            <p id="vault-status" class="text-center text-cyber-text mt-4">Synthesize the final PIN to recover the Sacred Page.</p>
         </div>
         
         <button class="cyber-button bg-gray-700/90 text-white font-bold py-2 px-6 rounded-lg mt-6 w-full"
-                onclick="window.location.reload()">
-            ABORT MISSION (Refresh)
+                onclick="initializeQuiz()">
+            RETURN TO QUIZ START
         </button>
 
     </div>
 
     <script>
-        // --- Data Definitions (The Quiz Questions) ---
+        // --- Data Definitions (The Quiz Questions for M1, M2, M3) ---
         const quizData = [
+            // Mission 1: Build the Base Database (SQL Fundamentals)
             {
-                question: "A simple SELECT statement in SQL is used to add new rows of data into a database table.",
-                concept: "Concept: Database Design & SQL",
+                question: "The SQL command INSERT is used to add new rows of data into a database table.",
+                concept: "M1: Database Creation (SQL)",
+                answer: true,
+                explanation: "Correct. INSERT is the command used for adding records (rows) into tables."
+            },
+            {
+                question: "In SQL, column names and data types should be drafted before any tables are created.",
+                concept: "M1: Database Schema",
+                answer: true,
+                explanation: "Correct. Planning the schema (column names and data types) is essential for proper database architecture."
+            },
+            // Mission 2: Patch the Wormhole (SQL Injection Defense)
+            {
+                question: "A vulnerable login path can be exploited using the payload ' OR '1'='1 to bypass authentication.",
+                concept: "M2: SQL Injection Exploit",
+                answer: true,
+                explanation: "Correct. This payload tricks the database into always evaluating the login condition as true."
+            },
+            {
+                question: "Parameterized statements are a safe method to prevent SQL injection by separating the SQL command from user input.",
+                concept: "M2: SQL Injection Defense",
+                answer: true,
+                explanation: "Correct. Parameterized statements treat user input strictly as data, not executable code."
+            },
+            // Mission 3: Encrypt the Launch Codes (Hashing/Cryptography)
+            {
+                question: "Hashing with SHA-256 is a reversible encryption method.",
+                concept: "M3: Hashing & Cryptography",
                 answer: false,
-                explanation: "Incorrect. The SQL command used to add new rows of data is INSERT. SELECT is only for retrieving data."
+                explanation: "Incorrect. Hashing is a one-way, irreversible function designed for integrity checking, not decryption."
             },
             {
-                question: "SQL Injection is a type of attack where a malicious user enters unauthorized SQL code into an input field.",
-                concept: "Concept: SQL Injection Defense",
+                question: "A digest is the long string of characters created when a launch key is processed through SHA-256.",
+                concept: "M3: Cryptography Terminology",
                 answer: true,
-                explanation: "Correct. This is the core mechanism of a SQL Injection attack, aiming to bypass security or extract data."
+                explanation: "Correct. The output of a hash function is called a hash, digest, or hash value."
             },
-            {
-                question: "Hashing with a function like SHA-256 is an encryption method that can be easily reversed (decrypted) to get the original data.",
-                concept: "Concept: Hashing & Cryptography",
-                answer: false,
-                explanation: "Incorrect. Hashing is a one-way function. It is designed to be irreversible, or practically impossible to reverse (unlike reversible encryption)."
-            },
-            {
-                question: "In this game's flow, a player must successfully complete Mission 2 before they are allowed to start Mission 3.",
-                concept: "Concept: Program Flow/Control",
-                answer: true,
-                explanation: "Correct. The project's flowchart shows a linear progression: the reward from Mission 2 unlocks the entry point to Mission 3."
-            },
-            {
-                question: "Using a system to check if a user's password hash matches a stored hash is a secure practice to prevent storing the actual password.",
-                concept: "Concept: Hashing Security",
-                answer: true,
-                explanation: "Correct. This practice ensures that even if a database is breached, the attacker only gets irreversible hashes, not the user's plain-text passwords."
-            },
-            // --- 5 New Questions Added ---
+            // General Security (Supporting Concepts)
             {
                 question: "A firewall's primary job is to block all incoming and outgoing network traffic regardless of safety.",
                 concept: "Concept: Network Security / Firewalls",
@@ -241,46 +257,45 @@ date: 2025-10-24
                 explanation: "Incorrect. A firewall filters traffic based on a defined set of security rules, allowing necessary traffic while blocking unsafe traffic."
             },
             {
-                question: "A spear phishing attack is a type of phishing that is highly customized to target a specific individual or organization.",
+                question: "Spear phishing targets a large, general audience rather than a specific individual.",
                 concept: "Concept: Social Engineering / Phishing",
-                answer: true,
-                explanation: "Correct. Spear phishing is much harder to spot than general phishing because it uses personal details to gain trust."
-            },
-            {
-                question: "Two-Factor Authentication (2FA) means providing two separate pieces of evidence (like a password and a code from your phone) to prove your identity.",
-                concept: "Concept: Authentication",
-                answer: true,
-                explanation: "Correct. 2FA is a great security measure because stealing your password is not enough for a hacker to get into your account."
-            },
-            {
-                question: "An effective password should be short, use simple, common words, and avoid symbols or numbers.",
-                concept: "Concept: Password Management",
                 answer: false,
-                explanation: "Incorrect. Strong passwords should be long, unique, and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
+                explanation: "Incorrect. Spear phishing is highly targeted and customized (like a laser beam, not a wide net)."
             },
             {
-                question: "A DDoS attack works by flooding a website's server with massive amounts of junk traffic to make it crash or stop working for legitimate users.",
+                question: "Two-Factor Authentication (2FA) is a requirement for strong passwords.",
+                concept: "Concept: Authentication",
+                answer: false,
+                explanation: "Incorrect. 2FA is a separate layer of security (an extra step), while strong passwords are about length and complexity."
+            },
+            {
+                question: "A Distributed Denial of Service (DDoS) attack overwhelms a server with junk traffic.",
                 concept: "Concept: Denial of Service",
                 answer: true,
-                explanation: "Correct. DDoS stands for Distributed Denial of Service, which overwhelms the target to deny service to others."
+                explanation: "Correct. DDoS uses many computers to flood a server, making it unavailable to legitimate users."
             }
         ];
 
-        // --- State Variables (Quiz) ---
+        // --- Global State Variables ---
         let currentQuestionIndex = 0;
         let score = 0;
+        const PASS_SCORE = 6;
         
-        // --- State Variables (Bonus Mission) ---
-        let bonusCode = '';
-        const MAX_ATTEMPTS = 5;
-        let attemptsLeft = MAX_ATTEMPTS;
+        // Final Vault PIN based on fragment numbers and total missions (4): 7424
+        const FINAL_VAULT_PIN = '7424'; 
+        const FRAGMENTS = {
+            ALPHA: 'ALPHA-7X9K', // Digit 7
+            BRAVO: 'BRAVO-4M8Q', // Digit 4
+            CHARLIE: 'CHARLIE-2N5P' // Digit 2
+        };
 
 
         // --- DOM Elements ---
-        let questionTextEl, questionConceptEl, scoreEl, currentQNumEl, totalQNumEl, buttonAreaEl, quizContainerEl, resultScreenEl, feedbackModalEl, modalContentEl, modalTitleEl, modalMessageEl, modalExplanationEl;
-        let codeSubmitBtn, codeInputEl, codeMessageEl, codeAttemptsEl;
+        let questionTextEl, questionConceptEl, scoreEl, currentQNumEl, totalQNumEl, buttonAreaEl, quizContainerEl, resultScreenEl, feedbackModalEl, modalContentEl, modalTitleEl, modalMessageEl, modalExplanationEl, fragmentDisplayEl;
+        let vaultContainerEl, pinInputEl, pinSubmitBtn, vaultStatusEl;
 
         function getDOMElements() {
+            // Quiz Elements
             questionTextEl = document.getElementById('question-text');
             questionConceptEl = document.getElementById('question-concept');
             scoreEl = document.getElementById('current-score');
@@ -294,36 +309,40 @@ date: 2025-10-24
             modalTitleEl = document.getElementById('modal-title');
             modalMessageEl = document.getElementById('modal-message');
             modalExplanationEl = document.getElementById('modal-explanation');
+            fragmentDisplayEl = document.getElementById('fragment-display');
             
-            // Bonus Mission Elements
-            codeSubmitBtn = document.getElementById('code-submit-btn');
-            codeInputEl = document.getElementById('code-input');
-            codeMessageEl = document.getElementById('code-message');
-            codeAttemptsEl = document.getElementById('code-attempts');
+            // Vault Elements
+            vaultContainerEl = document.getElementById('vault-container');
+            pinInputEl = document.getElementById('pin-input');
+            pinSubmitBtn = document.getElementById('pin-submit-btn');
+            vaultStatusEl = document.getElementById('vault-status');
         }
 
-        // --- Core Quiz Functions ---
+        // --- Phase 1: Quiz Functions ---
 
-        /**
-        * Initializes the quiz state and sets up the first question.
-        */
         function initializeQuiz() {
-            getDOMElements(); // Get elements after the page loads
+            getDOMElements(); 
             totalQNumEl.textContent = quizData.length;
             currentQuestionIndex = 0;
             score = 0;
             scoreEl.textContent = score;
+            
+            // Switch view to Quiz
             quizContainerEl.classList.remove('hidden');
-            document.getElementById('bonus-container').classList.add('hidden'); // Hide bonus game
+            vaultContainerEl.classList.add('hidden');
+
+            // Reset Quiz UI
             quizContainerEl.querySelector('#question-area').classList.remove('hidden');
             buttonAreaEl.classList.remove('hidden');
             resultScreenEl.classList.add('hidden');
+            fragmentDisplayEl.classList.add('hidden');
+            document.getElementById('next-phase-btn').onclick = startFinalSequence; // Default to final sequence if passing
+            document.getElementById('next-phase-btn').classList.remove('bg-cyber-red/90');
+            document.getElementById('next-phase-btn').classList.add('bg-cyber-blue/90');
+
             displayQuestion();
         }
 
-        /**
-        * Displays the current question and updates the progress tracker.
-        */
         function displayQuestion() {
             const q = quizData[currentQuestionIndex];
             questionTextEl.textContent = q.question;
@@ -353,9 +372,6 @@ date: 2025-10-24
             }
         }
 
-        /**
-        * Displays the final score screen and determines if the bonus mission is unlocked.
-        */
         function showResults() {
             quizContainerEl.querySelector('#question-area').classList.add('hidden');
             buttonAreaEl.classList.add('hidden');
@@ -363,43 +379,39 @@ date: 2025-10-24
 
             const total = quizData.length;
             const percentage = Math.round((score / total) * 100);
-            const resetBtnEl = document.getElementById('reset-btn');
-
-            let title = "MISSION SUCCESS!";
-            let message = `You secured ${score} out of ${total} core systems (${percentage}%). Earth is safe.`;
-            let titleColor = 'text-cyber-green';
-
-            if (percentage < 60) {
-                title = "MISSION INCOMPLETE";
-                message = `You secured ${score} out of ${total} core systems (${percentage}%). Earth is still vulnerable!`;
-                titleColor = 'text-cyber-red';
-                resetBtnEl.textContent = 'RE-INITIALIZE PROTOCOL';
-                resetBtnEl.onclick = resetQuiz;
-                resetBtnEl.classList.remove('bg-cyber-green/90');
-                resetBtnEl.classList.add('bg-cyber-red/90');
-                resultScreenEl.classList.remove('shadow-cyber-glow');
-                resultScreenEl.classList.add('shadow-cyber-error');
-            } else {
-                // Passed (60% or more) - Unlock Bonus Mission
-                title = "CORE SYSTEMS SECURED!";
-                message = `You achieved ${score} out of ${total} core systems (${percentage}%). Primary defense protocols are active.`;
-                titleColor = 'text-cyber-green';
+            const nextPhaseBtnEl = document.getElementById('next-phase-btn');
+            
+            document.getElementById('result-title').textContent = "MISSION COMPLETE";
+            document.getElementById('result-title').className = `text-4xl font-extrabold mb-4`;
+            
+            // Logic for awarding fragments and unlocking Phase 2
+            if (score >= PASS_SCORE) {
+                document.getElementById('result-title').classList.add('text-cyber-green');
+                document.getElementById('result-message').textContent = `Success! You scored ${score} out of ${total} (${percentage}%). All three fragments are decrypted and ready for synthesis.`;
                 
-                resetBtnEl.textContent = 'PROCEED TO BONUS MISSION';
-                resetBtnEl.onclick = startBonusMission;
-                resetBtnEl.classList.remove('bg-cyber-blue/90');
-                resetBtnEl.classList.add('bg-cyber-green/90');
+                // Display Fragments
+                fragmentDisplayEl.classList.remove('hidden');
+                fragmentDisplayEl.innerHTML = `
+                    <p class="text-lg font-semibold text-cyber-blue mb-2">Code Fragments Secured:</p>
+                    <p class="text-cyber-green font-mono">1. ${FRAGMENTS.ALPHA}</p>
+                    <p class="text-cyber-green font-mono">2. ${FRAGMENTS.BRAVO}</p>
+                    <p class="text-cyber-green font-mono">3. ${FRAGMENTS.CHARLIE}</p>
+                    <p class="text-sm text-gray-400 mt-2">PIN Sequence hint: The vault PIN starts with the first digit of each fragment, followed by the total number of primary modules (4).</p>
+                `;
+                
+                nextPhaseBtnEl.textContent = 'PROCEED TO FINAL SEQUENCE (M4)';
+                nextPhaseBtnEl.onclick = startFinalSequence;
+
+            } else {
+                document.getElementById('result-title').classList.add('text-cyber-red');
+                document.getElementById('result-message').textContent = `FAILURE. You scored ${score} out of ${total} (${percentage}%). Minimum score of ${PASS_SCORE} required. Fragments locked.`;
+                fragmentDisplayEl.classList.add('hidden');
+                
+                nextPhaseBtnEl.textContent = 'RE-INITIALIZE PROTOCOL';
+                nextPhaseBtnEl.onclick = initializeQuiz;
+                nextPhaseBtnEl.classList.remove('bg-cyber-blue/90');
+                nextPhaseBtnEl.classList.add('bg-cyber-red/90');
             }
-
-            document.getElementById('result-title').textContent = title;
-            document.getElementById('result-message').textContent = message;
-            document.getElementById('result-title').className = `text-4xl font-extrabold mb-4 ${titleColor}`;
-            document.getElementById('result-screen').classList.remove('border-cyber-blue/80');
-
-        }
-
-        window.resetQuiz = function() {
-            initializeQuiz();
         }
 
         function showModal(title, message, explanation, titleColor, borderColor) {
@@ -419,102 +431,48 @@ date: 2025-10-24
             advanceQuiz();
         }
 
-
-        // --- Bonus Mission Game Logic ---
+        // --- Phase 2: Vault Functions ---
         
-        window.startBonusMission = function() {
-            // 1. Hide Quiz, Show Bonus Mission
-            document.getElementById('quiz-container').classList.add('hidden');
-            document.getElementById('bonus-container').classList.remove('hidden');
+        window.startFinalSequence = function() {
+            // 1. Hide Quiz, Show Vault
+            quizContainerEl.classList.add('hidden');
+            vaultContainerEl.classList.remove('hidden');
 
-            // 2. Setup initial state: Generate a random 4-digit code (1000 to 9999)
-            bonusCode = String(Math.floor(1000 + Math.random() * 9000)); 
-            attemptsLeft = MAX_ATTEMPTS;
-            
-            // 3. Reset UI for new game
-            codeAttemptsEl.textContent = attemptsLeft;
-            codeInputEl.value = '';
-            codeInputEl.disabled = false;
-            codeSubmitBtn.disabled = false;
-            codeSubmitBtn.textContent = 'SUBMIT CODE';
-            codeMessageEl.textContent = 'Crack the 4-digit security code. Digits 0-9 allowed.';
-            codeMessageEl.className = 'text-center text-cyber-text mt-4';
-            // console.log('Bonus Code:', bonusCode); // Uncomment to cheat ;)
+            // 2. Reset Vault UI
+            pinInputEl.value = '';
+            pinInputEl.disabled = false;
+            pinSubmitBtn.disabled = false;
+            vaultStatusEl.textContent = 'Synthesize the final PIN to recover the Sacred Page.';
+            vaultStatusEl.className = 'text-center text-cyber-text mt-4';
         }
 
-        window.checkCode = function() {
-            const userInput = codeInputEl.value;
+        window.checkVaultPin = function() {
+            const userInput = pinInputEl.value;
             
-            if (userInput.length !== 4 || isNaN(userInput)) {
-                codeMessageEl.textContent = 'Invalid input: Code must be exactly 4 digits.';
-                codeMessageEl.className = 'text-center text-cyber-red mt-4';
+            if (userInput.length !== 4) {
+                vaultStatusEl.textContent = 'ERROR: PIN must be 4 digits. Sequence aborted.';
+                vaultStatusEl.className = 'text-center text-cyber-red mt-4';
                 return;
             }
 
             // --- Win Condition ---
-            if (userInput === bonusCode) {
-                codeMessageEl.innerHTML = `
-                    <span class="text-4xl font-bold text-cyber-green">CODE ACCEPTED!</span> <br> 
-                    <span class="text-xl">The Data Core is SECURED. Mission Complete!</span>
+            if (userInput === FINAL_VAULT_PIN) {
+                vaultStatusEl.innerHTML = `
+                    <span class="text-4xl font-bold text-cyber-green">VAULT UNLOCKED!</span> <br> 
+                    <span class="text-xl">The Sacred Page is retrieved. Earth is SAFE. Mission Complete!</span>
                 `;
-                codeMessageEl.className = 'text-center text-cyber-green mt-4 mb-4';
-                codeSubmitBtn.disabled = true;
-                codeInputEl.disabled = true;
-                return;
-            }
-
-            // --- Give Feedback and Check Attempts ---
-            attemptsLeft--;
-            codeAttemptsEl.textContent = attemptsLeft;
-
-            // --- Loss Condition ---
-            if (attemptsLeft <= 0) {
-                codeMessageEl.innerHTML = `
-                    <span class="text-4xl font-bold text-cyber-red">ACCESS DENIED!</span> <br>
-                    <span class="text-xl">The correct code was <span class="text-cyber-blue">${bonusCode}</span>.</span>
+                vaultStatusEl.className = 'text-center text-cyber-green mt-4 mb-4';
+                pinInputEl.disabled = true;
+                pinSubmitBtn.disabled = true;
+            } else {
+                // Fail Condition
+                vaultStatusEl.innerHTML = `
+                    <span class="text-4xl font-bold text-cyber-red">AUTHENTICATION FAILED</span> <br> 
+                    <span class="text-xl">Incorrect PIN sequence. Check your fragment order and try again.</span>
                 `;
-                codeMessageEl.className = 'text-center text-cyber-red mt-4 mb-4';
-                codeSubmitBtn.disabled = true;
-                codeInputEl.disabled = true;
-                return;
+                vaultStatusEl.className = 'text-center text-cyber-red mt-4 mb-4';
             }
-
-            // --- Mastermind-style Hint Logic ---
-            let correctPlace = 0; // "Secure Positions" (Correct digit, correct position)
-            let correctDigit = 0; // "Contained Digits" (Correct digit, wrong position)
-            
-            let codeCopy = bonusCode.split('');
-            let inputCopy = userInput.split('');
-
-            // Pass 1: Check for correct position (Bulls/Secure Positions)
-            for (let i = 0; i < 4; i++) {
-                if (inputCopy[i] === codeCopy[i]) {
-                    correctPlace++;
-                    codeCopy[i] = 'X'; // Mark as used
-                    inputCopy[i] = 'Y'; // Mark as used
-                }
-            }
-
-            // Pass 2: Check for correct digit (Cows/Contained Digits) using unmarked digits
-            for (let i = 0; i < 4; i++) {
-                if (inputCopy[i] !== 'Y') {
-                    const index = codeCopy.indexOf(inputCopy[i]);
-                    if (index !== -1) {
-                        correctDigit++;
-                        codeCopy[index] = 'X'; // Mark as used
-                    }
-                }
-            }
-
-            // Display Feedback
-            codeMessageEl.innerHTML = `
-                <span class="text-cyber-red">DENIED:</span> Incorrect code. <br>
-                <span class="text-cyber-green font-bold">${correctPlace} Secure Position(s)</span> found. <br>
-                <span class="text-cyber-blue font-bold">${correctDigit} Contained Digit(s)</span> found.
-            `;
-            codeMessageEl.className = 'text-center text-cyber-text mt-4';
         }
-
 
         // --- Start the Quiz on load ---
         window.onload = initializeQuiz;
