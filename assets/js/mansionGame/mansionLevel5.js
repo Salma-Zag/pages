@@ -55,7 +55,7 @@ class MansionLevel5 {
 		src: sprite_src_nomad,
 		SCALE_FACTOR: 10,
 		ANIMATION_RATE: 100,
-		pixels: {height: 307, width: 813},
+		pixels: {height: 1200, width: 3600},
 		INIT_POSITION: { x: (width /2), y: (height /2)},
 		orientation: {rows: 1, columns: 3},
 		down: {row: 1, start: 0, columns: 3},
