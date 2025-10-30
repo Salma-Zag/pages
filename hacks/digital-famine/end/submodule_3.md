@@ -213,41 +213,11 @@ date: 2025-10-21
   })();
   </script>
   
-  <script>
-  // Runtime loader: if .b64 files were generated and are available on the site
-  // fetch them and apply as data-URIs so the page becomes self-contained
-  (function(){
-     const basePath = '{{ "/images/digital-famine" | relative_url }}';
-    const bgB64 = basePath + '/end-3.png.b64';
-    const spB64 = basePath + '/end-3-computer.png.b64';
-
-    async function tryLoadB64(){
-      try{
-        const r = await fetch(bgB64, {cache: 'no-cache'});
-        if(r.ok){
-          const txt = (await r.text()).trim();
-          const root = document.querySelector('.game-root');
-          if(root && txt){
-            root.style.backgroundImage = 'url(' + txt + ')';
-            console.log('Background set from b64:', bgB64);
-          }
-        }
-      }catch(e){ console.warn('Could not load background b64', e); }
-
-      try{
-        const r2 = await fetch(spB64, {cache: 'no-cache'});
-        if(r2.ok){
-          const txt2 = (await r2.text()).trim();
-          const img = document.querySelector('#computerSprite img');
-          if(img && txt2){ img.src = txt2; console.log('Sprite set from b64:', spB64); }
-        }
-      }catch(e){ console.warn('Could not load sprite b64', e); }
-    }
-
-    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tryLoadB64);
-    else tryLoadB64();
-  })();
-  </script>
+  <!-- Note: runtime .b64 loader was removed. The page relies on the existing
+       Jekyll-resolved `relative_url` references for the PNGs and the
+       diagnostic loader earlier in this file which preloads the PNGs and reports
+       failures. If you need an alternative fallback, tell me and I can add a
+       canvas-based PNG->dataURI converter at runtime instead. -->
 (function(){
   const sprite = document.getElementById('computerSprite');
   const modal = document.getElementById('quizModal');
