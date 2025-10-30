@@ -1,3 +1,4 @@
+````markdown
 ---
 layout: opencs
 microblog: True 
@@ -23,6 +24,45 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
 
 ---
 
+<style>
+.sq-card {border-radius:.6rem;padding:1rem;background:white;box-shadow:0 6px 18px rgba(0,0,0,.06);margin-bottom:1rem;}
+.sq-terminal {background:#0a0f1c;color:#d1fae5;padding:.75rem;border-radius:.5rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:.9rem;white-space:pre-wrap;overflow:auto;}
+.sq-btn {background:#0f766e;color:white;border:none;padding:.5rem .75rem;border-radius:.375rem;cursor:pointer;}
+.sq-run {background:#14b8a6;}
+.progress-tracker {background:rgba(13,148,136,.15);border:2px solid rgba(13,148,136,.3);padding:1rem;border-radius:.75rem;margin:1rem 0;color:#e2e8f0;}
+.task-complete {color:#10b981;font-weight:bold;}
+</style>
+
+<div class="progress-tracker">
+  <h3 style="color:#2dd4bf;">🎯 Seattle Progress Tracker</h3>
+  <div id="progress-display">
+    <div id="task-archive">🗃️ Task 1: Archive Dish – <span class="status">Incomplete</span></div>
+    <div id="task-harddelete">🗑️ Task 2: Hard Delete Cascade – <span class="status">Incomplete</span></div>
+    <div id="task-analytics">📊 Task 3: Analytics Dashboard – <span class="status">Incomplete</span></div>
+    <div id="task-seed">🌱 Task 4: Seed Seattle Dishes – <span class="status">Incomplete</span></div>
+    <div id="task-view">👀 Task 5: View Archived/Active Lists – <span class="status">Incomplete</span></div>
+  </div>
+</div>
+
+---
+
+## 🧠 Concept Refresher
+
+**Soft Delete (`deleted_at`)**
+- Marks a record as archived instead of removing it.  
+- Lets you toggle visibility between *active* and *archived* records.
+
+**Hard Delete**
+- Permanently removes the record and linked rows (e.g., `dish_ingredients`).
+
+**Analytics (GROUP BY)**
+- Aggregates data for insights: top ingredients, average calories by city, dish counts per category.
+
+---
+
+## ⚙️ Mock Backend Extensions
+
+```html
 <style>
 .sq-card{border-radius:.6rem;padding:1rem;background:white;box-shadow:0 6px 18px rgba(0,0,0,.06);margin-bottom:1rem;}
 .sq-terminal{background:#0b1020;color:#d1fae5;padding:.75rem;border-radius:.5rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;font-size:.9rem;white-space:pre-wrap;overflow:auto;}
@@ -56,6 +96,7 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
 <div id="unlockNotification" class="unlock-notification">
   🎉 CRUD Complete!<br><small style="opacity:.9;font-size:14px;">Congratulations, Cleanup Crew!</small>
 </div>
+
 
 <script>
 (function(){
@@ -93,6 +134,7 @@ Final stop! In Seattle, learners archive or delete dishes (like *Clam Chowder in
 })();
 </script>
 
+
 <div class="sq-card">
   <div class="sq-label">Archive a dish by ID → sets <code>deleted_at</code></div>
   <input id="archive-id" class="sq-field" placeholder="enter dish id"/>
@@ -111,6 +153,7 @@ async function runArchive(){
   }else logTo('terminal-archive','❌ Error',res.body);
 }
 </script>
+
 
 <div class="sq-card">
   <div class="sq-label">Hard delete dish and linked ingredients</div>
@@ -131,6 +174,7 @@ async function runHard(){
 }
 </script>
 
+
 <div class="sq-card">
   <div class="sq-label">Run aggregated analytics queries (GROUP BY demo)</div>
   <button class="sq-btn sq-run" onclick="runAnalytics()">Run Analytics</button>
@@ -147,6 +191,7 @@ async function runAnalytics(){
   }else logTo('terminal-analytics','❌ Error',res.body);
 }
 </script>
+
 
 <div class="sq-card">
   <button class="sq-btn sq-run" onclick="seedSeattle()">Seed Seattle Dishes</button>
@@ -168,6 +213,7 @@ async function seedSeattle(){
   }else logTo('terminal-seedsea','❌ Seed failed',res);
 }
 </script>
+
 
 <div class="sq-card">
   <button class="sq-btn sq-run" onclick="viewSeattle()">View Active & Archived</button>
@@ -237,3 +283,54 @@ async function viewSeattle(){
   loadTaskProgress();
 })();
 </script>
+
+<script>
+(function(){
+  window.taskProgress={archive:false,harddelete:false,analytics:false,seed:false,view:false};
+
+  function loadTaskProgress(){
+    const saved=localStorage.getItem('sea_task_progress');
+    if(saved)try{Object.assign(window.taskProgress,JSON.parse(saved));}catch{}
+    updateProgressDisplay();
+  }
+  function saveTaskProgress(){localStorage.setItem('sea_task_progress',JSON.stringify(window.taskProgress));}
+  window.completeTask=function(t){
+    if(!window.taskProgress[t]){
+      window.taskProgress[t]=true;saveTaskProgress();updateProgressDisplay();checkModuleCompletion();
+    }
+  };
+  function updateProgressDisplay(){
+    const tasks=['archive','harddelete','analytics','seed','view'];let done=0;
+    tasks.forEach(x=>{
+      const el=document.getElementById(`task-${x}`);if(!el)return;
+      const s=el.querySelector('.status');
+      if(window.taskProgress[x]){s.textContent='Complete ✅';s.className='status task-complete';done++;}
+      else{s.textContent='Incomplete';s.className='status';}
+    });
+    const pct=Math.round((done/tasks.length)*100);
+    document.getElementById('completion-percentage').textContent=`${pct}%`;
+    document.getElementById('progress-bar').style.width=`${pct}%`;
+  }
+  function checkModuleCompletion(){
+    if(Object.values(window.taskProgress).every(Boolean)){
+      document.getElementById('unlockNotification').style.display='block';
+      setTimeout(()=>document.getElementById('unlockNotification').style.display='none',4000);
+      unlockNextCity();
+    }
+  }
+  function unlockNextCity(){
+    try{
+      const saved=localStorage.getItem('mchopiee_city_progress');
+      let gp={unlockedCities:[0,1,2,3],completedCities:[],totalCitiesCompleted:0};
+      if(saved)gp=JSON.parse(saved);
+      if(!gp.completedCities.includes(3)){gp.completedCities.push(3);gp.totalCitiesCompleted++;}
+      localStorage.setItem('mchopiee_city_progress',JSON.stringify(gp));
+    }catch(e){console.error(e);}
+  }
+  window.showToast=(txt,ms=2000)=>{const b=document.getElementById('sqToast');b.textContent=txt;b.style.display='block';setTimeout(()=>b.style.display='none',ms);};
+  window.logTo=(id,...p)=>{const e=document.getElementById(id);if(!e)return;const t=p.map(a=>typeof a==='object'?JSON.stringify(a,null,2):String(a)).join(' ');e.textContent+=(e.textContent?'\n':'')+t;e.scrollTop=e.scrollHeight;};
+  window.clearTerm=id=>{const e=document.getElementById(id);if(e)e.textContent='';};
+  loadTaskProgress();
+})();
+</script>
+````
