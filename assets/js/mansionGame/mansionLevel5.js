@@ -23,8 +23,7 @@ class MansionLevel5 {
 
 	//data for player
 	const sprite_player = path + "/images/gamify/spookMcWalk.png"; // be sure to include the path
-	//the higher the scale factor, the smaller the sprite
-	const player_scale_factor = 2.5;
+	const player_scale_factor = 5;
 	const sprite_data_player = {
         id: 'Player',
         greeting: "I am the player for level 5",
