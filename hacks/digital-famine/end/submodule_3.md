@@ -144,7 +144,7 @@ date: 2025-10-21
   }
 </style>
 
-<div class="game-root">
+<div class="game-root" style="background-image: url({{ '/images/digital-famine/end-3.png' | relative_url }}); background-position:center; background-size:cover; background-repeat:no-repeat;">
   <div class="overlay"></div>
 
   <!-- Sprite in bottom-right corner -->
@@ -188,7 +188,29 @@ date: 2025-10-21
   </div>
 </div>
 
-<script>
+  (script type="text/javascript">
+  // Diagnostic loader: attempts to load background and sprite images and reports failures in the console
+  (function(){
+    try{
+      const bg = new Image();
+      bg.onload = ()=> console.log('Background loaded:', '{{ "/images/digital-famine/end-3.png" | relative_url }}');
+      bg.onerror = ()=> {
+        console.error('Background failed to load:', '{{ "/images/digital-famine/end-3.png" | relative_url }}');
+        const el = document.createElement('div');
+        el.style.position='fixed'; el.style.left='12px'; el.style.top='12px'; el.style.zIndex=9999;
+        el.style.background='rgba(255,0,0,0.85)'; el.style.color='#fff'; el.style.padding='8px 10px'; el.style.borderRadius='6px';
+        el.textContent = 'Background image failed to load: ' + '{{ "/images/digital-famine/end-3.png" | relative_url }}';
+        document.body.appendChild(el);
+      };
+      bg.src = '{{ "/images/digital-famine/end-3.png" | relative_url }}';
+
+      const sp = new Image();
+      sp.onload = ()=> console.log('Sprite loaded:', '{{ "/images/digital-famine/end-3-computer.png" | relative_url }}');
+      sp.onerror = ()=> console.error('Sprite failed to load:', '{{ "/images/digital-famine/end-3-computer.png" | relative_url }}');
+      sp.src = '{{ "/images/digital-famine/end-3-computer.png" | relative_url }}';
+    }catch(e){ console.error('Image diagnostic error', e); }
+  })();
+  </script>
 (function(){
   const sprite = document.getElementById('computerSprite');
   const modal = document.getElementById('quizModal');
