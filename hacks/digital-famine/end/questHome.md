@@ -18,7 +18,7 @@ lxdData:
       Categories: ["end", "Flask", "Spring", "Databases", "Microblogging"]
       Video: "/digital-famine/end/submodule_1-video"
       Lessons: "/digital-famine/end/submodule_1/"
-      Image: "/images/digital-famine/end.svg"
+      Image: "/images/digital-famine/Planet1-Scene.jpg"
       Alt: "End Submodule 1"
     - Title: "Submodule 2"
       Genre: "Project Creation"
@@ -27,7 +27,7 @@ lxdData:
       Categories: ["end", "Flask", "Spring", "Databases"]
       Video: "/digital-famine/end/submodule_2-video"
       Lessons: "/digital-famine/end/submodule_2/"
-      Image: "/images/digital-famine/end.svg"
+      Image: "/images/digital-famine/Planet2-Scene.jpg"
       Alt: "end Submodule 2"
     - Title: "Submodule 3"
       Genre: "Project Creation"
@@ -36,7 +36,7 @@ lxdData:
       Categories: ["end", "Flask", "Spring", "Databases"]
       Video: "/digital-famine/end/submodule_3-video"
       Lessons: "/digital-famine/end/submodule_3/"
-      Image: "/images/digital-famine/end.svg"
+      Image: "/images/digital-famine/Planet3-Scene.png"
       Alt: "end Submodule 3"
     - Title: "Submodule 4"
       Genre: "Project Creation"
@@ -45,7 +45,7 @@ lxdData:
       Categories: ["end", "Flask", "Spring", "Databases"]
       Video: "/digital-famine/end/submodule_4-video"
       Lessons: "/digital-famine/end/submodule_4/"
-      Image: "/images/digital-famine/end.svg"
+      Image: "/images/digital-famine/Planet4-Scene.jpg"
       Alt: "end Submodule 4"
     - Title: "Submodule 5"
       Genre: "Project Creation"
@@ -54,7 +54,7 @@ lxdData:
       Categories: ["end", "Flask", "Spring", "Databases"]
       Video: "/digital-famine/end/submodule_5-video"
       Lessons: "/digital-famine/end/submodule_5/"
-      Image: "/images/digital-famine/end.svg"
+      Image: "/images/digital-famine/CrashingRocket.png"
       Alt: "end Submodule 5"
 ---
 {%- include tailwind/quests/digital-famine.html -%}
