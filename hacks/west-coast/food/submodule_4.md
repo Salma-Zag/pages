@@ -1,4 +1,3 @@
-````markdown
 ---
 layout: opencs
 microblog: True 
