@@ -60,23 +60,34 @@ class MansionLevel5 {
 			hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
 			/* Interact function
 			*  This function is called when the player interacts with the NPC
-			*  It pauses the main game, creates a new GameControl instance with the StarWars level,
+			*  It attempts to run a mini-game only if the required references exist.
 			*/
 			interact: function() {
-			  // Set a primary game reference from the game environment
-			  let primaryGame = gameEnv.gameControl;
-			  // Define the game in game level
-			  let levelArray = [GameLevelStarWars];
-			  // Define a new GameControl instance with the StarWars level
-			  let gameInGame = new GameControl(path,levelArray);
-			  // Pause the primary game 
-			  primaryGame.pause();
-			  // Start the game in game
-			  gameInGame.start();
-			  // Setup "callback" function to allow transition from game in gaame to the underlying game
-			  gameInGame.gameOver = function() {
-				// Call .resume on primary game
-				primaryGame.resume();
+			  // Safely check for required globals/objects before using them.
+			  if (!gameEnv || !gameEnv.gameControl) {
+				console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
+				return;
+			  }
+
+			  // Only attempt to launch the mini-game if GameControl and GameLevelStarWars are defined.
+			  if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
+				// Set a primary game reference from the game environment
+				let primaryGame = gameEnv.gameControl;
+				// Define the game in game level
+				let levelArray = [GameLevelStarWars];
+				// Define a new GameControl instance with the StarWars level
+				let gameInGame = new GameControl(path, levelArray);
+				// Pause the primary game 
+				primaryGame.pause();
+				// Start the game in game
+				gameInGame.start();
+				// Setup "callback" function to allow transition from game in game to the underlying game
+				gameInGame.gameOver = function() {
+				  // Call .resume on primary game
+				  primaryGame.resume();
+				};
+			  } else {
+				console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
 			  }
 			}
 		  };
