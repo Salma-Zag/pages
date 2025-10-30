@@ -1,9 +1,8 @@
 ---
-
 layout: opencs
 title: Platformer
 permalink: /digital-famine/
----------------------------
+---
 
 <div id="gameContainer">
     <div id="promptDropDown" class="promptDropDown" style="z-index: 9999"></div>
@@ -13,7 +12,7 @@ permalink: /digital-famine/
 <section id="storyScenes" style="margin-top: 60px; padding: 20px; color: white; font-family: 'Orbitron', sans-serif; background: radial-gradient(circle at center, #030b15 20%, #000000 100%);">
     <h1 style="text-align: center; font-size: 2.5em; color: #00b7ff;">Storyline</h1>
 
-```
+
 <!-- Scene 1 -->
 <div class="scene" style="margin-top: 40px;">
     <h2 style="color: #00ffcc;">Scene 1</h2>
@@ -71,7 +70,6 @@ permalink: /digital-famine/
     </div>
 </div>
 
-```
 
 </section>
 
