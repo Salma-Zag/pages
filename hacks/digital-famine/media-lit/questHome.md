@@ -5,7 +5,7 @@ title: Media Literacy Quest
 description: >
   Learn about media literacy and help defent Media Literacy plant from Foreign invaders. Build your shield level by completing the modules. 
 author: CSP 2025-26
-permalink: /digital-famine/media/
+permalink: /digital-famine/medialit/
 breadcrumb: true
 lxdData:
   Title: "Mastery of Media Literacy Modules"
