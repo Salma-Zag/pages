@@ -33,7 +33,7 @@ class MansionLevel5 {
         STEP_FACTOR: 800,
         ANIMATION_RATE: 10,
         INIT_POSITION: { x: 0, y: 0 }, 
-        pixels: {height: 3400, width: 1200},
+        pixels: {height: 2400, width: 3600},
         orientation: {rows: 2, columns: 3},
 		down: {row: 1, start: 0, columns: 3},
 		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
@@ -48,11 +48,11 @@ class MansionLevel5 {
 	};
 
 	// starting npc
-	const sprite_src_nomad = path + "/images/gamify/zombieNpc.png";
-	const sprite_data_nomad = {
+	const sprite_src_zombie = path + "/images/gamify/zombieNpc.png";
+	const sprite_data_npc = {
 		id: 'Starting Zombie',
 		greeting: "Zombie survival will start.",
-		src: sprite_src_nomad,
+		src: sprite_src_zombie,
 		SCALE_FACTOR: 10,
 		ANIMATION_RATE: 100,
 		pixels: {height: 1200, width: 3600},
@@ -82,17 +82,17 @@ class MansionLevel5 {
 			}
 		}
 	};
-	const sprite_src_enemy = path + "/images/gamify/zombieNpc.png";
-    const sprite_data_enemy = {
+
+	const sprite_data_enemy = {
         id: 'ZombieEnemy',
         greeting: "Zombie dead",
-        src: sprite_src_enemy,
+        src: sprite_src_zombie,
         SCALE_FACTOR: 10,
         ANIMATION_RATE: 50,
-        pixels: {height: 1504, width: 574},
+        pixels: {height: 1200, width: 3600},
         INIT_POSITION: { x: width / 2, y: height / 4 },
-        orientation: {rows: 1, columns: 1},
-        down: {row: 0, start: 0, columns: 1},
+        orientation: {rows: 1, columns: 3},
+        down: {row: 1, start: 0, columns: 3},
         hitbox: { widthPercentage: 0.4, heightPercentage: 0.4 },
         zIndex: 10,
         isKilling: false, // Flag to prevent multiple kills
@@ -126,7 +126,7 @@ class MansionLevel5 {
             }
 
             // Move towards nearest player
-            const speed = 1.5; // Adjust speed as needed
+            const speed = 2.5; // Adjust speed as needed
             const dx = nearest.position.x - this.position.x;
             const dy = nearest.position.y - this.position.y;
             const angle = Math.atan2(dy, dx);
@@ -253,7 +253,7 @@ class MansionLevel5 {
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
 	  { class: Player, data: sprite_data_player },
-	  { class: Npc, data: sprite_data_nomad},
+	  { class: Npc, data: sprite_data_npc},
 	  { class: Enemy, data: sprite_data_enemy }
 	];
   }
