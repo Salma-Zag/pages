@@ -11,13 +11,12 @@ date: 2025-10-21
 ---
 
 # San Diego
-# Adding Audio to a Webpage
 
+# Lesson:
+## Adding Audio to a Webpage
 Learn how to add and control audio using HTML with sounds from the San Diego's Petco Park
-
 ### **1. What It Does**  
 Use the `<audio>` tag to play clips (music, nature, narration) directly in the browser.
-
 ### **2. Prepare Files**  
 Save audio files like:  
 `/audio/petco-park.mp3`, `/audio/san-diego-zoo.mp3`, `/audio/balboa-park.mp3`, `/audio/la-jolla.mp3`
@@ -30,11 +29,12 @@ Each section should include a heading, a short description, and an audio player.
   <p class="text-gray-600 mb-4">
     Listen to authentic game-day sounds from the Padres’ home stadium — cheers, announcers, and that unmistakable Petco Park energy.
   </p>
+  
+<audio controls>
+  <source src="https://youtube.com/audio/baseballcheer.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
-  <audio controls preload="none">
-    <source src="assets/5 Sec Crowd Cheer - Sound Effect (HD).mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <p class="text-sm text-gray-500 mt-3">Source: Local file (assets/5 Sec Crowd Cheer - Sound Effect (HD).mp3)</p>
 </section>
