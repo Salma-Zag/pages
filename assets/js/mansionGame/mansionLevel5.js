@@ -46,9 +46,9 @@ class MansionLevel5 {
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
-	const sprite_src_nomad = path + "/images/mansionGame/placeholder_player_lvl5.png"; // be sure to include the path
+	const sprite_src_nomad = path + "/images/gamify/zombieNpc.png"; // be sure to include the path
 	const sprite_data_nomad = {
-			id: 'Placholder npc',
+			id: 'ZombieSurvivalNpc',
 			greeting: "Hi I am Da dude. Start zombe surival",
 			src: sprite_src_nomad,
 			SCALE_FACTOR: 10,  // Adjust this based on your scaling needs
