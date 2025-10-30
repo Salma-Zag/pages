@@ -12,7 +12,7 @@ date: 2025-10-21
 
 # San Diego
 
-# Lesson:
+# Petco Park Audio Lesson:
 ## Adding Audio to a Webpage
 Learn how to add and control audio using HTML with sounds from the San Diego's Petco Park
 ### **1. What It Does**  
