@@ -762,6 +762,32 @@ Click through to begin exploring **searching, filtering, and viewing dishes** in
   </a>
 </div>
 
+<!-- Next City Button -->
+<a href="/west-coast/food/LA/" class="next-city-btn">Next → Los Angeles</a>
+
+<style>
+.next-city-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, #06b6d4, #0ea5a4);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 10000;
+}
+.next-city-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(6, 182, 212, 0.5);
+}
+</style>
+
+
 <script>
 /* utilities used by editors */
 function runEditor(editorId, termId) {
