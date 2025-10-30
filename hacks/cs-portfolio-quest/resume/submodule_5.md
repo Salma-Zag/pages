@@ -15,9 +15,6 @@ date: 2025-10-21
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <style>
-  body {
-    background-color: #f9fafb;
-  }
   
   .linkedin-header {
     background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
@@ -68,7 +65,7 @@ date: 2025-10-21
     to { transform: rotate(360deg); }
   }
   
-  /* Ensure inputs have light backgrounds */
+  /* Ensure cool beenz inputs have light backgrounds */
   input, textarea {
     background-color: white !important;
     color: #1f2937 !important;
