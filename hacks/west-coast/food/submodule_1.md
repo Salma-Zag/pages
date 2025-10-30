@@ -970,7 +970,7 @@ Click through to begin exploring **searching, filtering, and viewing dishes** in
 </div>
 
 <!-- Next City Button -->
-<a href="/west-coast/food/LA/" class="next-city-btn">Next → Los Angeles</a>
+<a href="{{ site.baseurl }}/west-coast/food/LA/" class="next-city-btn">Next → Los Angeles</a>
 
 <script>
 /* utilities used by editors */
