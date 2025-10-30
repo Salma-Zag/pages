@@ -2,7 +2,7 @@
 layout: post
 title: "Los Angeles"
 description: "Roadtrip through LA and learn UI while you're there!"
-permalink: /west-coast/analytics/losangeles/GriffithO
+permalink: /west-coast/analytics/losangeles/HollywoodS
 parent: "Analytics/Admin"
 team: "Cool Collaborators"
 submodule: 1
@@ -17,8 +17,9 @@ This submodule will be developed by the Cool Collaborators team.
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Griffith Observatory — Roadtrip</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Hollywood Sign — Roadtrip</title>
 <style>
 /* ===== Truck intro (8s) ===== */
 body{background:#009688;overflow:hidden;font-family:'Open Sans',sans-serif}
@@ -48,32 +49,20 @@ body{background:#009688;overflow:hidden;font-family:'Open Sans',sans-serif}
 @keyframes hill{100%{transform:translateX(-2000px)}}
 .intro{position:fixed;inset:0;display:grid;place-items:center;background:#009688;z-index:10}
 .intro p{color:#fff;font-weight:800;margin-top:18px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
-/* ===== Scene: Griffith (night sky) ===== */
+/* ===== Scene: Hollywood Sign ===== */
 .hidden{display:none}
-.scene{position:relative;min-height:100vh;background:linear-gradient(#0f0c29,#302b63 55%,#24243e)}
-.twinkle{width:3px;height:3px;background:#fff;border-radius:50%;box-shadow:0 0 8px #fff;position:absolute;animation:tw 2s ease-in-out infinite}
-.twinkle.t2{animation-delay:.4s;top:18%}.twinkle.t3{animation-delay:.8s;top:28%}.twinkle.t4{animation-delay:1.2s;top:46%}
-@keyframes tw{50%{transform:scale(2.2);opacity:1}}
-.comet{width:8px;height:8px;background:#fff;border-radius:50%;box-shadow:0 0 10px #fff;top:20%;left:-100px;position:absolute;animation:comet 7s linear infinite}
-.comet:after{content:"";position:absolute;width:90px;height:2px;right:8px;top:3px;background:linear-gradient(to right,#fff,transparent)}
-.comet.c2{top:40%;animation-delay:1.6s}.comet.c3{top:60%;animation-delay:3.2s}
-@keyframes comet{to{left:110%}}
-.planet{border-radius:50%;position:absolute;animation:spin-planet 22s linear infinite}
-.planet.mars{width:56px;height:56px;background:radial-gradient(circle at 30% 30%,#ff6b4a,#cd5c3a);top:14%;left:10%;box-shadow:0 0 26px rgba(255,107,74,.55)}
-.planet.jupiter{width:78px;height:78px;background:radial-gradient(circle at 30% 30%,#ffa726,#ff8a50);top:48%;right:10%;box-shadow:0 0 34px rgba(255,167,38,.55);animation-duration:26s}
-@keyframes spin-planet{to{transform:rotate(360deg)}}
-.moon{width:64px;height:64px;background:linear-gradient(135deg,#fff5e1,#ffe4b5);border-radius:50%;position:absolute;top:24%;right:14%;box-shadow:0 0 36px rgba(255,245,225,.8);animation:float 7.5s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-18px)}}
-.observatory{position:absolute;bottom:84px;left:50%;transform:translateX(-50%);width:240px;height:130px}
-.dome{position:absolute;top:0;left:50%;transform:translateX(-50%);width:96px;height:74px;background:linear-gradient(#e8e8e8,#c0c0c0);border:4px solid #999;border-radius:50% 50% 0 0}
-.base{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:184px;height:64px;background:linear-gradient(#d3d3d3,#a9a9a9);border:4px solid #808080;border-radius:6px}
-.caption{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;color:#e9e9ff;font-weight:600;background:rgba(0,0,0,.35);padding:8px 14px;border-radius:10px}
+.scene{position:relative;min-height:100vh;background:linear-gradient(#8fd0ff 0%,#cfefff 60%,#eaf6ff 100%)}
+.hill{box-shadow:none}
+.hill-shape{position:absolute;bottom:0;width:60%;height:40%;background:radial-gradient(circle at 50% 100%,#6fb36a 0%,#518f57 70%);left:var(--x);border-radius:50% 50% 0 0;filter:brightness(.95)}
+.sign{position:absolute;bottom:46%;left:50%;transform:translateX(-50%);display:flex;gap:8px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
+.sign .ltr{width:28px;height:68px;background:#fff;border:5px solid #eaeaea;display:grid;place-items:center;font-weight:800;font-size:22px;color:#333}
+.caption{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;color:#2b2b2b;font-weight:600;background:rgba(255,255,255,.75);padding:8px 14px;border-radius:10px}
 </style>
 </head>
 <body>
 <!-- Truck intro -->
 <div class="intro" id="intro">
-  <div class="loop-wrapper" role="img" aria-label="Driving up to Griffith Observatory at dusk">
+  <div class="loop-wrapper" role="img" aria-label="Driving through teal hills toward Hollywood">
     <div class="mountain"></div>
     <div class="hill"></div>
     <div class="tree"></div><div class="tree"></div><div class="tree"></div>
@@ -81,27 +70,28 @@ body{background:#009688;overflow:hidden;font-family:'Open Sans',sans-serif}
     <div class="truck"></div>
     <div class="wheels"></div>
   </div>
-  <p>Winding up to Griffith Observatory…</p>
+  <p>Cruising up to the Hollywood Hills…</p>
 </div>
 
 <!-- Scene -->
 <main class="scene hidden" id="scene">
-  <div class="twinkle" style="top:12%;left:12%"></div>
-  <div class="twinkle t2" style="left:48%"></div>
-  <div class="twinkle t3" style="left:72%"></div>
-  <div class="twinkle t4" style="left:22%"></div>
-  <div class="comet"></div><div class="comet c2"></div><div class="comet c3"></div>
-  <div class="planet mars"></div><div class="planet jupiter"></div><div class="moon"></div>
-  <div class="observatory"><div class="dome"></div><div class="base"></div></div>
-  <div class="caption">🔭 Griffith Observatory — comets, planets & moonlit LA</div>
+  <div class="hill-shape" style="--x:-10%"></div>
+  <div class="hill-shape" style="--x:20%"></div>
+  <div class="hill-shape" style="--x:55%"></div>
+  <div class="sign" aria-label="HOLLYWOOD sign">
+    <div class="ltr">H</div><div class="ltr">O</div><div class="ltr">L</div><div class="ltr">L</div>
+    <div class="ltr">Y</div><div class="ltr">W</div><div class="ltr">O</div><div class="ltr">O</div><div class="ltr">D</div>
+  </div>
+  <div class="caption">⛰️ Hollywood Sign — Sunlit hills overlooking LA</div>
 </main>
 
 <script>
 setTimeout(()=>{
   document.getElementById('intro').classList.add('hidden');
   document.getElementById('scene').classList.remove('hidden');
-  document.body.style.background='linear-gradient(#0f0c29,#24243e)';
-},8000);
+  // optional: change body bg to match scene
+  document.body.style.background = 'linear-gradient(#8fd0ff,#eaf6ff)';
+}, 8000);
 </script>
 </body>
 </html>
