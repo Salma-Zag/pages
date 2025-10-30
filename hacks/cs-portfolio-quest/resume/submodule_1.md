@@ -42,7 +42,7 @@ date: 2025-10-21
       margin-top: 40px;
     }
     .stat-card {
-      background: #fff;
+      background: #b6b6b6ff;
       padding: 20px;
       border-radius: 16px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
