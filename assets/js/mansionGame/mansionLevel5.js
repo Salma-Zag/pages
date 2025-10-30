@@ -41,7 +41,7 @@ class MansionLevel5 {
 		right: {row: 1, start: 0, columns: 3},
 		up: {row: 1, start: 0, columns: 3},
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
-		upRight: {row: 1, start: 0, columns: 3, rotate: -Math.PI/16},
+		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
