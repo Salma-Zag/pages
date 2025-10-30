@@ -486,7 +486,6 @@ microblog: True
             </div>
         </div>
 
-        <!-- Step 1: Authentication -->
         <div class="step-section">
             <div class="step-header">
                 <div class="step-number">1</div>
@@ -521,7 +520,6 @@ microblog: True
             <div id="keyStatus"></div>
         </div>
 
-        <!-- Step 2: Construct Request -->
         <div class="step-section">
             <div class="step-header">
                 <div class="step-number">2</div>
@@ -575,7 +573,6 @@ microblog: True
             </div>
         </div>
 
-        <!-- Step 3: Send Request -->
         <div class="step-section">
             <div class="step-header">
                 <div class="step-number">3</div>
@@ -611,7 +608,6 @@ microblog: True
             <div id="responseArea" class="response-area"></div>
         </div>
 
-        <!-- Step 4: Parse and Use Data -->
         <div class="step-section">
             <div class="step-header">
                 <div class="step-number">4</div>
@@ -642,7 +638,6 @@ microblog: True
             <div id="parsedDataArea" class="response-area"></div>
         </div>
 
-        <!-- Stadium Comparison Analysis -->
         <div class="stadium-comparison" id="comparisonSection" style="display: none;">
             <h2 style="color: #2c3e50; text-align: center; margin-bottom: 25px;">
                 📊 Data Analysis: Comparing Both Stadiums
@@ -675,7 +670,6 @@ microblog: True
             </div>
         </div>
 
-        <!-- Lessons Learned -->
         <div class="lessons-learned">
             <h2>💡 Lessons Learned: APIs + Sports Data</h2>
             <ul>
@@ -741,6 +735,7 @@ microblog: True
             `;
             
             checkIfReady();
+            updateURL(); // Ensure the URL updates immediately with the key
         }
 
         function updateURL() {
@@ -748,15 +743,31 @@ microblog: True
             const endpoint = document.getElementById('endpoint').value;
             const queryParams = document.getElementById('queryParams').value;
             
+            const constructedUrlElement = document.getElementById('constructedUrl');
+
             if (endpoint) {
                 let fullUrl = baseUrl + endpoint;
+                
+                // Start of query string
+                let queryParts = [];
+                
+                // Add fixed query params if present
                 if (queryParams) {
-                    fullUrl += '?' + queryParams;
+                    queryParts.push(queryParams);
                 }
+                
+                // Add API key if generated
                 if (currentAPIKey) {
-                    fullUrl += (queryParams ? '&' : '?') + 'api_key=' + currentAPIKey;
+                    queryParts.push('api_key=' + currentAPIKey);
                 }
-                document.getElementById('constructedUrl').textContent = fullUrl;
+
+                if (queryParts.length > 0) {
+                    fullUrl += '?' + queryParts.join('&');
+                }
+                
+                constructedUrlElement.textContent = fullUrl;
+            } else {
+                constructedUrlElement.textContent = "Select a stadium above to see the complete API request URL...";
             }
             
             checkIfReady();
@@ -777,7 +788,10 @@ microblog: True
             const endpoint = document.getElementById('endpoint').value;
             const stadiumId = endpoint.includes('chase_center') ? 'chase_center' : 'levis_stadium';
             const responseArea = document.getElementById('responseArea');
+            const btn = document.getElementById('sendRequestBtn');
             
+            // Disable button and show loading
+            btn.disabled = true;
             responseArea.innerHTML = `
                 <div class="response-header">
                     ⏳ Sending Request to Bay Area Sports API... <span class="loading"></span>
@@ -786,6 +800,7 @@ microblog: True
             `;
             responseArea.classList.add('active');
             
+            // Simulate API latency
             setTimeout(() => {
                 const data = stadiumData[stadiumId];
                 collectedData[stadiumId] = data;
@@ -798,6 +813,7 @@ microblog: True
                     data: data
                 };
 
+                // Display Raw JSON Response
                 responseArea.innerHTML = `
                     <div class="response-header">
                         ✅ Request Successful!
@@ -808,18 +824,107 @@ microblog: True
                     <div class="json-display">${JSON.stringify(response, null, 2)}</div>
                 `;
                 
+                // Parse and use the data
                 parseAndDisplayData(data, stadiumId);
                 
+                // Scroll to the response
                 responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 
                 // Check if we have both stadiums to show comparison
                 if (Object.keys(collectedData).length === 2) {
                     showComparison();
                 }
+                
+                // Re-enable the button (if another endpoint is selected)
+                checkIfReady();
             }, 1500);
         }
 
         function parseAndDisplayData(data, stadiumId) {
             const parsedArea = document.getElementById('parsedDataArea');
+            parsedArea.classList.add('active');
             
-            const teamColor = stadiumId === 'chase_center'
+            const teamColor = stadiumId === 'chase_center' ? '#1D428A' : '#AA0000';
+            const teamName = stadiumId === 'chase_center' ? 'Golden State Warriors' : 'San Francisco 49ers';
+            
+            // Data fields to display
+            const fields = [
+                { label: 'Stadium Name', key: 'name' },
+                { label: 'Team', key: 'team' },
+                { label: 'Sport', key: 'sport' },
+                { label: 'Capacity', key: 'capacity', format: (v) => v.toLocaleString() + ' fans' },
+                { label: 'Opened Year', key: 'opened' },
+                { label: 'Construction Cost', key: 'cost' },
+                { label: 'Championships', key: 'championships' }
+            ];
+
+            let html = `
+                <div class="response-header" style="color: ${teamColor}; border-bottom: 2px solid ${teamColor}; padding-bottom: 10px;">
+                    📊 Parsed Data for ${data.name}
+                </div>
+                <div class="parsed-data" style="border-color: ${teamColor};">
+            `;
+            
+            fields.forEach(field => {
+                const value = field.format ? field.format(data[field.key]) : data[field.key];
+                html += `
+                    <div class="data-row">
+                        <span class="data-label">${field.label}:</span>
+                        <span class="data-value" style="color: ${teamColor};">${value}</span>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            
+            parsedArea.innerHTML = html;
+            
+            // If we have both, update the comparison section hidden divs
+            if (Object.keys(collectedData).length === 2) {
+                updateComparisonStats();
+            }
+        }
+        
+        function updateComparisonStats() {
+            const chase = collectedData.chase_center;
+            const levis = collectedData.levis_stadium;
+            
+            const fields = [
+                { label: 'Capacity', key: 'capacity', format: (v) => v.toLocaleString() },
+                { label: 'Opened', key: 'opened' },
+                { label: 'Championships', key: 'championships' },
+                { label: 'Estimated Cost', key: 'cost' }
+            ];
+            
+            let chaseHtml = '';
+            let levisHtml = '';
+
+            fields.forEach(field => {
+                const chaseValue = field.format ? field.format(chase[field.key]) : chase[field.key];
+                const levisValue = field.format ? field.format(levis[field.key]) : levis[field.key];
+                
+                chaseHtml += `
+                    <div class="data-row">
+                        <span class="data-label">${field.label}:</span>
+                        <span class="data-value" style="color: #1D428A;">${chaseValue}</span>
+                    </div>
+                `;
+                levisHtml += `
+                    <div class="data-row">
+                        <span class="data-label">${field.label}:</span>
+                        <span class="data-value" style="color: #AA0000;">${levisValue}</span>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('warriorsStats').innerHTML = chaseHtml;
+            document.getElementById('ninersStats').innerHTML = levisHtml;
+        }
+
+        function showComparison() {
+            document.getElementById('comparisonSection').style.display = 'block';
+            document.getElementById('comparisonSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -17,6 +17,7 @@ lxdData:
       Categories: ["Backend", "Flask", "Spring", "Databases"]
       Video: "/west-coast/backend/submodule_1-video"
       Lessons: "/west-coast/backend/submodule_1/"
+      Image: "/images/west-coast/petcopark.webp"
     - Title: "Los Angeles"
       Genre: "Project Creation"
       Level: 2
@@ -274,28 +275,30 @@ lxdData:
   
   <div class="modules-grid">
     {% for topic in page.lxdData.Topics %}
-    <div class="module-card">
-      <div class="module-header {% if topic.Title == 'San Diego' %}san-diego{% elsif topic.Title == 'Los Angeles' %}los-angeles{% elsif topic.Title == 'San Francisco' %}san-francisco{% else %}seattle{% endif %}">
-        <span class="module-level">Level {{ topic.Level }}</span>
-        <h2>{{ topic.Title }}</h2>
-        <p>{{ topic.Genre }}</p>
-      </div>
-      
-      <div class="module-body">
-        <h3>{{ topic.Description }}</h3>
-        
-        <div class="module-tags">
-          {% for category in topic.Categories %}
-          <span class="tag">{{ category }}</span>
-          {% endfor %}
+      <div class="module-card">
+        <div class="module-header {% if topic.Title == 'San Diego' %}san-diego{% elsif topic.Title == 'Los Angeles' %}los-angeles{% elsif topic.Title == 'San Francisco' %}san-francisco{% else %}seattle{% endif %}">
+          <span class="module-level">Level {{ topic.Level }}</span>
+          <h2>{{ topic.Title }}</h2>
+          <p>{{ topic.Genre }}</p>
         </div>
         
-        <div class="module-actions">
-          <a href="{{ topic.Lessons }}" class="btn btn-primary">Start Learning</a>
-          <a href="{{ topic.Video }}" class="btn btn-secondary">Watch Video</a>
+        <div class="module-body">
+
+
+          <h3>{{ topic.Description }}</h3>
+          <img src="{{topic.Image}}">
+          <div class="module-tags" alt="Petco Park">
+            {% for category in topic.Categories %}
+            <span class="tag">{{ category }}</span>
+            {% endfor %}
+          </div>
+          
+          <div class="module-actions">
+            <a href="{{ topic.Lessons }}" class="btn btn-primary">Start Learning</a>
+            <a href="{{ topic.Video }}" class="btn btn-secondary">Watch Video</a>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 </div>
