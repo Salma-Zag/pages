@@ -440,11 +440,11 @@ date: 2025-10-29
                     <div class="certificate-seal">🌍</div>
                     <h1 class="certificate-title">Certificate of Digital Excellence</h1>
                     <div class="certificate-subtitle">This certifies that</div>
-                    <div class="certificate-recipient">Knowledge Guardian</div>
+                    <div class="certificate-recipient">YOU</div>
                     <div class="certificate-text">
-                        has successfully completed the<br>
-                        <strong>Knowledge Restoration Protocol</strong><br>
-                        and restored 100% of Earth's essential digital wisdom
+                        has successfully<br>
+                        <strong>Saved the Earth</strong><br>
+                        and restored its knowledge, while become more educated along the way!
                     </div>
                     <div class="certificate-skills">
                         <div class="skill-badge">✓ Cybersecurity Expert</div>
