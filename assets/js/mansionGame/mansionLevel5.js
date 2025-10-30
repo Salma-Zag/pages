@@ -46,89 +46,41 @@ class MansionLevel5 {
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
+	// starting npc
 	const sprite_src_nomad = path + "/images/gamify/zombieNpc.png";
 	const sprite_data_nomad = {
-			id: 'ZombieSurvivalNpc',
-			greeting: "Hi I am Da dude. Start zombie surival",
-			src: sprite_src_nomad,
-			SCALE_FACTOR: 10,
-			ANIMATION_RATE: 100,
-			pixels: {height: 307, width: 813},
-			INIT_POSITION: { x: (width * 3 / 4), y: (height * 3 / 4)},
-			orientation: {rows: 3, columns: 7},
-			down: {row: 1, start: 0, columns: 7},
-			left: {row: 0, start: 0, columns: 7},
-			right: {row: 2, start: 0, columns: 7},
-			up: {row: 1, start: 0, columns: 7}, // fallback to down row if no up animation
-			hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
-			interact: function() {
-				if (!gameEnv || !gameEnv.gameControl) {
-					console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
-					return;
-				}
-				if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
-					let primaryGame = gameEnv.gameControl;
-					let levelArray = [GameLevelStarWars];
-					let gameInGame = new GameControl(path, levelArray);
-					primaryGame.pause();
-					gameInGame.start();
-					gameInGame.gameOver = function() {
-						primaryGame.resume();
-					};
-				} else {
-					console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
-				}
+		id: 'Starting Zombie',
+		greeting: "Zombie survival will start.",
+		src: sprite_src_nomad,
+		SCALE_FACTOR: 10,
+		ANIMATION_RATE: 100,
+		pixels: {height: 307, width: 813},
+		INIT_POSITION: { x: (width /2), y: (height /2)},
+		orientation: {rows: 1, columns: 3},
+		down: {row: 1, start: 0, columns: 3},
+		left: {row: 1, start: 0, columns: 3},
+		right: {row: 1, start: 0, columns: 3},
+		up: {row: 1, start: 0, columns: 3}, // fallback to down row if no up animation
+		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
+		interact: function() {
+			if (!gameEnv || !gameEnv.gameControl) {
+				console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
+				return;
 			}
+			if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
+				let primaryGame = gameEnv.gameControl;
+				let levelArray = [GameLevelStarWars];
+				let gameInGame = new GameControl(path, levelArray);
+				primaryGame.pause();
+				gameInGame.start();
+				gameInGame.gameOver = function() {
+					primaryGame.resume();
+				};
+			} else {
+				console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
+			}
+		}
 	};
-	// const sprite_src_r2d2 = path + "/images/gamify/r2_idle.png";
-	// const sprite_greet_r2d2 = "Hi I am R2D2. Leave this planet and help defend the rebel base on Hoth!";
-	// const sprite_data_r2d2 = {
-	// 	id: 'StarWarsR2D2',
-	// 	greeting: sprite_greet_r2d2,
-	// 	src: sprite_src_r2d2,
-	// 	SCALE_FACTOR: 8,
-	// 	ANIMATION_RATE: 100,
-	// 	pixels: {width: 505, height: 223},
-	// 	INIT_POSITION: { x: (width * 1 / 4), y: (height * 3 / 4)},
-	// 	orientation: {rows: 1, columns: 3 },
-	// 	down: {row: 0, start: 0, columns: 3 },
-	// 	hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
-	// 	// Add dialogues array for random messages
-	// 	dialogues: [
-	// 		"Beep boop! I have important data about the Death Star plans.",
-	// 		"The rebels need your help on Hoth. The Empire is approaching!",
-	// 		"I've served with Jedi Knights and rebel heroes across the galaxy.",
-	// 		"Whrrrr... bleep! Translation: Want to fly an X-Wing fighter?",
-	// 		"My counterpart C-3PO always worries too much.",
-	// 		"I've calculated the odds of success at approximately 647 to 1.",
-	// 		"The Force is strong with this one... I can sense it.",
-	// 		"Imperial forces are on high alert. We must be cautious."
-	// 	],
-	// 	reaction: function() {
-	// 		// Use dialogue system instead of alert
-	// 		if (this.dialogueSystem) {
-	// 			this.showReactionDialogue();
-	// 		} else {
-	// 			console.log(sprite_greet_r2d2);
-	// 		}
-	// 	},
-	// 	interact: function() {
-	// 		// KEEP ORIGINAL GAME-IN-GAME FUNCTIONALITY
-	// 		// Set a primary game reference from the game environment
-	// 		let primaryGame = gameEnv.gameControl;
-	// 		let levelArray = [GameLevelStarWars];
-	// 		let gameInGame = new GameControl(gameEnv.game, levelArray);
-	// 		primaryGame.pause();
-
-	// 		// Start the new game
-	// 		gameInGame.start();
-
-	// 		// Setup return to main game after mini-game ends
-	// 		gameInGame.gameOver = function() {
-	// 			primaryGame.resume();
-	// 		};
-	// 	}
-	// };
 
 	// List of objects defnitions for this level
 	this.classes = [
