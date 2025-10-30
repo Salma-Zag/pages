@@ -16,6 +16,11 @@ class GameLevelHomePage {
 
     console.log('📐 Canvas dimensions:', { width, height });
 
+    // Clear any lingering dialogue elements immediately on page load
+    const existingDialogues = document.querySelectorAll('[id*="dialogue"], [class*="dialogue"], .dialogue-overlay, #dialogue-overlay');
+    existingDialogues.forEach(el => el.remove());
+    console.log('✅ Cleared all existing dialogue elements on load');
+
     this.dialogueSystem = new DialogueSystem();
 
     this.applyPlanetEffect = (ctx, sprite, planetName) => {
@@ -211,7 +216,6 @@ class GameLevelHomePage {
           this.isLocked = !this.progression.ai;
           this.applyPlanetEffect(ctx, this, 'cyber');
           
-          // Draw glow effect AFTER the planet is drawn
           if (!this.isLocked) {
             const glowColor = this.progression.cyber ? 'rgba(34, 197, 94, 0.4)' : 'rgba(255, 255, 255, 0.5)';
             const glowSize = this.progression.cyber ? 40 : 50;
@@ -228,7 +232,7 @@ class GameLevelHomePage {
           }
         }.bind(this),
         dialogues: ["Would you like to travel to the Cyber Planet?"],
-        reaction: function() { }, // try comment this out
+        reaction: function() { },
         interact: function() {
           this.removeExistingKeyListener();
           this.debugProgress();
@@ -246,6 +250,7 @@ class GameLevelHomePage {
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
                 console.log('Traveling to Cyber Planet...');
                 this.debugProgress();
+                dialogueSystem.closeDialogue();
                 window.location.href = '/digital-famine/cybersecurity-game/';
               },
               primary: true
@@ -271,7 +276,6 @@ class GameLevelHomePage {
           this.isLocked = !this.progression.microblog;
           this.applyPlanetEffect(ctx, this, 'medialit');
           
-          // Draw glow effect
           if (!this.isLocked) {
             const glowColor = this.progression.medialit ? 'rgba(34, 197, 94, 0.4)' : 'rgba(255, 255, 255, 0.5)';
             const glowSize = this.progression.medialit ? 40 : 50;
@@ -299,6 +303,7 @@ class GameLevelHomePage {
               action: () => {
                 this.progression.medialit = true;
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
+                dialogueSystem.closeDialogue();
                 window.location.href = '/digital-famine/medialit/';
               },
               primary: true
@@ -324,7 +329,6 @@ class GameLevelHomePage {
           this.isLocked = !this.progression.medialit;
           this.applyPlanetEffect(ctx, this, 'ai');
           
-          // Draw glow effect
           if (!this.isLocked) {
             const glowColor = this.progression.ai ? 'rgba(34, 197, 94, 0.4)' : 'rgba(255, 255, 255, 0.5)';
             const glowSize = this.progression.ai ? 40 : 50;
@@ -352,6 +356,7 @@ class GameLevelHomePage {
               action: () => {
                 this.progression.ai = true;
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
+                dialogueSystem.closeDialogue();
                 window.location.href = '/digital-famine/ai/';
               },
               primary: true
@@ -385,6 +390,7 @@ class GameLevelHomePage {
               action: () => {
                 this.progression.microblog = true;
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
+                dialogueSystem.closeDialogue();
                 window.location.href = '/digital-famine/microblog/';
               },
               primary: true
@@ -613,7 +619,11 @@ class GameLevelHomePage {
     console.log('🎮 ===== INITIALIZE METHOD CALLED =====');
     console.log('Number of game objects:', this.gameEnv.gameObjects.length);
 
-    // THIS IS THE KEY LINE - CREATE BADGES HERE!
+    // Clear any lingering dialogues from previous page loads
+    this.dialogueSystem.closeDialogue();
+    console.log('✅ Cleared any existing dialogues');
+
+    // Create badges
     console.log('⏰ About to call createPlanetStatusBadges...');
     this.createPlanetStatusBadges();
     console.log('✅ createPlanetStatusBadges call completed');
