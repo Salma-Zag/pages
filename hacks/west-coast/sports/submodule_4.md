@@ -27,84 +27,119 @@ microblog: True
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #002244 0%, #005A8C 50%, #69BE28 100%);
+            background: #1a1a2e;
             min-height: 100vh;
             padding: 20px;
-            color: #080808ff;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        body.light-mode {
+            background: #f5f5f5;
+            color: #000000;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        p {
-            color: #000000ff;
-        }
-
+        
         header {
             text-align: center;
             padding: 30px 0;
-            background: rgba(0, 34, 68, 0.8);
+            background: #16213e;
             border-radius: 15px;
             margin-bottom: 30px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        h1 {
-            font-size: 2.5em;
-            color: #69BE28;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        body.light-mode header {
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        h1 {
             font-size: 2.5em;
-            color: #0d0e0cff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #0ea5e9;
+            margin-bottom: 10px;
         }
 
         .subtitle {
-            color: #1d3344ff;
-            margin-top: 10px;
-            font-size: 1.2em;
+            color: #94a3b8;
+            font-size: 1.1em;
         }
 
+        body.light-mode .subtitle {
+            color: #475569;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: #0284c7;
+        }
 
         .learning-section {
-            background: white;
-
-            color: #000000;
+            background: #16213e;
             padding: 25px;
             border-radius: 12px;
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .learning-section p {
-            color: #000000;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            font-weight: 500;
+        body.light-mode .learning-section {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .learning-section h2 {
-            color: #000000;
+            color: #0ea5e9;
             margin-bottom: 15px;
-            border-bottom: 3px solid #69BE28;
-            padding-bottom: 10px;
-            font-weight: 700;
+            font-size: 1.8em;
+        }
+
+        .learning-section p, .learning-section li {
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 10px;
+    }
+
+        body.light-mode .learning-section p,
+        body.light-mode .learning-section li {
+            color: #000000;
+        }
+
+        .learning-section ul {
+            margin-left: 20px;
+            margin-top: 10px;
         }
 
         .code-editor {
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: #0f172a;
+            color: #e2e8f0;
             padding: 20px;
             border-radius: 8px;
             font-family: 'Courier New', monospace;
             margin: 15px 0;
             overflow-x: auto;
-            border: 2px solid #005A8C;
-            white-space: pre;
+            border: 2px solid #0ea5e9;
+        }
+
+        body.light-mode .code-editor {
+            background: #1e293b;
+            color: #e2e8f0;
         }
 
         .button-group {
@@ -115,7 +150,7 @@ microblog: True
         }
 
         button {
-            background: linear-gradient(135deg, #005A8C, #002244);
+            background: #0ea5e9;
             color: white;
             border: none;
             padding: 12px 24px;
@@ -124,452 +159,413 @@ microblog: True
             font-size: 1em;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
+     }
 
         button:hover {
-            background: linear-gradient(135deg, #69BE28, #005A8C);
+            background: #0284c7;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
+    }
 
         .output {
-            background: #ffffffff;
-            border: 3px solid #005A8C;
+            background: #0f172a;
+            border: 2px solid #0ea5e9;
             border-radius: 8px;
             padding: 20px;
             margin-top: 15px;
-            color: #000000;
+            color: #e2e8f0;
             min-height: 100px;
             font-family: monospace;
             white-space: pre-wrap;
-            font-weight: 500;
+        }
+
+        body.light-mode .output {
+            background: #f8fafc;
+            color: #000000;
+            border-color: #0ea5e9;
         }
 
         .stadium-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
 
         .stadium-card {
+            background: #1e293b;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 3px solid transparent;
+            border: 2px solid #334155;
+        }
+
+        body.light-mode .stadium-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
         }
 
         .stadium-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-color: #0ea5e9;
         }
 
         .stadium-card h3 {
+            color: #0ea5e9;
             margin-bottom: 10px;
-            font-size: 1.5em;
+            font-size: 1.4em;
         }
 
         .stadium-card p {
+            color: #94a3b8;
             margin: 8px 0;
-            font-size: 1.1em;
+         }
+
+        body.light-mode .stadium-card p {
+            color: #475569;
         }
 
-        .seahawks-card {
-            background: linear-gradient(135deg, #002244, #69BE28);
-            color: white;
-            border-color: #A5ACAF;
+        .input-group {
+            margin: 15px 0;
         }
 
-        .mariners-card {
-            background: linear-gradient(135deg, #0C2C56, #005C5C);
-            color: white;
-            border-color: #C4CED4;
+        .input-group label {
+            display: block;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
-        .kraken-card {
-            background: linear-gradient(135deg, #001628, #99D9D9);
-            color: white;
-            border-color: #355464;
-        }
-
-        .huskies-card {
-            background: linear-gradient(135deg, #4B2E83, #B7A57A);
-            color: white;
-            border-color: #85754D;
-        }
-
-        .orcas-card {
-            background: linear-gradient(135deg, #1E3A8A, #10B981);
-            color: white;
-            border-color: #059669;
-        }
-
-        select {
-            padding: 10px;
-            border-radius: 6px;
-            border: 2px solid #005A8C;
-            font-size: 1em;
-            margin: 5px;
-            background: white;
+        body.light-mode .input-group label {
             color: #000000;
-            font-weight: 500;
         }
 
-        .highlight {
-            color: #69BE28;
-            font-weight: bold;
+        input[type="text"], select {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #334155;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-size: 1em;
         }
 
-        .api-demo {
-            background: rgba(105, 190, 40, 0.1);
-            border-left: 4px solid #69BE28;
+        body.light-mode input[type="text"],
+        body.light-mode select {
+            background: #ffffff;
+            color: #000000;
+            border-color: #cbd5e1;
+        }
+
+        .info-box {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid #0ea5e9;
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
         }
 
-        .learning-section label {
-            color: #000000;
-            font-weight: 600;
-            font-size: 1.05em;
+        .info-box p {
+            color: #e2e8f0;
+            margin: 5px 0;
         }
 
-        .request-label {
-            font-weight: 700;
+        body.light-mode .info-box p {
             color: #000000;
-            margin-top: 10px;
-            font-size: 1.1em;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #0ea5e9;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        strong {
+            color: #0ea5e9;
         }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
     <div class="container">
         <header>
-            <h1>Seattle Sports Stadium Tour</h1>
-            <p class="subtitle">The Coach Calls the Play (API Request), The Team Executes (API Response)</p>
+            <h1>Seattle Sports API Tour</h1>
+            <p class="subtitle">Understanding APIs Through the Coach and Team Analogy</p>
         </header>
 
         <div class="learning-section">
-            <h2>Welcome to the Seattle Sports API</h2>
-            <p><strong>Understanding APIs Through Sports:</strong> Think of an API like a coach calling plays. The coach (your code) makes a request by calling a specific play, and the team (the API) executes that play and returns the result.</p>
-            <p>In our Seattle sports example, when you want information about a stadium, you're like a coach calling a play. You send a request to the API, and it responds with the data you need - just like players executing the coach's call!</p>
-            <p>Click on any stadium below to see how the coach calls the play (API request) and how the team responds (API response)!</p>
+            <h2>Welcome to the API Playbook</h2>
+            <p><strong>The Coach and Team Analogy:</strong></p>
+            <ul>
+                <li><strong>The Coach (You):</strong> Decides what information is needed</li>
+                <li><strong>The Playbook (Database):</strong> Contains all available plays and data</li>
+                <li><strong>The Play (User Input):</strong> Your specific request for data</li>
+                <li><strong>The Team (API):</strong> Executes the play and retrieves the data</li>
+                <li><strong>The Response:</strong> The data returned to the coach</li>
+            </ul>
         </div>
 
         <div class="learning-section">
-            <h2>Seattle's Sports Stadiums</h2>
+            <h2><span class="step-number">1</span>The Coach Selects a Stadium</h2>
+            <p>First, you (the coach) need to decide which stadium you want information about. Click on any stadium card below:</p>
             <div class="stadium-grid">
-                <div class="stadium-card seahawks-card" onclick="showStadiumDetails('football')">
+                <div class="stadium-card" onclick="selectStadium('football')">
                     <h3>Lumen Field</h3>
                     <p><strong>Team:</strong> Seattle Seahawks</p>
                     <p><strong>Sport:</strong> Football (NFL)</p>
-                    <p><strong>Capacity:</strong> 68,740</p>
+
                 </div>
 
-                <div class="stadium-card mariners-card" onclick="showStadiumDetails('baseball')">
+                <div class="stadium-card" onclick="selectStadium('baseball')">
                     <h3>T-Mobile Park</h3>
                     <p><strong>Team:</strong> Seattle Mariners</p>
                     <p><strong>Sport:</strong> Baseball (MLB)</p>
-                    <p><strong>Capacity:</strong> 47,929</p>
+
                 </div>
 
-                <div class="stadium-card kraken-card" onclick="showStadiumDetails('hockey')">
+                <div class="stadium-card" onclick="selectStadium('hockey')">
                     <h3>Climate Pledge Arena</h3>
                     <p><strong>Team:</strong> Seattle Kraken</p>
                     <p><strong>Sport:</strong> Ice Hockey (NHL)</p>
-                    <p><strong>Capacity:</strong> 17,151</p>
+
                 </div>
 
-                <div class="stadium-card huskies-card" onclick="showStadiumDetails('college')">
+                <div class="stadium-card" onclick="selectStadium('college')">
                     <h3>Husky Stadium</h3>
                     <p><strong>Team:</strong> Washington Huskies</p>
                     <p><strong>Sport:</strong> College Football</p>
-                    <p><strong>Capacity:</strong> 70,138</p>
+
                 </div>
 
-                <div class="stadium-card orcas-card" onclick="showStadiumDetails('cricket')">
+                <div class="stadium-card" onclick="selectStadium('cricket')">
                     <h3>Marymoor Park</h3>
                     <p><strong>Team:</strong> Seattle Orcas</p>
                     <p><strong>Sport:</strong> Cricket (MLC)</p>
-                    <p><strong>Capacity:</strong> 5,000</p>
+                
                 </div>
             </div>
         </div>
 
         <div class="learning-section">
-            <h2>How APIs Work: The Coach and The Play</h2>
-            <p><strong>The Coach (You):</strong> Calls a specific play by making an API request</p>
-            <p><strong>The Play (API Request):</strong> A specific instruction asking for certain data</p>
-            <p><strong>The Team (API):</strong> Executes the play and processes your request</p>
-            <p><strong>The Execution (API Response):</strong> The result returned back to you</p>
-            <p style="margin-top: 15px;">When you clicked a stadium above, you acted as the coach calling a play. Here's what happened:</p>
-            
-            <div class="api-demo">
-                <p class="request-label">THE COACH CALLS THE PLAY (API REQUEST):</p>
-                <div class="code-editor" id="apiRequest">Click a stadium above to see the coach's call</div>
-                
-                <p class="request-label">THE TEAM EXECUTES (API RESPONSE):</p>
-                <div class="code-editor" id="apiResponse">The execution result will appear here</div>
-            </div>
-        </div>
-
-        <div class="learning-section">
-            <h2>Understanding Variables in APIs</h2>
-            <p>APIs store data in variables. Here's how our stadium data is structured:</p>
-            <div class="code-editor">const seattleData = {
-  football: { 
-    team: "Seahawks", 
-    stadium: "Lumen Field", 
-    capacity: 68740,
-    coordinates: "47.5952° N, 122.3316° W",
-    ticketPrice: "$85-$250"
-  },
-  baseball: { 
-    team: "Mariners", 
-    stadium: "T-Mobile Park", 
-    capacity: 47929,
-    coordinates: "47.5914° N, 122.3325° W",
-    ticketPrice: "$15-$180"
-  }
-  // ... more teams
-};</div>
-        </div>
-
-        <div class="learning-section">
-            <h2>Conditionals: The Coach Adapts the Play</h2>
-            <p>Just like a coach calls different plays based on the situation, APIs use conditionals to return different data based on your request:</p>
-            <div>
-                <label>Coach, what play do you want to call?</label>
-                <select id="sportFilter" onchange="filterBySport()">
-                    <option value="all">Show all teams</option>
-                    <option value="football">Football play</option>
-                    <option value="baseball">Baseball play</option>
-                    <option value="hockey">Hockey play</option>
-                    <option value="college">College play</option>
-                    <option value="cricket">Cricket play</option>
+            <h2><span class="step-number">2</span>The Coach Calls the Play</h2>
+            <p>Now that you've selected a stadium, choose what information you want (the play you're calling):</p>
+            <div class="input-group">
+                <label>Select the play from the playbook:</label>
+                <select id="playSelect" onchange="updatePlay()">
+                    <option value="">Choose a play...</option>
+                    <option value="basic">Get Basic Info</option>
+                    <option value="capacity">Get Stadium Capacity</option>
+                    <option value="tickets">Get Ticket Prices</option>
+                    <option value="location">Get Location</option>
                 </select>
             </div>
-            <div class="output" id="conditionalOutput"></div>
+            <div class="info-box">
+                <p><strong>The API Request (Your Play Call):</strong></p>
+                <div class="code-editor" id="apiRequest">Select a stadium and play above to see the API request</div>
+            </div>
         </div>
 
         <div class="learning-section">
-            <h2>Functions: The Coach's Playbook</h2>
-            <p>Functions are like plays in a coach's playbook - reusable strategies that work every time. The coach can call the same play for different situations:</p>
-            <div class="code-editor">function getStadiumInfo(sport) {
-  // The coach calls this play
-  const team = seattleData[sport];
-  return {
-    team: team.team,
-    stadium: team.stadium,
-    capacity: team.capacity,
-    tickets: team.ticketPrice
-  };
-  // The team executes and returns the result
+            <h2><span class="step-number">3</span>The Team Executes</h2>
+            <p>The API (team) processes your request and retrieves the data from the database (playbook):</p>
+            <div class="info-box">
+                <p><strong>The API Response (Team's Execution):</strong></p>
+                <div class="output" id="apiResponse">The team's response will appear here after you select a stadium and play</div>
+            </div>
+        </div>
+
+        <div class="learning-section">
+            <h2>Understanding API Endpoints</h2>
+            <p>APIs have different endpoints (different types of plays in the playbook). Each endpoint serves a specific purpose:</p>
+            
+            <div class="info-box">
+                <p><strong>GET /stadiums/:sport</strong></p>
+                <p>Retrieves information about a specific stadium by sport type</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>GET /schedules</strong></p>
+                <p>Retrieves game schedules for all Seattle teams</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>GET /weather</strong></p>
+                <p>Retrieves current weather conditions in Seattle</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>GET /tickets</strong></p>
+                <p>Retrieves ticket pricing information for all teams</p>
+            </div>
+
+            <p style="margin-top: 20px;">Try calling these different plays:</p>
+            <div class="button-group">
+                <button onclick="callEndpoint('schedules')">Get Schedules</button>
+                <button onclick="callEndpoint('weather')">Get Weather</button>
+                <button onclick="callEndpoint('tickets')">Get Tickets</button>
+            </div>
+            <div class="output" id="endpointOutput"></div>
+        </div>
+
+        <div class="learning-section">
+            <h2>How the Playbook (Database) Works</h2>
+            <p>The playbook stores all the data that the API can access. Here's a simplified view:</p>
+            <div class="code-editor">const playbook = {
+  football: {
+    team: "Seahawks",
+    stadium: "Lumen Field",
+    capacity: 68740,
+    location: "47.5952° N, 122.3316° W",
+    tickets: "$85-$250"
+  },
+  baseball: {
+    team: "Mariners",
+    stadium: "T-Mobile Park",
+    capacity: 47929,
+    location: "47.5914° N, 122.3325° W",
+    tickets: "$15-$180"
+  }
+  // ... more data
 }</div>
-            <div class="button-group">
-                <button onclick="demonstrateFunction('football')">Call Seahawks Play</button>
-                <button onclick="demonstrateFunction('baseball')">Call Mariners Play</button>
-                <button onclick="demonstrateFunction('hockey')">Call Kraken Play</button>
-            </div>
-            <div class="output" id="functionOutput"></div>
-        </div>
-
-        <div class="learning-section">
-            <h2>API Endpoints: Different Plays in the Playbook</h2>
-            <p>A coach has many different plays they can call. Similarly, APIs have multiple endpoints for different types of data. Call a play below:</p>
-            <div class="button-group">
-                <button onclick="getSchedules()">Call Play: Get Schedules</button>
-                <button onclick="getWeather()">Call Play: Get Weather</button>
-                <button onclick="getTickets()">Call Play: Get Tickets</button>
-                <button onclick="getAllStadiums()">Call Play: Get All Stadiums</button>
-            </div>
-            <div class="output" id="apiOutput"></div>
-        </div>
-
-        <div class="learning-section">
-            <h2>API Documentation</h2>
-            <p>Good APIs always include documentation explaining how to use them:</p>
-            <div class="code-editor">/**
- * Seattle Sports API Documentation
- * Base URL: https://api.seattlesports.com
- * 
- * Endpoints:
- * 
- * GET /stadiums
- *   Returns: Array of all stadium objects
- * 
- * GET /stadiums/:sport
- *   Parameters: sport (football, baseball, hockey, college, cricket)
- *   Returns: Single stadium object
- * 
- * GET /schedules
- *   Returns: Game schedules for all teams
- * 
- * GET /weather
- *   Returns: Current weather conditions at stadiums
- * 
- * GET /tickets
- *   Returns: Current ticket price ranges
- * 
- * Example Response Format:
- * {
- *   "team": "Seahawks",
- *   "stadium": "Lumen Field",
- *   "capacity": 68740,
- *   "coordinates": "47.5952° N, 122.3316° W",
- *   "ticketPrice": "$85-$250"
- * }
- */</div>
+            <p style="margin-top: 15px;">When you call a play, the API looks up the information in this playbook and returns it to you.</p>
         </div>
     </div>
 
     <script>
-        const seattleData = {
+        let selectedSport = null;
+
+        const playbook = {
             football: { 
                 team: "Seahawks", 
                 stadium: "Lumen Field", 
                 capacity: 68740,
-                coordinates: "47.5952° N, 122.3316° W",
-                ticketPrice: "$85-$250"
+                location: "47.5952° N, 122.3316° W",
+                tickets: "$85-$250"
             },
             baseball: { 
                 team: "Mariners", 
                 stadium: "T-Mobile Park", 
                 capacity: 47929,
-                coordinates: "47.5914° N, 122.3325° W",
-                ticketPrice: "$15-$180"
+                location: "47.5914° N, 122.3325° W",
+                tickets: "$15-$180"
             },
             hockey: { 
                 team: "Kraken", 
                 stadium: "Climate Pledge Arena", 
                 capacity: 17151,
-                coordinates: "47.6221° N, 122.3540° W",
-                ticketPrice: "$50-$300"
+                location: "47.6221° N, 122.3540° W",
+                tickets: "$50-$300"
             },
             college: { 
                 team: "Huskies", 
                 stadium: "Husky Stadium", 
                 capacity: 70138,
-                coordinates: "47.6501° N, 122.3016° W",
-                ticketPrice: "$35-$150"
+                location: "47.6501° N, 122.3016° W",
+                tickets: "$35-$150"
             },
             cricket: { 
                 team: "Orcas", 
                 stadium: "Marymoor Park", 
                 capacity: 5000,
-                coordinates: "47.6634° N, 122.1146° W",
-                ticketPrice: "$10-$40"
+                location: "47.6634° N, 122.1146° W",
+                tickets: "$10-$40"
             }
         };
 
-        function showStadiumDetails(sport) {
-            const team = seattleData[sport];
-            
-            // Show the API request
-            const request = 'GET /api/stadiums/' + sport + '\nHost: api.seattlesports.com\nContent-Type: application/json';
-            document.getElementById('apiRequest').textContent = request;
-            
-            // Show the API response
-            const response = JSON.stringify(team, null, 2);
-            document.getElementById('apiResponse').textContent = response;
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
         }
 
-        function filterBySport() {
-            const selected = document.getElementById('sportFilter').value;
-            const output = document.getElementById('conditionalOutput');
-            
-            output.textContent = "The Coach's Call: GET /api/stadiums" + (selected !== 'all' ? '/' + selected : '') + "\n\n";
-            
-            if (selected === 'all') {
-                output.textContent += "The Play Execution: if (sport === 'all') { return allStadiums; }\n\n";
-                output.textContent += "Team's Response:\n";
-                for (let sport in seattleData) {
-                    const team = seattleData[sport];
-                    output.textContent += team.team + " - " + team.stadium + " (" + team.capacity + " seats)\n";
-                }
-            } else {
-                const team = seattleData[selected];
-                if (team) {
-                    output.textContent += "The Play Execution: if (sport === '" + selected + "') { return seattleData['" + selected + "']; }\n\n";
-                    output.textContent += "Team's Response:\n" + JSON.stringify(team, null, 2);
-                }
+        function selectStadium(sport) {
+            selectedSport = sport;
+            document.getElementById('playSelect').value = '';
+            document.getElementById('apiRequest').textContent = 'Stadium selected: ' + playbook[sport].stadium + '\nNow select a play from the dropdown above.';
+            document.getElementById('apiResponse').textContent = 'Waiting for you to call a play...';
+        }
+
+        function updatePlay() {
+            const play = document.getElementById('playSelect').value;
+            if (!selectedSport) {
+                alert('Please select a stadium first!');
+                return;
             }
+
+            const team = playbook[selectedSport];
+            let request = 'GET /api/stadiums/' + selectedSport;
+            let response = '';
+
+            if (play === 'basic') {
+                request += '/info';
+                response = JSON.stringify({
+                    team: team.team,
+                    stadium: team.stadium
+                }, null, 2);
+            } else if (play === 'capacity') {
+                request += '/capacity';
+                response = JSON.stringify({
+                    stadium: team.stadium,
+                    capacity: team.capacity
+                }, null, 2);
+            } else if (play === 'tickets') {
+                request += '/tickets';
+                response = JSON.stringify({
+                    team: team.team,
+                    priceRange: team.tickets
+                }, null, 2);
+            } else if (play === 'location') {
+                request += '/location';
+                response = JSON.stringify({
+                    stadium: team.stadium,
+                    coordinates: team.location
+                }, null, 2);
+            }
+
+            document.getElementById('apiRequest').textContent = 'Coach calls the play:\n\n' + request + '\nHost: api.seattlesports.com';
+            document.getElementById('apiResponse').textContent = 'Team executes and returns:\n\n' + response;
         }
 
-        function demonstrateFunction(sport) {
-            const output = document.getElementById('functionOutput');
-            const team = seattleData[sport];
-            
-            output.textContent = "The Coach Calls: getStadiumInfo('" + sport + "')\n\n";
-            output.textContent += "The Team Executes and returns:\n";
-            output.textContent += JSON.stringify({
-                team: team.team,
-                stadium: team.stadium,
-                capacity: team.capacity,
-                tickets: team.ticketPrice
-            }, null, 2);
-        }
-
-        function getSchedules() {
-            const output = document.getElementById('apiOutput');
-            output.textContent = "The Coach's Call: GET /api/schedules\n\nThe team is executing...\n";
-            
-            setTimeout(() => {
-                const schedules = {
-                    "Seahawks": ["vs 49ers - Oct 30", "@ Rams - Nov 6", "vs Cardinals - Nov 13"],
-                    "Mariners": ["Season ended - Check back March 2026"],
-                    "Kraken": ["vs Canucks - Oct 29", "@ Flames - Nov 1", "vs Oilers - Nov 3"],
-                    "Huskies": ["vs Oregon - Nov 2", "@ USC - Nov 9"],
-                    "Orcas": ["Season ended - Check back July 2026"]
-                };
-                output.textContent = "Team's Response:\n\n" + JSON.stringify(schedules, null, 2);
-            }, 800);
-        }
-
-        function getWeather() {
-            const output = document.getElementById('apiOutput');
-            output.textContent = "The Coach's Call: GET /api/weather\n\nThe team is executing...\n";
-            
-            setTimeout(() => {
-                const weather = {
-                    "location": "Seattle, WA",
-                    "temperature": "54°F",
-                    "conditions": "Partly Cloudy",
-                    "precipitation": "20% chance of rain",
-                    "wind": "10 mph NW",
-                    "gameDay": "Good conditions for outdoor sports"
-                };
-                output.textContent = "Team's Response:\n\n" + JSON.stringify(weather, null, 2);
-            }, 800);
-        }
-
-        function getTickets() {
-            const output = document.getElementById('apiOutput');
-            output.textContent = "The Coach's Call: GET /api/tickets\n\nThe team is executing...\n";
+        function callEndpoint(endpoint) {
+            const output = document.getElementById('endpointOutput');
+            output.textContent = 'Calling play: GET /api/' + endpoint + '\n\nTeam is executing...\n';
             
             setTimeout(() => {
-                let tickets = {};
-                for (let sport in seattleData) {
-                    tickets[seattleData[sport].team] = seattleData[sport].ticketPrice;
+                let response = '';
+                if (endpoint === 'schedules') {
+                    response = JSON.stringify({
+                        "Seahawks": ["vs 49ers - Nov 3", "@ Rams - Nov 10"],
+                        "Mariners": ["Season starts March 2026"],
+                        "Kraken": ["vs Canucks - Nov 5", "@ Flames - Nov 7"]
+                    }, null, 2);
+                } else if (endpoint === 'weather') {
+                    response = JSON.stringify({
+                        "location": "Seattle, WA",
+                        "temperature": "54°F",
+                        "conditions": "Partly Cloudy",
+                        "precipitation": "20%"
+                    }, null, 2);
+                } else if (endpoint === 'tickets') {
+                    response = JSON.stringify({
+                        "Seahawks": "$85-$250",
+                        "Mariners": "$15-$180",
+                        "Kraken": "$50-$300",
+                        "Huskies": "$35-$150",
+                        "Orcas": "$10-$40"
+                    }, null, 2);
                 }
-                output.textContent = "Team's Response:\n\n" + JSON.stringify(tickets, null, 2);
+                output.textContent = 'Team\'s response:\n\n' + response;
             }, 800);
         }
-
-        function getAllStadiums() {
-            const output = document.getElementById('apiOutput');
-            output.textContent = "The Coach's Call: GET /api/stadiums\n\nThe team is executing...\n";
-            
-            setTimeout(() => {
-                output.textContent = "Team's Response:\n\n" + JSON.stringify(seattleData, null, 2);
-            }, 800);
-        }
-
-        // Initialize with first stadium example
-        showStadiumDetails('football');
+   
     </script>
 </body>
 </html>
