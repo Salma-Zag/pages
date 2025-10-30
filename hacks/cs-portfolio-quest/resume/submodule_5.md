@@ -195,7 +195,7 @@ date: 2025-10-21
           <p id="previewLocation" class="text-gray-600 text-sm mt-2"></p>
         </div>
 
-        <!-- About Section -->
+        <!-- About cool Section -->
         <div class="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
           <div class="flex justify-between items-start mb-4">
             <h3 class="text-xl font-bold text-gray-900">About</h3>
