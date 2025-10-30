@@ -275,6 +275,40 @@ document.querySelectorAll('input, textarea').forEach(el => {
   el.addEventListener('input', saveToLocal);
 });
 
+// Fill with dummy data
+function fillDummyData() {
+  document.getElementById('fullName').value = 'Alex Johnson';
+  document.getElementById('headline').value = 'Computer Science Student at UC San Diego | Aspiring Software Engineer';
+  document.getElementById('location').value = 'San Diego, California';
+  document.getElementById('skills').value = 'Python, JavaScript, React, Node.js, SQL, Git, Machine Learning';
+  document.getElementById('aboutPrompt').value = 'I am a junior computer science student at UC San Diego with a passion for full-stack development and AI. I have built several projects including a React task manager and a Python ML model for housing price prediction. I love solving complex problems and building impactful applications. Seeking software engineering internships for Summer 2025.';
+  document.getElementById('experiencePrompt').value = 'Software Engineering Intern at TechStart Inc (June 2024 - August 2024): Developed a customer analytics dashboard using React and Node.js that improved data visibility by 40%. Optimized database queries reducing load times by 25%.\n\nWeb Development TA at UC San Diego (Sept 2023 - Present): Assist 150+ students in learning HTML, CSS, JavaScript, and React. Created tutorial videos viewed 500+ times.\n\nPersonal Project - TaskFlow App: Built a full-stack task management app with authentication and real-time updates using WebSockets. Deployed on AWS with Docker.';
+  document.getElementById('education').value = 'B.S. Computer Science, UC San Diego\nExpected Graduation: June 2026\nGPA: 3.7/4.0';
+  saveToLocal();
+  alert('Demo data loaded!');
+}
+
+// Navigation functions
+function prevStep() {
+  if (currentStep > 1) {
+    goToStep(currentStep - 1);
+  }
+}
+
+function nextStep() {
+  if (currentStep === 1) {
+    const fullName = document.getElementById('fullName').value.trim();
+    const headline = document.getElementById('headline').value.trim();
+    if (!fullName || !headline) {
+      alert('Please fill in Name and Headline');
+      return;
+    }
+  }
+  if (currentStep < 4) {
+    goToStep(currentStep + 1);
+  }
+}
+
 // Load saved data from localStorage
 function loadSavedData() {
   try {
