@@ -44,7 +44,7 @@ lxdData:
       Categories: ["CV", "Resume", "Blogging"]
       Video: "/cs-portfolio-quest/resume-video"
       Lessons: "/cs-portfolio-quest/resume/"
-      Image: "/images/cs-portfolio-quest/resume.svg"
+      Image: "/images/cs-portfolio-quest/resume/ModuleBackground.png"
       Alt: "CS Portfolio Quest Resume"
     - Title: "C5: AI Usage"
       Genre: "Assessment"
