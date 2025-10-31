@@ -1331,9 +1331,52 @@ class GameLevelHomePage {
     renderScene();
   }
 
+  // Targeted function to remove only the unwanted scenes container
+  removeScenesContainer() {
+    // Look for elements that contain "Scene" text with numbers
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(el => {
+      // Check if element contains "Scene 1", "Scene 2", etc.
+      const hasSceneText = el.textContent && 
+                          (el.textContent.includes('Scene 1') || 
+                           el.textContent.includes('Scene 2') || 
+                           el.textContent.includes('Scene 3') || 
+                           el.textContent.includes('Scene 4') || 
+                           el.textContent.includes('Scene 5') || 
+                           el.textContent.includes('Scene 6'));
+      
+      // Check if it's at the bottom and contains images
+      if (hasSceneText) {
+        const rect = el.getBoundingClientRect();
+        const hasImages = el.querySelectorAll('img').length > 0;
+        const isAtBottom = rect.bottom >= window.innerHeight - 200;
+        
+        // Additional checks to avoid removing game UI
+        const isGameUI = el.id?.includes('game') || 
+                        el.id?.includes('planet') || 
+                        el.id?.includes('badge') || 
+                        el.id?.includes('splashscreen') ||
+                        el.className?.includes('game') ||
+                        el.className?.includes('planet');
+        
+        if (hasImages && isAtBottom && !isGameUI) {
+          console.log('Removing scenes container');
+          el.remove();
+        }
+      }
+    });
+  }
+
   initialize() {
     // Clear any lingering dialogues from previous page loads
     this.dialogueSystem.closeDialogue();
+
+    // Remove the unwanted scenes container at the bottom
+    this.removeScenesContainer();
+    // Try again after delays to catch dynamically added content
+    setTimeout(() => this.removeScenesContainer(), 100);
+    setTimeout(() => this.removeScenesContainer(), 500);
+    setTimeout(() => this.removeScenesContainer(), 1000);
 
     // Show splash screen only once per session
     if (!sessionStorage.getItem('splashShown')) {

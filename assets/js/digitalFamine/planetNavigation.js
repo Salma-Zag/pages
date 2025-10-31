@@ -55,10 +55,12 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   prevBtn.onmouseover = () => prevBtn.style.transform = 'scale(1.05)';
   prevBtn.onmouseout = () => prevBtn.style.transform = 'scale(1)';
   prevBtn.onclick = () => navigateToPreviousPlanet(gameInstance);
+  leftSection.appendChild(prevBtn);
   
   // Cheat Menu Button
   const cheatBtn = document.createElement('button');
@@ -75,12 +77,13 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   cheatBtn.onmouseover = () => cheatBtn.style.transform = 'scale(1.05)';
   cheatBtn.onmouseout = () => cheatBtn.style.transform = 'scale(1)';
   cheatBtn.onclick = () => showCheatMenu(gameInstance);
   
-  // Reset Progress Button (center-right)
+  // Reset Progress Button
   const resetBtn = document.createElement('button');
   resetBtn.id = 'reset-progress-btn';
   resetBtn.innerHTML = '🔄 Reset';
@@ -95,6 +98,7 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   resetBtn.onmouseover = () => resetBtn.style.transform = 'scale(1.05)';
   resetBtn.onmouseout = () => resetBtn.style.transform = 'scale(1)';
@@ -115,12 +119,13 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   nextBtn.onmouseover = () => nextBtn.style.transform = 'scale(1.05)';
   nextBtn.onmouseout = () => nextBtn.style.transform = 'scale(1)';
   nextBtn.onclick = () => navigateToNextPlanet(gameInstance);
   
-  // Clear footer before adding new layout
+  // Clear footer and add new container
   footer.innerHTML = '';
   
   // Create a wrapper container for buttons to ensure centering
@@ -218,22 +223,21 @@ function showCheatMenu(gameInstance) {
     document.getElementById('cheatsModal').style.display = 'flex';
     return;
   }
-  
-  // Create modal overlay
+  // Create modal overlay (use fixed positioning so it's consistently centered)
   const modal = document.createElement('div');
   modal.id = 'cheatsModal';
   modal.style.cssText = `
     display: flex;
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    z-index: 9999;
+    z-index: 99999;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(5px);
+    pointer-events: auto;
   `;
   
   // Create menu container
@@ -310,7 +314,7 @@ function showCheatMenu(gameInstance) {
     };
     btn.onclick = () => {
       cheatCompletePlanet(gameInstance, planet.key);
-      document.body.removeChild(modal);
+      if (modal.parentNode) modal.parentNode.removeChild(modal);
     };
     menu.appendChild(btn);
   });
@@ -343,7 +347,7 @@ function showCheatMenu(gameInstance) {
   };
   completeAllBtn.onclick = () => {
     cheatCompleteAll(gameInstance);
-    document.body.removeChild(modal);
+    if (modal.parentNode) modal.parentNode.removeChild(modal);
   };
   menu.appendChild(completeAllBtn);
   
@@ -366,16 +370,17 @@ function showCheatMenu(gameInstance) {
   `;
   closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(255, 255, 255, 0.2)';
   closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(255, 255, 255, 0.1)';
-  closeBtn.onclick = () => document.body.removeChild(modal);
+  closeBtn.onclick = () => { if (modal.parentNode) modal.parentNode.removeChild(modal); };
   menu.appendChild(closeBtn);
   
   modal.appendChild(menu);
+  // Always append to body so fixed positioning centers relative to viewport
   document.body.appendChild(modal);
-  
+
   // Close modal when clicking outside
   modal.onclick = (e) => {
-    if (e.target === modal) {
-      document.body.removeChild(modal);
+    if (e.target === modal && modal.parentNode) {
+      modal.parentNode.removeChild(modal);
     }
   };
 }
@@ -469,4 +474,3 @@ function resetAllProgress(gameInstance) {
     console.log('Progress reset. Reloading game...');
   }
 }
-
