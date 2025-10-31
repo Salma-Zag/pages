@@ -34,6 +34,9 @@ lxdData:
       Description: "Learn UI, Fun Destinations, Travel Quest"
       Lessons: "/west-coast/analytics/submodule_4/"
       Image: "/images/west-coast/seattle.png"
+footer: 
+    home: /west-coast/travel/
+    next: /west-coast/analytics/sandiego/
 ---
 {%- include tailwind/quests/west-coas-travel.html -%}
 

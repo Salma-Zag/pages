@@ -8,6 +8,9 @@ team: "Cool Collaborators"
 submodule: 4
 author: "Cool Collaborators"
 date: 2025-10-21
+footer: 
+    previous: /west-coast/analytics/sanfrancisco/
+    home: /west-coast/travel/
 ---
 
 # Seattle

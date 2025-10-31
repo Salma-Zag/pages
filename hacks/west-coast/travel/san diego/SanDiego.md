@@ -8,6 +8,10 @@ team: "Cool Collaborators"
 submodule: 3
 author: "Cool Collaborators"
 date: 2025-10-21
+footer: 
+    previous: /west-coast/analytics/losangeles/
+    home: /west-coast/travel/
+    next: /west-coast/analytics/sanfrancisco/
 ---
 
 # San Diego

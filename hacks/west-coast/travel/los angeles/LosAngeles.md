@@ -8,6 +8,9 @@ team: "Cool Collaborators"
 submodule: 1
 author: "Cool Collaborators"
 date: 2025-10-21
+footer: 
+    home: /west-coast/travel/
+    next: /west-coast/analytics/sandiego/
 ---
 
 # Los Angeles 
