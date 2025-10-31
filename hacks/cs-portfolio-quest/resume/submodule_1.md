@@ -480,39 +480,3 @@ date: 2025-10-21
       background: #0056b3;
     }
   </style>
-</head>
-<body>
-  <h1>Choose Your Character</h1>
-
-  <div class="character-selection">
-    <div class="character" id="char1" style="background-image: url('{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/elephant.mp4');"></div>
-    <div class="character" id="char2" style="background-image: url('{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/hamster.mp4');"></div>
-    <div class="character" id="char3" style="background-image: url('{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/monkey.mp4');"></div>
-  </div>
-
-  <button id="confirm-btn" disabled>Confirm Selection</button>
-
-  <script>
-    const characters = document.querySelectorAll(".character");
-    const confirmBtn = document.getElementById("confirm-btn");
-    let selectedCharacter = null;
-
-    characters.forEach(char => {
-      char.addEventListener("click", () => {
-        characters.forEach(c => c.classList.remove("selected"));
-        char.classList.add("selected");
-        selectedCharacter = char.id;
-        confirmBtn.disabled = false;
-      });
-    });
-
-    confirmBtn.addEventListener("click", () => {
-      if (selectedCharacter) {
-        // Store the selection so it can be used later (for sprite updates)
-        localStorage.setItem("selectedCharacter", selectedCharacter);
-        alert(`You selected ${selectedCharacter}!`);
-        // You could redirect to the next module:
-        // window.location.href = "module2.html";
-      }
-    });
-  </script>
