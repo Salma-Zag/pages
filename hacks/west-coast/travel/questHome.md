@@ -35,6 +35,6 @@ lxdData:
       Lessons: "/west-coast/analytics/submodule_4/"
       Image: "/images/west-coast/seattle.png"
 ---
-{%- include tailwind/quests/west-coast.html -%}
+{%- include tailwind/quests/west-coas-travel.html -%}
 
 
