@@ -257,6 +257,20 @@ a.back-home {
   margin-left: 8px;
 }
 .ingredients-remove-btn:hover { color: var(--accent-2); text-decoration: underline; }
+
+/* Custom styles for collapsible details/summary */
+summary {
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    color: #e6e9ff;
+    list-style-position: inside;
+    list-style-type: '▶ ';
+}
+details[open] > summary {
+    list-style-type: '▼ ';
+}
 </style>
 
 <!-- Dark mode toggle -->
@@ -293,7 +307,7 @@ a.back-home {
 
 - **🧠 What Does CREATE Mean?**  
   - In databases, **CREATE** = inserting new records (e.g., dishes, ingredients, or join rows).  
-  - On the web, a client form sends a `POST /api/dishes` request.  
+  - On the web, a client form sends a POST /api/dishes request.  
   - The server creates:
     - a new **dish** record,  
     - any missing **ingredient** entries, and  
@@ -515,19 +529,21 @@ a.back-home {
 - **⚙️ How this interactive page works (quick):**  
   - Each task includes an editable **code area** (or input form) and a **Run** button.  
   - Running code appends output to the **terminal area** below that task.  
-  - The page uses a **mock backend (`MockAPI`)** that simulates:  
-    - `POST /api/dishes`  
-    - `POST /api/dishes/bulk`  
-    - `GET /api/dishes?city=sd`  
+  - The page uses a **mock backend (MockAPI)** that simulates:  
+    - POST /api/dishes  
+    - POST /api/dishes/bulk  
+    - GET /api/dishes?city=sd  
   - Data is stored in **localStorage**, so progress **persists** across refreshes.  
   - When creating the **Baja Bowl**, a toast appears showing “+50 XP 🎉”.
 
-# %% Interactive Task: Fish Taco Class (Editable + Run)
+<br>
 
-<div class="sq-card">
-  <div class="sq-label">Describe & implement the <strong>FishTaco</strong> class (id, fishType, toppings[], sauce, price, spiceLevel) and method <code>calculateTotalPrice()</code> (<em>8% tax</em>). Throw error if fishType missing.</div>
-
-  <textarea id="code-fishtaco" class="code-editor">
+<!-- Task 1 -->
+<details open>
+  <summary>Task 1: Fish Taco Class</summary>
+  <div class="sq-card">
+    <div class="sq-label">Describe & implement the <strong>FishTaco</strong> class (id, fishType, toppings[], sauce, price, spiceLevel) and method <code>calculateTotalPrice()</code> (<em>8% tax</em>). Throw error if fishType missing.</div>
+    <textarea id="code-fishtaco" class="code-editor">
 // class FishTaco { ... } - edit or run the example
 class FishTaco {
   constructor(id, fishType, toppings = [], sauce, price = 0, spiceLevel = "Mild") {
@@ -553,22 +569,21 @@ console.log("Total price:", taco.calculateTotalPrice().toFixed(2));
 
 // Mark task as complete when run successfully
 completeTask('fishtaco');
-  </textarea>
-
-  <div style="margin-top:0.5rem" class="editor-actions">
-    <button class="sq-btn sq-run" onclick="runEditor('code-fishtaco','terminal-fishtaco')">Run</button>
-    <button class="sq-btn" onclick="copyEditor('code-fishtaco')">Copy</button>
+    </textarea>
+    <div style="margin-top:0.5rem" class="editor-actions">
+      <button class="sq-btn sq-run" onclick="runEditor('code-fishtaco','terminal-fishtaco')">Run</button>
+      <button class="sq-btn" onclick="copyEditor('code-fishtaco')">Copy</button>
+    </div>
+    <pre id="terminal-fishtaco" class="sq-terminal"></pre>
   </div>
+</details>
 
-  <pre id="terminal-fishtaco" class="sq-terminal"></pre>
-</div>
-
-# %% Interactive Task: BurritoCart (Editable + Run)
-
-<div class="sq-card">
-  <div class="sq-label">Implement <strong>BurritoCart</strong> with methods <code>addBurrito()</code>, <code>removeBurrito()</code>, <code>getTotalPrice()</code>, <code>getBurritosByFilling()</code>.</div>
-
-  <textarea id="code-burritocart" class="code-editor">
+<!-- Task 2 -->
+<details>
+  <summary>Task 2: BurritoCart</summary>
+  <div class="sq-card">
+    <div class="sq-label">Implement <strong>BurritoCart</strong> with methods <code>addBurrito()</code>, <code>removeBurrito()</code>, <code>getTotalPrice()</code>, <code>getBurritosByFilling()</code>.</div>
+    <textarea id="code-burritocart" class="code-editor">
 // BurritoCart implementation
 class BurritoCart {
   constructor() {
@@ -596,54 +611,54 @@ console.log("Carne Asada burritos:", cart.getBurritosByFilling("Carne Asada"));
 
 // Mark task as complete when run successfully
 completeTask('burritocart');
-  </textarea>
-
-  <div style="margin-top:0.5rem" class="editor-actions">
-    <button class="sq-btn sq-run" onclick="runEditor('code-burritocart','terminal-burritocart')">Run</button>
-    <button class="sq-btn" onclick="copyEditor('code-burritocart')">Copy</button>
+    </textarea>
+    <div style="margin-top:0.5rem" class="editor-actions">
+      <button class="sq-btn sq-run" onclick="runEditor('code-burritocart','terminal-burritocart')">Run</button>
+      <button class="sq-btn" onclick="copyEditor('code-burritocart')">Copy</button>
+    </div>
+    <pre id="terminal-burritocart" class="sq-terminal"></pre>
   </div>
+</details>
 
-  <pre id="terminal-burritocart" class="sq-terminal"></pre>
-</div>
+<!-- Task 3 -->
+<details>
+  <summary>Task 3: Build the Baja Bowl</summary>
+  <div class="sq-card">
+    <div class="sq-label">Use the form to build a <strong>Baja Bowl</strong>. Required fields: <em>name, category, ingredients (name, qty, unit), calories</em>. Photo may be a URL or uploaded file (stored as data URL).</div>
+    <div style="display:grid; grid-template-columns: 1fr; gap:0.5rem;">
+      <label class="sq-label">Dish name</label>
+      <input id="dish-name" class="sq-field" placeholder="Baja Bowl" value="Baja Bowl" />
 
-# %% Interactive Task: Build the Baja Bowl (Form + Run)
+      <label class="sq-label">Category</label>
+      <input id="dish-category" class="sq-field" placeholder="Healthy" value="Healthy" />
 
-<div class="sq-card">
-  <div class="sq-label">Use the form to build a <strong>Baja Bowl</strong>. Required fields: <em>name, category, ingredients (name, qty, unit), calories</em>. Photo may be a URL or uploaded file (stored as data URL).</div>
+      <label class="sq-label">Calories</label>
+      <input id="dish-calories" type="number" class="sq-field" placeholder="600" value="600" />
 
-  <div style="display:grid; grid-template-columns: 1fr; gap:0.5rem;">
-    <label class="sq-label">Dish name</label>
-    <input id="dish-name" class="sq-field" placeholder="Baja Bowl" value="Baja Bowl" />
+      <label class="sq-label">Photo URL (optional)</label>
+      <input id="dish-photo" class="sq-field" placeholder="https://..." />
 
-    <label class="sq-label">Category</label>
-    <input id="dish-category" class="sq-field" placeholder="Healthy" value="Healthy" />
+      <label class="sq-label">Add Ingredients (name, qty, unit)</label>
+      <div style="display:flex; gap:0.5rem;">
+        <input id="ing-name" class="sq-field" placeholder="avocado" />
+        <input id="ing-qty" class="sq-field" placeholder="1" />
+        <input id="ing-unit" class="sq-field" placeholder="cup" />
+        <button class="sq-btn" onclick="addIngredient()">Add</button>
+      </div>
 
-    <label class="sq-label">Calories</label>
-    <input id="dish-calories" type="number" class="sq-field" placeholder="600" value="600" />
+      <div id="ingredients-list" class="small" style="margin-top:0.5rem">No ingredients yet</div>
 
-    <label class="sq-label">Photo URL (optional)</label>
-    <input id="dish-photo" class="sq-field" placeholder="https://..." />
+      <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
+        <button class="sq-btn sq-run" onclick="runCreateForm()">Create Dish (POST)</button>
+        <button class="sq-btn" onclick="clearForm()">Clear</button>
+      </div>
 
-    <label class="sq-label">Add Ingredients (name, qty, unit)</label>
-    <div style="display:flex; gap:0.5rem;">
-      <input id="ing-name" class="sq-field" placeholder="avocado" />
-      <input id="ing-qty" class="sq-field" placeholder="1" />
-      <input id="ing-unit" class="sq-field" placeholder="cup" />
-      <button class="sq-btn" onclick="addIngredient()">Add</button>
-    </div>
-
-    <div id="ingredients-list" class="small" style="margin-top:0.5rem">No ingredients yet</div>
-
-    <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
-      <button class="sq-btn sq-run" onclick="runCreateForm()">Create Dish (POST)</button>
-      <button class="sq-btn" onclick="clearForm()">Clear</button>
-    </div>
-
-    <div style="margin-top:0.5rem">
-      <div id="terminal-create" class="sq-terminal"></div>
+      <div style="margin-top:0.5rem">
+        <div id="terminal-create" class="sq-terminal"></div>
+      </div>
     </div>
   </div>
-</div>
+</details>
 
 <script>
 (function(){
@@ -711,12 +726,12 @@ completeTask('burritocart');
 })();
 </script>
 
-# %% Interactive: Simulated POST endpoint + Unit Test
-
-<div class="sq-card">
-  <div class="sq-label">Simulate a `POST /api/dishes` call programmatically (JS). There is also a simple unit test runner below to assert `201` and returned resource.</div>
-
-  <textarea id="code-post" class="code-editor">
+<!-- Task 4 -->
+<details>
+  <summary>Task 4: Programmatic POST & Unit Test</summary>
+  <div class="sq-card">
+    <div class="sq-label">Simulate a POST /api/dishes call programmatically (JS). There is also a simple unit test runner below to assert 201 and returned resource.</div>
+    <textarea id="code-post" class="code-editor">
 // Example programmatic POST using MockAPIInstance
 (async function(){
   const payload = {
@@ -736,20 +751,18 @@ completeTask('burritocart');
   console.log("Status:", res.status);
   console.log("Body:", res.body);
 })();
-  </textarea>
-
-  <div style="margin-top:0.5rem" class="editor-actions">
-    <button class="sq-btn sq-run" onclick="runEditor('code-post','terminal-post')">Run</button>
-    <button class="sq-btn" onclick="copyEditor('code-post')">Copy</button>
+    </textarea>
+    <div style="margin-top:0.5rem" class="editor-actions">
+      <button class="sq-btn sq-run" onclick="runEditor('code-post','terminal-post')">Run</button>
+      <button class="sq-btn" onclick="copyEditor('code-post')">Copy</button>
+    </div>
+    <pre id="terminal-post" class="sq-terminal"></pre>
+    <div style="margin-top:0.75rem;">
+      <button class="sq-btn sq-run" onclick="runUnitTest()">Run Unit Test: POST returns 201 & created resource</button>
+      <div id="terminal-test" class="sq-terminal" style="margin-top:0.5rem"></div>
+    </div>
   </div>
-
-  <pre id="terminal-post" class="sq-terminal"></pre>
-
-  <div style="margin-top:0.75rem;">
-    <button class="sq-btn sq-run" onclick="runUnitTest()">Run Unit Test: POST returns 201 & created resource</button>
-    <div id="terminal-test" class="sq-terminal" style="margin-top:0.5rem"></div>
-  </div>
-</div>
+</details>
 
 <script>
 window.runUnitTest = async function() {
@@ -771,18 +784,18 @@ window.runUnitTest = async function() {
 };
 </script>
 
-# %% Interactive Task: Seed Pantry (Bulk POST)
-
-<div class="sq-card">
-  <div class="sq-label">Seed the San Diego pantry with at least three dishes (Fish Tacos, California Burrito, Baja Bowl)</div>
-
-  <div style="display:flex; gap:0.5rem;">
-    <button class="sq-btn sq-run" onclick="seedPantry()">Seed Pantry</button>
-    <button class="sq-btn" onclick="clearTerm('terminal-seed')">Clear</button>
+<!-- Task 5 -->
+<details>
+  <summary>Task 5: Seed Pantry (Bulk POST)</summary>
+  <div class="sq-card">
+    <div class="sq-label">Seed the San Diego pantry with at least three dishes (Fish Tacos, California Burrito, Baja Bowl)</div>
+    <div style="display:flex; gap:0.5rem;">
+      <button class="sq-btn sq-run" onclick="seedPantry()">Seed Pantry</button>
+      <button class="sq-btn" onclick="clearTerm('terminal-seed')">Clear</button>
+    </div>
+    <pre id="terminal-seed" class="sq-terminal" style="margin-top:0.5rem"></pre>
   </div>
-
-  <pre id="terminal-seed" class="sq-terminal" style="margin-top:0.5rem"></pre>
-</div>
+</details>
 
 <script>
 window.seedPantry = async function() {
@@ -803,18 +816,18 @@ window.seedPantry = async function() {
 };
 </script>
 
-# %% Interactive Task: View Pantry (GET /api/dishes?city=sd)
-
-<div class="sq-card">
-  <div class="sq-label">View the San Diego pantry (GET /api/dishes?city=sd)</div>
-
-  <div style="display:flex; gap:0.5rem;">
-    <button class="sq-btn sq-run" onclick="viewPantry()">View Pantry</button>
-    <button class="sq-btn" onclick="clearTerm('terminal-pantry')">Clear</button>
+<!-- Task 6 -->
+<details>
+  <summary>Task 6: View Pantry</summary>
+  <div class="sq-card">
+    <div class="sq-label">View the San Diego pantry (GET /api/dishes?city=sd)</div>
+    <div style="display:flex; gap:0.5rem;">
+      <button class="sq-btn sq-run" onclick="viewPantry()">View Pantry</button>
+      <button class="sq-btn" onclick="clearTerm('terminal-pantry')">Clear</button>
+    </div>
+    <pre id="terminal-pantry" class="sq-terminal" style="margin-top:0.5rem"></pre>
   </div>
-
-  <pre id="terminal-pantry" class="sq-terminal" style="margin-top:0.5rem"></pre>
-</div>
+</details>
 
 <script>
 window.viewPantry = async function() {
