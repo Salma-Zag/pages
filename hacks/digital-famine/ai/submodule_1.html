@@ -143,6 +143,19 @@ date: 2025-10-30
                         </div>
                     </div>
                 </div>
+                <!-- Narrow AI interactive prompt -->
+                <div class="ai-prompt-widget mt-6">
+                    <label for="prompt-narrow" class="block font-semibold mb-2">Try a prompt for Narrow AI</label>
+                    <textarea id="prompt-narrow" rows="3" placeholder="Type a short prompt here (e.g., 'Write a polite email declining an event')" class="w-full p-2 rounded text-black"></textarea>
+                    <div class="ai-actions mt-2">
+                        <button onclick="generateResponse('narrow')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Narrow AI Response</button>
+                    </div>
+                    <div class="ai-output mt-3">
+                        <label class="block font-semibold">Output (Narrow AI):</label>
+                        <pre id="output-narrow" class="ai-box p-3 rounded">(generated response will appear here)</pre>
+                        <button onclick="copyOutput('output-narrow')" class="mt-2 px-3 py-1 bg-slate-700 rounded text-white">Copy</button>
+                    </div>
+                </div>
                 <button onclick="goToSection(2)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Continue to General AI</button>
             </div>
         </div>
@@ -201,6 +214,19 @@ date: 2025-10-30
                             <p class="font-semibold">⚠️ Current Status:</p>
                             <p>General AI doesn't exist yet. While this type of AI has the potential to revolutionize almost every aspect of life, it also raises important questions about safety, ethics, and control that researchers are working to address.</p>
                         </div>
+                    </div>
+                </div>
+                <!-- General AI interactive prompt -->
+                <div class="ai-prompt-widget mt-6">
+                    <label for="prompt-general" class="block font-semibold mb-2">Try a prompt for General AI</label>
+                    <textarea id="prompt-general" rows="3" placeholder="Type a prompt that requires general reasoning (e.g., 'Plan a 3-day beginner coding workshop')" class="w-full p-2 rounded text-black"></textarea>
+                    <div class="ai-actions mt-2">
+                        <button onclick="generateResponse('general')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate General AI Response</button>
+                    </div>
+                    <div class="ai-output mt-3">
+                        <label class="block font-semibold">Output (General AI):</label>
+                        <pre id="output-general" class="ai-box p-3 rounded">(generated response will appear here)</pre>
+                        <button onclick="copyOutput('output-general')" class="mt-2 px-3 py-1 bg-slate-700 rounded text-white">Copy</button>
                     </div>
                 </div>
                 <button onclick="goToSection(3)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Continue to Super AI</button>
@@ -272,6 +298,20 @@ date: 2025-10-30
                             <p class="font-semibold text-red-300">🔒 Why Control Matters:</p>
                             <p>If a Super AI pursued its own goals instead of human values, it could become dangerous or even catastrophic. This is why researchers emphasize the critical importance of AI safety, alignment, and careful development before such systems become possible.</p>
                         </div>
+                    </div>
+                </div>
+                <!-- Super AI interactive prompt -->
+                <div class="ai-prompt-widget mt-6">
+                    <label for="prompt-super" class="block font-semibold mb-2">Try a prompt for Super AI</label>
+                    <textarea id="prompt-super" rows="3" placeholder="Type an ambitious prompt (e.g., 'Design a renewable energy plan for a small country')" class="w-full p-2 rounded text-black"></textarea>
+                    <div class="ai-actions mt-2">
+                        <button onclick="generateResponse('super')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Super AI Response</button>
+                        <button onclick="fillAll()" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Fill All</button>
+                    </div>
+                    <div class="ai-output mt-3">
+                        <label class="block font-semibold">Output (Super AI):</label>
+                        <pre id="output-super" class="ai-box p-3 rounded">(generated response will appear here)</pre>
+                        <button onclick="copyOutput('output-super')" class="mt-2 px-3 py-1 bg-slate-700 rounded text-white">Copy</button>
                     </div>
                 </div>
                 <button onclick="goToSection(4)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
@@ -420,5 +460,61 @@ date: 2025-10-30
             document.getElementById('retry-message').classList.add('section-hidden');
         }
     </script>
+    <!-- Shared JS for AI prompt widgets -->
+    <script>
+        function generateResponse(type) {
+            const prompt = (type === 'narrow') ? document.getElementById('prompt-narrow').value.trim()
+                          : (type === 'general') ? document.getElementById('prompt-general').value.trim()
+                          : document.getElementById('prompt-super').value.trim();
+            let out = '';
+            if (!prompt) {
+                out = '(Enter a prompt above and click Generate)';
+            } else {
+                if (type === 'narrow') {
+                    out = `Narrow AI response to: "${prompt}"\n\n- Focused, task-specific result (concise and direct).`;
+                } else if (type === 'general') {
+                    out = `General AI response to: "${prompt}"\n\n- Multi-step plan, reasoning, and suggested alternatives.`;
+                } else {
+                    out = `Super AI response to: "${prompt}"\n\n- Visionary, cross-domain synthesis with long-term predictions and novel ideas.`;
+                }
+            }
+            document.getElementById('output-' + type).textContent = out;
+        }
+
+        function fillAll() {
+            const narrow = document.getElementById('prompt-narrow').value.trim();
+            const general = document.getElementById('prompt-general').value.trim();
+            const sup = document.getElementById('prompt-super').value.trim();
+            if (!narrow && !general && !sup) {
+                const demo = 'Plan a 3-day beginner coding workshop focused on HTML, CSS, and JavaScript.';
+                document.getElementById('prompt-narrow').value = demo;
+                document.getElementById('prompt-general').value = demo;
+                document.getElementById('prompt-super').value = demo;
+            } else {
+                const first = narrow || general || sup || '';
+                if (!narrow) document.getElementById('prompt-narrow').value = first;
+                if (!general) document.getElementById('prompt-general').value = first;
+                if (!sup) document.getElementById('prompt-super').value = first;
+            }
+            generateResponse('narrow');
+            generateResponse('general');
+            generateResponse('super');
+        }
+
+        function copyOutput(id) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard?.writeText(text).then(() => {
+                alert('Copied to clipboard');
+            }, () => { alert('Copy failed'); });
+        }
+    </script>
+
+    <style>
+        .ai-prompt-widget { border: 1px solid rgba(255,255,255,0.06); padding: 12px; margin: 12px 0; background: rgba(255,255,255,0.02); }
+        .ai-prompt-widget textarea { width: 100%; box-sizing: border-box; font-family: inherit; }
+        .ai-output { margin-top: 8px; }
+        .ai-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); padding: 8px; white-space: pre-wrap; color: #e6eef8; }
+        .ai-actions button { margin-right: 8px; }
+    </style>
 </body>
 </html>
