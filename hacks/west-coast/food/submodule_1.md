@@ -290,24 +290,15 @@ a.back-home {
   <small style="font-size: 13px; opacity: 0.95;">You can now continue to the next city!</small>
 </div>
 
----
+- **🧠 What Does CREATE Mean?**  
+  - In databases, **CREATE** = inserting new records (e.g., dishes, ingredients, or join rows).  
+  - On the web, a client form sends a `POST /api/dishes` request.  
+  - The server creates:
+    - a new **dish** record,  
+    - any missing **ingredient** entries, and  
+    - **dish_ingredients** join records — ideally inside a single transaction (all succeed or all fail).  
+  - Analogy: your database is like a **kitchen pantry**. Adding a dish = adding a **recipe card** and ensuring all the required ingredients already exist in the pantry.
 
-## 🧠 What Does CREATE Mean?
-
-In databases, **CREATE** = inserting new records (dishes, ingredients, join rows).  
-On the web, a client form sends a `POST /api/dishes` request. The server creates a dish, ingredient entries, and `dish_ingredients` join records — ideally inside a transaction (all succeed or all fail).
-
-Analogy: your database is a kitchen pantry. Adding a dish is like adding a recipe card and ensuring all required ingredients exist in the pantry.
-
----
-
-## How this interactive page works (quick)
-- Each task has an editable code area (or an input form) and a **Run** button.
-- Running code appends output to the terminal area under the task.
-- The page includes a **mock backend** (`MockAPI`) that simulates `POST /api/dishes`, `POST /api/dishes/bulk`, and `GET /api/dishes?city=sd`. Data is stored in `localStorage` so progress persists across refreshes.
-- On success when creating Baja Bowl, a **toast** shows `+50 XP`.
-
----
 
 # %% Interactive: Mock Backend & Utilities
 
@@ -324,7 +315,7 @@ Analogy: your database is a kitchen pantry. Adding a dish is like adding a recip
 </div>
 
 <script>
-/* Mock API + utilities for this page. Outputs go to terminal elements using `logTo(id,...)` */
+/* Mock API + utilities for this page. Outputs go to terminal elements using logTo(id,...) */
 (function () {
   // Task completion tracking
   window.taskProgress = {
@@ -402,107 +393,48 @@ Analogy: your database is a kitchen pantry. Adding a dish is like adding a recip
     const isComplete = allTasks.every(task => task === true);
     
     if (isComplete) {
-      // Show unlock notification
       const notification = document.getElementById('unlockNotification');
       if (notification) {
         notification.style.display = 'block';
-        setTimeout(() => {
-          notification.style.display = 'none';
-        }, 4000);
+        setTimeout(() => notification.style.display = 'none', 4000);
       }
-
-      // ENHANCED: Multiple approaches to unlock the next city
       unlockNextCity();
-      
       console.log('🎉 San Diego module completed! Los Angeles should now be unlocked.');
     }
   }
 
-  // NEW: Dedicated function to handle unlocking with multiple fallback methods
+  // Fallback unlock methods
   function unlockNextCity() {
-    const cityIndex = 0; // San Diego is index 0
-    
-    // Method 1: Direct access to main navigation system
-    if (typeof window.markCityCompleted === 'function') {
-      window.markCityCompleted(cityIndex);
-      console.log('✅ Method 1: Called window.markCityCompleted directly');
-      return;
-    }
-    
-    // Method 2: Try parent window (if in iframe or similar)
-    try {
-      if (window.parent && window.parent.markCityCompleted) {
-        window.parent.markCityCompleted(cityIndex);
-        console.log('✅ Method 2: Called parent.markCityCompleted');
-        return;
-      }
-    } catch (e) {
-      console.log('Method 2 failed:', e.message);
-    }
-    
-    // Method 3: Try top window
-    try {
-      if (window.top && window.top.markCityCompleted) {
-        window.top.markCityCompleted(cityIndex);
-        console.log('✅ Method 3: Called top.markCityCompleted');
-        return;
-      }
-    } catch (e) {
-      console.log('Method 3 failed:', e.message);
-    }
-    
-    // Method 4: Direct localStorage manipulation as fallback
     try {
       const saved = localStorage.getItem('mchopiee_city_progress');
-      let gameProgress = {
-        unlockedCities: [0],
-        completedCities: [],
-        totalCitiesCompleted: 0
-      };
-      
-      if (saved) {
-        gameProgress = JSON.parse(saved);
-      }
-      
-      // Mark San Diego as completed and unlock Los Angeles
+      let gameProgress = saved ? JSON.parse(saved) : { unlockedCities:[0], completedCities:[], totalCitiesCompleted:0 };
       if (!gameProgress.completedCities.includes(0)) {
         gameProgress.completedCities.push(0);
         gameProgress.totalCitiesCompleted++;
       }
-      
       if (!gameProgress.unlockedCities.includes(1)) {
-        gameProgress.unlockedCities.push(1); // Unlock Los Angeles (index 1)
+        gameProgress.unlockedCities.push(1);
       }
-      
-      // Save back to localStorage
       localStorage.setItem('mchopiee_city_progress', JSON.stringify(gameProgress));
-      console.log('✅ Method 4: Direct localStorage update completed');
-      console.log('Updated progress:', gameProgress);
-      
+      console.log('✅ Progress updated:', gameProgress);
     } catch (e) {
-      console.error('Method 4 failed:', e);
+      console.error('Unlock failed:', e);
     }
   }
 
-  // helpers
-  function t() { return Date.now().toString(36).slice(-6); }
+  // Helpers
   window.logTo = function (id, ...parts) {
     const el = document.getElementById(id);
     if (!el) return;
-    const text = parts.map(p => {
-      try { return typeof p === 'object' ? JSON.stringify(p, null, 2) : String(p); } catch(e) { return String(p); }
-    }).join(' ');
+    const text = parts.map(p => typeof p === 'object' ? JSON.stringify(p, null, 2) : String(p)).join(' ');
     el.textContent += (el.textContent ? '\n' : '') + text;
     el.scrollTop = el.scrollHeight;
   };
 
-  window.clearTerm = function (id) { const el = document.getElementById(id); if (el) el.textContent = ''; };
+  window.clearTerm = id => { const el = document.getElementById(id); if (el) el.textContent = ''; };
 
-  // mock DB wrapper persisted to localStorage
   class MockDB {
-    constructor() {
-      this.load();
-    }
+    constructor() { this.load(); }
     load() {
       const raw = localStorage.getItem('foodquest_sd_db_v1');
       if (raw) {
@@ -521,126 +453,73 @@ Analogy: your database is a kitchen pantry. Adding a dish is like adding a recip
         dishes: this.dishes, ingredients: this.ingredients, dishIngredients: this.dishIngredients
       }));
     }
-    reset() {
-      this.dishes = []; this.ingredients = []; this.dishIngredients = []; this.save();
-    }
+    reset() { this.dishes=[]; this.ingredients=[]; this.dishIngredients=[]; this.save(); }
   }
 
-  // API simulating atomic create with transaction-like rollback
   class MockAPI {
-    constructor() {
-      this.db = new MockDB();
-    }
-
-    _cloneState() {
-      return {
-        dishes: JSON.parse(JSON.stringify(this.db.dishes)),
-        ingredients: JSON.parse(JSON.stringify(this.db.ingredients)),
-        dishIngredients: JSON.parse(JSON.stringify(this.db.dishIngredients)),
-      };
-    }
-
-    _restoreState(state) {
-      this.db.dishes = state.dishes;
-      this.db.ingredients = state.ingredients;
-      this.db.dishIngredients = state.dishIngredients;
-      this.db.save();
-    }
-
-    // findOrCreateIngredient by name (case-insensitive)
-    findOrCreateIngredient(name) {
-      const existing = this.db.ingredients.find(i => i.name.toLowerCase() === name.toLowerCase());
-      if (existing) return existing;
-      const newIng = { id: t(), name, createdAt: new Date().toISOString() };
-      this.db.ingredients.push(newIng);
-      return newIng;
-    }
-
-    // Simulates POST /api/dishes
+    constructor() { this.db = new MockDB(); }
     async postDish(payload) {
-      // server-side validation
-      if (!payload || !payload.name || !payload.category || !Array.isArray(payload.ingredients) || isNaN(payload.calories)) {
-        return { status: 400, body: { error: "Missing required fields" } };
-      }
-
-      // transaction simulation
-      const before = this._cloneState();
-      try {
-        const dish = { id: t(), name: payload.name, category: payload.category, calories: payload.calories, photo: payload.photo || null, city: payload.city || 'sd', createdAt: new Date().toISOString() };
-        this.db.dishes.push(dish);
-
-        // create ingredients if missing, add dishIngredients
-        for (const ing of payload.ingredients) {
-          if (!ing || !ing.name) throw new Error("Invalid ingredient");
-          const ingRec = this.findOrCreateIngredient(ing.name);
-          this.db.dishIngredients.push({ id: t(), dishId: dish.id, ingredientId: ingRec.id, qty: ing.qty || null, unit: ing.unit || null });
-        }
-
-        // save and return created resource
-        this.db.save();
-        return { status: 201, body: dish };
-      } catch (err) {
-        // rollback
-        this._restoreState(before);
-        return { status: 500, body: { error: err.message || "Transaction failed" } };
-      }
+      if (!payload || !payload.name || !payload.category || !Array.isArray(payload.ingredients) || isNaN(payload.calories))
+        return { status:400, body:{error:"Missing required fields"} };
+      const dish = { id:Date.now().toString(36), ...payload, createdAt:new Date().toISOString() };
+      this.db.dishes.push(dish);
+      this.db.save();
+      return { status:201, body:dish };
     }
-
-    // Bulk POST
     async postBulk(dishesArray) {
-      if (!Array.isArray(dishesArray)) return { status: 400, body: { error: "Expected array" } };
+      if (!Array.isArray(dishesArray)) return { status:400, body:{error:"Expected array"} };
       const created = [];
       for (const d of dishesArray) {
-        const payload = Object.assign({ ingredients: [] }, d);
-        const res = await this.postDish(payload);
-        if (res.status !== 201) { return { status: 500, body: { error: "Bulk insert failed" } }; }
+        const res = await this.postDish(d);
+        if (res.status !== 201) return { status:500, body:{error:"Bulk insert failed"} };
         created.push(res.body);
       }
-      return { status: 201, body: created };
+      return { status:201, body:created };
     }
-
-    // GET /api/dishes?city=sd
-    async getDishes(query = {}) {
-      const city = (query.city || 'sd').toLowerCase();
-      return this.db.dishes.filter(d => (d.city || 'sd').toLowerCase() === city);
+    async getDishes(query={}) {
+      const city = (query.city||'sd').toLowerCase();
+      return this.db.dishes.filter(d => (d.city||'sd').toLowerCase()===city);
     }
-
-    // reset
     reset() { this.db.reset(); }
   }
 
-  // singleton
   window.MockAPIInstance = new MockAPI();
 
-  // expose initializer
   window.initMock = function() {
     window.MockAPIInstance.reset();
-    window.logTo('terminal-init', '[MockAPI] Reset DB. You can seed or create dishes now.');
+    window.logTo('terminal-init','[MockAPI] Reset DB. You can seed or create dishes now.');
     showToast("Mock DB reset");
   };
 
-  // toast helper
-  window.showToast = function(text, ms = 3000) {
-    const b = document.getElementById('sqToast');
-    b.textContent = text;
-    b.style.display = 'block';
-    setTimeout(()=> b.style.display = 'none', ms);
+  window.showToast = function(text, ms=3000){
+    const b=document.getElementById('sqToast');
+    b.textContent=text;
+    b.style.display='block';
+    setTimeout(()=>b.style.display='none',ms);
   };
 
-  // initialize on load
   if (!localStorage.getItem('foodquest_sd_db_v1')) {
     window.MockAPIInstance.db.save();
-    window.logTo('terminal-init', '[MockAPI] Initialized new DB. Try seeding!');
+    window.logTo('terminal-init','[MockAPI] Initialized new DB. Try seeding!');
   } else {
-    window.logTo('terminal-init', '[MockAPI] DB loaded from localStorage.');
+    window.logTo('terminal-init','[MockAPI] DB loaded from localStorage.');
   }
 
-  // Load task progress on page load
   loadTaskProgress();
 })();
 </script>
 
 ---
+
+- **⚙️ How this interactive page works (quick):**  
+  - Each task includes an editable **code area** (or input form) and a **Run** button.  
+  - Running code appends output to the **terminal area** below that task.  
+  - The page uses a **mock backend (`MockAPI`)** that simulates:  
+    - `POST /api/dishes`  
+    - `POST /api/dishes/bulk`  
+    - `GET /api/dishes?city=sd`  
+  - Data is stored in **localStorage**, so progress **persists** across refreshes.  
+  - When creating the **Baja Bowl**, a toast appears showing “+50 XP 🎉”.
 
 # %% Interactive Task: Fish Taco Class (Editable + Run)
 
