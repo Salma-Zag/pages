@@ -38,7 +38,14 @@ export function addLevelNavigationButtons(gameInstance) {
     prevButton.onclick = function() {
         console.log("Previous Level button clicked");
         console.log("Transitioning to the previous level...");
-        gameInstance.loadPreviousLevel();
+        if (gameInstance && typeof gameInstance.loadPreviousLevel === 'function') {
+            gameInstance.loadPreviousLevel();
+        } else if (gameInstance && typeof gameInstance.changeLevel === 'function' && typeof gameInstance.currentLevel === 'number') {
+            // fallback if your game uses a different API
+            gameInstance.changeLevel(gameInstance.currentLevel - 1);
+        } else {
+            console.warn("gameInstance.loadPreviousLevel() is not defined. Implement it on your Game class or pass a gameInstance with that method.");
+        }
     };
     prevButton.style.cssText = `
         background-color: #f26767ff;
