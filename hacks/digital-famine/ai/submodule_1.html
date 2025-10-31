@@ -150,6 +150,7 @@ date: 2025-10-30
                     <textarea id="prompt-narrow" rows="3" placeholder="Type a short prompt here (e.g., 'Write a polite email declining an event')" class="w-full p-2 rounded text-black"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('narrow')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Narrow AI Response</button>
+                        <button onclick="autoFill('narrow')" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
                     </div>
                     <div class="ai-output mt-3">
                         <label class="block font-semibold">Output (Narrow AI):</label>
@@ -223,6 +224,7 @@ date: 2025-10-30
                     <textarea id="prompt-general" rows="3" placeholder="Type a prompt that requires general reasoning (e.g., 'Plan a 3-day beginner coding workshop')" class="w-full p-2 rounded text-black"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('general')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate General AI Response</button>
+                        <button onclick="autoFill('general')" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
                     </div>
                     <div class="ai-output mt-3">
                         <label class="block font-semibold">Output (General AI):</label>
@@ -307,7 +309,7 @@ date: 2025-10-30
                     <textarea id="prompt-super" rows="3" placeholder="Type an ambitious prompt (e.g., 'Design a renewable energy plan for a small country')" class="w-full p-2 rounded text-black"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('super')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Super AI Response</button>
-                        <button onclick="fillAll()" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
+                        <button onclick="autoFill('super')" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
                     </div>
                     <div class="ai-output mt-3">
                         <label class="block font-semibold">Output (Super AI):</label>
@@ -405,6 +407,20 @@ date: 2025-10-30
             buttons.forEach(btn => btn.disabled = true);
             
             event.target.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
+
+        // Shared autofill logic for each section
+        function autoFill(type) {
+            const demos = {
+                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
+                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
+                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
+            };
+            const textarea = document.getElementById('prompt-' + type);
+            if (textarea && !textarea.value.trim()) {
+                textarea.value = demos[type];
+                setTimeout(() => { generateResponse(type); }, 50);
+            }
+        }
             
             if (isCorrect) {
                 feedbackDiv.textContent = '✅ Correct! Great job!';
@@ -526,7 +542,19 @@ date: 2025-10-30
         .ai-prompt-widget textarea { width: 100%; box-sizing: border-box; font-family: inherit; }
         .ai-output { margin-top: 8px; }
         .ai-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); padding: 8px; white-space: pre-wrap; color: #e6eef8; }
-        .ai-actions button { margin-right: 8px; }
+        .ai-actions button, .ai-output button {
+            margin-right: 8px;
+            border-radius: 0.5rem; /* More squared but still rounded (like quiz buttons) */
+            transition: background 0.15s, box-shadow 0.15s;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.04);
+        }
+        .ai-actions button:active, .ai-output button:active {
+            filter: brightness(0.85);
+            background-color: #334155 !important; /* darker slate on click */
+        }
+        .ai-actions button:last-child, .ai-output button:last-child {
+            margin-right: 0;
+        }
     </style>
 </body>
 </html>
