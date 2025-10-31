@@ -658,8 +658,8 @@ class MansionLevel4 {
     this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.3; // Set volume to a reasonable level
-    this.backgroundMusic.play();
-
-
+    this.backgroundMusic.play().catch(error => {
+        console.error('Error playing background music:', error);
+    });
 
 export default MansionLevel4;
