@@ -12,8 +12,291 @@ date: 2025-10-21
 
 # Los Angeles 
 
-## Content Coming Soon
-This submodule will be developed by the Cool Collaborators team. 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Universal Studios Button Lesson</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #2874a6;
+color: #fff;
+margin: 0;
+padding: 40px 20px;
+line-height: 1.6;
+font-size: 16px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #fff;
+            font-size: 14px;
+        }
+        code {
+            color: #fff;
+            font-size: 14px;
+        }
+        .example-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            background: linear-gradient(to bottom, #2874a6 0%, #5499c7 100%);
+            border-radius: 10px;
+            position: relative;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .button-container {
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 25px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        #universalContainer {
+            opacity: 0;
+            transform: scale(0.5) translateY(50px);
+            transition: all 1s ease;
+            z-index: 10;
+        }
+        #universalContainer.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .globe-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .globe {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #4a90e2 0%, #2563a8 50%, #1a4d8a 100%);
+            border-radius: 50%;
+            box-shadow: 
+                inset -20px -20px 40px rgba(0,0,0,0.3),
+                inset 20px 20px 40px rgba(255,255,255,0.1),
+                0 10px 30px rgba(0,0,0,0.4);
+            animation: globeAppear 0.8s ease backwards;
+        }
+        .globe::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            filter: blur(10px);
+        }
+        .latitude-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+        }
+        .lat1 { top: 30%; }
+        .lat2 { top: 50%; }
+        .lat3 { top: 70%; }
+        .longitude-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255,255,255,0.2);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .universal-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.5),
+                0 0 10px rgba(255,255,255,0.3);
+            font-family: Arial Black, sans-serif;
+            letter-spacing: 2px;
+            animation: textAppear 0.8s ease backwards;
+            animation-delay: 0.4s;
+        }
+        .ring {
+            position: absolute;
+            border: 3px solid rgba(255,255,255,0.4);
+            border-radius: 50%;
+            animation: ringAppear 0.8s ease backwards;
+        }
+        .ring1 {
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            animation-delay: 0.2s;
+        }
+        .ring2 {
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            animation-delay: 0.3s;
+        }
+        @keyframes globeAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.3) rotateY(-90deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+        @keyframes textAppear {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        @keyframes ringAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>Los Angeles</h1>
+<h2>Universal Studios Button Lesson</h2>
+        <h3>Step 1: Set Up Your HTML File</h3>
+        <p>First, create a new file and save it as button.html. Every HTML file needs this basic structure:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Button&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <p>What this means:</p>
+        <p>&lt;!DOCTYPE html&gt; tells the browser this is an HTML file</p>
+        <p>&lt;html&gt; wraps everything</p>
+        <p>&lt;head&gt; contains information about the page</p>
+        <p>&lt;body&gt; is where your visible content goes</p>
+        <h3>Step 2: Create Your First Button</h3>
+        <p>Inside the &lt;body&gt; tags, add a button:</p>
+        <pre><code>&lt;body&gt;
+    &lt;button&gt;Click Me!&lt;/button&gt;
+&lt;/body&gt;</code></pre>
+        <h3>Step 3: Make the Button Do Something</h3>
+        <p>Add an onclick attribute to make something happen when clicked:</p>
+        <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code></pre>
+        <div class="example-section">
+            <h3>Here's an example button!</h3>
+            <div class="demo-container">
+                <div class="button-container">
+                    <button onclick="generateUniversal()">Click for Universal Studios</button>
+                </div>
+                <div id="universalContainer">
+                    <div class="globe-container">
+                        <div class="ring ring2"></div>
+                        <div class="ring ring1"></div>
+                        <div class="globe">
+                            <div class="latitude-line lat1"></div>
+                            <div class="latitude-line lat2"></div>
+                            <div class="latitude-line lat3"></div>
+                            <div class="longitude-line"></div>
+                        </div>
+                        <div class="universal-text">UNIVERSAL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function generateUniversal() {
+            var universalContainer = document.getElementById('universalContainer');
+            // Reset animation by removing and re-adding the class
+            universalContainer.classList.remove('show');
+            // Small delay to allow reset
+            setTimeout(function() {
+                universalContainer.classList.add('show');
+            }, 50);
+        }
+    </script>
+</body>
+</html>
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
