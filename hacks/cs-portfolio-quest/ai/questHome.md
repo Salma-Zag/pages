@@ -50,11 +50,11 @@ lxdData:
 {%- include tailwind/cs-portfolio-mini_quest_info.html -%}
 
 <!-- FRQ: Placeholder -->
-<div class="frq-box" id="quest-frq" style="border:1px solid #ccc; padding:1rem; border-radius:8px; margin:1.5rem 0; background:#f9f9f9; color:#222;">
+<div class="frq-box" id="quest-frq" style="border:1px solid #2c2c2e; padding:1rem; border-radius:8px; margin:1.5rem 0; background:#1c1c1e; color:#e5e5ea; font-weight:300;">
   <b>FRQ:</b> <span id="frq-question">Placeholder FRQ: Describe how you will use AI to assist this quest (prompting or tooling).</span><br><br>
-  <textarea id="frq-answer" rows="5" placeholder="Type your response here..." style="width:100%; border-radius:6px; border:1px solid #ccc; padding:0.5rem; margin-top:0.5rem; background:#fff; color:#222;"></textarea>
+  <textarea id="frq-answer" rows="5" placeholder="Type your response here..." style="width:100%; border-radius:6px; border:1px solid #3a3a3c; padding:0.5rem; margin-top:0.5rem; background:#2c2c2e; color:#f2f2f7;"></textarea>
   <p></p>
-  <button id="frq-grade-btn" style="margin-top: 10px;">Grade</button>
+  <button id="frq-grade-btn" style="margin-top:10px; background:#2c2c2e; color:#e5e5ea; border:1px solid #3a3a3c; padding:0.4rem 0.75rem; border-radius:6px;">Grade</button>
   <div id="frq-feedback"></div>
 </div>
 
