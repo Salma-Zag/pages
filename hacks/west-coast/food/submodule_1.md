@@ -1,7 +1,7 @@
 ---
 layout: opencs
 microblog: True 
-title: "San Diego"
+title: "San Diego"    
 description: "City One of Food - San Diego"
 permalink: /west-coast/food/SD/
 parent: "San Diego"
@@ -11,6 +11,9 @@ categories: [CSP]
 tags: [food, sandiego, create, crud]
 author: "Syntax Terrors"
 date: 2025-10-24
+footer:
+  home: /west-coast/food/
+  next: /west-coast/food/LA/
 ---
 
 # 🏙️ San Diego — CREATE (CRUD Submodule 1)
@@ -213,34 +216,6 @@ strong { color: #f8f9ff; }
   text-align: center;
 }
 
-/* Back / Next buttons area */
-a.back-home {
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  border: 1px solid rgba(139,92,246,0.32);
-  padding: 12px 28px;
-  border-radius: 22px;
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 8px 30px rgba(139,92,246,0.12);
-}
-.next-city-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: linear-gradient(135deg, var(--accent-3), rgba(6,182,212,0.9));
-  color: white;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.6rem;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 14px 40px rgba(6,182,212,0.12);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 10000;
-}
-.next-city-btn:hover { transform: translateY(-3px); }
 
 /* Editor tool row */
 .editor-actions { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
@@ -868,15 +843,6 @@ Your **Baja Bowl** creation earned you **+50 XP** and the **"First Insert"** bad
 The next city awaits: **Los Angeles — READ module unlocked!** 🌆  
 Click through to begin exploring **searching, filtering, and viewing dishes** in LA.
 
-<!-- Back to Home Button moved to bottom -->
-<div style="margin-top: 2.5rem; text-align: center; padding: 1.5rem 0; border-top: 1px solid rgba(99,102,241,0.08);">
-  <a href="{{ site.baseurl }}/west-coast/food/" class="back-home">
-    ← Back to Food Route Hub
-  </a>
-</div>
-
-<!-- Next City Button -->
-<a href="{{ site.baseurl }}/west-coast/food/LA/" class="next-city-btn">Next → Los Angeles</a>
 
 <script>
 /* utilities used by editors */
