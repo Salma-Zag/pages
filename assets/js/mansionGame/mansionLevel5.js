@@ -289,7 +289,7 @@ class MansionLevel5 {
 	// List of objects defnitions for this level
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
-	  { class: Player, data: sprite_data_player },
+	  { class: PlayerWithArrows, data: sprite_data_player }, // Use PlayerWithArrows here!
 	  { class: Npc, data: sprite_data_npc},
 	  { class: Enemy, data: sprite_data_enemy },
 	  { class: Arrow, data: sprite_data_arrow } // Add Arrow class here
