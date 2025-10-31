@@ -32,13 +32,13 @@
       {% for topic in page.lxdData.Topics %}
         {% assign module_image = "" %}
         {% if topic.Level == 1 %}
-          {% assign module_image = "images/WC_AIModule_Image.jpg" %}
+          {% assign module_image = "images/WC_AI_Submodule1.png" %}
         {% elsif topic.Level == 2 %}
-          {% assign module_image = "images/WC_FoodModule.jpeg" %}
+          {% assign module_image = "images/WC_AI_Submodule2.png" %}
         {% elsif topic.Level == 3 %}
-          {% assign module_image = "images/WC_SportsModule.jpeg" %}
+          {% assign module_image = "images/WC_AI_Submodule3.webp" %}
         {% elsif topic.Level == 4 %}
-          {% assign module_image = "images/WC_TravelModule.jpg" %}
+          {% assign module_image = "images/WC_AI_Submodule4RM.png" %}
         {% endif %}
         
         <div class="bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2 card-hover-effects" data-module="c{{ topic.Level }}">
