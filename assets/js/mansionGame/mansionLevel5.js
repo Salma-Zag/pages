@@ -58,28 +58,25 @@ class MansionLevel5 {
 		pixels: {width: 3600, height: 1200},
 		INIT_POSITION: { x: (width /2), y: (height /2)},
 		orientation: {rows: 1, columns: 3},
-		down: {row: 1, start: 0, columns: 3},
-		left: {row: 1, start: 0, columns: 3},
-		right: {row: 1, start: 0, columns: 3},
-		up: {row: 1, start: 0, columns: 3}, // fallback to down row if no up animation
+		down: {row: 0, start: 0, columns: 3},
 		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
 		interact: function() {
-			if (!gameEnv || !gameEnv.gameControl) {
-				console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
-				return;
-			}
-			if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
-				let primaryGame = gameEnv.gameControl;
-				let levelArray = [GameLevelStarWars];
-				let gameInGame = new GameControl(path, levelArray);
-				primaryGame.pause();
-				gameInGame.start();
-				gameInGame.gameOver = function() {
-					primaryGame.resume();
-				};
-			} else {
-				console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
-			}
+			// if (!gameEnv || !gameEnv.gameControl) {
+			// 	console.warn('Mini-game interaction unavailable: gameEnv or gameControl missing.');
+			// 	return;
+			// }
+			// if (typeof GameControl === 'function' && typeof GameLevelStarWars !== 'undefined') {
+			// 	let primaryGame = gameEnv.gameControl;
+			// 	let levelArray = [GameLevelStarWars];
+			// 	let gameInGame = new GameControl(path, levelArray);
+			// 	primaryGame.pause();
+			// 	gameInGame.start();
+			// 	gameInGame.gameOver = function() {
+			// 		primaryGame.resume();
+			// 	};
+			// } else {
+			// 	console.warn('Mini-game interaction unavailable: GameControl or GameLevelStarWars not provided.');
+			// }
 		}
 	};
 
@@ -92,10 +89,7 @@ class MansionLevel5 {
         pixels: {width: 3600, height: 1200},
         INIT_POSITION: { x: width / 2, y: height / 4 },
         orientation: {rows: 1, columns: 3},
-		down: {row: 1, start: 0, columns: 3},
-		left: {row: 1, start: 0, columns: 3},
-		right: {row: 1, start: 0, columns: 3},
-		up: {row: 1, start: 0, columns: 3},
+		down: {row: 0, start: 0, columns: 3},
         hitbox: { widthPercentage: 0.4, heightPercentage: 0.4 },
         zIndex: 10,
         isKilling: false, // Flag to prevent multiple kills
@@ -223,7 +217,7 @@ class MansionLevel5 {
                     deathMessage.style.width = '400px';
                     deathMessage.innerHTML = `
                         <div style="margin-bottom: 20px;">☠️ YOU DIED ☠️</div>
-                        <div style="font-size: 16px; margin-bottom: 20px;">The Enderman got you!</div>
+                        <div style="font-size: 16px; margin-bottom: 20px;">The zombies got you!</div>
                         <div style="font-size: 14px;">Respawning in 2 seconds...</div>
                     `;
                     
@@ -252,7 +246,7 @@ class MansionLevel5 {
             }
         }
     };
-	
+
 	// List of objects defnitions for this level
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
