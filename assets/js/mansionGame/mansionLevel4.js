@@ -655,7 +655,7 @@ class MansionLevel4 {
     // Removed collision checking method - was causing issues with player movement
   }
     // Adding Music
-    this.backgroundMusic = newAudio(path + '/audio/mansionGame/SpookieDookie.mp3');
+    this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.3; // Set volume to a reasonable level
     this.backgroundMusic.play();
