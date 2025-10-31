@@ -12,8 +12,305 @@ date: 2025-10-21
 
 # Los Angeles 
 
-## Content Coming Soon
-This submodule will be developed by the Cool Collaborators team. 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Griffith Observatory Button Lesson</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #000;
+color: #fff;
+margin: 0;
+padding: 40px 20px;
+line-height: 1.6;
+font-size: 16px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #fff;
+            font-size: 14px;
+        }
+        code {
+            color: #fff;
+            font-size: 14px;
+        }
+        .example-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #0f3460 50%, #16213e 100%);
+            border-radius: 10px;
+            position: relative;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .button-container {
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 25px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        #observatoryContainer {
+            opacity: 0;
+            transform: scale(0.5) translateY(50px);
+            transition: all 1s ease;
+            z-index: 10;
+        }
+        #observatoryContainer.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .observatory {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        .dome {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 60px;
+            background: linear-gradient(to bottom, #d4d4d4 0%, #a8a8a8 100%);
+            border-radius: 60px 60px 0 0;
+            border: 3px solid #fff;
+            animation: domeAppear 0.8s ease backwards;
+            animation-delay: 0.3s;
+        }
+        .dome::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #4a4a4a;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+        .building {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 70px;
+            background: linear-gradient(to bottom, #e8e8e8 0%, #c4c4c4 100%);
+            border: 3px solid #fff;
+            animation: buildingAppear 0.8s ease backwards;
+            animation-delay: 0.1s;
+        }
+        .window {
+            position: absolute;
+            background: #ffd700;
+            border: 1px solid #fff;
+            animation: windowGlow 2s ease-in-out infinite;
+        }
+        .window1 {
+            top: 15px;
+            left: 30px;
+            width: 25px;
+            height: 30px;
+        }
+        .window2 {
+            top: 15px;
+            left: 70px;
+            width: 25px;
+            height: 30px;
+        }
+        .window3 {
+            top: 15px;
+            right: 70px;
+            width: 25px;
+            height: 30px;
+        }
+        .window4 {
+            top: 15px;
+            right: 30px;
+            width: 25px;
+            height: 30px;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        .star1 { top: 20%; left: 15%; animation-delay: 0s; }
+        .star2 { top: 30%; left: 80%; animation-delay: 0.5s; }
+        .star3 { top: 15%; left: 45%; animation-delay: 1s; }
+        .star4 { top: 25%; left: 65%; animation-delay: 1.5s; }
+        .star5 { top: 35%; right: 20%; animation-delay: 2s; }
+        .star6 { top: 10%; right: 35%; animation-delay: 2.5s; }
+        @keyframes buildingAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes domeAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.3);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+        }
+        @keyframes windowGlow {
+            0%, 100% {
+                opacity: 0.8;
+                box-shadow: 0 0 5px #ffd700;
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 15px #ffd700;
+            }
+        }
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>Los Angeles</h1>
+<h2>Griffith Observatory Button Lesson</h2>
+        <h3>Step 1: Set Up Your HTML File</h3>
+        <p>First, create a new file and save it as button.html. Every HTML file needs this basic structure:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Button&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <p>What this means:</p>
+        <p>&lt;!DOCTYPE html&gt; tells the browser this is an HTML file</p>
+        <p>&lt;html&gt; wraps everything</p>
+        <p>&lt;head&gt; contains information about the page</p>
+        <p>&lt;body&gt; is where your visible content goes</p>
+        <h3>Step 2: Create Your First Button</h3>
+        <p>Inside the &lt;body&gt; tags, add a button:</p>
+        <pre><code>&lt;body&gt;
+    &lt;button&gt;Click Me!&lt;/button&gt;
+&lt;/body&gt;</code></pre>
+        <h3>Step 3: Make the Button Do Something</h3>
+        <p>Add an onclick attribute to make something happen when clicked:</p>
+        <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code></pre>
+        <div class="example-section">
+            <h3>Here's an example button!</h3>
+            <div class="demo-container">
+                <div class="stars">
+                    <div class="star star1"></div>
+                    <div class="star star2"></div>
+                    <div class="star star3"></div>
+                    <div class="star star4"></div>
+                    <div class="star star5"></div>
+                    <div class="star star6"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="generateObservatory()">Click for Griffith Observatory</button>
+                </div>
+                <div id="observatoryContainer">
+                    <div class="observatory">
+                        <div class="building">
+                            <div class="window window1"></div>
+                            <div class="window window2"></div>
+                            <div class="window window3"></div>
+                            <div class="window window4"></div>
+                        </div>
+                        <div class="dome"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function generateObservatory() {
+            var observatoryContainer = document.getElementById('observatoryContainer');
+            // Reset animation by removing and re-adding the class
+            observatoryContainer.classList.remove('show');
+            // Small delay to allow reset
+            setTimeout(function() {
+                observatoryContainer.classList.add('show');
+            }, 50);
+        }
+    </script>
+</body>
+</html>
+
 <!doctype html>
 <html lang="en">
 <head>
