@@ -419,3 +419,100 @@ date: 2025-10-21
       content.classList.toggle("open");
     }
   </script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .character-selection {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .character {
+      width: 150px;
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      border: 3px solid transparent;
+      border-radius: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .character:hover {
+      transform: scale(1.05);
+      border-color: #999;
+    }
+
+    .character.selected {
+      border-color: #007bff;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+    }
+
+    #confirm-btn {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    #confirm-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose Your Character</h1>
+
+  <div class="character-selection">
+    <div class="character" id="char1" style="background-image: url('{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/elephant.mp4');"></div>
+    <div class="character" id="char2" style="background-image: url('{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/hamster.mp4');"></div>
+    <div class="character" id="char3" style="background-image: url('{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/monkey.mp4');"></div>
+  </div>
+
+  <button id="confirm-btn" disabled>Confirm Selection</button>
+
+  <script>
+    const characters = document.querySelectorAll(".character");
+    const confirmBtn = document.getElementById("confirm-btn");
+    let selectedCharacter = null;
+
+    characters.forEach(char => {
+      char.addEventListener("click", () => {
+        characters.forEach(c => c.classList.remove("selected"));
+        char.classList.add("selected");
+        selectedCharacter = char.id;
+        confirmBtn.disabled = false;
+      });
+    });
+
+    confirmBtn.addEventListener("click", () => {
+      if (selectedCharacter) {
+        // Store the selection so it can be used later (for sprite updates)
+        localStorage.setItem("selectedCharacter", selectedCharacter);
+        alert(`You selected ${selectedCharacter}!`);
+        // You could redirect to the next module:
+        // window.location.href = "module2.html";
+      }
+    });
+  </script>
