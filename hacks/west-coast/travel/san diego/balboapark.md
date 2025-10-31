@@ -15,11 +15,21 @@ date: 2025-10-21
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  overflow: hidden;
   background: #009688;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   position: relative;
+}
+
+/* Animation Wrapper */
+.animation-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Truck Scene */
@@ -41,6 +51,9 @@ body {
   opacity: 0;
   transition: opacity 1s ease;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Fade-in class */
@@ -49,7 +62,7 @@ body {
   z-index: 15;
 }
 
-/* Truck Animation Styles (same as before) */
+/* Truck Animation Styles */
 .loop-wrapper {
   margin: 0 auto;
   position: relative;
@@ -133,48 +146,169 @@ body {
 @keyframes wingLeft { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(-25deg); } }
 @keyframes wingRight { 0%, 100% { transform: scaleX(-1) rotateY(0deg); } 50% { transform: scaleX(-1) rotateY(-25deg); } }
 
+/* Audio Lesson Styles */
+.audio-lesson {
+  font-family: Arial, sans-serif;
+  background: #6b4423;
+  color: #fff;
+  margin: 0;
+  padding: 40px 20px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.audio-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.audio-lesson h1, 
+.audio-lesson h2, 
+.audio-lesson h3 {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+}
+
+.audio-lesson p {
+  color: #fff;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.audio-lesson pre {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  color: #fff;
+  font-size: 14px;
+}
+
+.audio-lesson code {
+  color: #fff;
+  font-size: 14px;
+}
+
+.example-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.example-section h2 {
+  color: #ffd700;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.example-section p {
+  color: #e0e0e0;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+audio {
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.source-text {
+  font-size: 14px;
+  color: #b0b0b0;
+  margin-top: 15px;
+}
 </style>
 </head>
 <body>
 
-<!-- Truck Scene -->
-<div id="truck-scene">
-  <div class="loop-wrapper">
-    <div class="mountain"></div>
-    <div class="hill"></div>
-    <div class="tree"></div>
-    <div class="tree"></div>
-    <div class="tree"></div>
-    <div class="rock"></div>
-    <div class="truck"></div>
-    <div class="wheels"></div>
+<!-- Animation Wrapper -->
+<div class="animation-wrapper">
+  <!-- Truck Scene -->
+  <div id="truck-scene">
+    <div class="loop-wrapper">
+      <div class="mountain"></div>
+      <div class="hill"></div>
+      <div class="tree"></div>
+      <div class="tree"></div>
+      <div class="tree"></div>
+      <div class="rock"></div>
+      <div class="truck"></div>
+      <div class="wheels"></div>
+    </div>
+  </div>
+
+  <!-- Balboa Park Scene -->
+  <div id="balboa-scene" class="container">
+    <div class="balboa-scene">
+      <div class="sun"></div>
+      <div class="botanical">
+        <div class="tower left"><div class="tower-top"></div></div>
+        <div class="dome-building">
+          <div class="dome">
+            <div class="dome-panel" style="--x: 20px"></div>
+            <div class="dome-panel" style="--x: 40px"></div>
+            <div class="dome-panel" style="--x: 60px"></div>
+            <div class="dome-panel" style="--x: 80px"></div>
+            <div class="dome-panel" style="--x: 100px"></div>
+          </div>
+          <div class="arch"></div>
+        </div>
+        <div class="tower right"><div class="tower-top"></div></div>
+      </div>
+      <div class="flower f1"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
+      <div class="flower f2"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
+      <div class="flower f3"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
+      <div class="flower f4"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
+      <div class="butterfly"><div class="butterfly-wing left"></div><div class="butterfly-body"></div><div class="butterfly-wing right"></div></div>
+      <div class="balboa-garden"></div>
+    </div>
   </div>
 </div>
 
-<!-- Balboa Park Scene -->
-<div id="balboa-scene" class="container">
-  <div class="balboa-scene">
-    <div class="sun"></div>
-    <div class="botanical">
-      <div class="tower left"><div class="tower-top"></div></div>
-      <div class="dome-building">
-        <div class="dome">
-          <div class="dome-panel" style="--x: 20px"></div>
-          <div class="dome-panel" style="--x: 40px"></div>
-          <div class="dome-panel" style="--x: 60px"></div>
-          <div class="dome-panel" style="--x: 80px"></div>
-          <div class="dome-panel" style="--x: 100px"></div>
-        </div>
-        <div class="arch"></div>
-      </div>
-      <div class="tower right"><div class="tower-top"></div></div>
+<!-- Audio Lesson Section -->
+<div class="audio-lesson">
+  <div class="audio-container">
+    <h1>Balboa Park Organ Audio Lesson</h1>
+    <h2>Adding Audio to a Webpage</h2>
+    <p>Learn how to add and control audio using HTML with sounds from Balboa Park's historic Spreckels Organ Pavilion</p>
+    
+    <h3>1. What It Does</h3>
+    <p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
+    
+    <h3>2. Prepare Files</h3>
+    <p>Save audio files like:</p>
+    <pre><code>/audio/balboa-organ.mp3
+/audio/organ-performance.mp3
+/audio/spreckels-pavilion.mp3
+/audio/organ-concert.mp3</code></pre>
+    
+    <h3>3. Basic Structure</h3>
+    <p>Each section should include a heading, a short description, and an audio player.</p>
+    <pre><code>&lt;audio controls&gt;
+  &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
+  Your browser does not support the audio element.
+&lt;/audio&gt;</code></pre>
+    
+    <div class="example-section">
+      <h2>Audio you will be working with: Balboa Park Organ Pavilion</h2>
+      <p>
+        Listen to the majestic sounds of the Spreckels Organ — one of the world's largest outdoor pipe organs, filling Balboa Park with rich, powerful tones.
+      </p>
+      <audio controls>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <p class="source-text">Source: Organ performance and classical music</p>
     </div>
-    <div class="flower f1"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
-    <div class="flower f2"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
-    <div class="flower f3"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
-    <div class="flower f4"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="flower-center"></div></div>
-    <div class="butterfly"><div class="butterfly-wing left"></div><div class="butterfly-body"></div><div class="butterfly-wing right"></div></div>
-    <div class="balboa-garden"></div>
   </div>
 </div>
 
@@ -185,115 +319,5 @@ setTimeout(() => {
 }, 6000);
 </script>
 
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Balboa Park Organ Audio Lesson</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-background: #6b4423;
-color: #fff;
-margin: 0;
-padding: 40px 20px;
-line-height: 1.6;
-font-size: 16px;
-}
-.container {
-max-width: 800px;
-margin: 0 auto;
-}
-h1, h2, h3 {
-color: #fff;
-font-size: 16px;
-font-weight: bold;
-margin: 20px 0 10px 0;
-}
-p {
-color: #fff;
-font-size: 16px;
-margin: 10px 0;
-}
-pre {
-background: #1a1a1a;
-padding: 15px;
-border-radius: 5px;
-overflow-x: auto;
-color: #fff;
-font-size: 14px;
-}
-code {
-color: #fff;
-font-size: 14px;
-}
-.example-section {
-margin: 40px 0;
-padding: 30px;
-background: #f3f4f6;
-border-radius: 16px;
-box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-max-width: 600px;
-margin-left: auto;
-margin-right: auto;
-text-align: center;
-}
-.example-section h2 {
-color: #1f2937;
-font-size: 20px;
-margin-bottom: 10px;
-}
-.example-section p {
-color: #4b5563;
-font-size: 16px;
-margin-bottom: 20px;
-}
-audio {
-width: 100%;
-margin: 20px 0;
-border-radius: 8px;
-}
-.source-text {
-font-size: 14px;
-color: #6b7280;
-margin-top: 15px;
-}
-</style>
-</head>
-<body>
-<div class="container">
-<h1>Balboa Park Organ Audio Lesson</h1>
-<h2>Adding Audio to a Webpage</h2>
-<p>Learn how to add and control audio using HTML with sounds from Balboa Park's historic Spreckels Organ Pavilion</p>
-<h3>1. What It Does</h3>
-<p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
-<h3>2. Prepare Files</h3>
-<p>Save audio files like:</p>
-<pre><code>/audio/balboa-organ.mp3
-/audio/organ-performance.mp3
-/audio/spreckels-pavilion.mp3
-/audio/organ-concert.mp3</code></pre>
-<h3>3. Basic Structure</h3>
-<p>Each section should include a heading, a short description, and an audio player.</p>
-<pre><code>&lt;audio controls&gt;
-  &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
-  Your browser does not support the audio element.
-&lt;/audio&gt;</code></pre>
-<div class="example-section">
-<h2>Audio you will be working with: Balboa Park Organ Pavilion</h2>
-<p>
-Listen to the majestic sounds of the Spreckels Organ — one of the world's largest outdoor pipe organs, filling Balboa Park with rich, powerful tones.
-</p>
-<audio controls>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<p class="source-text">Source: Organ performance and classical music</p>
-</div>
-</div>
 </body>
 </html>
