@@ -1,11 +1,11 @@
 ---
-layout: post
+layout: cs-portfolio-lesson
 title: "AI Usage Certification"
 description: "Complete your AI Usage Quest and earn your official certification from Open Coding Society. Add it to your LinkedIn profile to showcase your skills."
 permalink: /cs-portfolio-quest/ai/submodule_4/
 parent: "AI Usage"
 team: "Thinkers"
-submodule: 5
+submodule: 4
 categories: [CSP, Submodule, AIUsage]
 tags: [ai, submodule, thinkers, certificate]
 author: "Thinkers Team"
@@ -298,5 +298,3 @@ document.getElementById('cert-date').textContent = new Date().toLocaleDateString
 
 document.addEventListener('DOMContentLoaded', checkCompletion);
 </script>
-
-{%- include tailwind/cs-portfolio-quest-lessons_info.html -%}
