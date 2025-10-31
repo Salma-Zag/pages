@@ -12,8 +12,360 @@ date: 2025-10-21
 
 # Los Angeles 
 
-## Content Coming Soon
-This submodule will be developed by the Cool Collaborators team. 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hollywood Walk of Fame Button Lesson</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #2874a6;
+color: #fff;
+margin: 0;
+padding: 40px 20px;
+line-height: 1.6;
+font-size: 16px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #fff;
+            font-size: 14px;
+        }
+        code {
+            color: #fff;
+            font-size: 14px;
+        }
+        .example-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 500px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #b0d9f5 60%, #d4d4d4 100%);
+            border-radius: 10px;
+            position: relative;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .button-container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            z-index: 10;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 25px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        #walkContainer {
+            opacity: 0;
+            transition: all 1s ease;
+            z-index: 5;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        #walkContainer.show {
+            opacity: 1;
+        }
+        .sidewalk {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 30px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+        }
+        .star-tile {
+            position: relative;
+            width: 100px;
+            height: 120px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+            border: 3px solid #8b7355;
+            border-radius: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                inset 0 1px 3px rgba(255,255,255,0.3),
+                inset 0 -1px 3px rgba(0,0,0,0.3),
+                0 5px 10px rgba(0,0,0,0.3);
+            animation: tileAppear 0.8s ease backwards;
+        }
+        .star-tile:nth-child(1) { animation-delay: 0.2s; }
+        .star-tile:nth-child(2) { animation-delay: 0.4s; }
+        .star-tile:nth-child(3) { animation-delay: 0.6s; }
+        .star-tile:nth-child(4) { animation-delay: 0.8s; }
+        .star-shape {
+            font-size: 40px;
+            color: #c71585;
+            text-shadow: 
+                1px 1px 2px rgba(0,0,0,0.3),
+                0 0 5px rgba(199,21,133,0.5);
+            margin-bottom: 5px;
+        }
+        .star-name {
+            font-size: 9px;
+            font-weight: 900;
+            color: #2a2a2a;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            padding: 0 5px;
+        }
+        .person {
+            position: absolute;
+            bottom: 200px;
+            width: 30px;
+            animation: walk 8s linear infinite;
+        }
+        .person1 {
+            left: -50px;
+            animation-delay: 0s;
+        }
+        .person2 {
+            left: -50px;
+            animation-delay: 3s;
+        }
+        .person3 {
+            left: -50px;
+            animation-delay: 6s;
+        }
+        .person-body {
+            width: 20px;
+            height: 35px;
+            background: #ff6b6b;
+            border-radius: 5px 5px 0 0;
+            margin: 0 auto;
+        }
+        .person-head {
+            width: 15px;
+            height: 15px;
+            background: #ffcba4;
+            border-radius: 50%;
+            margin: 0 auto 2px;
+        }
+        .person-legs {
+            display: flex;
+            justify-content: center;
+            gap: 3px;
+        }
+        .leg {
+            width: 6px;
+            height: 20px;
+            background: #4a4a4a;
+            animation: legWalk 0.6s ease-in-out infinite;
+        }
+        .leg:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        @keyframes walk {
+            from {
+                left: -50px;
+            }
+            to {
+                left: 100%;
+            }
+        }
+        @keyframes legWalk {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(20deg);
+            }
+        }
+        @keyframes tileAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .buildings {
+            position: absolute;
+            bottom: 200px;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 0 20px;
+        }
+        .building {
+            background: linear-gradient(to bottom, #6a6a6a 0%, #4a4a4a 100%);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .building1 {
+            width: 60px;
+            height: 100px;
+        }
+        .building2 {
+            width: 50px;
+            height: 120px;
+        }
+        .building3 {
+            width: 70px;
+            height: 90px;
+        }
+        .building4 {
+            width: 55px;
+            height: 110px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>Los Angeles</h1>
+<h2>Hollywood Walk of Fame Button Lesson</h2>
+        <h3>Step 1: Set Up Your HTML File</h3>
+        <p>First, create a new file and save it as button.html. Every HTML file needs this basic structure:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Button&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <p>What this means:</p>
+        <p>&lt;!DOCTYPE html&gt; tells the browser this is an HTML file</p>
+        <p>&lt;html&gt; wraps everything</p>
+        <p>&lt;head&gt; contains information about the page</p>
+        <p>&lt;body&gt; is where your visible content goes</p>
+        <h3>Step 2: Create Your First Button</h3>
+        <p>Inside the &lt;body&gt; tags, add a button:</p>
+        <pre><code>&lt;body&gt;
+    &lt;button&gt;Click Me!&lt;/button&gt;
+&lt;/body&gt;</code></pre>
+        <h3>Step 3: Make the Button Do Something</h3>
+        <p>Add an onclick attribute to make something happen when clicked:</p>
+        <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code></pre>
+        <div class="example-section">
+            <h3>Here's an example button!</h3>
+            <div class="demo-container">
+                <div class="button-container">
+                    <button onclick="generateWalk()">Click for Walk of Fame</button>
+                </div>
+                <div id="walkContainer">
+                    <div class="buildings">
+                        <div class="building building1"></div>
+                        <div class="building building2"></div>
+                        <div class="building building3"></div>
+                        <div class="building building4"></div>
+                    </div>
+                    <div class="person person1">
+                        <div class="person-head"></div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person person2">
+                        <div class="person-head"></div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="person person3">
+                        <div class="person-head"></div>
+                        <div class="person-body"></div>
+                        <div class="person-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                    </div>
+                    <div class="sidewalk">
+                        <div class="star-tile">
+                            <div class="star-shape">★</div>
+                            <div class="star-name">MARILYN<br>MONROE</div>
+                        </div>
+                        <div class="star-tile">
+                            <div class="star-shape">★</div>
+                            <div class="star-name">CHARLIE<br>CHAPLIN</div>
+                        </div>
+                        <div class="star-tile">
+                            <div class="star-shape">★</div>
+                            <div class="star-name">ELVIS<br>PRESLEY</div>
+                        </div>
+                        <div class="star-tile">
+                            <div class="star-shape">★</div>
+                            <div class="star-name">MICHAEL<br>JACKSON</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function generateWalk() {
+            var walkContainer = document.getElementById('walkContainer');
+            // Reset animation by removing and re-adding the class
+            walkContainer.classList.remove('show');
+            // Small delay to allow reset
+            setTimeout(function() {
+                walkContainer.classList.add('show');
+            }, 50);
+        }
+    </script>
+</body>
+</html>
+
 <!doctype html>
 <html lang="en">
 <head>
