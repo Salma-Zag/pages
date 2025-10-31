@@ -32,7 +32,7 @@ class MansionLevel5 {
         greeting: "I am the player for level 5",
         src: sprite_player,
         SCALE_FACTOR: player_scale_factor,
-        STEP_FACTOR: 800,
+        STEP_FACTOR: 1500,
         ANIMATION_RATE: 10,
         INIT_POSITION: { x: 0, y: 0 }, 
         pixels: {height: 2400, width: 3600},
@@ -63,7 +63,7 @@ class MansionLevel5 {
 		down: {row: 0, start: 0, columns: 3},
 		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
 		interact: function() {
-			// start waves here
+			let enemy = Enemy(sprite_data_enemy, gameEnv);
 		}
 	};
 
@@ -110,7 +110,7 @@ class MansionLevel5 {
             }
 
             // Move towards nearest player
-            const speed = 2; // Adjust speed as needed
+            const speed = 1.5; // Adjust speed as needed
             const dx = nearest.position.x - this.position.x;
             const dy = nearest.position.y - this.position.y;
             const angle = Math.atan2(dy, dx);
@@ -238,8 +238,8 @@ class MansionLevel5 {
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
 	  { class: Player, data: sprite_data_player },
-	  { class: Npc, data: sprite_data_npc},
-	  { class: Enemy, data: sprite_data_enemy }
+	//   { class: Enemy, data: sprite_data_enemy },
+	  { class: Npc, data: sprite_data_npc}
 	];
   }
 
