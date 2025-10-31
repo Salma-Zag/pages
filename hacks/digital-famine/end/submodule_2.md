@@ -945,7 +945,13 @@ breadcrumb: true
   });
 })();
 </script>
-    
+
+<script type="module">
+  import { initEndModuleProgression } from '{{site.baseurl}}/assets/js/digitalFamine/endModuleProgression.js';
+  
+  // Initialize progression system for this module
+  initEndModuleProgression();
+</script>
 
 
 

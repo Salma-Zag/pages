@@ -58,3 +58,10 @@ lxdData:
       Alt: "end Submodule 5"
 ---
 {%- include tailwind/quests/digital-famine.html -%}
+
+<script type="module">
+  import { initEndModuleProgression } from '{{site.baseurl}}/assets/js/digitalFamine/endModuleProgression.js';
+  
+  // Initialize progression system for quest home page
+  initEndModuleProgression();
+</script>
