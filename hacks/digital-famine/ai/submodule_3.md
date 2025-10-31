@@ -26,14 +26,13 @@ An AI API (Application Programming Interface) is a set of rules that allows deve
 An typical example of using an AI API is to build a **customer service chatbot** that uses a natural language processing API to understand customer queries and generate responses. Ex:microblog.
 
 
-<<<<<<< HEAD
+
 #
 #
 # 
 # Structure of Microblog: Layers Overview
-=======
+
 # Layers Overview
->>>>>>> e8f4a8b881f2be69151026f5038007d1207e31c6
 
 ## 1. Layout Layer 
 
