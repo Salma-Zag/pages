@@ -62,7 +62,7 @@ lxdData:
       Categories: ["Certificate", "Integration", "Achievement"]
       Video: "/cs-portfolio-quest/analytics-video"
       Lessons: "/cs-portfolio-quest/analytics/"
-      Image: "/images/cs-portfolio-quest/analytics.svg"
+      Image: "/images/cs-portfolio-quest/analytics/analytics.svg"
       Alt: "CS Portfolio Quest Mastery Certificate"
 ---
 {%- include tailwind/cs-portfolio-quest_info.html -%}
