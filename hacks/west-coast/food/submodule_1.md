@@ -268,11 +268,11 @@ a.back-home {
 <div class="progress-tracker">
   <h3>🎯 San Diego Progress Tracker</h3>
   <div id="progress-display">
-    <div id="task-fishtaco" class="task-item">📝 Task 1: Fish Taco Class - <span class="status">Incomplete</span></div>
-    <div id="task-burritocart" class="task-item">🛒 Task 2: Burrito Cart - <span class="status">Incomplete</span></div>
-    <div id="task-bajabowl" class="task-item">🥗 Task 3: Build Baja Bowl - <span class="status">Incomplete</span></div>
-    <div id="task-seed" class="task-item">🌱 Task 4: Seed Pantry - <span class="status">Incomplete</span></div>
-    <div id="task-view" class="task-item">👀 Task 5: View Pantry - <span class="status">Incomplete</span></div>
+    <div id="task-fishtaco" class="task-item">Task 1: Fish Taco Class - <span class="status">Incomplete</span></div>
+    <div id="task-burritocart" class="task-item">Task 2: Burrito Cart - <span class="status">Incomplete</span></div>
+    <div id="task-bajabowl" class="task-item">Task 3: Build Baja Bowl - <span class="status">Incomplete</span></div>
+    <div id="task-seed" class="task-item">Task 4: Seed Pantry - <span class="status">Incomplete</span></div>
+    <div id="task-view" class="task-item">Task 5: View Pantry - <span class="status">Incomplete</span></div>
   </div>
   <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.01); border-radius: 0.5rem;">
     <strong>Completion: <span id="completion-percentage">0%</span></strong>
@@ -281,6 +281,7 @@ a.back-home {
     </div>
   </div>
 </div>
+
 
 <div class="sq-toast" id="sqToast">Baja Bowl added — +50 XP</div>
 
