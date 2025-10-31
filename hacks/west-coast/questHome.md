@@ -8,7 +8,7 @@ author: CSP 2025-26
 permalink: /west-coast
 lxdData:
   Title: "Learning Modules"
-  Description: "Build critical project development skills and earn a certificate upon completion!"
+  Description: "Learn important aspects of code while you travel across the west coast!"
   Topics:
     - Title: "C1: AI Itenerary"
       Genre: "Project Creation"
