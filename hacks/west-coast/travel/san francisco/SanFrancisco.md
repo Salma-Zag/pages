@@ -1,20 +1,31 @@
 ---
 layout: post
-title: "San Diego"
-description: "Roadtrip through SD and learn UI while you're there!"
-permalink: /west-coast/analytics/sandiego/
+title: "San Francisco"
+description: "Roadtrip through SF and learn UI while you're there!"
+permalink: /west-coast/analytics/sanfrancisco/
 parent: "Analytics/Admin"
 team: "Cool Collaborators"
-submodule: 3
+submodule: 2
 author: "Cool Collaborators"
 date: 2025-10-21
+footer: 
+    previous:  /west-coast/analytics/sandiego/
+    home: /west-coast/travel/
+    next: /west-coast/analytics/submodule_4/
 ---
 
-# San Diego
+# San Francisco
 
 ## Content Coming Soon
-This submodule will be developed by the Curators team.
+This submodule will be developed by the Collaborators team.
 
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reveal Code Modal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 <style>
   body {
     font-family: 'Poppins', sans-serif;
@@ -91,15 +102,6 @@ This submodule will be developed by the Curators team.
     text-align: center;
   }
 </style>
-
-
-<html lang="en">
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reveal Code Modal</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
@@ -132,3 +134,4 @@ This submodule will be developed by the Curators team.
 
 </body>
 </html>
+
