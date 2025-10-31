@@ -1,7 +1,7 @@
 ---
 layout: opencs
 microblog: True 
-title: "San Diego"
+title: "San Diego"    
 description: "City One of Food - San Diego"
 permalink: /west-coast/food/SD/
 parent: "San Diego"
