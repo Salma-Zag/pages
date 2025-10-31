@@ -10,10 +10,271 @@ author: "Cool Collaborators"
 date: 2025-10-21
 ---
 
-# Los Angeles 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hollywood Sign Button Lesson</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
 
-## Content Coming Soon
-This submodule will be developed by the Cool Collaborators team. 
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        code {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .example-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 60%, #d2b48c 60%, #8b7355 100%);
+            border-radius: 10px;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 25px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        #signContainer {
+            opacity: 0;
+            transform: scale(0.5) translateY(50px);
+            transition: all 1s ease;
+            z-index: 10;
+        }
+
+        #signContainer.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .hollywood-sign {
+            display: flex;
+            gap: 15px;
+            perspective: 1000px;
+        }
+
+        .letter {
+            font-size: 80px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 
+                4px 4px 0 #2c3e50,
+                -2px -2px 0 #34495e,
+                2px -2px 0 #34495e,
+                -2px 2px 0 #34495e,
+                0 0 30px rgba(255,255,255,0.6),
+                0 0 60px rgba(255,255,255,0.3);
+            font-family: 'Arial Black', sans-serif;
+            animation: letterPop 0.5s ease backwards;
+        }
+
+        .letter:nth-child(1) { animation-delay: 0.1s; }
+        .letter:nth-child(2) { animation-delay: 0.2s; }
+        .letter:nth-child(3) { animation-delay: 0.3s; }
+        .letter:nth-child(4) { animation-delay: 0.4s; }
+        .letter:nth-child(5) { animation-delay: 0.5s; }
+        .letter:nth-child(6) { animation-delay: 0.6s; }
+        .letter:nth-child(7) { animation-delay: 0.7s; }
+        .letter:nth-child(8) { animation-delay: 0.8s; }
+        .letter:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes letterPop {
+            from {
+                opacity: 0;
+                transform: rotateY(90deg) scale(0.3);
+            }
+            to {
+                opacity: 1;
+                transform: rotateY(0deg) scale(1);
+            }
+        }
+
+        .hillside {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hill {
+            position: absolute;
+            bottom: 0;
+            background: #6b8e23;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .hill1 {
+            left: 10%;
+            width: 300px;
+            height: 150px;
+        }
+
+        .hill2 {
+            left: 35%;
+            width: 350px;
+            height: 180px;
+        }
+
+        .hill3 {
+            right: 15%;
+            width: 320px;
+            height: 160px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Los Angeles</h1>
+        <h2>Hollywood Sign Button Lesson</h2>
+
+        <h3>Step 1: Set Up Your HTML File</h3>
+        <p>First, create a new file and save it as button.html. Every HTML file needs this basic structure:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Button&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <p>What this means:</p>
+        <p>&lt;!DOCTYPE html&gt; tells the browser this is an HTML file</p>
+        <p>&lt;html&gt; wraps everything</p>
+        <p>&lt;head&gt; contains information about the page</p>
+        <p>&lt;body&gt; is where your visible content goes</p>
+
+        <h3>Step 2: Create Your First Button</h3>
+        <p>Inside the &lt;body&gt; tags, add a button:</p>
+        <pre><code>&lt;body&gt;
+    &lt;button&gt;Click Me!&lt;/button&gt;
+&lt;/body&gt;</code></pre>
+
+        <h3>Step 3: Make the Button Do Something</h3>
+        <p>Add an onclick attribute to make something happen when clicked:</p>
+        <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code></pre>
+
+        <div class="example-section">
+            <h3>Here's an example button!</h3>
+            <div class="demo-container">
+                <div class="hillside">
+                    <div class="hill hill1"></div>
+                    <div class="hill hill2"></div>
+                    <div class="hill hill3"></div>
+                </div>
+
+                <div class="button-container">
+                    <button onclick="generateHollywoodSign()">Click for Hollywood Sign</button>
+                </div>
+
+                <div id="signContainer">
+                    <div class="hollywood-sign">
+                        <div class="letter">H</div>
+                        <div class="letter">O</div>
+                        <div class="letter">L</div>
+                        <div class="letter">L</div>
+                        <div class="letter">Y</div>
+                        <div class="letter">W</div>
+                        <div class="letter">O</div>
+                        <div class="letter">O</div>
+                        <div class="letter">D</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateHollywoodSign() {
+            var signContainer = document.getElementById('signContainer');
+            
+            // Reset animation by removing and re-adding the class
+            signContainer.classList.remove('show');
+            
+            // Small delay to allow reset
+            setTimeout(function() {
+                signContainer.classList.add('show');
+            }, 50);
+        }
+    </script>
+</body>
+</html>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,8 +283,7 @@ This submodule will be developed by the Cool Collaborators team.
 <title>Hollywood Sign — Roadtrip</title>
 <style>
 /* ===== Truck intro (8s) ===== */
-body{background:#009688;overflow-x:hidden;font-family:'Open Sans',sans-serif}
-.no-scroll{overflow:hidden}
+body{background:#009688;overflow:hidden;font-family:'Open Sans',sans-serif}
 .loop-wrapper{margin:0 auto;position:relative;display:block;width:600px;height:250px;overflow:hidden;border-bottom:3px solid #fff;color:#fff}
 .mountain{position:absolute;right:-900px;bottom:-20px;width:2px;height:2px;box-shadow:0 0 0 50px #4DB6AC,60px 50px 0 70px #4DB6AC,90px 90px 0 50px #4DB6AC,250px 250px 0 50px #4DB6AC,290px 320px 0 50px #4DB6AC,320px 400px 0 50px #4DB6AC;transform:rotate(130deg);animation:mtn 20s linear infinite}
 .hill{position:absolute;right:-900px;bottom:-50px;width:400px;border-radius:50%;height:20px;box-shadow:0 0 0 50px #4DB6AC,-20px 0 0 20px #4DB6AC,-90px 0 0 50px #4DB6AC,250px 0 0 50px #4DB6AC,290px 0 0 50px #4DB6AC,620px 0 0 50px #4DB6AC;animation:hill 4s 2s linear infinite}
@@ -58,40 +318,9 @@ body{background:#009688;overflow-x:hidden;font-family:'Open Sans',sans-serif}
 .sign{position:absolute;bottom:46%;left:50%;transform:translateX(-50%);display:flex;gap:8px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
 .sign .ltr{width:28px;height:68px;background:#fff;border:5px solid #eaeaea;display:grid;place-items:center;font-weight:800;font-size:22px;color:#333}
 .caption{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;color:#2b2b2b;font-weight:600;background:rgba(255,255,255,.75);padding:8px 14px;border-radius:10px}
-/* ===== Scrollable parallax additions ===== */
-.scroll-container{height:320vh;position:relative}
-.sticky-viewport{position:sticky;top:0;height:100vh;overflow:hidden}
-.scene{position:relative;height:100vh;background:linear-gradient(#8fd0ff 0%,#cfefff 60%,#eaf6ff 100%)}
-.scene *{will-change:transform}
-.hill-shape{bottom:-2%;height:45%}
-.hill-back{filter:brightness(.9);transform:translate3d(calc(-10px*var(--p)),0,0)}
-.hill-mid{transform:translate3d(calc(-40px*var(--p)),0,0)}
-.hill-front{filter:brightness(1.05);transform:translate3d(calc(-90px*var(--p)),0,0)}
-.sun{position:absolute;top:12%;left:12%;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff8c6 0%,#ffe066 35%,#ffcf33 60%,rgba(255,207,51,.65) 100%);box-shadow:0 0 80px 30px rgba(255,207,51,.35);transform:translate3d(0,calc(40px*var(--p)),0)}
-.cloud{position:absolute;top:10%;left:110%;width:220px;height:70px;filter:blur(.2px)}
-.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}
-.cloud:before{width:120px;height:60px;left:0;top:10px}
-.cloud:after{width:80px;height:50px;left:80px;top:0}
-.cloud.slow{animation:cloud-move 90s linear infinite}
-.cloud.mid{animation:cloud-move 60s linear infinite}
-.cloud.fast{animation:cloud-move 40s linear infinite}
-@keyframes cloud-move{0%{transform:translateX(0)}100%{transform:translateX(-220vw)}}
-.birds{position:absolute;top:24%;left:100%;width:60px;height:20px;opacity:.8;animation:birds 18s linear infinite}
-@keyframes birds{0%{transform:translateX(0) scale(1)}50%{transform:translateX(-55vw) scale(1.05)}100%{transform:translateX(-110vw) scale(1)}}
-.bird{position:absolute;width:14px;height:6px;border-top:2px solid #2b2b2b;border-radius:50%;transform-origin:50% 0}
-.bird:nth-child(1){left:0;top:6px;transform:rotate(-8deg)}
-.bird:nth-child(2){left:20px;top:0;transform:rotate(6deg)}
-.bird:nth-child(3){left:40px;top:8px}
-.sign .ltr{transform:translate3d(0,calc(-6px*var(--p)),0)}
-.sign .ltr:nth-child(odd){animation:shine 6s ease-in-out infinite}
-@keyframes shine{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}
-.foreground{position:absolute;bottom:-1%;left:-10%;width:130%;height:26%;background:radial-gradient(80% 100% at 50% 100%,#3f7141 0%,#2d5a31 70%,transparent 71%);transform:translate3d(calc(-120px*var(--p)),0,0)}
-.scroll-hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);color:#2b2b2b;font-weight:700;background:rgba(255,255,255,.8);padding:8px 14px;border-radius:999px;display:flex;align-items:center;gap:10px}
-.scroll-hint .dot{width:6px;height:6px;background:#2b2b2b;border-radius:50%;animation:dot 1.6s ease-in-out infinite}
-@keyframes dot{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(6px);opacity:1}}
 </style>
 </head>
-<body class="no-scroll">
+<body>
 <!-- Truck intro -->
 <div class="intro" id="intro">
   <div class="loop-wrapper" role="img" aria-label="Driving through teal hills toward Hollywood">
@@ -106,51 +335,24 @@ body{background:#009688;overflow-x:hidden;font-family:'Open Sans',sans-serif}
 </div>
 
 <!-- Scene -->
-<div class="scroll-container hidden" id="scroll">
-  <div class="sticky-viewport">
-    <main class="scene" id="scene">
-      <div class="sun"></div>
-      <div class="cloud slow" style="top:10%;left:120%"></div>
-      <div class="cloud mid" style="top:22%;left:135%"></div>
-      <div class="cloud fast" style="top:32%;left:110%"></div>
-      <div class="birds">
-        <div class="bird"></div><div class="bird"></div><div class="bird"></div>
-      </div>
-      <div class="hill-shape hill-back" style="--x:-10%"></div>
-      <div class="hill-shape hill-mid" style="--x:20%"></div>
-      <div class="hill-shape hill-front" style="--x:55%"></div>
-      <div class="sign" aria-label="HOLLYWOOD sign">
-        <div class="ltr">H</div><div class="ltr">O</div><div class="ltr">L</div><div class="ltr">L</div>
-        <div class="ltr">Y</div><div class="ltr">W</div><div class="ltr">O</div><div class="ltr">O</div><div class="ltr">D</div>
-      </div>
-      <div class="foreground"></div>
-      <div class="scroll-hint" aria-hidden="true">Scroll to explore<div class="dot"></div></div>
-      <div class="caption">⛰️ Hollywood Sign — Sunlit hills overlooking LA</div>
-    </main>
+<main class="scene hidden" id="scene">
+  <div class="hill-shape" style="--x:-10%"></div>
+  <div class="hill-shape" style="--x:20%"></div>
+  <div class="hill-shape" style="--x:55%"></div>
+  <div class="sign" aria-label="HOLLYWOOD sign">
+    <div class="ltr">H</div><div class="ltr">O</div><div class="ltr">L</div><div class="ltr">L</div>
+    <div class="ltr">Y</div><div class="ltr">W</div><div class="ltr">O</div><div class="ltr">O</div><div class="ltr">D</div>
   </div>
-</div>
+  <div class="caption">⛰️ Hollywood Sign — Sunlit hills overlooking LA</div>
+</main>
 
 <script>
-// Intro -> scroll scene transition
 setTimeout(()=>{
   document.getElementById('intro').classList.add('hidden');
-  document.getElementById('scroll').classList.remove('hidden');
-  document.body.classList.remove('no-scroll');
+  document.getElementById('scene').classList.remove('hidden');
+  // optional: change body bg to match scene
   document.body.style.background = 'linear-gradient(#8fd0ff,#eaf6ff)';
 }, 8000);
-
-// Scroll-driven parallax
-(function(){
-  const root = document.documentElement;
-  const onScroll = () => {
-    const doc = document.documentElement;
-    const max = (doc.scrollHeight - window.innerHeight) || 1;
-    const p = Math.min(1, Math.max(0, window.scrollY / max));
-    root.style.setProperty('--p', String(p));
-  };
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-})();
 </script>
 </body>
 </html>
