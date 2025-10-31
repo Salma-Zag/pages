@@ -26,16 +26,19 @@ export function initPlanetNavigation(gameInstance) {
   const paragraphs = footer.querySelectorAll('p');
   paragraphs.forEach(p => p.remove());
   
-  // Make footer a flex container
-  footer.style.display = 'flex';
-  footer.style.justifyContent = 'space-between';
-  footer.style.alignItems = 'center';
-  footer.style.flexWrap = 'wrap';
-  footer.style.width = '100vw';
-  footer.style.maxWidth = '100vw';
-  footer.style.boxSizing = 'border-box';
-  footer.style.overflowX = 'auto';
-  footer.style.padding = '10px 20px';
+  // Make footer a flex container centered
+  // Note: Don't override position as it's already set in the HTML
+  footer.style.setProperty('display', 'flex', 'important');
+  footer.style.setProperty('justify-content', 'center', 'important');
+  footer.style.setProperty('align-items', 'center', 'important');
+  footer.style.setProperty('position', 'fixed', 'important');
+  footer.style.setProperty('bottom', '0', 'important');
+  footer.style.setProperty('left', '0', 'important');
+  footer.style.setProperty('right', '0', 'important');
+  footer.style.setProperty('width', '100%', 'important');
+  footer.style.setProperty('height', 'auto', 'important');
+  footer.style.setProperty('padding', '15px 20px', 'important');
+  footer.style.setProperty('z-index', '1000', 'important');
   
   // Previous Planet Button (far left)
   const prevBtn = document.createElement('button');
@@ -57,15 +60,7 @@ export function initPlanetNavigation(gameInstance) {
   prevBtn.onmouseout = () => prevBtn.style.transform = 'scale(1)';
   prevBtn.onclick = () => navigateToPreviousPlanet(gameInstance);
   
-  // Create center container for Cheat and Reset buttons
-  const centerContainer = document.createElement('div');
-  centerContainer.style.display = 'flex';
-  centerContainer.style.justifyContent = 'center';
-  centerContainer.style.alignItems = 'center';
-  centerContainer.style.gap = '10px';
-  centerContainer.style.flex = '0 1 auto';
-  
-  // Cheat Menu Button (center-left)
+  // Cheat Menu Button
   const cheatBtn = document.createElement('button');
   cheatBtn.id = 'cheat-btn';
   cheatBtn.innerHTML = '🎮 Cheat Menu';
@@ -105,7 +100,7 @@ export function initPlanetNavigation(gameInstance) {
   resetBtn.onmouseout = () => resetBtn.style.transform = 'scale(1)';
   resetBtn.onclick = () => resetAllProgress(gameInstance);
   
-  // Next Planet Button (far right)
+  // Next Planet Button
   const nextBtn = document.createElement('button');
   nextBtn.id = 'next-planet-btn';
   nextBtn.innerHTML = 'Next ➡️';
@@ -125,19 +120,42 @@ export function initPlanetNavigation(gameInstance) {
   nextBtn.onmouseout = () => nextBtn.style.transform = 'scale(1)';
   nextBtn.onclick = () => navigateToNextPlanet(gameInstance);
   
-  // Add buttons to center container
-  centerContainer.appendChild(cheatBtn);
-  centerContainer.appendChild(resetBtn);
-  
   // Clear footer before adding new layout
   footer.innerHTML = '';
   
-  // Add buttons to footer in correct positions
-  footer.appendChild(prevBtn); // far left
-  footer.appendChild(centerContainer); // center
-  footer.appendChild(nextBtn); // far right
+  // Create a wrapper container for buttons to ensure centering
+  const buttonWrapper = document.createElement('div');
+  buttonWrapper.style.display = 'flex';
+  buttonWrapper.style.gap = '20px';
+  buttonWrapper.style.alignItems = 'center';
+  buttonWrapper.style.justifyContent = 'center';
+  
+  // Add all buttons to wrapper
+  buttonWrapper.appendChild(prevBtn);
+  buttonWrapper.appendChild(cheatBtn);
+  buttonWrapper.appendChild(resetBtn);
+  buttonWrapper.appendChild(nextBtn);
+  
+  // Add wrapper to footer
+  footer.appendChild(buttonWrapper);
   
   console.log('✅ Planet navigation buttons added to footer');
+}
+
+/**
+ * Get planet URL from planet key
+ * @param {string} planetKey - The planet key
+ * @returns {string} The planet's URL
+ */
+function getPlanetURL(planetKey) {
+  const planetURLs = {
+    'microblog': '/digital-famine/microblog/',
+    'medialit': '/digital-famine/medialit/',
+    'ai': '/digital-famine/ai/',
+    'cyber': '/digital-famine/cybersecurity-game/',
+    'end': '/digital-famine/end/'
+  };
+  return planetURLs[planetKey] || '/digital-famine/';
 }
 
 /**
@@ -154,7 +172,11 @@ function navigateToPreviousPlanet(gameInstance) {
     localStorage.setItem('planetProgression', JSON.stringify(gameInstance.progression));
     console.log('Navigating to previous planet:', prevPlanet);
     gameInstance.dialogueSystem.showDialogue(`Traveling back to ${prevPlanet} planet...`);
-    setTimeout(() => location.reload(), 800);
+    
+    // Navigate to the previous planet's URL
+    setTimeout(() => {
+      window.location.href = getPlanetURL(prevPlanet);
+    }, 800);
   } else {
     gameInstance.dialogueSystem.showDialogue("You're already at the first planet!");
   }
@@ -174,7 +196,11 @@ function navigateToNextPlanet(gameInstance) {
     localStorage.setItem('planetProgression', JSON.stringify(gameInstance.progression));
     console.log('Navigating to next planet:', nextPlanet);
     gameInstance.dialogueSystem.showDialogue(`Traveling to ${nextPlanet} planet...`);
-    setTimeout(() => location.reload(), 800);
+    
+    // Navigate to the next planet's URL
+    setTimeout(() => {
+      window.location.href = getPlanetURL(nextPlanet);
+    }, 800);
   } else {
     gameInstance.dialogueSystem.showDialogue("You're at the final destination!");
   }
