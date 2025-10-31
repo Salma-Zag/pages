@@ -1,207 +1,33 @@
+//Survival Zombie Game Pre Code:
+
 // To build GameLevels, each contains GameObjects from below imports
 import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
 import Npc from './GameEngine/Npc.js';
 import Enemy from './GameEngine/Enemy.js';
+// import GameControl from './GameEngine/GameControl.js'
 
-// --- Arrow class FIRST ---
-class Arrow {
-    constructor(data, gameEnv) {
-        this.id = data.id || 'Arrow';
-        this.src = data.src;
-        this.SCALE_FACTOR = data.SCALE_FACTOR || 2;
-        this.ANIMATION_RATE = data.ANIMATION_RATE || 1;
-        this.pixels = data.pixels;
-        this.orientation = data.orientation;
-        this.direction = data.direction || 'right';
-        this.speed = data.speed || 20;
-        this.hitbox = data.hitbox;
-        this.position = { ...data.INIT_POSITION };
-        this.width = this.pixels.width / this.SCALE_FACTOR;
-        this.height = this.pixels.height / this.SCALE_FACTOR;
-        this.gameEnv = gameEnv;
-        this.lifetime = 60; // frames
-        this.isDestroyed = false;
-        this.img = null;
-    }
 
-    update() {
-        if (this.isDestroyed) return;
-
-        // Move arrow
-        switch (this.direction) {
-            case 'left': this.position.x -= this.speed; break;
-            case 'right': this.position.x += this.speed; break;
-            case 'up': this.position.y -= this.speed; break;
-            case 'down': this.position.y += this.speed; break;
-            case 'upLeft':
-                this.position.x -= this.speed * 0.7;
-                this.position.y -= this.speed * 0.7;
-                break;
-            case 'upRight':
-                this.position.x += this.speed * 0.7;
-                this.position.y -= this.speed * 0.7;
-                break;
-            case 'downLeft':
-                this.position.x -= this.speed * 0.7;
-                this.position.y += this.speed * 0.7;
-                break;
-            case 'downRight':
-                this.position.x += this.speed * 0.7;
-                this.position.y += this.speed * 0.7;
-                break;
-        }
-        this.lifetime--;
-        if (this.lifetime <= 0) this.destroy();
-
-        // Check collision with zombies
-        const zombies = this.gameEnv.gameObjects.filter(obj => obj.id === 'ZombieEnemy');
-        for (const zombie of zombies) {
-            if (this.collidesWith(zombie)) {
-                zombie.isKilling = true;
-                if (typeof zombie.destroy === 'function') zombie.destroy();
-                else this.gameEnv.removeGameObject(zombie);
-                this.destroy();
-                break;
-            }
-        }
-    }
-
-    collidesWith(other) {
-        return (
-            this.position.x < other.position.x + other.width &&
-            this.position.x + this.width > other.position.x &&
-            this.position.y < other.position.y + other.height &&
-            this.position.y + this.height > other.position.y
-        );
-    }
-
-    destroy() {
-        this.isDestroyed = true;
-        this.gameEnv.removeGameObject(this);
-    }
-
-    draw(ctx) {
-        if (!ctx) return;
-        if (!this.img) {
-            this.img = new window.Image();
-            this.img.src = this.src;
-        }
-        ctx.save();
-        ctx.translate(this.position.x, this.position.y);
-        // Rotate arrow based on direction
-        switch (this.direction) {
-            case 'up': ctx.rotate(-Math.PI / 2); break;
-            case 'down': ctx.rotate(Math.PI / 2); break;
-            case 'left': ctx.scale(-1, 1); break;
-            case 'upLeft': ctx.rotate(-Math.PI / 4); break;
-            case 'upRight': ctx.rotate(-Math.PI / 4); ctx.scale(-1, 1); break;
-            case 'downLeft': ctx.rotate(Math.PI / 4); break;
-            case 'downRight': ctx.rotate(Math.PI / 4); ctx.scale(-1, 1); break;
-        }
-        ctx.drawImage(this.img, 0, 0, this.width, this.height);
-        ctx.restore();
-    }
-}
-
-// --- sprite_data_arrow NEXT ---
-const sprite_data_arrow = {
-    id: 'Arrow',
-    src: '/images/mansionGame/arrows.png',
-    SCALE_FACTOR: 2,
-    ANIMATION_RATE: 1,
-    pixels: {width: 128, height: 32},
-    orientation: {rows: 1, columns: 1},
-    direction: 'right', // will be set on creation
-    speed: 20,
-    hitbox: { widthPercentage: 1, heightPercentage: 1 }
-};
-
-// --- PlayerWithArrows class NEXT ---
-const originalPlayerClass = Player;
-class PlayerWithArrows extends originalPlayerClass {
-    handleKeyDown({ keyCode }) {
-        super.handleKeyDown({ keyCode });
-        // 'E' key (69) to shoot arrow
-        if (keyCode === 69 && this.gameEnv) {
-            this.shootArrow();
-        }
-    }
-
-    shootArrow() {
-        // Use direction from player
-        const dir = this.direction || 'right';
-        const arrowData = { ...sprite_data_arrow, direction: dir };
-        arrowData.INIT_POSITION = {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height / 2
-        };
-        this.gameEnv.addGameObject('Arrow', arrowData);
-    }
-}
-
-// --- MansionLevel5 class LAST ---
 class MansionLevel5 {
   constructor(gameEnv) {
-    // Ensure gameEnv has a gameObjects array
-    if (!gameEnv.gameObjects) gameEnv.gameObjects = [];
+	let width = gameEnv.innerWidth;
+	let height = gameEnv.innerHeight;
+	let path = gameEnv.path;
 
-    // Add addGameObject method if missing
-    if (typeof gameEnv.addGameObject !== 'function') {
-      gameEnv.addGameObject = function(className, data) {
-        // Find the class in this.classes by id or className
-        let Cls = null;
-        if (this.classes) {
-          for (const entry of this.classes) {
-            if (
-              (entry.data && entry.data.id === className) ||
-              (entry.class && entry.class.name === className)
-            ) {
-              Cls = entry.class;
-              break;
-            }
-          }
-        }
-        // Fallback: try global
-        if (!Cls && typeof window[className] === 'function') {
-          Cls = window[className];
-        }
-        if (!Cls) {
-          console.warn('Class not found for addGameObject:', className);
-          return;
-        }
-        const obj = new Cls(data, this);
-        this.gameObjects.push(obj);
-        return obj;
-      };
-    }
+	// Background data
+	const image_background = path + "/images/mansionGame/background_lvl5.png"; // be sure to include the path
+	const image_data_background = {
+		name: 'background',
+		greeting: "This is the library, you will fight hordes of enemies, survive as long as possible.",
+		src: image_background,
+		pixels: {height: 1280, width: 720},
+		mode: 'stretch'
+	};
 
-    // Add removeGameObject method if missing
-    if (typeof gameEnv.removeGameObject !== 'function') {
-      gameEnv.removeGameObject = function(obj) {
-        const idx = this.gameObjects.indexOf(obj);
-        if (idx !== -1) this.gameObjects.splice(idx, 1);
-      };
-    }
-
-    let width = gameEnv.innerWidth;
-    let height = gameEnv.innerHeight;
-    let path = gameEnv.path;
-
-    // Background data
-    const image_background = path + "/images/mansionGame/background_lvl5.png"; // be sure to include the path
-    const image_data_background = {
-        name: 'background',
-        greeting: "This is the library, you will fight hordes of enemies, survive as long as possible.",
-        src: image_background,
-        pixels: {height: 1280, width: 720},
-        mode: 'stretch'
-    };
-
-    //data for player
-    const sprite_player = path + "/images/mansionGame/spookMcWalk.png"; // be sure to include the path
-    const player_scale_factor = 5;
-    const sprite_data_player = {
+	//data for player
+	const sprite_player = path + "/images/mansionGame/spookMcWalk.png"; // be sure to include the path
+	const player_scale_factor = 5;
+	const sprite_data_player = {
         id: 'Player',
         greeting: "I am the player for level 5",
         src: sprite_player,
@@ -211,37 +37,37 @@ class MansionLevel5 {
         INIT_POSITION: { x: 0, y: 0 }, 
         pixels: {height: 2400, width: 3600},
         orientation: {rows: 2, columns: 3},
-        down: {row: 1, start: 0, columns: 3},
-        downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
-        downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
-        left: {row: 0, start: 0, columns: 3},
-        right: {row: 1, start: 0, columns: 3},
-        up: {row: 1, start: 0, columns: 3},
-        upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
-        upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
-        hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
-        keypress: {up: 87, left: 65, down: 83, right: 68}
-    };
+		down: {row: 1, start: 0, columns: 3},
+		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
+		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
+		left: {row: 0, start: 0, columns: 3},
+		right: {row: 1, start: 0, columns: 3},
+		up: {row: 1, start: 0, columns: 3},
+		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
+		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
+		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
+		keypress: {up: 87, left: 65, down: 83, right: 68}
+	};
 
-    // starting npc
-    const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
-    const sprite_data_npc = {
-        id: 'Starting Zombie',
-        greeting: "Zombie survival will start.",
-        src: sprite_src_zombie,
-        SCALE_FACTOR: 4,
-        ANIMATION_RATE: 100,
-        pixels: {width: 3600, height: 1200},
-        INIT_POSITION: { x: (width /2), y: (height /2)},
-        orientation: {rows: 1, columns: 3},
-        down: {row: 0, start: 0, columns: 3},
-        hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
-        interact: function() {
-            // start waves here
-        }
-    };
+	// starting npc
+	const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
+	const sprite_data_npc = {
+		id: 'Starting Zombie',
+		greeting: "Zombie survival will start.",
+		src: sprite_src_zombie,
+		SCALE_FACTOR: 4,
+		ANIMATION_RATE: 100,
+		pixels: {width: 3600, height: 1200},
+		INIT_POSITION: { x: (width /2), y: (height /2)},
+		orientation: {rows: 1, columns: 3},
+		down: {row: 0, start: 0, columns: 3},
+		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
+		interact: function() {
+			// start waves here
+		}
+	};
 
-    const sprite_data_enemy = {
+	const sprite_data_enemy = {
         id: 'ZombieEnemy',
         greeting: "Zombie dead",
         src: sprite_src_zombie,
@@ -250,7 +76,7 @@ class MansionLevel5 {
         pixels: {width: 3600, height: 1200},
         INIT_POSITION: { x: width / 2, y: height / 4 },
         orientation: {rows: 1, columns: 3},
-        down: {row: 0, start: 0, columns: 3},
+		down: {row: 0, start: 0, columns: 3},
         hitbox: { widthPercentage: 0.4, heightPercentage: 0.4 },
         zIndex: 10,
         isKilling: false, // Flag to prevent multiple kills
@@ -408,15 +234,15 @@ class MansionLevel5 {
         }
     };
 
-    // List of objects definitions for this level
-    this.classes = [
-      { class: GameEnvBackground, data: image_data_background },
-      { class: PlayerWithArrows, data: sprite_data_player },
-      { class: Npc, data: sprite_data_npc},
-      { class: Enemy, data: sprite_data_enemy },
-      { class: Arrow, data: sprite_data_arrow }
-    ];
+	// List of objects defnitions for this level
+	this.classes = [
+	  { class: GameEnvBackground, data: image_data_background },
+	  { class: Player, data: sprite_data_player },
+	  { class: Npc, data: sprite_data_npc},
+	  { class: Enemy, data: sprite_data_enemy }
+	];
   }
+
 }
 
 export default MansionLevel5;
