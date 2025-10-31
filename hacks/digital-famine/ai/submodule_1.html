@@ -407,20 +407,6 @@ date: 2025-10-30
             buttons.forEach(btn => btn.disabled = true);
             
             event.target.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
-
-        // Shared autofill logic for each section
-        function autoFill(type) {
-            const demos = {
-                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
-                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
-                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
-            };
-            const textarea = document.getElementById('prompt-' + type);
-            if (textarea && !textarea.value.trim()) {
-                textarea.value = demos[type];
-                setTimeout(() => { generateResponse(type); }, 50);
-            }
-        }
             
             if (isCorrect) {
                 feedbackDiv.textContent = '✅ Correct! Great job!';
@@ -451,6 +437,20 @@ date: 2025-10-30
                         document.getElementById('retry-message').classList.remove('section-hidden');
                     }
                 }, 1500);
+            }
+        }
+
+        // Shared autofill logic for each section (now in global scope)
+        function autoFill(type) {
+            const demos = {
+                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
+                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
+                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
+            };
+            const textarea = document.getElementById('prompt-' + type);
+            if (textarea && !textarea.value.trim()) {
+                textarea.value = demos[type];
+                setTimeout(() => { generateResponse(type); }, 50);
             }
         }
 
