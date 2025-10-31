@@ -582,3 +582,6 @@ The standard format for API data exchange.
 - ORMs (like SQLAlchemy) convert Python code to SQL automatically  
 - Postman helps test APIs without building a frontend  
 
+
+## Up Next
+In the next submodule, you'll learn about different backend frameworks. Keep progressing in order to receive a certificate for completing this module.
