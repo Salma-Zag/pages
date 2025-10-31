@@ -457,3 +457,6 @@ public class PostControllerTest {
 - **Flask**: Best for small-to-medium projects, ML APIs, rapid development
 - **Spring Boot**: Best for enterprise apps, microservices, large teams
 - **Both are systems that work**, it is important to choose based on the needs of the system.
+
+## Up Next
+In the next submodule, you'll wrap up your learning on the backend. Keep progressing in order to receive a certificate for completing this module.

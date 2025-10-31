@@ -148,3 +148,5 @@ const javaURI = "https://api.mywebsite.com";
 - Can test different backend servers
 - Keeps code clean and maintainable
 
+## Up Next
+In the next submodule, you'll learn about APIs and Databases. Keep progressing in order to receive a certificate for completing this module.
