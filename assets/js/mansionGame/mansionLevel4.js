@@ -188,7 +188,7 @@ class BlackjackGameManager {
         gameContainer.style.cssText = `
             width: 90%;
             max-width: 900px;
-            background: white;
+            background: transparent;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
@@ -200,7 +200,7 @@ class BlackjackGameManager {
         moneyDisplay.style.cssText = `
             font-size: 24px;
             font-weight: bold;
-            color: #2ecc71;
+            color: white;
             text-align: center;
             margin-bottom: 20px;
         `;
@@ -238,7 +238,7 @@ class BlackjackGameManager {
             text-align: center;
         `;
         bettingSelector.innerHTML = `
-            <label for="bet-amount" style="font-weight: bold; margin-right: 10px;">Bet Amount:</label>
+            <label for="bet-amount" style="font-weight: bold; margin-right: 10px; color: white;">Bet Amount:</label>
             <select id="bet-amount" style="padding: 8px; font-size: 16px; border-radius: 5px; border: 2px solid #2ecc71;">
                 <option value="100">$100 (Safe)</option>
                 <option value="500">$500 (Medium)</option>
@@ -267,19 +267,19 @@ class BlackjackGameManager {
     loadBlackjackHTML(container) {
         // Import the blackjack HTML structure
         const blackjackHTML = `
-            <div id="game-container" style="background: white;">
+            <div id="game-container" style="background: transparent;">
                 <div id="dealer-area" class="player-area">
-                    <h2>Dealer's Hand: <span id="dealer-score">0</span></h2>
+                    <h2 style="color: white;">Dealer's Hand: <span id="dealer-score">0</span></h2>
                     <div class="hand-container">
                         <div id="dealer-cards" class="cards-container"></div>
-                        <div id="dealer-points" class="points-list"></div>
+                        <div id="dealer-points" class="points-list" style="color: white;"></div>
                     </div>
                 </div>
                 <div id="player-area" class="player-area">
-                    <h2>Your Hand: <span id="player-score">0</span></h2>
+                    <h2 style="color: white;">Your Hand: <span id="player-score">0</span></h2>
                     <div class="hand-container">
                         <div id="player-cards" class="cards-container"></div>
-                        <div id="player-points" class="points-list"></div>
+                        <div id="player-points" class="points-list" style="color: white;"></div>
                     </div>
                 </div>
                 <div id="game-controls">
@@ -288,7 +288,7 @@ class BlackjackGameManager {
                     <button id="stand-btn">Stand</button>
                     <button id="exit-casino-btn" style="background: #e74c3c; color: white;">Exit Casino</button>
                 </div>
-                <p id="message" style="color: black; font-weight: bold;"></p>
+                <p id="message" style="color: white; font-weight: bold;"></p>
             </div>
         `;
 
@@ -455,8 +455,8 @@ class BlackjackGameManager {
                 
                 document.getElementById('money-display').innerHTML = `
                     <span style="color: ${moneyColor}">Current Money: ${moneyDisplay}</span><br>
-                    Current Bet: $${this.currentBet}<br>
-                    Goal: $${this.goalMoney}
+                    <span style="color: white;">Current Bet: $${this.currentBet}</span><br>
+                    <span style="color: white;">Goal: $${this.goalMoney}</span>
                 `;
 
                 deck = createDeck();
@@ -524,8 +524,8 @@ class BlackjackGameManager {
         // Update the display with current money (currentBet is outdated after the round)
         document.getElementById('money-display').innerHTML = `
             <span style="color: ${moneyColor}">Current Money: ${moneyDisplay}</span><br>
-            Current Bet: $0 (Round Over)<br>
-            Goal: $${this.goalMoney}
+            <span style="color: white;">Current Bet: $0 (Round Over)</span><br>
+            <span style="color: white;">Goal: $${this.goalMoney}</span>
         `;
 
         // Only trigger victory if we actually have the goal money (and not in debt)
@@ -644,6 +644,12 @@ class MansionLevel4 {
         ];
 
         this.gameEnv = gameEnv;
+        
+        // Adding Music
+        this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
+        this.backgroundMusic.loop = true;
+        this.backgroundMusic.volume = 0.3; // Set volume to a reasonable level
+        this.backgroundMusic.play();
     }
 
     // Update method called every frame by the game engine
@@ -653,13 +659,6 @@ class MansionLevel4 {
     }
 
     // Removed collision checking method - was causing issues with player movement
-  }
-    // Adding Music
-    this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
-    this.backgroundMusic.loop = true;
-    this.backgroundMusic.volume = 0.3; // Set volume to a reasonable level
-    this.backgroundMusic.play();
-
-
+}
 
 export default MansionLevel4;
