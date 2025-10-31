@@ -23,7 +23,7 @@ class MansionLevel5 {
 	};
 
 	//data for player
-	const sprite_player = path + "/images/gamify/spookMcWalk.png"; // be sure to include the path
+	const sprite_player = path + "/images/mansionGame/spookMcWalk.png"; // be sure to include the path
 	const player_scale_factor = 5;
 	const sprite_data_player = {
         id: 'Player',
@@ -48,14 +48,14 @@ class MansionLevel5 {
 	};
 
 	// starting npc
-	const sprite_src_zombie = path + "/images/gamify/zombieNpc.png";
+	const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
 	const sprite_data_npc = {
 		id: 'Starting Zombie',
 		greeting: "Zombie survival will start.",
 		src: sprite_src_zombie,
 		SCALE_FACTOR: 10,
 		ANIMATION_RATE: 100,
-		pixels: {height: 1200, width: 3600},
+		pixels: {width: 3600, height: 1200},
 		INIT_POSITION: { x: (width /2), y: (height /2)},
 		orientation: {rows: 1, columns: 3},
 		down: {row: 1, start: 0, columns: 3},
@@ -88,11 +88,14 @@ class MansionLevel5 {
         greeting: "Zombie dead",
         src: sprite_src_zombie,
         SCALE_FACTOR: 10,
-        ANIMATION_RATE: 50,
-        pixels: {height: 1200, width: 3600},
+        ANIMATION_RATE: 100,
+        pixels: {width: 3600, height: 1200},
         INIT_POSITION: { x: width / 2, y: height / 4 },
         orientation: {rows: 1, columns: 3},
-        down: {row: 1, start: 0, columns: 3},
+		down: {row: 1, start: 0, columns: 3},
+		left: {row: 1, start: 0, columns: 3},
+		right: {row: 1, start: 0, columns: 3},
+		up: {row: 1, start: 0, columns: 3},
         hitbox: { widthPercentage: 0.4, heightPercentage: 0.4 },
         zIndex: 10,
         isKilling: false, // Flag to prevent multiple kills
@@ -249,6 +252,7 @@ class MansionLevel5 {
             }
         }
     };
+	
 	// List of objects defnitions for this level
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
