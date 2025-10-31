@@ -369,3 +369,49 @@ date: 2025-10-21
   </div>
 </body>
 </html>
+
+# Progress Bar Lesson: Lumen Field Theme
+
+## What is a Progress Bar?
+A progress bar shows how much of a task is complete. Think of Lumen Field—fans watching the game clock count down, or the "12th Man" flag raising before kickoff. It shows where you are and how much is left.
+
+## The 3 Parts of a Progress Bar
+
+### The Track (The Field)
+The full 100 yards—represents the total task.
+- Background bar showing the complete distance
+
+### The Fill (Yards Gained)
+Progress down the field—shows how far you've come.
+- Colored bar that grows as you complete the task
+
+### The Label (Scoreboard)
+Game stats and time remaining—tells you exactly where you are.
+- Text showing percentage or "3 of 10 steps complete"
+
+## 5 Design Tips
+
+### 1. Make it Visible
+Like the giant scoreboard—easy to see from anywhere.
+- Use clear colors with good contrast
+- Make it big enough to notice
+
+### 2. Show Real Progress
+Like yard markers on the field—accurate and honest.
+- Update smoothly as tasks complete
+- Never fake progress or go backwards
+
+### 3. Use Team Colors
+Seahawks blue and green create excitement.
+- Match your brand colors
+- Use color to show status (green = good, red = error)
+
+### 4. Add Context
+Like the play clock—tell users what's happening.
+- "Uploading files... 60%"
+- "2 of 5 questions answered"
+
+### 5. Keep it Simple
+Don't overcomplicate like a confusing penalty call.
+- One bar, clear message
+- Avoid f

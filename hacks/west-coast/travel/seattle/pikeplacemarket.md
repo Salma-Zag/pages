@@ -272,3 +272,70 @@ date: 2025-10-21
   </div>
 </body>
 </html>
+
+# Progress Bar Lesson: Pike Place Market Theme
+
+## What is a Progress Bar?
+A progress bar shows how much of a task is complete. Think of Pike Place Market—shoppers moving through vendor stalls from the fish market to the flower stands, checking items off their list. It shows where you are and how much is left.
+
+## The 3 Parts of a Progress Bar
+
+### The Track (The Full Market)
+From the famous Pike Place sign to the last vendor—represents the total task.
+- Background bar showing the complete distance
+
+### The Fill (Stalls Visited)
+Progress through the market—shows how far you've come.
+- Colored bar that grows as you complete the task
+
+### The Label (Vendor Signs)
+Clear signs at each stall—tells you exactly where you are.
+- Text showing percentage or "3 of 10 items checked out"
+
+## 5 Design Tips
+
+### 1. Make it Visible
+Like the bright vendor signs—easy to see in the busy market.
+- Use clear colors with good contrast
+- Make it big enough to notice
+
+### 2. Show Real Progress
+Like crossing items off your shopping list—accurate and honest.
+- Update smoothly as tasks complete
+- Never fake progress or go backwards
+
+### 3. Use Market Colors
+Bright produce colors and fresh fish tones create energy.
+- Match your brand colors
+- Use color to show status (green = good, red = error)
+
+### 4. Add Context
+Like vendor shouts calling out specials—tell users what's happening.
+- "Processing payment... 60%"
+- "2 of 5 items added to cart"
+
+### 5. Keep it Simple
+Don't overcomplicate like a crowded Saturday morning.
+- One bar, clear message
+- Avoid fancy animations that distract
+
+## Common Mistakes
+
+1. No feedback—users don't know if anything is happening
+2. Jumping progress—going from 10% to 90% instantly feels fake
+3. Stuck at 99%—like waiting in the checkout line forever
+4. Too small—like trying to read price signs from across the aisle
+5. No message—progress without context confuses users
+
+## Quick Example
+
+**Good**: "Adding to cart... [████████░░] 80% - Almost done!"  
+**Bad**: [░░░░░░░░░░] (no message, unclear progress)
+
+## Quick Tips
+
+- Always show feedback when users wait
+- Smooth animations feel more professional
+- Add estimated time if possible: "About 30 seconds remaining"
+- Use motion to show it's working, not frozen
+- Celebrate completion—like finding the perfect bouquet!

@@ -282,3 +282,71 @@ date: 2025-10-21
   </div>
 </body>
 </html>
+
+
+# Progress Bar Lesson: Mount Rainier National Park Theme
+
+## What is a Progress Bar?
+A progress bar shows how much of a task is complete. Think of Mount Rainier National Park—hikers watching trail markers count up to the summit, or the elevation gain on your climb. It shows where you are and how much is left.
+
+## The 3 Parts of a Progress Bar
+
+### The Track (The Trail)
+The full trail from Paradise to the summit—represents the total task.
+- Background bar showing the complete distance
+
+### The Fill (Miles Hiked)
+Progress up the mountain—shows how far you've come.
+- Colored bar that grows as you complete the task
+
+### The Label (Trail Marker)
+Elevation signs and mile markers—tells you exactly where you are.
+- Text showing percentage or "3 of 10 miles complete"
+
+## 5 Design Tips
+
+### 1. Make it Visible
+Like trail markers visible through the mist—easy to see from anywhere.
+- Use clear colors with good contrast
+- Make it big enough to notice
+
+### 2. Show Real Progress
+Like elevation markers on the trail—accurate and honest.
+- Update smoothly as tasks complete
+- Never fake progress or go backwards
+
+### 3. Use Nature Colors
+Mountain blues and forest greens create calm focus.
+- Match your brand colors
+- Use color to show status (green = good, red = error)
+
+### 4. Add Context
+Like a trail map—tell users what's happening.
+- "Uploading photos... 60%"
+- "2 of 5 forms completed"
+
+### 5. Keep it Simple
+Don't overcomplicate like confusing trail junctions.
+- One bar, clear message
+- Avoid fancy animations that distract
+
+## Common Mistakes
+
+1. No feedback—users don't know if anything is happening
+2. Jumping progress—going from 10% to 90% instantly feels fake
+3. Stuck at 99%—like being 100 feet from the summit forever
+4. Too small—like trying to read a trail sign from a mile away
+5. No message—progress without context confuses users
+
+## Quick Example
+
+**Good**: "Processing images... [████████░░] 80% - 2 minutes left"  
+**Bad**: [░░░░░░░░░░] (no message, unclear progress)
+
+## Quick Tips
+
+- Always show feedback when users wait
+- Smooth animations feel more professional
+- Add estimated time if possible: "About 2 minutes remaining"
+- Use motion to show it's working, not frozen
+- Celebrate completion—like reaching the summit!

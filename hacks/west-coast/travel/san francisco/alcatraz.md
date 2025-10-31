@@ -9,7 +9,6 @@ date: 2025-10-21
 
 
 # UI Hierarchy Lesson: Alcatraz Island Theme
-
 ## What is UI Hierarchy?
 
 UI hierarchy organizes elements by importance. Think of Alcatraz Island—the main cellhouse dominates, with guard towers and cell blocks arranged to guide visitors naturally through the site.
