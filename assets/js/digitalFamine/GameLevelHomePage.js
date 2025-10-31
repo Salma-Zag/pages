@@ -4,6 +4,7 @@ import Player from '/assets/js/adventureGame/GameEngine/Player.js';
 import Npc from '/assets/js/adventureGame/GameEngine/Npc.js';
 import GameControl from '/assets/js/adventureGame/GameEngine/GameControl.js';
 import DialogueSystem from '/assets/js/adventureGame/DialogueSystem.js';
+import { initPlanetNavigation } from '/assets/js/digitalFamine/planetNavigation.js';
 
 class GameLevelHomePage {
   constructor(gameEnv) {
@@ -627,6 +628,16 @@ class GameLevelHomePage {
     console.log('⏰ About to call createPlanetStatusBadges...');
     this.createPlanetStatusBadges();
     console.log('✅ createPlanetStatusBadges call completed');
+    
+    /*
+     * All planet navigation logic is now controlled in the planetNavigation.js file
+     * The initPlanetNavigation function creates all footer buttons and handles:
+     * - Previous/Next planet navigation
+     * - Cheat menu modal
+     * - Reset progress functionality
+     */
+    initPlanetNavigation(this);
+    console.log('✅ Planet navigation initialized');
     
     for (let gameObject of this.gameEnv.gameObjects) {
       const objectId = gameObject.id || gameObject.canvas?.id;
