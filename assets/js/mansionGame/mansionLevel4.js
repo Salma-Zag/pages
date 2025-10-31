@@ -239,13 +239,13 @@ class BlackjackGameManager {
         `;
         bettingSelector.innerHTML = `
             <label for="bet-amount" style="font-weight: bold; margin-right: 10px; color: white;">Bet Amount:</label>
-            <select id="bet-amount" style="padding: 8px; font-size: 16px; border-radius: 5px; border: 2px solid #2ecc71;">
-                <option value="100">$100 (Safe)</option>
-                <option value="500">$500 (Medium)</option>
-                <option value="1000" selected>$1,000 (Risky)</option>
-                <option value="2500">$2,500 (Very Risky)</option>
-                <option value="5000">$5,000 (All-In)</option>
-                <option value="all">All Money (YOLO)</option>
+            <select id="bet-amount" style="padding: 8px; font-size: 16px; border-radius: 5px; border: 2px solid #2ecc71; color: white; background: #2c3e50;">
+                <option value="100" style="color: white;">$100 (Safe)</option>
+                <option value="500" style="color: white;">$500 (Medium)</option>
+                <option value="1000" selected style="color: white;">$1,000 (Risky)</option>
+                <option value="2500" style="color: white;">$2,500 (Very Risky)</option>
+                <option value="5000" style="color: white;">$5,000 (All-In)</option>
+                <option value="all" style="color: white;">All Money (YOLO)</option>
             </select>
         `;
 
@@ -356,7 +356,8 @@ class BlackjackGameManager {
                     const cardEl = document.createElement("div");
                     cardEl.classList.add("card");
                     cardEl.textContent = `${card.value}${card.suit}`;
-                    cardEl.style.color = (card.suit==="♥"||card.suit==="♦")?"red":"black";
+                    // Change black cards (spades and clubs) to white for visibility
+                    cardEl.style.color = (card.suit==="♥"||card.suit==="♦")?"red":"white";
                     container.appendChild(cardEl);
                 }
                 pointsContainer.textContent = calculateHand(hand);
@@ -369,7 +370,8 @@ class BlackjackGameManager {
                 const cardEl1 = document.createElement("div");
                 cardEl1.classList.add("card");
                 cardEl1.textContent = `${firstCard.value}${firstCard.suit}`;
-                cardEl1.style.color = (firstCard.suit==="♥"||firstCard.suit==="♦")?"red":"black";
+                // Change black cards (spades and clubs) to white for visibility
+                cardEl1.style.color = (firstCard.suit==="♥"||firstCard.suit==="♦")?"red":"white";
                 dealerCardsEl.appendChild(cardEl1);
 
                 const cardEl2 = document.createElement("div");
@@ -488,7 +490,8 @@ class BlackjackGameManager {
                 if (gameOver) return;
 
                 dealerCardsEl.children[1].textContent = `${dealerHand[1].value}${dealerHand[1].suit}`;
-                dealerCardsEl.children[1].style.color = (dealerHand[1].suit==="♥"||dealerHand[1].suit==="♦") ? "red" : "black";
+                // Change black cards (spades and clubs) to white for visibility
+                dealerCardsEl.children[1].style.color = (dealerHand[1].suit==="♥"||dealerHand[1].suit==="♦") ? "red" : "white";
                 document.getElementById("dealer-points").textContent = calculateHand(dealerHand);
 
                 while (calculateHand(dealerHand) < 17) {
@@ -497,7 +500,8 @@ class BlackjackGameManager {
                     const cardEl = document.createElement("div");
                     cardEl.classList.add("card");
                     cardEl.textContent = `${card.value}${card.suit}`;
-                    cardEl.style.color = (card.suit==="♥"||card.suit==="♦")?"red":"black";
+                    // Change black cards (spades and clubs) to white for visibility
+                    cardEl.style.color = (card.suit==="♥"||card.suit==="♦")?"red":"white";
                     dealerCardsEl.appendChild(cardEl);
                     document.getElementById("dealer-points").textContent = calculateHand(dealerHand);
                 }
@@ -659,13 +663,6 @@ class MansionLevel4 {
     }
 
     // Removed collision checking method - was causing issues with player movement
-  }
-    // Adding Music
-    this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
-    this.backgroundMusic.loop = true;
-    this.backgroundMusic.volume = 0.5; // Set volume to a reasonable level
-    this.backgroundMusic.play();
-
-
+}
 
 export default MansionLevel4;
