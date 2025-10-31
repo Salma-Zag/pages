@@ -638,7 +638,7 @@ date: 2025-10-29
         // ============================================
         // ELIO INTERVIEW BOT LOGIC
         // ============================================
-        let apiKey = 'YOUR_API_KEY_HERE'; // Replace with your Gemini API key
+        let apiKey = 'YOUR_API_KEY_HERE'; 
         let conversationHistory = [];
         let interviewActive = false;
         let currentQuestionIndex = 0;
