@@ -803,8 +803,4 @@ date: 2025-10-21
     updateProgress();
   </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 5b9ec2918 (imported sub module 4 for testing purposes, fixed images on home page,)
