@@ -1,10 +1,10 @@
 ---
 layout: post 
 tailwind: True
-title: Building a Computer Science Linkedin Profile
+title: West Coast Journey Through Code
 description: >
   Understand how to ideate, develop, and describe computer science projects for future career success!
-author: CSA 2025-26
+author: CSP 2025-26
 permalink: /west-coast
 lxdData:
   Title: "Learning Modules"
