@@ -42,6 +42,9 @@ lxdData:
       Video: "/west-coast/backend/submodule_4-video"
       Lessons: "/west-coast/backend/submodule_4/"
       Image4: "/images/west-coast/seattlestadiums.webp"
+footer:
+  home: /west-coast/sports/
+  next: /west-coast/backend/submodule_1/
 ---
 
 <style>
