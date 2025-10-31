@@ -5,6 +5,7 @@ description:
 permalink: /west-coast/travel/sd/balboapark/
 date: 2025-10-21
 ---
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -21,10 +22,7 @@ date: 2025-10-21
     font-family: system-ui, -apple-system, sans-serif;
     background: linear-gradient(135deg, #00a8cc, #005f73);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    padding: 40px 0;
   }
   
   .container {
@@ -34,6 +32,7 @@ date: 2025-10-21
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
     position: relative;
+    margin: 0 auto 40px;
   }
   
   .balboa-scene {
@@ -269,6 +268,78 @@ date: 2025-10-21
     color: #005f73;
     box-shadow: 0 8px 20px rgba(0,0,0,.3);
   }
+  
+  .audio-lesson {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    margin-bottom: 40px;
+  }
+  
+  .audio-container {
+    padding: 20px;
+  }
+  
+  .audio-container h1 {
+    color: #005f73;
+    margin-bottom: 10px;
+    font-size: 32px;
+  }
+  
+  .audio-container h2 {
+    color: #00a8cc;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+  
+  .audio-container h3 {
+    color: #005f73;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .audio-container p {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .audio-container pre {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 15px 0;
+  }
+  
+  .audio-container code {
+    font-family: 'Courier New', monospace;
+    color: #005f73;
+  }
+  
+  .example-section {
+    background: #f0f8ff;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+    border-left: 4px solid #00a8cc;
+  }
+  
+  .example-section audio {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .source-text {
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+  }
 </style>
 </head>
 <body>
@@ -335,53 +406,43 @@ date: 2025-10-21
       <div class="balboa-garden"></div>
     </div>
   </div>
-</body>
-</html>
 
-<!-- Audio Lesson Section -->
-<div class="audio-lesson">
-  <div class="audio-container">
-    <h1>Balboa Park Organ Audio Lesson</h1>
-    <h2>Adding Audio to a Webpage</h2>
-    <p>Learn how to add and control audio using HTML with sounds from Balboa Park's historic Spreckels Organ Pavilion</p>
-    
-    <h3>1. What It Does</h3>
-    <p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
-    
-    <h3>2. Prepare Files</h3>
-    <p>Save audio files like:</p>
-    <pre><code>/audio/balboa-organ.mp3
+  <!-- Audio Lesson Section -->
+  <div class="audio-lesson">
+    <div class="audio-container">
+      <h1>Balboa Park Organ Audio Lesson</h1>
+      <h2>Adding Audio to a Webpage</h2>
+      <p>Learn how to add and control audio using HTML with sounds from Balboa Park's historic Spreckels Organ Pavilion</p>
+      
+      <h3>1. What It Does</h3>
+      <p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
+      
+      <h3>2. Prepare Files</h3>
+      <p>Save audio files like:</p>
+      <pre><code>/audio/balboa-organ.mp3
 /audio/organ-performance.mp3
 /audio/spreckels-pavilion.mp3
 /audio/organ-concert.mp3</code></pre>
-    
-    <h3>3. Basic Structure</h3>
-    <p>Each section should include a heading, a short description, and an audio player.</p>
-    <pre><code>&lt;audio controls&gt;
+      
+      <h3>3. Basic Structure</h3>
+      <p>Each section should include a heading, a short description, and an audio player.</p>
+      <pre><code>&lt;audio controls&gt;
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
   Your browser does not support the audio element.
 &lt;/audio&gt;</code></pre>
-    
-    <div class="example-section">
-      <h2>Audio you will be working with: Balboa Park Organ Pavilion</h2>
-      <p>
-        Listen to the majestic sounds of the Spreckels Organ — one of the world's largest outdoor pipe organs, filling Balboa Park with rich, powerful tones.
-      </p>
-      <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <p class="source-text">Source: Organ performance and classical music</p>
+      
+      <div class="example-section">
+        <h2>Audio you will be working with: Balboa Park Organ Pavilion</h2>
+        <p>
+          Listen to the majestic sounds of the Spreckels Organ — one of the world's largest outdoor pipe organs, filling Balboa Park with rich, powerful tones.
+        </p>
+        <audio controls>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <p class="source-text">Source: Organ performance and classical music</p>
+      </div>
     </div>
   </div>
-</div>
-
-<script>
-setTimeout(() => {
-  document.getElementById('truck-scene').style.display = 'none';
-  document.getElementById('balboa-scene').classList.add('show-balboa');
-}, 6000);
-</script>
-
 </body>
 </html>
