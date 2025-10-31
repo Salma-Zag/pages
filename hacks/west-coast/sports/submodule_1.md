@@ -24,7 +24,6 @@ microblog: True
 
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #e8eaf0;
         padding: 20px;
         min-height: 100vh;
     }
@@ -56,7 +55,7 @@ microblog: True
     }
 
     .concept-box {
-        background: #f8f9fa;
+        background: #ffffff;
         padding: 25px;
         border-left: 5px solid #FFC425;
         margin: 25px;
@@ -70,13 +69,18 @@ microblog: True
     }
 
     .concept-box p {
-        color: #002D62 !important;
+        color: #000000 !important;
         line-height: 1.6;
         font-weight: 500;
     }
 
+    .concept-box li {
+        color: #000000 !important;
+        line-height: 1.8;
+    }
+
     .concept-box p strong {
-        color: #002D62 !important;
+        color: #000000 !important;
     }
 
     .concept-box code {
@@ -276,6 +280,7 @@ microblog: True
     .loading-spinner {
         text-align: center;
         padding: 30px;
+        display: none;
     }
 
     .spinner {
@@ -308,17 +313,20 @@ microblog: True
         white-space: pre-wrap;
         max-height: 400px;
         overflow-y: auto;
-        display: none;
+        margin-top: 20px;
     }
 
     .custom-response.active {
-        display: block;
         animation: slideIn 0.3s ease-out;
     }
 
     .custom-response.error {
         background: #e74c3c;
         color: white;
+    }
+
+    .custom-response:empty {
+        display: none;
     }
 
     .api-section {
@@ -461,14 +469,17 @@ microblog: True
 <div class="container">
     <div class="header">
         <h1>Stop 1: San Diego — "Connecting to the Data Field"</h1>
-        <p>San Diego</p>
+        <p>Explore All 5 Major San Diego Sports Venues</p>
     </div>
 
     <div class="concept-box">
         <h2>Coding Concept: Making APIs (Part 1)</h2>
-        <p><strong>Define</strong> the Purpose / Endpoints — Decide what the API does and what data it provides.</p>
-        <p style="margin-top: 15px;"><strong>Example:</strong> <code>/getStadiumInfo</code> returns stadium name, capacity, team.</p>
-        <p style="margin-top: 10px;">Endpoints are like "doors" to access different types of data.</p>
+        <p><strong>Define the Purpose / Endpoints</strong></p>
+        <ul style="margin-top: 10px; margin-left: 20px; line-height: 1.8;">
+            <li>Decide what the API does and what data it provides</li>
+            <li><strong>Example:</strong> <code>/getStadiumInfo</code> returns name, capacity, team</li>
+            <li>Endpoints = "doors" to access different data</li>
+        </ul>
     </div>
 
     <div class="analogy-box">
@@ -476,45 +487,46 @@ microblog: True
         <div class="analogy-grid">
             <div class="analogy-card" onmouseenter="highlightStep(1)" onmouseleave="resetHighlight()">
                 <div class="analogy-icon">Playbook</div>
-                <h3>The Playbook (The API)</h3>
-                <p>The playbook tells you what plays you can run - like API endpoints showing what data you can request.</p>
-                <div class="step-indicator" id="step-1">Step 1: Check available plays</div>
+                <h3>The Playbook (Database)</h3>
+                <p>Contains all available plays and data - like a database storing all information</p>
+                <div class="step-indicator" id="step-1">Step 1: Database holds all plays</div>
             </div>
             <div class="analogy-card" onmouseenter="highlightStep(2)" onmouseleave="resetHighlight()">
-                <div class="analogy-icon">Request</div>
-                <h3>You Request a Play (Order)</h3>
-                <p>You decide which play to run and call it out - just like making an API request for specific data.</p>
-                <div class="step-indicator" id="step-2">Step 2: Request a play</div>
+                <div class="analogy-icon">Play</div>
+                <h3>A Play (User Input)</h3>
+                <p>You select which play you want - like choosing what data to request from the API</p>
+                <div class="step-indicator" id="step-2">Step 2: Select your play</div>
             </div>
             <div class="analogy-card" onmouseenter="highlightStep(3)" onmouseleave="resetHighlight()">
-                <div class="analogy-icon">Quarterback</div>
-                <h3>The Quarterback (Server)</h3>
-                <p>The quarterback confirms the play and prepares to execute it - like the server processing your request.</p>
-                <div class="step-indicator" id="step-3">Step 3: Confirm the play</div>
+                <div class="analogy-icon">Order</div>
+                <h3>Call the Play (API Request)</h3>
+                <p>You call out the order - like sending an API request with your selected endpoint</p>
+                <div class="step-indicator" id="step-3">Step 3: Input your order</div>
             </div>
             <div class="analogy-card" onmouseenter="highlightStep(4)" onmouseleave="resetHighlight()">
                 <div class="analogy-icon">Coach</div>
                 <h3>The Coach (API)</h3>
-                <p>The coach delivers the play to the team - like the API returning the requested data to you.</p>
-                <div class="step-indicator" id="step-4">Step 4: Deliver the play</div>
+                <p>Reviews the request and decides what data to send - uses analytics to optimize response</p>
+                <div class="step-indicator" id="step-4">Step 4: API processes request</div>
             </div>
             <div class="analogy-card" onmouseenter="highlightStep(5)" onmouseleave="resetHighlight()">
-                <div class="analogy-icon">Execution</div>
-                <h3>Play Execution (Response)</h3>
-                <p>The team runs the play successfully - just like receiving and using the API response data.</p>
-                <div class="step-indicator" id="step-5">Step 5: Execute and use data</div>
+                <div class="analogy-icon">Quarterback</div>
+                <h3>The Quarterback (Server)</h3>
+                <p>Executes the play and retrieves data from the playbook - like server fetching from database</p>
+                <div class="step-indicator" id="step-5">Step 5: Server retrieves data</div>
             </div>
-            <div class="analogy-card highlight-card">
-                <div class="analogy-icon">Stats</div>
-                <h3>Our Sports APIs</h3>
-                <p>Request stadium statistics and get real data back - just like calling plays from a playbook!</p>
+            <div class="analogy-card" onmouseenter="highlightStep(6)" onmouseleave="resetHighlight()">
+                <div class="analogy-icon">Execution</div>
+                <h3>Play Result (Response)</h3>
+                <p>You receive the exact data you requested - API returns response to your application</p>
+                <div class="step-indicator" id="step-6">Step 6: Receive response</div>
             </div>
         </div>
     </div>
 
     <div class="interactive-fetch">
         <h2>Try a Real API Call!</h2>
-        <p class="fetch-description">Paste any public API URL below and watch it fetch real data. Try examples like weather APIs, cat facts, or any public endpoint!</p>
+        <p class="fetch-description">Paste any public API URL and fetch real data</p>
         
         <div class="url-input-section">
             <input type="text" id="custom-url" class="url-input" placeholder="https://api.example.com/data">
@@ -522,14 +534,14 @@ microblog: True
         </div>
 
         <div class="example-urls">
-            <p><strong>Try these examples:</strong></p>
-            <button class="example-btn" onclick="loadExample('https://api.github.com/users/github')">GitHub User API</button>
-            <button class="example-btn" onclick="loadExample('https://catfact.ninja/fact')">Random Cat Fact</button>
-            <button class="example-btn" onclick="loadExample('https://dog.ceo/api/breeds/image/random')">Random Dog Image</button>
-            <button class="example-btn" onclick="loadExample('https://api.agify.io/?name=michael')">Name Age Predictor</button>
+            <p><strong>Try these API simulations:</strong></p>
+            <button class="example-btn" onclick="loadExample('demo-ip')">Get My IP Address</button>
+            <button class="example-btn" onclick="loadExample('demo-bitcoin')">Bitcoin Price</button>
+            <button class="example-btn" onclick="loadExample('demo-joke')">Random Joke</button>
+            <button class="example-btn" onclick="loadExample('demo-advice')">Random Advice</button>
         </div>
 
-        <div id="loading" class="loading-spinner" style="display: none;">
+        <div id="loading" class="loading-spinner">
             <div class="spinner"></div>
             <p>Fetching data from server...</p>
         </div>
@@ -544,6 +556,9 @@ microblog: True
             <h3>Petco Park</h3>
             <div class="endpoint-path">GET /api/getStadiumInfo?venue=petco</div>
             <p>Home of the San Diego Padres (MLB Baseball)</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.9em;">
+                <strong>What this endpoint does:</strong> Returns detailed information about Petco Park including capacity, location, year opened, and team details.
+            </div>
             <button class="btn">Fetch Data</button>
             <div id="response-petco" class="response-area"></div>
         </div>
@@ -552,6 +567,9 @@ microblog: True
             <h3>Snapdragon Stadium</h3>
             <div class="endpoint-path">GET /api/getStadiumInfo?venue=snapdragon</div>
             <p>Home of San Diego FC (MLS Soccer) & San Diego Wave FC (NWSL)</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.9em;">
+                <strong>What this endpoint does:</strong> Retrieves stadium data for San Diego's newest sports venue, including both MLS and NWSL team information.
+            </div>
             <button class="btn">Fetch Data</button>
             <div id="response-snapdragon" class="response-area"></div>
         </div>
@@ -560,6 +578,9 @@ microblog: True
             <h3>Pechanga Arena</h3>
             <div class="endpoint-path">GET /api/getStadiumInfo?venue=pechanga</div>
             <p>Home of the San Diego Gulls (AHL Hockey)</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.9em;">
+                <strong>What this endpoint does:</strong> Fetches arena specifications and hockey team details, including the historic venue's championship history.
+            </div>
             <button class="btn">Fetch Data</button>
             <div id="response-pechanga" class="response-area"></div>
         </div>
@@ -568,6 +589,9 @@ microblog: True
             <h3>Viejas Arena</h3>
             <div class="endpoint-path">GET /api/getStadiumInfo?venue=viejas</div>
             <p>Home of San Diego State Aztecs Basketball</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.9em;">
+                <strong>What this endpoint does:</strong> Provides college basketball arena information including seating capacity and SDSU Aztecs team data.
+            </div>
             <button class="btn">Fetch Data</button>
             <div id="response-viejas" class="response-area"></div>
         </div>
@@ -576,6 +600,9 @@ microblog: True
             <h3>Torero Stadium</h3>
             <div class="endpoint-path">GET /api/getStadiumInfo?venue=torero</div>
             <p>Home of University of San Diego Football</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.9em;">
+                <strong>What this endpoint does:</strong> Returns football stadium details for USD's home field, including surface type and venue capacity.
+            </div>
             <button class="btn">Fetch Data</button>
             <div id="response-torero" class="response-area"></div>
         </div>
@@ -584,6 +611,9 @@ microblog: True
             <h3>All San Diego Venues</h3>
             <div class="endpoint-path">GET /api/getAllVenues?city=sandiego</div>
             <p>Returns a complete list of all 5 sports venues in San Diego</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.9em;">
+                <strong>What this endpoint does:</strong> Aggregates data from all venue endpoints and returns a comprehensive JSON object with all San Diego sports venues in a single API call.
+            </div>
             <button class="btn">Fetch Data</button>
             <div id="response-all" class="response-area"></div>
         </div>
@@ -591,7 +621,7 @@ microblog: True
 
     <div class="key-learning">
         <h3>Key Learning</h3>
-        <p>APIs are like scouts — they know exactly where to find stats and bring back only the data you ask for through specific "doors" called endpoints.</p>
+        <p>APIs are scouts that find and return only the data you request through specific "endpoint doors"</p>
     </div>
 </div>
 
@@ -740,23 +770,98 @@ microblog: True
 
     function loadExample(url) {
         document.getElementById('custom-url').value = url;
+        fetchCustomURL();
     }
+
+    const demoAPIs = {
+        'demo-ip': {
+            status: 200,
+            statusText: 'OK',
+            url: 'https://api.ipify.org?format=json',
+            data: { ip: '192.168.1.100' },
+            timestamp: new Date().toISOString()
+        },
+        'demo-bitcoin': {
+            status: 200,
+            statusText: 'OK',
+            url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+            data: {
+                bpi: {
+                    USD: { rate: '43,250.50', description: 'United States Dollar' }
+                },
+                disclaimer: 'This data is simulated for demo purposes'
+            },
+            timestamp: new Date().toISOString()
+        },
+        'demo-joke': {
+            status: 200,
+            statusText: 'OK',
+            url: 'https://official-joke-api.appspot.com/random_joke',
+            data: {
+                type: 'general',
+                setup: 'Why do programmers prefer dark mode?',
+                punchline: 'Because light attracts bugs!'
+            },
+            timestamp: new Date().toISOString()
+        },
+        'demo-advice': {
+            status: 200,
+            statusText: 'OK',
+            url: 'https://api.adviceslip.com/advice',
+            data: {
+                slip: {
+                    id: 117,
+                    advice: 'Always test your API endpoints before deploying to production.'
+                }
+            },
+            timestamp: new Date().toISOString()
+        }
+    };
 
     async function fetchCustomURL() {
         const url = document.getElementById('custom-url').value.trim();
         const responseDiv = document.getElementById('custom-response');
         const loadingDiv = document.getElementById('loading');
 
+        console.log('fetchCustomURL called with:', url);
+
         if (!url) {
             responseDiv.textContent = 'Error: Please enter a URL';
+            responseDiv.style.display = 'block';
             responseDiv.classList.add('active', 'error');
             setTimeout(() => responseDiv.classList.remove('error'), 3000);
             return;
         }
 
-        try {
-            responseDiv.style.display = 'none';
+        // Check if it's a demo API
+        if (demoAPIs[url]) {
+            console.log('Demo API detected:', url);
+            responseDiv.style.display = 'block';
             responseDiv.classList.remove('active', 'error');
+            responseDiv.textContent = 'Loading...';
+            loadingDiv.style.display = 'block';
+
+            // Simulate loading time
+            setTimeout(() => {
+                console.log('Displaying demo response');
+                loadingDiv.style.display = 'none';
+                responseDiv.textContent = JSON.stringify(demoAPIs[url], null, 2);
+                responseDiv.classList.add('active');
+                responseDiv.classList.remove('error');
+                
+                // Scroll to response
+                setTimeout(() => {
+                    responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }, 800);
+            return;
+        }
+
+        // Try real API fetch
+        try {
+            responseDiv.style.display = 'block';
+            responseDiv.classList.remove('active', 'error');
+            responseDiv.textContent = 'Loading...';
             loadingDiv.style.display = 'block';
 
             const response = await fetch(url);
@@ -789,11 +894,12 @@ microblog: True
             const errorResult = {
                 error: error.message,
                 url: url,
-                note: 'This API might have CORS restrictions or require authentication',
+                note: 'This API might have CORS restrictions or require authentication. Try the demo examples above!',
                 timestamp: new Date().toISOString()
             };
 
             responseDiv.textContent = JSON.stringify(errorResult, null, 2);
+            responseDiv.style.display = 'block';
             responseDiv.classList.add('active', 'error');
         }
     }
