@@ -1,6 +1,6 @@
 ---
 title: Example Page
-permalink: /exampleMe
+permalink: /exampleFooter
 ---
 
 <script src="{{site.baseurl}}/assets/js/FooterOverride.js"></script>
