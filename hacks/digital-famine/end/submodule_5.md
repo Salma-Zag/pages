@@ -9,7 +9,8 @@ submodule: 5
 microblog: True
 categories: [CSP, Submodule, End]
 tags: [end, submodule, codemaxxers]
-author: "CodeMaxxers Team"
+author: "Evan Svetina"
+microblog: true
 date: 2025-10-29
 ---
 

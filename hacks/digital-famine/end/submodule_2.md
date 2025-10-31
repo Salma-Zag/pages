@@ -9,6 +9,7 @@ submodule: 2
 categories: [CSP, Submodule, End]
 tags: [end, submodule, codemaxxers, media-literacy]
 author: "Cyrus Zhang"
+microblog: true
 date: 2025-10-24
 breadcrumb: true
 ---
@@ -253,7 +254,6 @@ breadcrumb: true
       <button class="btn primary" id="start">Launch Final Test</button>
       <button class="btn ghost" id="load">Load Save</button>
       <button class="btn ghost" id="reset">Full Reset</button>
-      <button class="btn" id="cheat" style="background: linear-gradient(90deg, #f59e0b, #ef4444); color: #fff; font-weight: 700;">🎮 Cheat: Auto-Complete</button>
     </div>
     <div class="divider"></div>
     <div class="notice mini">Autosaves after each stage to <span class="kbd">localStorage</span> under key <span class="kbd">ml-end-submodule-2</span>.</div>
@@ -588,48 +588,6 @@ breadcrumb: true
     if (next>10) { hideAllStages(); show('#results'); finalize(); }
   });
   $('#reset').addEventListener('click', reset);
-
-  // Cheat button - auto-complete all stages with perfect score
-  $('#cheat').addEventListener('click', () => {
-    if (!confirm('🎮 CHEAT MODE: This will instantly complete all 10 stages with a perfect score. Continue?')) return;
-    
-    // Mark all stages as answered and correct
-    for (let i=1; i<=10; i++) {
-      state.stages[i].answered = true;
-      state.stages[i].correct = true;
-      
-      // Add sample text responses
-      if (i === 1) state.stages[i].mini = 'No author credentials, emotional language, no citations';
-      else if (i === 2) state.stages[i].sources = ['Peer-reviewed journal', 'Reuters wire service', 'Government agency'];
-      else if (i === 3) state.stages[i].mini = 'AI-generated media uses advanced models that create realistic images with subtle inconsistencies in lighting and shadows.';
-      else if (i === 4) {
-        state.stages[i].picks = ['cb1', 'cb2'];
-        state.stages[i].rewrite = 'Space Council announces new trade restrictions pending official release.';
-      }
-      else if (i === 5) state.stages[i].mini = 'Confirmation bias, political bias, selection bias, commercial bias, framing bias';
-      else if (i === 6) state.stages[i].mini = 'Framing uses word choice and emphasis to shape perception without lying, by selecting what to highlight or omit.';
-      else if (i === 7) state.stages[i].mini = 'Transfer, glittering generalities, name-calling, plain folks, testimonial';
-      else if (i === 8) state.stages[i].mini = 'Follow diverse sources, use incognito mode, seek opposing viewpoints';
-      else if (i === 9) state.stages[i].mini = 'Confirmation bias is the tendency to seek, interpret, and remember information that confirms existing beliefs.';
-      else if (i === 10) state.stages[i].rationale = 'Peer-reviewed journals provide rigorous methodology, citations, and accountability through expert review processes.';
-    }
-    
-    // Set perfect score and energy
-    state.score = 100;
-    state.energy = 100;
-    
-    // Save and show results
-    save();
-    hide('#intro');
-    hideAllStages();
-    show('#results');
-    finalize();
-    
-    // Show success message
-    setTimeout(() => {
-      alert('✅ CHEAT COMPLETE! Perfect score achieved. All 10 stages completed. You may now proceed to the next module!');
-    }, 500);
-  });
 
   function hideAllStages(){ for (let i=1;i<=10;i++){ hide('#stage-' + i); } }
 

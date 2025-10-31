@@ -60,7 +60,6 @@ export function initPlanetNavigation(gameInstance) {
   prevBtn.onmouseover = () => prevBtn.style.transform = 'scale(1.05)';
   prevBtn.onmouseout = () => prevBtn.style.transform = 'scale(1)';
   prevBtn.onclick = () => navigateToPreviousPlanet(gameInstance);
-  leftSection.appendChild(prevBtn);
   
   // Cheat Menu Button
   const cheatBtn = document.createElement('button');

@@ -8,7 +8,8 @@ team: "CodeMaxxers"
 submodule: 1
 categories: [CSP, Submodule, Backend]
 tags: [end, submodule, codemaxxers]
-author: "CodeMaxxer's Team"
+author: "William Windle"
+microblog: true
 date: 2025-10-24
 ---
 <!DOCTYPE html>

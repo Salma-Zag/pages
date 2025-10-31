@@ -61,8 +61,12 @@ export function completeModule(moduleNumber) {
   
   saveProgressState(state);
   
-  // Trigger update on current page if on quest home
-  updateQuestDisplay();
+  // Only update quest display if we're actually on the quest home page
+  const currentModuleNum = getCurrentModuleNumber();
+  if (!currentModuleNum) {
+    // We're on quest home, update the display
+    updateQuestDisplay();
+  }
   
   return state;
 }
@@ -114,10 +118,55 @@ function getCurrentModuleNumber() {
 }
 
 /**
+ * Add Reset All button to the top of the quest home page
+ * @param {Object} state - Current progress state
+ */
+function addResetAllButtonToTop(state) {
+  // Create the Reset All button
+  const resetAllBtn = document.createElement('button');
+  resetAllBtn.id = 'reset-all-progress-btn';
+  resetAllBtn.innerHTML = '🔄 Reset All Progress';
+  resetAllBtn.style.cssText = `
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    z-index: 9999;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
+  `;
+  resetAllBtn.onmouseover = () => {
+    resetAllBtn.style.transform = 'scale(1.05)';
+    resetAllBtn.style.boxShadow = '0 6px 20px rgba(239, 68, 68, 0.7)';
+  };
+  resetAllBtn.onmouseout = () => {
+    resetAllBtn.style.transform = 'scale(1)';
+    resetAllBtn.style.boxShadow = '0 4px 15px rgba(239, 68, 68, 0.5)';
+  };
+  resetAllBtn.onclick = () => resetProgress();
+  
+  document.body.appendChild(resetAllBtn);
+  
+  console.log('✅ Reset All button added to top right of page at position (top: 100px, right: 30px)');
+}
+
+/**
  * Update quest home page display with lock indicators
  */
 function updateQuestDisplay() {
   const state = getProgressState();
+  
+  // Add Reset All button to the top of the page (only once)
+  if (!document.getElementById('reset-all-progress-btn')) {
+    addResetAllButtonToTop(state);
+  }
   
   // Find all module cards using data-module attribute
   for (let moduleNum = 1; moduleNum <= 5; moduleNum++) {
@@ -452,12 +501,12 @@ export function addModuleFooterControls() {
   autoCompleteBtn.onmouseout = () => autoCompleteBtn.style.transform = 'scale(1)';
   autoCompleteBtn.onclick = () => autoCompleteCurrentModule();
   
-  // Reset progress button
-  const resetBtn = document.createElement('button');
-  resetBtn.innerHTML = '🔄 Reset All';
-  resetBtn.className = 'medium filledHighlight primary';
-  resetBtn.style.cssText = `
-    background: linear-gradient(135deg, #ef4444, #dc2626);
+  // Reset current module button
+  const resetModuleBtn = document.createElement('button');
+  resetModuleBtn.innerHTML = '🔄 Reset Module';
+  resetModuleBtn.className = 'medium filledHighlight primary';
+  resetModuleBtn.style.cssText = `
+    background: linear-gradient(135deg, #f97316, #ea580c);
     color: white;
     border: 2px solid rgba(255,255,255,0.3);
     padding: 10px 20px;
@@ -467,12 +516,13 @@ export function addModuleFooterControls() {
     cursor: pointer;
     transition: all 0.3s ease;
   `;
-  resetBtn.onmouseover = () => resetBtn.style.transform = 'scale(1.05)';
-  resetBtn.onmouseout = () => resetBtn.style.transform = 'scale(1)';
-  resetBtn.onclick = () => resetProgress();
+  resetModuleBtn.onmouseover = () => resetModuleBtn.style.transform = 'scale(1.05)';
+  resetModuleBtn.onmouseout = () => resetModuleBtn.style.transform = 'scale(1)';
+  resetModuleBtn.onclick = () => resetCurrentModule();
   
   // Next Module button
   const nextModuleBtn = document.createElement('button');
+  nextModuleBtn.id = 'next-module-btn';
   nextModuleBtn.innerHTML = 'Next Module ➡️';
   nextModuleBtn.className = 'medium filledHighlight primary';
   nextModuleBtn.style.cssText = `
@@ -497,17 +547,86 @@ export function addModuleFooterControls() {
     nextModuleBtn.style.cursor = 'not-allowed';
   }
   
+  // Add pulse animation CSS for Next button
+  if (!document.getElementById('pulse-animation-style')) {
+    const pulseStyle = document.createElement('style');
+    pulseStyle.id = 'pulse-animation-style';
+    pulseStyle.textContent = `
+      @keyframes pulse {
+        0%, 100% { 
+          box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+        50% { 
+          box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+        }
+      }
+    `;
+    document.head.appendChild(pulseStyle);
+  }
+  
   // Assemble footer
   buttonWrapper.appendChild(prevModuleBtn);
   buttonWrapper.appendChild(homeBtn);
   buttonWrapper.appendChild(progressDiv);
   buttonWrapper.appendChild(autoCompleteBtn);
-  buttonWrapper.appendChild(resetBtn);
+  buttonWrapper.appendChild(resetModuleBtn);
   buttonWrapper.appendChild(nextModuleBtn);
   
   footer.appendChild(buttonWrapper);
   
   console.log('✅ Module footer controls added');
+}
+
+/**
+ * Reset the current module's progress
+ */
+function resetCurrentModule() {
+  const moduleNum = getCurrentModuleNumber();
+  
+  if (!moduleNum) return;
+  
+  if (confirm(`🔄 Reset Module ${moduleNum}? This will remove its completion status and you can redo it.`)) {
+    const state = getProgressState();
+    
+    // Remove this module from completed array
+    state.completed = state.completed.filter(m => m !== moduleNum);
+    
+    // Also remove any modules after this one (since they depend on this one)
+    state.completed = state.completed.filter(m => m < moduleNum);
+    
+    // Update current module
+    state.current = moduleNum;
+    
+    saveProgressState(state);
+    
+    // Show success message
+    showSuccessMessage(`🔄 Module ${moduleNum} has been reset! You can now redo it.`);
+    
+    // Update button
+    const btn = document.getElementById('module-complete-btn');
+    if (btn) {
+      btn.innerHTML = '🎮 Auto-Complete';
+      btn.style.background = 'linear-gradient(135deg, #a855f7, #7c3aed)';
+      btn.onclick = () => autoCompleteCurrentModule();
+      btn.style.cursor = 'pointer';
+    }
+    
+    // Update progress indicator
+    const footer = document.getElementById('masterFooter');
+    if (footer) {
+      const progressDivs = footer.querySelectorAll('div');
+      progressDivs.forEach(div => {
+        if (div.innerHTML && div.innerHTML.includes('Progress:')) {
+          div.innerHTML = `📋 Progress: ${state.completed.length}/5 modules`;
+        }
+      });
+    }
+    
+    // Reload after a short delay to clear any game state
+    setTimeout(() => {
+      location.reload();
+    }, 1500);
+  }
 }
 
 /**
@@ -528,14 +647,28 @@ function navigateToPreviousModule() {
 function navigateToNextModule() {
   const moduleNum = getCurrentModuleNumber();
   
-  if (!moduleNum || moduleNum === 5) return;
+  console.log('🔍 Next button clicked! Current module:', moduleNum);
+  
+  if (!moduleNum) {
+    console.warn('No module number detected');
+    return;
+  }
+  
+  if (moduleNum === 5) {
+    console.log('Already on last module');
+    alert('You are on the last module!');
+    return;
+  }
   
   const nextModule = moduleNum + 1;
+  console.log('Checking if module', nextModule, 'is unlocked...');
   
   // Check if next module is unlocked
   if (isModuleUnlocked(nextModule)) {
+    console.log('✅ Module', nextModule, 'is unlocked! Navigating...');
     window.location.href = `/digital-famine/end/submodule_${nextModule}/`;
   } else {
+    console.log('🔒 Module', nextModule, 'is locked');
     // Show locked message
     showLockedMessage(nextModule);
   }
@@ -599,7 +732,8 @@ function autoCompleteCurrentModule() {
     if (btn) {
       btn.innerHTML = '✅ Completed';
       btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-      btn.onclick = null;
+      btn.disabled = true;
+      btn.style.opacity = '0.8';
       btn.style.cursor = 'default';
     }
     
@@ -612,6 +746,54 @@ function autoCompleteCurrentModule() {
           div.innerHTML = `📋 Progress: ${state.completed.length}/5 modules`;
         }
       });
+    }
+    
+    // CRITICAL: Enable the Next button so user can proceed
+    const nextBtn = document.getElementById('next-module-btn');
+    console.log('🔍 Looking for Next button...', nextBtn ? 'FOUND' : 'NOT FOUND');
+    console.log('Current module:', moduleNum);
+    
+    if (nextBtn) {
+      console.log('Next button current state:', {
+        disabled: nextBtn.disabled,
+        opacity: nextBtn.style.opacity,
+        pointerEvents: nextBtn.style.pointerEvents
+      });
+      
+      if (moduleNum < 5) {
+        // Force enable the button
+        nextBtn.disabled = false;
+        nextBtn.style.setProperty('opacity', '1', 'important');
+        nextBtn.style.setProperty('cursor', 'pointer', 'important');
+        nextBtn.style.setProperty('pointer-events', 'auto', 'important');
+        nextBtn.style.setProperty('background', 'linear-gradient(135deg, #22c55e, #16a34a)', 'important');
+        
+        // Add a visual indicator that next module is ready
+        nextBtn.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.5)';
+        nextBtn.style.animation = 'pulse 1.5s ease-in-out infinite';
+        
+        console.log('✅ Next button ENABLED! New state:', {
+          disabled: nextBtn.disabled,
+          opacity: nextBtn.style.opacity,
+          pointerEvents: nextBtn.style.pointerEvents
+        });
+        console.log('Next module', moduleNum + 1, 'is unlocked:', isModuleUnlocked(moduleNum + 1));
+      }
+    } else {
+      console.error('❌ Next button NOT FOUND in DOM!');
+    }
+    
+    // Also ensure Previous button and Reset Module button stay functional
+    const prevBtn = document.getElementById('prev-module-btn');
+    if (prevBtn && moduleNum > 1) {
+      prevBtn.disabled = false;
+      prevBtn.style.setProperty('pointer-events', 'auto', 'important');
+    }
+    
+    const resetModuleBtn = document.getElementById('reset-module-btn');
+    if (resetModuleBtn) {
+      resetModuleBtn.disabled = false;
+      resetModuleBtn.style.setProperty('pointer-events', 'auto', 'important');
     }
   }
 }
