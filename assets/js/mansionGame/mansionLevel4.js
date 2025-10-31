@@ -3,6 +3,7 @@ import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
 import GameObject from './GameEngine/GameObject.js';
 
+//cool comment
 class Barrier extends GameObject {
     constructor(data, gameEnv) {
         super(gameEnv);
@@ -140,7 +141,7 @@ class BlackjackGameManager {
     constructor() {
         this.money = 1000;
         this.currentBet = 0;
-        this.goalMoney = 100000;
+        this.goalMoney = 25000; // Changed from 100000 to 25000
         this.gameActive = false;
         this.overlay = null;
     }
@@ -213,12 +214,35 @@ class BlackjackGameManager {
         `;
         instructions.innerHTML = `
             🎰 CASINO CHALLENGE 🎰<br>
-            You must bet ALL your money each round!<br>
-            Win your way from $1,000 to $100,000 to escape!
+            Choose your bet amount and play strategically!<br>
+            Win your way from $1,000 to $25,000 to escape!
+        `;
+
+        // Add betting amount selector
+        const bettingSelector = document.createElement('div');
+        bettingSelector.style.cssText = `
+            background: #34495e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+        `;
+        bettingSelector.innerHTML = `
+            <label for="bet-amount" style="font-weight: bold; margin-right: 10px;">Bet Amount:</label>
+            <select id="bet-amount" style="padding: 8px; font-size: 16px; border-radius: 5px; border: 2px solid #2ecc71;">
+                <option value="100">$100 (Safe)</option>
+                <option value="500">$500 (Medium)</option>
+                <option value="1000" selected>$1,000 (Risky)</option>
+                <option value="2500">$2,500 (Very Risky)</option>
+                <option value="5000">$5,000 (All-In)</option>
+                <option value="all">All Money (YOLO)</option>
+            </select>
         `;
 
         gameContainer.appendChild(moneyDisplay);
         gameContainer.appendChild(instructions);
+        gameContainer.appendChild(bettingSelector);
         this.overlay.appendChild(gameContainer);
         document.body.appendChild(this.overlay);
 
@@ -348,40 +372,75 @@ class BlackjackGameManager {
 
                 if (playerValue > 21) {
                     messageEl.textContent = "You busted! Lost $" + this.currentBet;
-                    this.money = 0;
+                    console.log('Player busted. Money before:', this.money);
+                    // Subtract the bet from current money (goes into debt if needed)
+                    this.money -= this.currentBet;
+                    console.log('Money after losing bet:', this.money);
                     gameOver = true;
                     this.handleGameEnd(false);
                 } else if (dealerValue > 21) {
+                    console.log('Dealer busted! Money before:', this.money);
+                    // Win the bet amount
+                    this.money += this.currentBet;
                     messageEl.textContent = "Dealer busted! Won $" + this.currentBet;
-                    this.money *= 2;
+                    console.log('Money after winning bet:', this.money);
                     gameOver = true;
                     this.handleGameEnd(true);
                 } else if (gameOver) {
                     if (playerValue > dealerValue) {
+                        console.log('Player won! Money before:', this.money, 'currentBet:', this.currentBet);
+                        const oldMoney = this.money;
+                        // Win the bet amount
+                        this.money += this.currentBet;
+                        console.log('Money after winning bet:', this.money, 'Went from', oldMoney, 'to', this.money);
                         messageEl.textContent = "You win! Won $" + this.currentBet;
-                        this.money *= 2;
                         this.handleGameEnd(true);
                     } else if (dealerValue > playerValue) {
                         messageEl.textContent = "Dealer wins! Lost $" + this.currentBet;
-                        this.money = 0;
+                        console.log('Dealer won. Money before:', this.money);
+                        // Subtract the bet from current money (goes into debt if needed)
+                        this.money -= this.currentBet;
+                        console.log('Money after losing bet:', this.money);
                         this.handleGameEnd(false);
                     } else {
-                        messageEl.textContent = "Push! Your money is returned.";
+                        // Push - money stays the same (bet is returned)
+                        console.log('Push! Money before:', this.money, 'currentBet:', this.currentBet);
+                        // Money should already be correct, but let's ensure it
+                        // Since we bet all money, on push we just keep what we had
+                        messageEl.textContent = "Push! It's a tie. Your $" + this.money + " is returned.";
+                        console.log('Push! Money after:', this.money);
                         this.handleGameEnd(false);
                     }
                 }
             };
 
             const newGame = () => {
-                if (this.money <= 0) {
-                    messageEl.textContent = "Game Over! You lost all your money. Restarting level...";
-                    setTimeout(() => this.resetLevel(), 2000);
-                    return;
+                // Get selected bet amount
+                const betSelector = document.getElementById('bet-amount');
+                const betValue = betSelector.value;
+                
+                let betAmount;
+                if (betValue === 'all') {
+                    // Bet all money (or $1000 if in debt/at zero)
+                    betAmount = this.money > 0 ? this.money : 1000;
+                } else {
+                    betAmount = parseInt(betValue);
+                    // If they don't have enough money, bet on credit
+                    if (this.money < betAmount && this.money >= 0) {
+                        // Can't bet more than you have unless in debt
+                        betAmount = Math.max(this.money, 100); // Minimum $100 bet
+                    }
                 }
-
-                this.currentBet = this.money;
+                
+                this.currentBet = betAmount;
+                console.log('Starting new game. Current money:', this.money, 'Betting:', this.currentBet);
+                
+                // Color code money display: green if positive, red if negative
+                const moneyColor = this.money >= 0 ? '#2ecc71' : '#e74c3c';
+                const moneyDisplay = this.money >= 0 ? `$${this.money}` : `-$${Math.abs(this.money)} (DEBT)`;
+                
                 document.getElementById('money-display').innerHTML = `
-                    Current Money: $${this.money}<br>
+                    <span style="color: ${moneyColor}">Current Money: ${moneyDisplay}</span><br>
                     Current Bet: $${this.currentBet}<br>
                     Goal: $${this.goalMoney}
                 `;
@@ -400,7 +459,15 @@ class BlackjackGameManager {
                 if (gameOver) return;
                 playerHand.push(deck.pop());
                 renderHand(playerHand, playerCardsEl, document.getElementById("player-points"));
-                if (calculateHand(playerHand) > 21) checkGameOver();
+                const playerValue = calculateHand(playerHand);
+                
+                if (playerValue > 21) {
+                    checkGameOver();
+                } else if (playerValue === 21) {
+                    messageEl.textContent = "Blackjack! You have 21. Stand or risk busting!";
+                } else {
+                    messageEl.textContent = `You have ${playerValue}. Hit or Stand?`;
+                }
             };
 
             const stand = () => {
@@ -436,22 +503,23 @@ class BlackjackGameManager {
     }
 
     handleGameEnd(won) {
+        // Color code money display: green if positive, red if negative
+        const moneyColor = this.money >= 0 ? '#2ecc71' : '#e74c3c';
+        const moneyDisplay = this.money >= 0 ? `$${this.money}` : `-$${Math.abs(this.money)} (DEBT)`;
+        
+        // Update the display with current money (currentBet is outdated after the round)
         document.getElementById('money-display').innerHTML = `
-            Current Money: $${this.money}<br>
-            Current Bet: $${this.currentBet}<br>
+            <span style="color: ${moneyColor}">Current Money: ${moneyDisplay}</span><br>
+            Current Bet: $0 (Round Over)<br>
             Goal: $${this.goalMoney}
         `;
 
+        // Only trigger victory if we actually have the goal money (and not in debt)
         if (this.money >= this.goalMoney) {
             setTimeout(() => {
-                alert("🎉 CONGRATULATIONS! You've won $100,000 and escaped the casino! Level Complete!");
+                alert("🎉 CONGRATULATIONS! You've won $25,000 and escaped the casino! Level Complete!");
                 this.exitGame();
                 // Trigger level completion
-            }, 2000);
-        } else if (this.money <= 0) {
-            setTimeout(() => {
-                alert("💀 You lost everything! The level resets...");
-                this.resetLevel();
             }, 2000);
         }
     }
