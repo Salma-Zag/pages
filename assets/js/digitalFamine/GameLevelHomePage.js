@@ -8,19 +8,15 @@ import { initPlanetNavigation } from '/assets/js/digitalFamine/planetNavigation.
 
 class GameLevelHomePage {
   constructor(gameEnv) {
-    console.log('🚀 GameLevelHomePage constructor starting...');
     this.gameEnv = gameEnv;
     
     let width = gameEnv.innerWidth;
     let height = gameEnv.innerHeight;
     let path = gameEnv.path;
 
-    console.log('📐 Canvas dimensions:', { width, height });
-
     // Clear any lingering dialogue elements immediately on page load
     const existingDialogues = document.querySelectorAll('[id*="dialogue"], [class*="dialogue"], .dialogue-overlay, #dialogue-overlay');
     existingDialogues.forEach(el => el.remove());
-    console.log('✅ Cleared all existing dialogue elements on load');
 
     this.dialogueSystem = new DialogueSystem();
 
@@ -59,13 +55,8 @@ class GameLevelHomePage {
     };
     
     this.debugProgress = () => {
-      console.log('Current Progress:', {
-        microblog: this.progression.microblog,
-        medialit: this.progression.medialit,
-        ai: this.progression.ai,
-        cyber: this.progression.cyber,
-        current: this.progression.current
-      });
+      // Silent debug - only log when explicitly needed for debugging
+      // console.log('Current Progress:', this.progression);
     };
     
     const savedProgress = localStorage.getItem('planetProgression');
@@ -79,7 +70,6 @@ class GameLevelHomePage {
         cyber: loaded.cyber && loaded.ai ? loaded.cyber : false,
         current: loaded.current || this.progression.getNextPlanet()
       };
-      console.log('✅ Loaded saved progress:', this.progression);
     }
 
     document.addEventListener('keydown', (e) => {
@@ -91,7 +81,6 @@ class GameLevelHomePage {
           const prevPlanet = planetOrder[currentIndex - 1];
           this.progression.current = prevPlanet;
           localStorage.setItem('planetProgression', JSON.stringify(this.progression));
-          console.log('Navigating to previous planet:', prevPlanet);
           this.debugProgress();
           location.reload();
         }
@@ -103,11 +92,9 @@ class GameLevelHomePage {
           if (this.progression[this.progression.current]) {
             this.progression.current = nextPlanet;
             localStorage.setItem('planetProgression', JSON.stringify(this.progression));
-            console.log('Navigating to next planet:', nextPlanet);
             this.debugProgress();
             location.reload();
           } else {
-            console.log('Complete current planet first!');
             this.dialogueSystem.showDialogue("Complete the current planet first!");
           }
         }
@@ -115,7 +102,6 @@ class GameLevelHomePage {
       
       if (e.key.toLowerCase() === 'r' && e.ctrlKey) {
         localStorage.removeItem('planetProgression');
-        console.log('Progress reset! Reloading...');
         location.reload();
       }
     });
@@ -249,7 +235,6 @@ class GameLevelHomePage {
               action: () => {
                 this.progression.cyber = true;
                 localStorage.setItem('planetProgression', JSON.stringify(this.progression));
-                console.log('Traveling to Cyber Planet...');
                 this.debugProgress();
                 dialogueSystem.closeDialogue();
                 window.location.href = '/digital-famine/cybersecurity-game/';
@@ -444,8 +429,6 @@ class GameLevelHomePage {
     };
     this.planetData.push({ name: 'end', pos: sprite_data_home.INIT_POSITION, scale: sprite_data_home.SCALE_FACTOR });
 
-    console.log('🌍 Planet data collected:', this.planetData.length, 'planets');
-
     this.classes = [
       { class: GameEnvBackground, data: image_data_desert },
       { class: Player, data: sprite_data_chillguy },
@@ -464,11 +447,9 @@ class GameLevelHomePage {
     this.playerObject = null;
     
     this.createPageCounter();
-    console.log('✅ Constructor complete');
   }
   
   createPageCounter() {
-    console.log('📄 Creating page counter...');
     const container = document.getElementById('gameContainer');
     
     const counterDiv = document.createElement('div');
@@ -494,15 +475,12 @@ class GameLevelHomePage {
   }
   
   createPlanetStatusBadges() {
-    console.log('🏷️  CREATING PLANET STATUS BADGES NOW!');
     const container = document.getElementById('gameContainer');
     
     if (!container) {
       console.error('❌ gameContainer not found!');
       return;
     }
-    
-    console.log('✅ gameContainer found');
     
     const badgeContainer = document.createElement('div');
     badgeContainer.id = 'planet-badges-container';
@@ -516,12 +494,9 @@ class GameLevelHomePage {
     
     container.appendChild(badgeContainer);
     this.badgeContainer = badgeContainer;
-    console.log('✅ Badge container created');
     
     this.planetBadges = {};
     this.planetData.forEach((planet, index) => {
-      console.log(`🪐 Creating badge for ${planet.name}`);
-      
       const badge = document.createElement('div');
       badge.id = `badge-${planet.name}`;
       badge.style.position = 'absolute';
@@ -543,10 +518,8 @@ class GameLevelHomePage {
       
       badgeContainer.appendChild(badge);
       this.planetBadges[planet.name] = badge;
-      console.log(`  ✅ Badge created at (${badgeX}, ${badgeY})`);
     });
     
-    console.log('✅ All badges created:', Object.keys(this.planetBadges).length);
     this.updatePlanetStatusBadges();
   }
   
@@ -616,18 +589,324 @@ class GameLevelHomePage {
     }
   }
 
-  initialize() {
-    console.log('🎮 ===== INITIALIZE METHOD CALLED =====');
-    console.log('Number of game objects:', this.gameEnv.gameObjects.length);
+  createSplashScreen() {
+    // Check if splashscreen element already exists
+    let existingSplash = document.getElementById('splashscreen');
+    if (!existingSplash) {
+      // Create if it doesn't exist
+      existingSplash = document.createElement('div');
+      existingSplash.id = 'splashscreen';
+      existingSplash.innerHTML = `
+        <h1>Welcome to Digital Famine</h1>
+        <h2>Save Earth from the Information Crisis</h2>
+        
+        <div class="story-content">
+          <p><strong>The year is 2157.</strong> Earth faces its greatest threat yet - not from war or climate change, but from a catastrophic information collapse known as the Digital Famine.</p>
+          
+          <p>Misinformation, cyber attacks, and AI manipulation have fractured society. Knowledge itself has become corrupted, and humanity teeters on the brink of a new dark age.</p>
+          
+          <p>You are Earth's last hope - a pilot sent to recover the four Ancient Pages of Digital Wisdom scattered across the galaxy. Each page contains essential knowledge to restore truth and security to our world:</p>
+          
+          <ul>
+            <li>📱 <strong>The Microblog Page</strong> - Master the art of digital communication</li>
+            <li>📰 <strong>The Media Literacy Page</strong> - Learn to discern truth from deception</li>
+            <li>🤖 <strong>The AI Page</strong> - Understand and control artificial intelligence</li>
+            <li>🔒 <strong>The Cybersecurity Page</strong> - Protect against digital threats</li>
+          </ul>
+          
+          <h3>Your Mission</h3>
+          <p>Navigate your rocket through the galaxy, visit each planet, and complete their challenges to earn the Ancient Pages. Only when all four pages are collected can Earth be saved.</p>
+          
+          <h3>Controls</h3>
+          <ul>
+            <li><strong>W/A/S/D</strong> - Move your rocket</li>
+            <li><strong>SPACE</strong> - Interact with planets</li>
+            <li><strong>T</strong> - Toggle satellite companion</li>
+          </ul>
+          
+          <!-- Space for additional manual content -->
+          <div class="additional-content">
+            <!-- You can add more content here manually -->
+          </div>
+          
+          <p class="ready-text">Are you ready to save humanity?</p>
+        </div>
+      `;
+      document.body.appendChild(existingSplash);
+    }
 
+    // Create overlay backdrop
+    const overlay = document.createElement('div');
+    overlay.id = 'splash-overlay';
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(5px);
+      z-index: 99998;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.5s ease-in;
+    `;
+
+    // Style the splashscreen as a modal
+    existingSplash.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 700px;
+      height: 80vh;
+      max-height: 600px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #ffffff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(100, 200, 255, 0.5);
+      z-index: 99999;
+      overflow-y: auto;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      border: 2px solid #00d4ff;
+      animation: slideIn 0.6s ease-out;
+    `;
+
+    // Add close button
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '✕';
+    closeButton.style.cssText = `
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #00d4ff;
+      color: #00d4ff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `;
+    
+    closeButton.onmouseover = () => {
+      closeButton.style.background = '#00d4ff';
+      closeButton.style.color = '#1a1a2e';
+      closeButton.style.transform = 'rotate(90deg)';
+    };
+    
+    closeButton.onmouseout = () => {
+      closeButton.style.background = 'rgba(255, 255, 255, 0.1)';
+      closeButton.style.color = '#00d4ff';
+      closeButton.style.transform = 'rotate(0deg)';
+    };
+
+    // Add start button
+    const startButton = document.createElement('button');
+    startButton.innerHTML = 'Begin Mission';
+    startButton.style.cssText = `
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      border: none;
+      color: white;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    `;
+    
+    startButton.onmouseover = () => {
+      startButton.style.transform = 'translateX(-50%) scale(1.05)';
+      startButton.style.boxShadow = '0 7px 30px rgba(0, 212, 255, 0.6)';
+    };
+    
+    startButton.onmouseout = () => {
+      startButton.style.transform = 'translateX(-50%) scale(1)';
+      startButton.style.boxShadow = '0 5px 20px rgba(0, 212, 255, 0.4)';
+    };
+
+    // Style internal elements
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes slideIn {
+        from { 
+          opacity: 0;
+          transform: translate(-50%, -45%);
+        }
+        to { 
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+      
+      #splashscreen h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #00d4ff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+      }
+      
+      #splashscreen h2 {
+        font-size: 20px;
+        text-align: center;
+        color: #00d4ff;
+        margin-bottom: 30px;
+        font-weight: 300;
+      }
+      
+      #splashscreen h3 {
+        color: #00d4ff;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-size: 24px;
+      }
+      
+      #splashscreen .story-content {
+        padding-bottom: 60px;
+        line-height: 1.6;
+      }
+      
+      #splashscreen p {
+        margin-bottom: 15px;
+        color: #e0e0e0;
+        font-size: 16px;
+      }
+      
+      #splashscreen ul {
+        margin: 20px 0;
+        padding-left: 20px;
+      }
+      
+      #splashscreen li {
+        margin-bottom: 12px;
+        color: #e0e0e0;
+        font-size: 16px;
+      }
+      
+      #splashscreen strong {
+        color: #ffffff;
+      }
+      
+      #splashscreen .ready-text {
+        text-align: center;
+        font-size: 20px;
+        color: #00d4ff;
+        margin-top: 30px;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      #splashscreen::-webkit-scrollbar {
+        width: 10px;
+      }
+      
+      #splashscreen::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+      
+      #splashscreen::-webkit-scrollbar-thumb {
+        background: #00d4ff;
+        border-radius: 10px;
+      }
+      
+      #splashscreen::-webkit-scrollbar-thumb:hover {
+        background: #0099cc;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Close function
+    const closeSplash = () => {
+      overlay.style.animation = 'fadeOut 0.3s ease-out';
+      existingSplash.style.animation = 'slideOut 0.3s ease-out';
+      
+      setTimeout(() => {
+        overlay.remove();
+        existingSplash.style.display = 'none';
+        // Store that splash has been shown
+        sessionStorage.setItem('splashShown', 'true');
+      }, 300);
+    };
+
+    closeButton.onclick = closeSplash;
+    startButton.onclick = closeSplash;
+    
+    // Allow ESC key to close
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        closeSplash();
+        document.removeEventListener('keydown', handleEsc);
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+
+    // Add elements to DOM
+    existingSplash.appendChild(closeButton);
+    existingSplash.appendChild(startButton);
+    document.body.appendChild(overlay);
+
+    // Add closing animations
+    const closeStyle = document.createElement('style');
+    closeStyle.textContent = `
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+      
+      @keyframes slideOut {
+        from { 
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+        to { 
+          opacity: 0;
+          transform: translate(-50%, -55%);
+        }
+      }
+    `;
+    document.head.appendChild(closeStyle);
+  }
+
+  initialize() {
     // Clear any lingering dialogues from previous page loads
     this.dialogueSystem.closeDialogue();
-    console.log('✅ Cleared any existing dialogues');
+
+    // Show splash screen only once per session
+    if (!sessionStorage.getItem('splashShown')) {
+      this.createSplashScreen();
+    }
 
     // Create badges
-    console.log('⏰ About to call createPlanetStatusBadges...');
     this.createPlanetStatusBadges();
-    console.log('✅ createPlanetStatusBadges call completed');
     
     /*
      * All planet navigation logic is now controlled in the planetNavigation.js file
@@ -637,16 +916,13 @@ class GameLevelHomePage {
      * - Reset progress functionality
      */
     initPlanetNavigation(this);
-    console.log('✅ Planet navigation initialized');
     
     for (let gameObject of this.gameEnv.gameObjects) {
       const objectId = gameObject.id || gameObject.canvas?.id;
       if (objectId === 'Chill Guy' || objectId === 'chill guy') {
         this.playerObject = gameObject;
-        console.log('Player found');
       } else if (objectId === 'Satellite' || objectId === 'satellite') {
         this.satelliteObject = gameObject;
-        console.log('Satellite found');
         gameObject.canvas.style.display = 'none';
       }
     }
@@ -657,8 +933,6 @@ class GameLevelHomePage {
         this.satelliteObject.canvas.style.display = isVisible ? 'none' : 'block';
       }
     });
-    
-    console.log('✅ ===== INITIALIZE COMPLETE =====');
   }
 
   update() {
