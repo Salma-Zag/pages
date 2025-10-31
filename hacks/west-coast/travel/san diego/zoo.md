@@ -19,17 +19,23 @@ date: 2025-10-21
     padding: 0;
   }
   
-  html, body {
-    height: 100%;
+  html {
+    scroll-behavior: smooth;
   }
   
   body {
     font-family: system-ui, -apple-system, sans-serif;
     background: linear-gradient(135deg, #00a8cc, #005f73);
+    min-height: 100vh;
+  }
+  
+  .animation-wrapper {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    padding: 40px 20px;
+    min-height: 100vh;
   }
   
   .container {
@@ -407,176 +413,187 @@ date: 2025-10-21
     0%, 100% { transform: rotateX(0deg); }
     50% { transform: rotateX(-30deg); }
   }
+
+  /* Audio Lesson Styles */
+  .audio-lesson {
+    font-family: Arial, sans-serif;
+    background: #2d5016;
+    color: #fff;
+    margin: 0;
+    padding: 40px 20px;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .audio-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .audio-lesson h1, 
+  .audio-lesson h2, 
+  .audio-lesson h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+  }
+
+  .audio-lesson p {
+    color: #fff;
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .audio-lesson pre {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .audio-lesson code {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .example-section {
+    margin: 40px 0;
+    padding: 30px;
+    background: #1a1a1a;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .example-section h2 {
+    color: #ffd700;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .example-section p {
+    color: #e0e0e0;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  audio {
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 8px;
+  }
+
+  .source-text {
+    font-size: 14px;
+    color: #b0b0b0;
+    margin-top: 15px;
+  }
 </style>
 </head>
 <body>
-  <div class="container">
-    <div class="zoo-scene">
-      <div class="sun"></div>
-      <div class="cloud"></div>
-      
-      <div class="zoo-sign">
-        <div class="zoo-sign-text">SAN DIEGO ZOO</div>
-      </div>
-      
-      <div class="zoo-trees"></div>
-      
-      <div class="animal panda">
-        <div class="panda-body">
-          <div class="panda-head">
-            <div class="panda-ear left"></div>
-            <div class="panda-ear right"></div>
-            <div class="panda-eye left"></div>
-            <div class="panda-eye right"></div>
+  <div class="animation-wrapper">
+    <div class="container">
+      <div class="zoo-scene">
+        <div class="sun"></div>
+        <div class="cloud"></div>
+        
+        <div class="zoo-sign">
+          <div class="zoo-sign-text">SAN DIEGO ZOO</div>
+        </div>
+        
+        <div class="zoo-trees"></div>
+        
+        <div class="animal panda">
+          <div class="panda-body">
+            <div class="panda-head">
+              <div class="panda-ear left"></div>
+              <div class="panda-ear right"></div>
+              <div class="panda-eye left"></div>
+              <div class="panda-eye right"></div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div class="animal giraffe">
-        <div class="giraffe-body">
-          <div class="giraffe-spot spot1"></div>
-          <div class="giraffe-spot spot2"></div>
-          <div class="giraffe-spot spot3"></div>
-        </div>
-        <div class="giraffe-neck">
-          <div class="giraffe-head">
-            <div class="giraffe-horn left"></div>
-            <div class="giraffe-horn right"></div>
+        
+        <div class="animal giraffe">
+          <div class="giraffe-body">
+            <div class="giraffe-spot spot1"></div>
+            <div class="giraffe-spot spot2"></div>
+            <div class="giraffe-spot spot3"></div>
           </div>
+          <div class="giraffe-neck">
+            <div class="giraffe-head">
+              <div class="giraffe-horn left"></div>
+              <div class="giraffe-horn right"></div>
+            </div>
+          </div>
+          <div class="giraffe-leg fl"></div>
+          <div class="giraffe-leg fr"></div>
         </div>
-        <div class="giraffe-leg fl"></div>
-        <div class="giraffe-leg fr"></div>
+        
+        <div class="animal lion">
+          <div class="lion-mane">
+            <div class="mane-piece m1"></div>
+            <div class="mane-piece m2"></div>
+            <div class="mane-piece m3"></div>
+            <div class="mane-piece m4"></div>
+            <div class="mane-piece m5"></div>
+            <div class="mane-piece m6"></div>
+          </div>
+          <div class="lion-head">
+            <div class="lion-eye left"></div>
+            <div class="lion-eye right"></div>
+            <div class="lion-nose"></div>
+          </div>
+          <div class="lion-body"></div>
+        </div>
+        
+        <div class="zoo-bird"></div>
+        <div class="zoo-path"></div>
       </div>
-      
-      <div class="animal lion">
-        <div class="lion-mane">
-          <div class="mane-piece m1"></div>
-          <div class="mane-piece m2"></div>
-          <div class="mane-piece m3"></div>
-          <div class="mane-piece m4"></div>
-          <div class="mane-piece m5"></div>
-          <div class="mane-piece m6"></div>
-        </div>
-        <div class="lion-head">
-          <div class="lion-eye left"></div>
-          <div class="lion-eye right"></div>
-          <div class="lion-nose"></div>
-        </div>
-        <div class="lion-body"></div>
-      </div>
-      
-      <div class="zoo-bird"></div>
-      <div class="zoo-path"></div>
     </div>
   </div>
-</body>
-</html>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>San Diego Zoo Audio Lesson</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-background: #2d5016;
-color: #fff;
-margin: 0;
-padding: 40px 20px;
-line-height: 1.6;
-font-size: 16px;
-}
-.container {
-max-width: 800px;
-margin: 0 auto;
-}
-h1, h2, h3 {
-color: #fff;
-font-size: 16px;
-font-weight: bold;
-margin: 20px 0 10px 0;
-}
-p {
-color: #fff;
-font-size: 16px;
-margin: 10px 0;
-}
-pre {
-background: #1a1a1a;
-padding: 15px;
-border-radius: 5px;
-overflow-x: auto;
-color: #fff;
-font-size: 14px;
-}
-code {
-color: #fff;
-font-size: 14px;
-}
-.example-section {
-margin: 40px 0;
-padding: 30px;
-background: #f3f4f6;
-border-radius: 16px;
-box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-max-width: 600px;
-margin-left: auto;
-margin-right: auto;
-text-align: center;
-}
-.example-section h2 {
-color: #1f2937;
-font-size: 20px;
-margin-bottom: 10px;
-}
-.example-section p {
-color: #4b5563;
-font-size: 16px;
-margin-bottom: 20px;
-}
-audio {
-width: 100%;
-margin: 20px 0;
-border-radius: 8px;
-}
-.source-text {
-font-size: 14px;
-color: #6b7280;
-margin-top: 15px;
-}
-</style>
-</head>
-<body>
-<div class="container">
-<h1>San Diego Zoo Audio Lesson</h1>
-<h2>Adding Audio to a Webpage</h2>
-<p>Learn how to add and control audio using HTML with sounds from the world-famous San Diego Zoo</p>
-<h3>1. What It Does</h3>
-<p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
-<h3>2. Prepare Files</h3>
-<p>Save audio files like:</p>
-<pre><code>/audio/lion-roar.mp3
+  <div class="audio-lesson">
+    <div class="audio-container">
+      <h1>San Diego Zoo Audio Lesson</h1>
+      <h2>Adding Audio to a Webpage</h2>
+      <p>Learn how to add and control audio using HTML with sounds from the world-famous San Diego Zoo</p>
+      
+      <h3>1. What It Does</h3>
+      <p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
+      
+      <h3>2. Prepare Files</h3>
+      <p>Save audio files like:</p>
+      <pre><code>/audio/lion-roar.mp3
 /audio/zoo-ambience.mp3
 /audio/wildlife-sounds.mp3
 /audio/safari-park.mp3</code></pre>
-<h3>3. Basic Structure</h3>
-<p>Each section should include a heading, a short description, and an audio player.</p>
-<pre><code>&lt;audio controls&gt;
+      
+      <h3>3. Basic Structure</h3>
+      <p>Each section should include a heading, a short description, and an audio player.</p>
+      <pre><code>&lt;audio controls&gt;
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
   Your browser does not support the audio element.
 &lt;/audio&gt;</code></pre>
-<div class="example-section">
-<h2>Audio you will be working with: San Diego Zoo Lion Roar</h2>
-<p>
-Listen to the powerful roar of the king of the jungle — one of the most iconic sounds from the San Diego Zoo's African savanna exhibit.
-</p>
-<audio controls>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<p class="source-text">Source: Lion roar and wildlife sounds</p>
-</div>
-</div>
+      
+      <div class="example-section">
+        <h2>Audio you will be working with: San Diego Zoo Lion Roar</h2>
+        <p>
+          Listen to the powerful roar of the king of the jungle — one of the most iconic sounds from the San Diego Zoo's African savanna exhibit.
+        </p>
+        <audio controls>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <p class="source-text">Source: Lion roar and wildlife sounds</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
