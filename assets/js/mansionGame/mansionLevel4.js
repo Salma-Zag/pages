@@ -644,6 +644,12 @@ class MansionLevel4 {
         ];
 
         this.gameEnv = gameEnv;
+        
+        // Adding Music
+        this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
+        this.backgroundMusic.loop = true;
+        this.backgroundMusic.volume = 0.3; // Set volume to a reasonable level
+        this.backgroundMusic.play();
     }
 
     // Update method called every frame by the game engine
@@ -653,13 +659,6 @@ class MansionLevel4 {
     }
 
     // Removed collision checking method - was causing issues with player movement
-  }
-    // Adding Music
-    this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
-    this.backgroundMusic.loop = true;
-    this.backgroundMusic.volume = 0.3; // Set volume to a reasonable level
-    this.backgroundMusic.play();
-
-
+}
 
 export default MansionLevel4;
