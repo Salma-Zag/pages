@@ -110,7 +110,7 @@ class MansionLevel5 {
             }
 
             // Move towards nearest player
-            const speed = 2.5; // Adjust speed as needed
+            const speed = 2; // Adjust speed as needed
             const dx = nearest.position.x - this.position.x;
             const dy = nearest.position.y - this.position.y;
             const angle = Math.atan2(dy, dx);
