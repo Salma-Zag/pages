@@ -482,20 +482,26 @@ date: 2025-10-30
         }
 
         function fillAll() {
-            const narrow = document.getElementById('prompt-narrow').value.trim();
-            const general = document.getElementById('prompt-general').value.trim();
-            const sup = document.getElementById('prompt-super').value.trim();
-            if (!narrow && !general && !sup) {
-                const demo = 'Plan a 3-day beginner coding workshop focused on HTML, CSS, and JavaScript.';
-                document.getElementById('prompt-narrow').value = demo;
-                document.getElementById('prompt-general').value = demo;
-                document.getElementById('prompt-super').value = demo;
-            } else {
-                const first = narrow || general || sup || '';
-                if (!narrow) document.getElementById('prompt-narrow').value = first;
-                if (!general) document.getElementById('prompt-general').value = first;
-                if (!sup) document.getElementById('prompt-super').value = first;
-            }
+            const narrowEl = document.getElementById('prompt-narrow');
+            const generalEl = document.getElementById('prompt-general');
+            const superEl = document.getElementById('prompt-super');
+            const narrow = narrowEl?.value.trim();
+            const general = generalEl?.value.trim();
+            const sup = superEl?.value.trim();
+
+            // Distinct, type-appropriate demo prompts for each AI type
+            const demos = {
+                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
+                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
+                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
+            };
+
+            // Only fill the textareas that are currently empty, and ensure each gets a prompt appropriate to its AI type
+            if (!narrow) narrowEl.value = demos.narrow;
+            if (!general) generalEl.value = demos.general;
+            if (!sup) superEl.value = demos.super;
+
+            // Generate outputs for all three types
             generateResponse('narrow');
             generateResponse('general');
             generateResponse('super');
