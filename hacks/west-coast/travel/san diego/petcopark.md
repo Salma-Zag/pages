@@ -497,3 +497,116 @@ date: 2025-10-21
   </div>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Petco Park Audio Lesson</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #2874a6;
+color: #fff;
+margin: 0;
+padding: 40px 20px;
+line-height: 1.6;
+font-size: 16px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #fff;
+            font-size: 14px;
+        }
+        code {
+            color: #fff;
+            font-size: 14px;
+        }
+        .example-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f3f4f6;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .example-section h2 {
+            color: #1f2937;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .example-section p {
+            color: #4b5563;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .source-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 15px;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Petco Park Audio Lesson</h1>
+<h2>Adding Audio to a Webpage</h2>
+<p>Learn how to add and control audio using HTML with sounds from San Diego's Petco Park</p>
+
+        <h3>1. What It Does</h3>
+        <p>Use the &lt;audio&gt; tag to play clips (music, nature, narration) directly in the browser.</p>
+
+        <h3>2. Prepare Files</h3>
+        <p>Save audio files like:</p>
+        <pre><code>/audio/petco-park.mp3
+/audio/san-diego-zoo.mp3
+/audio/balboa-park.mp3
+/audio/la-jolla.mp3</code></pre>
+
+        <h3>3. Basic Structure</h3>
+        <p>Each section should include a heading, a short description, and an audio player.</p>
+        <pre><code>&lt;audio controls&gt;
+  &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
+  Your browser does not support the audio element.
+&lt;/audio&gt;</code></pre>
+
+        <div class="example-section">
+            <h2>Audio you will be working with: Petco Park Atmosphere</h2>
+            <p>
+                Listen to authentic game-day sounds from the Padres' home stadium — cheers, announcers, and that unmistakable Petco Park energy.
+            </p>
+            <audio controls>
+                <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p class="source-text">Source: Baseball crowd cheer sound effect</p>
+        </div>
+    </div>
+</body>
+</html>
