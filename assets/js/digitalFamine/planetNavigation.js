@@ -26,18 +26,33 @@ export function initPlanetNavigation(gameInstance) {
   const paragraphs = footer.querySelectorAll('p');
   paragraphs.forEach(p => p.remove());
   
-  // Make footer a flex container
+  // Make footer a flex container with three equal columns
   footer.style.display = 'flex';
-  footer.style.justifyContent = 'space-between';
+  footer.style.justifyContent = 'center';
   footer.style.alignItems = 'center';
-  footer.style.flexWrap = 'wrap';
-  footer.style.width = '100vw';
-  footer.style.maxWidth = '100vw';
+  footer.style.width = '100%';
   footer.style.boxSizing = 'border-box';
-  footer.style.overflowX = 'auto';
   footer.style.padding = '10px 20px';
+  footer.style.gap = '10px';
   
-  // Previous Planet Button (far left)
+  // Create container for three equal sections
+  const footerContainer = document.createElement('div');
+  footerContainer.style.cssText = `
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+    gap: 20px;
+  `;
+  
+  // Left section (Previous button)
+  const leftSection = document.createElement('div');
+  leftSection.style.cssText = `
+    display: flex;
+    justify-content: flex-start;
+  `;
+  
   const prevBtn = document.createElement('button');
   prevBtn.id = 'prev-planet-btn';
   prevBtn.innerHTML = '⬅️ Previous';
@@ -52,20 +67,23 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   prevBtn.onmouseover = () => prevBtn.style.transform = 'scale(1.05)';
   prevBtn.onmouseout = () => prevBtn.style.transform = 'scale(1)';
   prevBtn.onclick = () => navigateToPreviousPlanet(gameInstance);
+  leftSection.appendChild(prevBtn);
   
-  // Create center container for Cheat and Reset buttons
-  const centerContainer = document.createElement('div');
-  centerContainer.style.display = 'flex';
-  centerContainer.style.justifyContent = 'center';
-  centerContainer.style.alignItems = 'center';
-  centerContainer.style.gap = '10px';
-  centerContainer.style.flex = '0 1 auto';
+  // Center section (Cheat and Reset buttons)
+  const centerSection = document.createElement('div');
+  centerSection.style.cssText = `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  `;
   
-  // Cheat Menu Button (center-left)
+  // Cheat Menu Button
   const cheatBtn = document.createElement('button');
   cheatBtn.id = 'cheat-btn';
   cheatBtn.innerHTML = '🎮 Cheat Menu';
@@ -80,12 +98,13 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   cheatBtn.onmouseover = () => cheatBtn.style.transform = 'scale(1.05)';
   cheatBtn.onmouseout = () => cheatBtn.style.transform = 'scale(1)';
   cheatBtn.onclick = () => showCheatMenu(gameInstance);
   
-  // Reset Progress Button (center-right)
+  // Reset Progress Button
   const resetBtn = document.createElement('button');
   resetBtn.id = 'reset-progress-btn';
   resetBtn.innerHTML = '🔄 Reset';
@@ -100,12 +119,22 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   resetBtn.onmouseover = () => resetBtn.style.transform = 'scale(1.05)';
   resetBtn.onmouseout = () => resetBtn.style.transform = 'scale(1)';
   resetBtn.onclick = () => resetAllProgress(gameInstance);
   
-  // Next Planet Button (far right)
+  centerSection.appendChild(cheatBtn);
+  centerSection.appendChild(resetBtn);
+  
+  // Right section (Next button)
+  const rightSection = document.createElement('div');
+  rightSection.style.cssText = `
+    display: flex;
+    justify-content: flex-end;
+  `;
+  
   const nextBtn = document.createElement('button');
   nextBtn.id = 'next-planet-btn';
   nextBtn.innerHTML = 'Next ➡️';
@@ -120,22 +149,36 @@ export function initPlanetNavigation(gameInstance) {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
   `;
   nextBtn.onmouseover = () => nextBtn.style.transform = 'scale(1.05)';
   nextBtn.onmouseout = () => nextBtn.style.transform = 'scale(1)';
   nextBtn.onclick = () => navigateToNextPlanet(gameInstance);
+  rightSection.appendChild(nextBtn);
   
-  // Add buttons to center container
-  centerContainer.appendChild(cheatBtn);
-  centerContainer.appendChild(resetBtn);
+  // Add sections to container
+  footerContainer.appendChild(leftSection);
+  footerContainer.appendChild(centerSection);
+  footerContainer.appendChild(rightSection);
   
-  // Clear footer before adding new layout
+  // Clear footer and add new container
   footer.innerHTML = '';
+  footer.appendChild(footerContainer);
   
-  // Add buttons to footer in correct positions
-  footer.appendChild(prevBtn); // far left
-  footer.appendChild(centerContainer); // center
-  footer.appendChild(nextBtn); // far right
+  // Add media query for smaller screens
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = `
+    @media (max-width: 768px) {
+      #masterFooter > div {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+      #masterFooter > div > div {
+        justify-content: center !important;
+      }
+    }
+  `;
+  document.head.appendChild(styleSheet);
   
   console.log('✅ Planet navigation buttons added to footer');
 }
@@ -192,22 +235,21 @@ function showCheatMenu(gameInstance) {
     document.getElementById('cheatsModal').style.display = 'flex';
     return;
   }
-  
-  // Create modal overlay
+  // Create modal overlay (use fixed positioning so it's consistently centered)
   const modal = document.createElement('div');
   modal.id = 'cheatsModal';
   modal.style.cssText = `
     display: flex;
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    z-index: 9999;
+    z-index: 99999;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(5px);
+    pointer-events: auto;
   `;
   
   // Create menu container
@@ -284,7 +326,7 @@ function showCheatMenu(gameInstance) {
     };
     btn.onclick = () => {
       cheatCompletePlanet(gameInstance, planet.key);
-      document.body.removeChild(modal);
+      if (modal.parentNode) modal.parentNode.removeChild(modal);
     };
     menu.appendChild(btn);
   });
@@ -317,7 +359,7 @@ function showCheatMenu(gameInstance) {
   };
   completeAllBtn.onclick = () => {
     cheatCompleteAll(gameInstance);
-    document.body.removeChild(modal);
+    if (modal.parentNode) modal.parentNode.removeChild(modal);
   };
   menu.appendChild(completeAllBtn);
   
@@ -340,16 +382,17 @@ function showCheatMenu(gameInstance) {
   `;
   closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(255, 255, 255, 0.2)';
   closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(255, 255, 255, 0.1)';
-  closeBtn.onclick = () => document.body.removeChild(modal);
+  closeBtn.onclick = () => { if (modal.parentNode) modal.parentNode.removeChild(modal); };
   menu.appendChild(closeBtn);
   
   modal.appendChild(menu);
+  // Always append to body so fixed positioning centers relative to viewport
   document.body.appendChild(modal);
-  
+
   // Close modal when clicking outside
   modal.onclick = (e) => {
-    if (e.target === modal) {
-      document.body.removeChild(modal);
+    if (e.target === modal && modal.parentNode) {
+      modal.parentNode.removeChild(modal);
     }
   };
 }
@@ -443,4 +486,3 @@ function resetAllProgress(gameInstance) {
     console.log('Progress reset. Reloading game...');
   }
 }
-
