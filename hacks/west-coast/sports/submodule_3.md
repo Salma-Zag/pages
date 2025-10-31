@@ -13,14 +13,12 @@ date: 2025-10-21
 microblog: True
 ---
  
-# Submodule 3
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF Sports API Learning Demo</title>
+    <title>San Francisco - Making API Calls</title>
     <style>
         * {
             margin: 0;
@@ -30,24 +28,25 @@ microblog: True
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: #f5f5f5;
+            color: #333;
             padding: 20px;
-            min-height: 100vh;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .header {
-            background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 100%);
+            background: linear-gradient(135deg, #AA0000 0%, #B3995D 100%);
             color: white;
             padding: 40px;
+            border-radius: 15px;
             text-align: center;
-            border-radius: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(170, 0, 0, 0.2);
         }
 
         .header h1 {
@@ -57,145 +56,136 @@ microblog: True
 
         .header p {
             font-size: 1.2em;
-            opacity: 0.9;
-            margin-bottom: 20px;
+            opacity: 0.95;
         }
 
-        .sports-intro {
+        .section {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .sports-intro h2 {
-            color: #2c3e50;
+        .section h2 {
+            color: #AA0000;
             margin-bottom: 20px;
             font-size: 1.8em;
-        }
-
-        .stadium-quick-facts {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .stadium-fact {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #3498db;
-        }
-
-        .warriors-fact {
-            border-left-color: #1D428A;
-        }
-
-        .niners-fact {
-            border-left-color: #AA0000;
-        }
-
-        .stadium-fact h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .step-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .step-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
+            border-bottom: 3px solid #B3995D;
+            padding-bottom: 10px;
         }
 
         .step-number {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            display: inline-block;
+            background: #AA0000;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
+            text-align: center;
+            line-height: 40px;
             font-weight: bold;
-            margin-right: 20px;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            margin-right: 15px;
+            font-size: 1.2em;
         }
 
-        .step-title h2 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .step-title p {
-            color: #7f8c8d;
-            font-size: 1.1em;
-        }
-
-        .sports-connection {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .explanation {
+            background: #f8f9fa;
             padding: 20px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            border-left: 5px solid #B3995D;
+            margin: 20px 0;
         }
 
-        .sports-connection h3 {
+        .explanation h3 {
+            color: #AA0000;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .explanation p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .stadium-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stadium-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border: 3px solid #dee2e6;
+            transition: all 0.3s;
+        }
+
+        .stadium-card:hover {
+            border-color: #B3995D;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .stadium-card h3 {
+            color: #AA0000;
             margin-bottom: 10px;
             font-size: 1.3em;
         }
 
-        .sports-connection p {
-            line-height: 1.6;
-            opacity: 0.95;
+        .stadium-card .info {
+            color: #666;
+            margin: 5px 0;
         }
 
-        .api-key-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #3498db;
+        .interactive-box {
+            background: #f8f9fa;
+            padding: 25px;
             border-radius: 10px;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            border: 2px dashed #B3995D;
         }
 
-        .generate-key-btn {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        .interactive-box h3 {
+            color: #AA0000;
+            margin-bottom: 15px;
+        }
+
+        .key-display {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #dee2e6;
+            margin: 15px 0;
+            color: #333;
+            font-size: 1em;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #AA0000 0%, #B3995D 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1em;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-weight: bold;
-            margin-right: 10px;
+            cursor: pointer;
+            font-size: 1em;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
         }
 
-        .generate-key-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4);
+        .generate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(170, 0, 0, 0.3);
         }
 
         .url-builder {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .url-part {
@@ -205,17 +195,21 @@ microblog: True
         .url-part label {
             display: block;
             font-weight: bold;
-            color: #2c3e50;
+            color: #AA0000;
             margin-bottom: 5px;
         }
 
-        .url-part input, .url-part select {
+        .url-part select, .url-part input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid #dee2e6;
             border-radius: 8px;
             font-size: 1em;
-            font-family: 'Courier New', monospace;
+        }
+
+        .url-part select:focus, .url-part input:focus {
+            outline: none;
+            border-color: #B3995D;
         }
 
         .constructed-url {
@@ -224,42 +218,37 @@ microblog: True
             padding: 20px;
             border-radius: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 1.1em;
+            font-size: 0.95em;
             word-break: break-all;
             margin-top: 15px;
+            min-height: 60px;
         }
 
-        .api-call-btn {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        .call-btn {
+            background: #B3995D;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
             font-size: 1.1em;
-            font-weight: bold;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 15px;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
         }
 
-        .api-call-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        .call-btn:hover:not(:disabled) {
+            background: #9d864f;
+            transform: scale(1.02);
         }
 
-        .api-call-btn:disabled {
-            background: #95a5a6;
+        .call-btn:disabled {
+            background: #ccc;
             cursor: not-allowed;
-            transform: none;
         }
 
         .response-area {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #ddd;
             margin-top: 20px;
             display: none;
         }
@@ -280,22 +269,26 @@ microblog: True
             }
         }
 
-        .response-header {
-            color: #27ae60;
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #AA0000;
             font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-            display: flex;
-            align-items: center;
         }
 
-        .status-badge {
-            background: #27ae60;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-left: 10px;
-            font-size: 0.9em;
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #AA0000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .json-display {
@@ -304,148 +297,277 @@ microblog: True
             padding: 20px;
             border-radius: 8px;
             font-family: 'Courier New', monospace;
-            font-size: 0.95em;
+            font-size: 0.9em;
             white-space: pre-wrap;
-            margin-bottom: 20px;
-            max-height: 400px;
+            max-height: 300px;
             overflow-y: auto;
+            margin: 15px 0;
         }
 
         .parsed-data {
             background: white;
-            padding: 20px;
+            border: 3px solid #B3995D;
             border-radius: 10px;
-            border: 2px solid #3498db;
+            padding: 20px;
+            margin-top: 15px;
         }
 
         .data-row {
             display: flex;
             justify-content: space-between;
             padding: 12px;
-            border-bottom: 1px solid #ecf0f1;
             background: #f8f9fa;
-            margin-bottom: 8px;
-            border-radius: 8px;
-        }
-
-        .data-row:last-child {
-            border-bottom: none;
+            border-radius: 6px;
+            margin-bottom: 10px;
         }
 
         .data-label {
             font-weight: bold;
-            color: #2c3e50;
+            color: #AA0000;
         }
 
         .data-value {
-            color: #3498db;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            border-radius: 8px;
+            color: #155724;
+            margin: 15px 0;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #AA0000 0%, #B3995D 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(170, 0, 0, 0.2);
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
             font-weight: bold;
         }
 
-        .info-box {
-            background: #e8f4f8;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-
-        .info-box h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .info-box p {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .stadium-comparison {
+        /* Quiz Styles */
+        .quiz-section {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            border: 3px solid #B3995D;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .comparison-card {
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .warriors-card {
-            background: linear-gradient(135deg, rgba(29, 66, 138, 0.1) 0%, rgba(253, 185, 39, 0.1) 100%);
-            border: 2px solid #1D428A;
-        }
-
-        .niners-card {
-            background: linear-gradient(135deg, rgba(170, 0, 0, 0.1) 0%, rgba(179, 153, 93, 0.1) 100%);
-            border: 2px solid #AA0000;
-        }
-
-        .lessons-learned {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .lessons-learned h2 {
+        .quiz-section h2 {
+            color: #AA0000;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-size: 2em;
         }
 
-        .lessons-learned ul {
-            line-height: 2;
-            font-size: 1.1em;
-            list-style: none;
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
         }
 
-        .lessons-learned li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
+        .quiz-question.active {
+            display: block;
+            animation: slideIn 0.3s ease-out;
         }
 
-        .lessons-learned li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
+        .question-number {
+            background: #B3995D;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .loading {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
+            margin-bottom: 15px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .question-text {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .quiz-option:hover {
+            border-color: #B3995D;
+            background: #fff9e6;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            border-color: #AA0000;
+            background: #ffe6e6;
+            font-weight: bold;
+        }
+
+        .quiz-option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .quiz-feedback.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #AA0000 0%, #B3995D 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+            display: none;
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .quiz-complete {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .quiz-complete.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .quiz-score {
+            font-size: 3em;
+            color: #AA0000;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .restart-btn {
+            background: #B3995D;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .restart-btn:hover {
+            background: #9d864f;
+            transform: scale(1.05);
+        }
+
+        .drag-item {
+            background: white;
+            border: 2px solid #AA0000;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: move;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .drag-item:hover {
+            background: #ffe6e6;
+        }
+
+        .drop-zone {
+            background: white;
+            border: 2px dashed #dee2e6;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .drop-zone.filled {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .drop-zone.drag-over {
+            background: #fff9e6;
+            border-color: #B3995D;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .stadium-quick-facts, .comparison-grid {
+            .stadium-cards {
                 grid-template-columns: 1fr;
             }
         }
@@ -454,232 +576,147 @@ microblog: True
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏟️ Learning APIs Through San Francisco Sports</h1>
-            <p>Understanding API Workflows Using Real Stadium Data</p>
-            <p style="font-size: 0.9em; opacity: 0.8;">Chase Center (Warriors) & Levi's Stadium (49ers)</p>
+            <h1>🏟️ Stop 2: San Francisco</h1>
+            <p>Learn How to Make Complete API Calls</p>
         </div>
 
-        <div class="sports-intro">
-            <h2>🎯 Why Use Sports Data to Learn APIs?</h2>
-            <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">
-                San Francisco Bay Area sports provide the perfect example for learning how APIs work in the real world. 
-                Just like sports statistics apps (ESPN, Bleacher Report) need to get live game data, scores, and player stats, 
-                we'll use API concepts to collect data about two iconic Bay Area stadiums.
-            </p>
-
-            <div class="stadium-quick-facts">
-                <div class="stadium-fact warriors-fact">
+        <div class="section">
+            <h2>Meet the San Francisco Stadiums</h2>
+            <div class="stadium-cards">
+                <div class="stadium-card">
                     <h3>🏀 Chase Center</h3>
-                    <p><strong>Team:</strong> Golden State Warriors<br>
-                    <strong>Capacity:</strong> 18,064 fans<br>
-                    <strong>Opened:</strong> 2019<br>
-                    <strong>Location:</strong> San Francisco</p>
+                    <div class="info"><strong>Team:</strong> Golden State Warriors</div>
+                    <div class="info"><strong>Capacity:</strong> 18,064 fans</div>
+                    <div class="info"><strong>Opened:</strong> 2019</div>
+                    <div class="info"><strong>Championships:</strong> 7 NBA Titles</div>
                 </div>
-
-                <div class="stadium-fact niners-fact">
+                <div class="stadium-card">
                     <h3>🏈 Levi's Stadium</h3>
-                    <p><strong>Team:</strong> San Francisco 49ers<br>
-                    <strong>Capacity:</strong> 68,500 fans<br>
-                    <strong>Opened:</strong> 2014<br>
-                    <strong>Location:</strong> Santa Clara</p>
+                    <div class="info"><strong>Team:</strong> San Francisco 49ers</div>
+                    <div class="info"><strong>Capacity:</strong> 68,500 fans</div>
+                    <div class="info"><strong>Opened:</strong> 2014</div>
+                    <div class="info"><strong>Championships:</strong> 5 Super Bowls</div>
                 </div>
             </div>
         </div>
 
-        <div class="step-section">
-            <div class="step-header">
-                <div class="step-number">1</div>
-                <div class="step-title">
-                    <h2>🔑 Step 1: Requesting Access (Authentication)</h2>
-                    <p>Getting Permission to Access Stadium Data</p>
-                </div>
+        <div class="section">
+            <h2><span class="step-number">1</span> Get Your API Key</h2>
+            <div class="explanation">
+                <h3>What is an API Key?</h3>
+                <p>An API key is like a special password that proves you have permission to access data. Think of it like a stadium pass - without it, you can't get in! Real sports apps need API keys to get live scores and stats.</p>
             </div>
 
-            <div class="sports-connection">
-                <h3>🏟️ Real-World Example: Sports Data Access</h3>
-                <p>
-                    Imagine you're building a sports app that shows live Warriors scores or 49ers game stats. 
-                    Before you can access stadium information (attendance, ticket prices, game schedules), you need 
-                    permission from the data provider. That's what an API key does - it's like getting a press pass 
-                    to access the stadium's official data!
-                </p>
+            <div class="interactive-box">
+                <h3>🔑 Generate Your Access Key:</h3>
+                <div class="key-display" id="keyDisplay">Click the button below to generate your API key...</div>
+                <button class="generate-btn" onclick="generateKey()">🔓 Generate API Key</button>
+                <div id="keySuccess"></div>
             </div>
-            
-            <div class="info-box">
-                <h3>Why Do We Need Authentication?</h3>
-                <p>API keys identify who's requesting the data (like checking your ID at a game), prevent unauthorized 
-                access, track usage limits (like season ticket allotments), and keep the data secure.</p>
-            </div>
-
-            <input type="text" id="apiKey" class="api-key-input" placeholder="Your API Key will appear here..." readonly>
-            
-            <button class="generate-key-btn" onclick="generateAPIKey()">
-                🔓 Generate API Key (Get Stadium Data Access)
-            </button>
-            
-            <div id="keyStatus"></div>
         </div>
 
-        <div class="step-section">
-            <div class="step-header">
-                <div class="step-number">2</div>
-                <div class="step-title">
-                    <h2>📝 Step 2: Constructing the Request (The URL)</h2>
-                    <p>Building the Query to Get Specific Stadium Information</p>
-                </div>
+        <div class="section">
+            <h2><span class="step-number">2</span> Build Your API Request</h2>
+            <div class="explanation">
+                <h3>What is an API Request?</h3>
+                <p>An API request is like asking a specific question. You need to tell the computer: WHERE to look (URL), WHAT you want (which stadium), and WHO you are (your API key). Let's build one!</p>
             </div>
 
-            <div class="sports-connection">
-                <h3>🏟️ Real-World Example: Requesting Specific Game Data</h3>
-                <p>
-                    Think about searching for Warriors stats on ESPN.com. You specify WHAT you want 
-                    (Warriors team stats), WHEN you want it (2024 season), and in WHAT FORMAT (web page). 
-                    Similarly, our API URL specifies which stadium's data we want and how we want it delivered (JSON format).
-                </p>
-            </div>
-
-            <div class="info-box">
-                <h3>Parts of an API Request URL</h3>
-                <p>
-                    <strong>Base URL:</strong> https://api.bayareasports.com (Main address, like NBA.com)<br>
-                    <strong>Endpoint:</strong> /v1/stadium/chase_center (Specific page, like /warriors/stats)<br>
-                    <strong>Query Parameters:</strong> ?format=json&season=2024 (Extra filters and options)
-                </p>
-            </div>
-
-            <div class="url-builder">
-                <div class="url-part">
-                    <label>Base URL (Bay Area Sports API Server):</label>
-                    <input type="text" id="baseUrl" value="https://api.bayareasports.com" readonly>
-                </div>
-                
-                <div class="url-part">
-                    <label>Endpoint (Which Stadium Do You Want Data For?):</label>
-                    <select id="endpoint" onchange="updateURL()">
-                        <option value="">-- Select a Stadium --</option>
-                        <option value="/v1/stadium/chase_center">🏀 Chase Center (Golden State Warriors)</option>
-                        <option value="/v1/stadium/levis_stadium">🏈 Levi's Stadium (San Francisco 49ers)</option>
-                    </select>
-                </div>
-                
-                <div class="url-part">
-                    <label>Query Parameters (Additional Filters):</label>
-                    <input type="text" id="queryParams" value="format=json&season=2024" onkeyup="updateURL()">
-                </div>
-                
-                <div class="constructed-url" id="constructedUrl">
-                    Select a stadium above to see the complete API request URL...
+            <div class="interactive-box">
+                <h3>🔨 Build Your Request URL:</h3>
+                <div class="url-builder">
+                    <div class="url-part">
+                        <label>Step 1: Select which stadium data you want:</label>
+                        <select id="stadiumSelect" onchange="updateURL()">
+                            <option value="">-- Choose a stadium --</option>
+                            <option value="chase_center">🏀 Chase Center (Warriors)</option>
+                            <option value="levis_stadium">🏈 Levi's Stadium (49ers)</option>
+                        </select>
+                    </div>
+                    <div class="constructed-url" id="constructedURL">
+                        Select a stadium above to see your API request URL...
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="step-section">
-            <div class="step-header">
-                <div class="step-number">3</div>
-                <div class="step-title">
-                    <h2>🚀 Step 3: Sending the Request & Receiving the Response</h2>
-                    <p>Communicating with the Server to Get Stadium Data</p>
-                </div>
+        <div class="section">
+            <h2><span class="step-number">3</span> Send the Request & Get Data</h2>
+            <div class="explanation">
+                <h3>Making the API Call</h3>
+                <p>When you click "Send Request," your computer asks the server: "Give me information about this stadium." The server looks it up and sends back the data in JSON format - a way computers organize information.</p>
             </div>
 
-            <div class="sports-connection">
-                <h3>🏟️ Real-World Example: Live Game Updates</h3>
-                <p>
-                    When you check the Warriors score on your phone during a game, your app sends a request 
-                    to a server: "Give me the current score for Warriors vs Lakers." The server responds with 
-                    the data: "Warriors 102, Lakers 98, 3rd Quarter." This happens instantly, just like our API call!
-                </p>
-            </div>
-
-            <div class="info-box">
-                <h3>How HTTP Requests Work</h3>
-                <p>
-                    When you click "Send Request," your browser makes an HTTP GET request (like asking a question). 
-                    The server processes it and sends back:<br>
-                    • <strong>Status Code:</strong> 200 = Success (data found), 404 = Not Found, 500 = Server Error<br>
-                    • <strong>Data:</strong> Stadium information in JSON format (easy for computers to read)
-                </p>
-            </div>
-
-            <button class="api-call-btn" id="sendRequestBtn" onclick="sendAPIRequest()" disabled>
-                🚀 Send API Request (Get Stadium Data Now!)
+            <button class="call-btn" id="sendBtn" onclick="sendRequest()" disabled>
+                🚀 Send API Request
             </button>
 
             <div id="responseArea" class="response-area"></div>
         </div>
 
-        <div class="step-section">
-            <div class="step-header">
-                <div class="step-number">4</div>
-                <div class="step-title">
-                    <h2>📊 Step 4: Parsing and Utilizing the Data</h2>
-                    <p>Converting JSON into Usable Information for Analysis</p>
-                </div>
-            </div>
-
-            <div class="sports-connection">
-                <h3>🏟️ Real-World Example: Stats Analysis</h3>
-                <p>
-                    Sports analysts take raw game data (points, rebounds, assists) and create meaningful insights: 
-                    "Curry averaged 28 points per game" or "49ers won 75% of home games." Similarly, we'll take 
-                    raw stadium data and extract useful comparisons: Which stadium is bigger? Which team has more championships?
-                </p>
-            </div>
-
-            <div class="info-box">
-                <h3>What is Parsing?</h3>
-                <p>
-                    Parsing converts raw JSON text into structured data your program can use. Instead of reading 
-                    text like '{"capacity": 18064}', your code can now use <code>stadium.capacity</code> to get the 
-                    number 18,064 and perform calculations, create charts, or make comparisons!
-                </p>
-            </div>
-
-            <div id="parsedDataArea" class="response-area"></div>
+        <div class="key-takeaway">
+            <p>🎯 <span class="highlight">What You Learned:</span> Making an API call has 3 steps: Get permission (API key), Build your request (URL), Send it and receive data (JSON response). Every app that shows live sports data does exactly this!</p>
         </div>
 
-        <div class="stadium-comparison" id="comparisonSection" style="display: none;">
-            <h2 style="color: #2c3e50; text-align: center; margin-bottom: 25px;">
-                📊 Data Analysis: Comparing Both Stadiums
-            </h2>
-
-            <div class="comparison-grid">
-                <div class="comparison-card warriors-card">
-                    <h3 style="color: #1D428A; margin-bottom: 15px;">🏀 Chase Center Stats</h3>
-                    <div id="warriorsStats"></div>
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <h2>🎯 Test Your Knowledge</h2>
+            
+            <div class="quiz-question active" id="q1">
+                <div class="question-number">Question 1 of 3</div>
+                <div class="question-text">What is an API key used for?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(1, 0, false)">A) To make your computer faster</div>
+                    <div class="quiz-option" onclick="selectOption(1, 1, true)">B) To prove you have permission to access the data</div>
+                    <div class="quiz-option" onclick="selectOption(1, 2, false)">C) To encrypt your password</div>
+                    <div class="quiz-option" onclick="selectOption(1, 3, false)">D) To store data on your computer</div>
                 </div>
-
-                <div class="comparison-card niners-card">
-                    <h3 style="color: #AA0000; margin-bottom: 15px;">🏈 Levi's Stadium Stats</h3>
-                    <div id="ninersStats"></div>
-                </div>
+                <div class="quiz-feedback" id="feedback1"></div>
+                <button class="next-btn" id="next1" onclick="nextQuestion(2)">Next Question →</button>
             </div>
 
-            <div class="info-box" style="margin-top: 20px;">
-                <h3>🎯 Key Insights from the Data:</h3>
-                <p>
-                    <strong>Capacity:</strong> Levi's Stadium holds almost 4x more fans than Chase Center (68,500 vs 18,064) 
-                    because football fields require much more space than basketball courts.<br><br>
-                    
-                    <strong>Cost:</strong> Both stadiums cost over $1 billion to build, showing that modern sports venues 
-                    require massive investment regardless of the sport.<br><br>
-                    
-                    <strong>Championships:</strong> The Warriors have 7 NBA titles while the 49ers have 5 Super Bowl wins, 
-                    making the Bay Area one of the most successful sports regions in America!
-                </p>
+            <div class="quiz-question" id="q2">
+                <div class="question-number">Question 2 of 3</div>
+                <div class="question-text">Drag the steps of making an API call into the correct order:</div>
+                <div style="margin: 20px 0;">
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #AA0000;">Available Steps (drag these):</strong>
+                        <div id="draggables">
+                            <div class="drag-item" draggable="true" data-step="3">Receive the data response</div>
+                            <div class="drag-item" draggable="true" data-step="1">Get an API key</div>
+                            <div class="drag-item" draggable="true" data-step="2">Build the request URL</div>
+                        </div>
+                    </div>
+                    <div>
+                        <strong style="color: #AA0000;">Correct Order (drop here):</strong>
+                        <div class="drop-zone" data-position="1">1st: Drop here</div>
+                        <div class="drop-zone" data-position="2">2nd: Drop here</div>
+                        <div class="drop-zone" data-position="3">3rd: Drop here</div>
+                    </div>
+                </div>
+                <button class="generate-btn" onclick="checkDragDrop()" style="margin-top: 20px;">Check Answer</button>
+                <div class="quiz-feedback" id="feedback2"></div>
+                <button class="next-btn" id="next2" onclick="nextQuestion(3)">Next Question →</button>
             </div>
-        </div>
 
-        <div class="lessons-learned">
-            <h2>💡 Lessons Learned: APIs + Sports Data</h2>
-            <ul>
-                <li><strong>Authentication:</strong> You need permission (API keys) to access sports data, just like needing tickets to enter a stadium</li>
-                <li><strong>API Requests:</strong> Constructing URLs is like filling out a specific request form: "Show me Warriors stats for 2024 season"</li>
-                <li><strong>HTTP Communication:</strong> APIs use the same technology that loads websites - your browser talks to servers using HTTP</li>
-                <li><strong>JSON Format:</strong> Sports data comes back as JSON, a format that's easy for computers to read and humans to understand</li>
-                <li><strong>Data Analysis:</strong> Raw numbers become insights when you compare them: capacity differences, championship counts, construction costs</li>
-                <li><strong>Real-World Applications:</strong> Every sports app (ESPN, The Athletic, Bleacher Report) uses APIs exactly like this to get live scores, stats, and news!</li>
-            </ul>
+            <div class="quiz-question" id="q3">
+                <div class="question-number">Question 3 of 3</div>
+                <div class="question-text">Which stadium has a larger capacity?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(3, 0, false)">A) Chase Center (18,064 fans)</div>
+                    <div class="quiz-option" onclick="selectOption(3, 1, true)">B) Levi's Stadium (68,500 fans)</div>
+                    <div class="quiz-option" onclick="selectOption(3, 2, false)">C) They have the same capacity</div>
+                </div>
+                <div class="quiz-feedback" id="feedback3"></div>
+                <button class="next-btn" id="next3" onclick="showResults()">See Results →</button>
+            </div>
+
+            <div class="quiz-complete" id="quizComplete">
+                <h3 style="color: #AA0000; font-size: 2em; margin-bottom: 20px;">🎉 Quiz Complete!</h3>
+                <div class="quiz-score" id="finalScore">3/3</div>
+                <p style="color: #666; font-size: 1.2em; margin-bottom: 20px;" id="scoreMessage">Perfect! You understand APIs!</p>
+                <button class="restart-btn" onclick="restartQuiz()">🔄 Retake Quiz</button>
+            </div>
         </div>
     </div>
 
@@ -693,10 +730,7 @@ microblog: True
                 opened: 2019,
                 location: "San Francisco, CA",
                 championships: 7,
-                cost: "$1.4 Billion",
-                avgTicketPrice: "$250",
-                sustainabilityCertification: "LEED Gold",
-                notableFeatures: "State-of-the-art technology hub, waterfront location, concert venue"
+                cost: "$1.4 Billion"
             },
             levis_stadium: {
                 name: "Levi's Stadium",
@@ -706,225 +740,133 @@ microblog: True
                 opened: 2014,
                 location: "Santa Clara, CA",
                 championships: 5,
-                cost: "$1.3 Billion",
-                avgTicketPrice: "$180",
-                sustainabilityCertification: "LEED Gold",
-                notableFeatures: "Solar panels, green roof, hosted Super Bowl 50"
+                cost: "$1.3 Billion"
             }
         };
 
-        let currentAPIKey = null;
-        let collectedData = {};
+        let currentKey = null;
+        let selectedStadium = null;
+        let score = 0;
 
-        function generateAPIKey() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let key = 'sf_sports_';
-            for (let i = 0; i < 24; i++) {
-                key += characters.charAt(Math.floor(Math.random() * characters.length));
+        function generateKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let key = 'sf_';
+            for (let i = 0; i < 20; i++) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             
-            currentAPIKey = key;
-            document.getElementById('apiKey').value = key;
-            
-            document.getElementById('keyStatus').innerHTML = `
-                <div class="info-box" style="margin-top: 20px; background: #d5f4e6; border-left-color: #27ae60;">
-                    <h3>✅ API Key Generated Successfully!</h3>
-                    <p><strong>Your Access Token:</strong> This key identifies you as an authorized user of the Bay Area Sports API. 
-                    In production, this would be secret and stored securely. It will be automatically included in all your requests.</p>
+            currentKey = key;
+            document.getElementById('keyDisplay').textContent = key;
+            document.getElementById('keySuccess').innerHTML = `
+                <div class="success-message" style="margin-top: 15px;">
+                    ✅ <strong>Success!</strong> Your API key has been generated. You can now make requests!
                 </div>
             `;
             
-            checkIfReady();
-            updateURL(); // Ensure the URL updates immediately with the key
+            updateURL();
         }
 
         function updateURL() {
-            const baseUrl = document.getElementById('baseUrl').value;
-            const endpoint = document.getElementById('endpoint').value;
-            const queryParams = document.getElementById('queryParams').value;
+            const stadium = document.getElementById('stadiumSelect').value;
+            selectedStadium = stadium;
             
-            const constructedUrlElement = document.getElementById('constructedUrl');
-
-            if (endpoint) {
-                let fullUrl = baseUrl + endpoint;
-                
-                // Start of query string
-                let queryParts = [];
-                
-                // Add fixed query params if present
-                if (queryParams) {
-                    queryParts.push(queryParams);
-                }
-                
-                // Add API key if generated
-                if (currentAPIKey) {
-                    queryParts.push('api_key=' + currentAPIKey);
-                }
-
-                if (queryParts.length > 0) {
-                    fullUrl += '?' + queryParts.join('&');
-                }
-                
-                constructedUrlElement.textContent = fullUrl;
-            } else {
-                constructedUrlElement.textContent = "Select a stadium above to see the complete API request URL...";
+            if (!stadium) {
+                document.getElementById('constructedURL').textContent = 'Select a stadium above to see your API request URL...';
+                document.getElementById('sendBtn').disabled = true;
+                return;
             }
             
-            checkIfReady();
-        }
-
-        function checkIfReady() {
-            const endpoint = document.getElementById('endpoint').value;
-            const btn = document.getElementById('sendRequestBtn');
+            let url = `https://api.sfsports.com/v1/stadium/${stadium}?format=json`;
             
-            if (currentAPIKey && endpoint) {
-                btn.disabled = false;
+            if (currentKey) {
+                url += `&api_key=${currentKey}`;
+                document.getElementById('sendBtn').disabled = false;
             } else {
-                btn.disabled = true;
+                document.getElementById('sendBtn').disabled = true;
             }
+            
+            document.getElementById('constructedURL').textContent = url;
         }
 
-        function sendAPIRequest() {
-            const endpoint = document.getElementById('endpoint').value;
-            const stadiumId = endpoint.includes('chase_center') ? 'chase_center' : 'levis_stadium';
+        function sendRequest() {
             const responseArea = document.getElementById('responseArea');
-            const btn = document.getElementById('sendRequestBtn');
-            
-            // Disable button and show loading
-            btn.disabled = true;
-            responseArea.innerHTML = `
-                <div class="response-header">
-                    ⏳ Sending Request to Bay Area Sports API... <span class="loading"></span>
-                </div>
-                <p style="color: #555; margin-top: 10px;">Fetching ${stadiumId === 'chase_center' ? 'Warriors' : '49ers'} stadium data...</p>
-            `;
             responseArea.classList.add('active');
             
-            // Simulate API latency
+            responseArea.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Sending request to server...</p>
+                </div>
+            `;
+            
             setTimeout(() => {
-                const data = stadiumData[stadiumId];
-                collectedData[stadiumId] = data;
-                
+                const data = stadiumData[selectedStadium];
                 const response = {
                     status: 200,
-                    statusText: "OK",
-                    message: "Stadium data retrieved successfully",
+                    message: "Success",
                     timestamp: new Date().toISOString(),
                     data: data
                 };
-
-                // Display Raw JSON Response
+                
                 responseArea.innerHTML = `
-                    <div class="response-header">
-                        ✅ Request Successful!
-                        <span class="status-badge">200 OK</span>
+                    <div class="success-message">
+                        ✅ <strong>Request Successful!</strong> The server found the data and sent it back.
                     </div>
-                    <p style="color: #555; margin-bottom: 15px;">The server found the ${data.team} stadium data and sent it back as JSON.</p>
-                    <h3 style="color: #2c3e50; margin-bottom: 10px;">📥 Raw JSON Response:</h3>
+                    <h3 style="color: #AA0000; margin: 20px 0 10px 0;">📥 Raw JSON Response:</h3>
                     <div class="json-display">${JSON.stringify(response, null, 2)}</div>
+                    <h3 style="color: #AA0000; margin: 20px 0 10px 0;">📊 Parsed Data (Easy to Read):</h3>
+                    <div class="parsed-data">
+                        <div class="data-row">
+                            <span class="data-label">Stadium Name:</span>
+                            <span class="data-value">${data.name}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Team:</span>
+                            <span class="data-value">${data.team}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Sport:</span>
+                            <span class="data-value">${data.sport}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Capacity:</span>
+                            <span class="data-value">${data.capacity.toLocaleString()} fans</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Opened:</span>
+                            <span class="data-value">${data.opened}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Championships:</span>
+                            <span class="data-value">${data.championships}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Cost to Build:</span>
+                            <span class="data-value">${data.cost}</span>
+                        </div>
+                    </div>
+                    <div class="explanation" style="margin-top: 20px;">
+                        <h3>💡 What Just Happened?</h3>
+                        <p>The server received your request, looked up ${data.name} in its database, and sent back all the information as JSON. Your browser then converted (parsed) that JSON into a readable format!</p>
+                    </div>
                 `;
                 
-                // Parse and use the data
-                parseAndDisplayData(data, stadiumId);
-                
-                // Scroll to the response
                 responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                
-                // Check if we have both stadiums to show comparison
-                if (Object.keys(collectedData).length === 2) {
-                    showComparison();
-                }
-                
-                // Re-enable the button (if another endpoint is selected)
-                checkIfReady();
             }, 1500);
         }
 
-        function parseAndDisplayData(data, stadiumId) {
-            const parsedArea = document.getElementById('parsedDataArea');
-            parsedArea.classList.add('active');
+        // Quiz Functions
+        function selectOption(questionNum, optionIndex, isCorrect) {
+            const options = document.querySelectorAll(`#q${questionNum} .quiz-option`);
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
             
-            const teamColor = stadiumId === 'chase_center' ? '#1D428A' : '#AA0000';
-            const teamName = stadiumId === 'chase_center' ? 'Golden State Warriors' : 'San Francisco 49ers';
+            const selected = options[optionIndex];
+            selected.classList.add('selected');
             
-            // Data fields to display
-            const fields = [
-                { label: 'Stadium Name', key: 'name' },
-                { label: 'Team', key: 'team' },
-                { label: 'Sport', key: 'sport' },
-                { label: 'Capacity', key: 'capacity', format: (v) => v.toLocaleString() + ' fans' },
-                { label: 'Opened Year', key: 'opened' },
-                { label: 'Construction Cost', key: 'cost' },
-                { label: 'Championships', key: 'championships' }
-            ];
-
-            let html = `
-                <div class="response-header" style="color: ${teamColor}; border-bottom: 2px solid ${teamColor}; padding-bottom: 10px;">
-                    📊 Parsed Data for ${data.name}
-                </div>
-                <div class="parsed-data" style="border-color: ${teamColor};">
-            `;
-            
-            fields.forEach(field => {
-                const value = field.format ? field.format(data[field.key]) : data[field.key];
-                html += `
-                    <div class="data-row">
-                        <span class="data-label">${field.label}:</span>
-                        <span class="data-value" style="color: ${teamColor};">${value}</span>
-                    </div>
-                `;
-            });
-
-            html += `</div>`;
-            
-            parsedArea.innerHTML = html;
-            
-            // If we have both, update the comparison section hidden divs
-            if (Object.keys(collectedData).length === 2) {
-                updateComparisonStats();
-            }
-        }
-        
-        function updateComparisonStats() {
-            const chase = collectedData.chase_center;
-            const levis = collectedData.levis_stadium;
-            
-            const fields = [
-                { label: 'Capacity', key: 'capacity', format: (v) => v.toLocaleString() },
-                { label: 'Opened', key: 'opened' },
-                { label: 'Championships', key: 'championships' },
-                { label: 'Estimated Cost', key: 'cost' }
-            ];
-            
-            let chaseHtml = '';
-            let levisHtml = '';
-
-            fields.forEach(field => {
-                const chaseValue = field.format ? field.format(chase[field.key]) : chase[field.key];
-                const levisValue = field.format ? field.format(levis[field.key]) : levis[field.key];
-                
-                chaseHtml += `
-                    <div class="data-row">
-                        <span class="data-label">${field.label}:</span>
-                        <span class="data-value" style="color: #1D428A;">${chaseValue}</span>
-                    </div>
-                `;
-                levisHtml += `
-                    <div class="data-row">
-                        <span class="data-label">${field.label}:</span>
-                        <span class="data-value" style="color: #AA0000;">${levisValue}</span>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('warriorsStats').innerHTML = chaseHtml;
-            document.getElementById('ninersStats').innerHTML = levisHtml;
-        }
-
-        function showComparison() {
-            document.getElementById('comparisonSection').style.display = 'block';
-            document.getElementById('comparisonSection').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
+            setTimeout(() => {
+                const feedback = document.getElementById(`feedback${questionNum}`);
+                if (isCorrect) {
+                    selected.classList.add('correct');
+                    feedback.className = 'quiz-feedback correct show';
+                    feedback.textContent = '✅ Correct! Great job!';
+                    score++;

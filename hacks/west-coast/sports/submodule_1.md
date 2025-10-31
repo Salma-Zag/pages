@@ -17,7 +17,6 @@ footer:
   next: /west-coast/backend/submodule_2/
 ---
 
-# Submodule 1
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +33,9 @@ footer:
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f5f5f5;
+            color: #333;
             padding: 20px;
+            line-height: 1.6;
         }
 
         .container {
@@ -43,13 +44,13 @@ footer:
         }
 
         .header {
-            background: linear-gradient(135deg, #002D62 0%, #FFC425 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #ffa000 100%);
             color: white;
             padding: 40px;
             border-radius: 15px;
             text-align: center;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(255, 160, 0, 0.3);
         }
 
         .header h1 {
@@ -63,49 +64,52 @@ footer:
         }
 
         .section {
-            background: white;
+            background: #1a1f3a;
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #2d3561;
         }
 
         .section h2 {
-            color: #002D62;
+            color: #ffa000;
             margin-bottom: 20px;
             font-size: 1.8em;
-            border-bottom: 3px solid #FFC425;
+            border-bottom: 3px solid #ffa000;
             padding-bottom: 10px;
         }
 
         .simple-explanation {
-            background: #f8f9fa;
+            background: #242b4d;
             padding: 20px;
             border-radius: 10px;
-            border-left: 5px solid #FFC425;
+            border-left: 5px solid #ffa000;
             margin-bottom: 20px;
         }
 
         .simple-explanation h3 {
-            color: #002D62;
+            color: #ffa000;
             margin-bottom: 10px;
+            font-size: 1.2em;
         }
 
         .simple-explanation p {
             line-height: 1.8;
-            color: #333;
+            color: #b0b0b0;
+            font-size: 1.05em;
         }
 
         .analogy-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #fff9e6 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #2d3561 100%);
             padding: 25px;
             border-radius: 12px;
             margin: 20px 0;
-            border: 3px solid #FFC425;
+            border: 2px solid #ffa000;
         }
 
         .analogy-box h3 {
-            color: #002D62;
+            color: #ffa000;
             margin-bottom: 15px;
             text-align: center;
             font-size: 1.4em;
@@ -118,22 +122,22 @@ footer:
         }
 
         .step {
-            background: white;
+            background: #242b4d;
             padding: 20px;
             border-radius: 10px;
-            border-left: 5px solid #002D62;
+            border-left: 5px solid #ffa000;
             transition: all 0.3s;
         }
 
         .step:hover {
             transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 20px rgba(255, 160, 0, 0.3);
         }
 
         .step-number {
             display: inline-block;
-            background: #002D62;
-            color: white;
+            background: #ffa000;
+            color: #0a0e27;
             width: 35px;
             height: 35px;
             border-radius: 50%;
@@ -144,13 +148,13 @@ footer:
         }
 
         .step strong {
-            color: #002D62;
+            color: #ffa000;
             font-size: 1.1em;
         }
 
         .venue-card {
-            background: white;
-            border: 3px solid #dee2e6;
+            background: #242b4d;
+            border: 2px solid #2d3561;
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 20px;
@@ -160,36 +164,35 @@ footer:
 
         .venue-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(255, 160, 0, 0.3);
+            border-color: #ffa000;
         }
 
-        .venue-card.petco { border-color: #2F241D; background: linear-gradient(135deg, #ffffff 0%, #fff4d9 100%); }
-        .venue-card.snapdragon { border-color: #00B140; background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%); }
-        .venue-card.pechanga { border-color: #FA4616; background: linear-gradient(135deg, #ffffff 0%, #ffebe6 100%); }
-
         .venue-card h3 {
-            color: #002D62;
+            color: #ffa000;
             font-size: 1.5em;
             margin-bottom: 10px;
         }
 
         .venue-info {
-            color: #666;
+            color: #b0b0b0;
             margin: 5px 0;
+            font-size: 1.05em;
         }
 
         .api-endpoint {
-            background: #f8f9fa;
+            background: #1a1f3a;
             padding: 12px;
             border-radius: 6px;
             font-family: 'Courier New', monospace;
             margin: 15px 0;
-            color: #d63384;
+            color: #4fc3f7;
             font-size: 0.95em;
+            border: 1px solid #2d3561;
         }
 
         .fetch-btn {
-            background: linear-gradient(135deg, #002D62 0%, #FFC425 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #ffa000 100%);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -198,11 +201,12 @@ footer:
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 10px;
+            font-size: 1em;
         }
 
         .fetch-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 45, 98, 0.3);
+            box-shadow: 0 5px 20px rgba(255, 160, 0, 0.5);
         }
 
         .response-box {
@@ -221,15 +225,16 @@ footer:
         }
 
         .loading-text {
-            color: #002D62;
+            color: #ffa000;
             font-weight: bold;
             margin-bottom: 10px;
+            font-size: 1.1em;
         }
 
         .progress-bar {
             width: 100%;
             height: 8px;
-            background: #e0e0e0;
+            background: #1a1f3a;
             border-radius: 10px;
             overflow: hidden;
             margin: 15px 0;
@@ -237,14 +242,14 @@ footer:
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #002D62 0%, #FFC425 100%);
+            background: linear-gradient(90deg, #1a237e 0%, #ffa000 100%);
             width: 0%;
             transition: width 0.5s ease;
         }
 
         .data-reveal {
-            background: white;
-            border: 3px solid #FFC425;
+            background: #242b4d;
+            border: 2px solid #ffa000;
             border-radius: 10px;
             padding: 20px;
         }
@@ -254,7 +259,7 @@ footer:
             justify-content: space-between;
             padding: 12px;
             margin: 8px 0;
-            background: #f8f9fa;
+            background: #1a1f3a;
             border-radius: 6px;
             opacity: 0;
             transform: translateX(-20px);
@@ -276,42 +281,6 @@ footer:
             }
         }
 
-        .data-label {
-            font-weight: bold;
-            color: #002D62;
-        }
-
-        .data-value {
-            color: #333;
-            font-family: 'Courier New', monospace;
-            background: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        .api-explanation {
-            background: linear-gradient(135deg, #e3f2fd 0%, #fff9e6 100%);
-            border: 2px solid #FFC425;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            font-size: 0.95em;
-        }
-
-        .api-explanation strong {
-            color: #002D62;
-        }
-
-        .request-preview {
-            background: #1e1e1e;
-            color: #00ff00;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85em;
-            margin: 10px 0;
-        }
-
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -323,15 +292,54 @@ footer:
             }
         }
 
+        .data-label {
+            font-weight: bold;
+            color: #ffa000;
+            font-size: 1.05em;
+        }
+
+        .data-value {
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .api-explanation {
+            background: linear-gradient(135deg, #1a237e 0%, #2d3561 100%);
+            border: 2px solid #ffa000;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #b0b0b0;
+        }
+
+        .api-explanation strong {
+            color: #ffa000;
+        }
+
+        .request-preview {
+            background: #0a0e27;
+            color: #4fc3f7;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            margin: 10px 0;
+            border: 1px solid #2d3561;
+        }
+
         .key-takeaway {
-            background: linear-gradient(135deg, #002D62 0%, #FFC425 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #ffa000 100%);
             color: white;
             padding: 30px;
             border-radius: 12px;
             text-align: center;
             font-size: 1.2em;
             line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(255, 160, 0, 0.3);
         }
 
         .highlight {
@@ -339,6 +347,280 @@ footer:
             padding: 3px 8px;
             border-radius: 4px;
             font-weight: bold;
+        }
+
+        /* Quiz Styles */
+        .quiz-section {
+            background: #1a1f3a;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #ffa000;
+            box-shadow: 0 5px 20px rgba(255, 160, 0, 0.3);
+        }
+
+        .quiz-section h2 {
+            color: #ffa000;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .quiz-question {
+            background: #242b4d;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid #2d3561;
+            display: none;
+        }
+
+        .quiz-question.active {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .question-number {
+            background: #ffa000;
+            color: #0a0e27;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            color: #e0e0e0;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .quiz-option {
+            background: #1a1f3a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 2px solid #2d3561;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #b0b0b0;
+            font-size: 1.05em;
+        }
+
+        .quiz-option:hover {
+            border-color: #ffa000;
+            background: #242b4d;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            border-color: #4fc3f7;
+            background: #1a237e;
+            color: #fff;
+        }
+
+        .quiz-option.correct {
+            border-color: #4caf50;
+            background: #1b5e20;
+            color: #fff;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #f44336;
+            background: #b71c1c;
+            color: #fff;
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 1.05em;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .quiz-feedback.correct {
+            background: #1b5e20;
+            border: 2px solid #4caf50;
+            color: #fff;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #b71c1c;
+            border: 2px solid #f44336;
+            color: #fff;
+        }
+
+        .interactive-task {
+            background: #0a0e27;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px dashed #ffa000;
+        }
+
+        .drag-drop-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .draggable-item {
+            background: #1a237e;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: move;
+            border: 2px solid #ffa000;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .draggable-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 160, 0, 0.4);
+        }
+
+        .draggable-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zone {
+            background: #242b4d;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 60px;
+            border: 2px dashed #2d3561;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .drop-zone.drag-over {
+            border-color: #ffa000;
+            background: #1a1f3a;
+        }
+
+        .drop-zone.filled {
+            border-color: #4caf50;
+            background: #1b5e20;
+        }
+
+        .input-task {
+            margin-top: 15px;
+        }
+
+        .api-input {
+            width: 100%;
+            padding: 15px;
+            background: #1a1f3a;
+            border: 2px solid #2d3561;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            margin-top: 10px;
+        }
+
+        .api-input:focus {
+            outline: none;
+            border-color: #ffa000;
+        }
+
+        .submit-btn {
+            background: #ffa000;
+            color: #0a0e27;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #ff8f00;
+            transform: scale(1.05);
+        }
+
+        .submit-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #1a237e 0%, #ffa000 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+            display: none;
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 160, 0, 0.5);
+        }
+
+        .quiz-complete {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .quiz-complete.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .quiz-score {
+            font-size: 3em;
+            color: #ffa000;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .restart-btn {
+            background: #ffa000;
+            color: #0a0e27;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .restart-btn:hover {
+            background: #ff8f00;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -393,9 +675,9 @@ footer:
 
         <div class="section">
             <h2>Try It: San Diego Sports Venues</h2>
-            <p style="margin-bottom: 20px; color: #666;">Click on any venue card below to fetch its data using an API call. Watch how the API returns specific information!</p>
+            <p style="margin-bottom: 20px; color: #b0b0b0;">Click on any venue card below to fetch its data using an API call. Watch how the API returns specific information!</p>
 
-            <div class="venue-card petco" onclick="fetchVenue('petco')">
+            <div class="venue-card" onclick="fetchVenue('petco')">
                 <h3>⚾ Petco Park</h3>
                 <div class="venue-info">Home of the San Diego Padres (MLB Baseball)</div>
                 <div class="api-endpoint">GET /api/stadium?venue=petco</div>
@@ -403,7 +685,7 @@ footer:
                 <div id="response-petco" class="response-box"></div>
             </div>
 
-            <div class="venue-card snapdragon" onclick="fetchVenue('snapdragon')">
+            <div class="venue-card" onclick="fetchVenue('snapdragon')">
                 <h3>⚽ Snapdragon Stadium</h3>
                 <div class="venue-info">Home of San Diego FC (MLS) & San Diego Wave FC (NWSL)</div>
                 <div class="api-endpoint">GET /api/stadium?venue=snapdragon</div>
@@ -411,7 +693,7 @@ footer:
                 <div id="response-snapdragon" class="response-box"></div>
             </div>
 
-            <div class="venue-card pechanga" onclick="fetchVenue('pechanga')">
+            <div class="venue-card" onclick="fetchVenue('pechanga')">
                 <h3>🏒 Pechanga Arena</h3>
                 <div class="venue-info">Home of the San Diego Gulls (AHL Hockey)</div>
                 <div class="api-endpoint">GET /api/stadium?venue=pechanga</div>
@@ -419,7 +701,7 @@ footer:
                 <div id="response-pechanga" class="response-box"></div>
             </div>
 
-            <div class="venue-card" style="border-color: #667eea; background: linear-gradient(135deg, #ffffff 0%, #e8eaf6 100%);" onclick="fetchVenue('all')">
+            <div class="venue-card" onclick="fetchVenue('all')">
                 <h3>🌟 All San Diego Venues</h3>
                 <div class="venue-info">Get data for ALL venues in one request</div>
                 <div class="api-endpoint">GET /api/stadium?city=sandiego</div>
@@ -447,180 +729,93 @@ footer:
         <div class="key-takeaway">
             <p>🎯 <span class="highlight">Key Takeaway:</span> APIs let different programs talk to each other. You ask for data (request), and the API brings it back (response). It's that simple!</p>
         </div>
+
+        <!-- Interactive Quiz Section -->
+        <div class="quiz-section">
+            <h2>🎯 Test Your Knowledge: Interactive Quiz</h2>
+            
+            <!-- Question 1: Multiple Choice -->
+            <div class="quiz-question active" id="q1">
+                <div class="question-number">Question 1 of 4</div>
+                <div class="question-text">What does API stand for?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(1, 0, false)">A) Application Programming Internet</div>
+                    <div class="quiz-option" onclick="selectOption(1, 1, true)">B) Application Programming Interface</div>
+                    <div class="quiz-option" onclick="selectOption(1, 2, false)">C) Advanced Programming Interface</div>
+                    <div class="quiz-option" onclick="selectOption(1, 3, false)">D) Automatic Program Integration</div>
+                </div>
+                <div class="quiz-feedback" id="feedback1"></div>
+                <button class="next-btn" id="next1" onclick="nextQuestion(2)">Next Question →</button>
+            </div>
+
+            <!-- Question 2: Drag and Drop -->
+            <div class="quiz-question" id="q2">
+                <div class="question-number">Question 2 of 4</div>
+                <div class="question-text">Drag the steps to put the API process in the correct order:</div>
+                <div class="interactive-task">
+                    <div style="margin-bottom: 15px; color: #ffa000; font-weight: bold;">Drag items into the correct order (1-4):</div>
+                    <div style="display: grid; gap: 10px; margin-bottom: 20px;" id="draggable-container">
+                        <div class="draggable-item" draggable="true" data-step="3">API finds the data in database</div>
+                        <div class="draggable-item" draggable="true" data-step="1">You want specific information</div>
+                        <div class="draggable-item" draggable="true" data-step="4">API sends back the data</div>
+                        <div class="draggable-item" draggable="true" data-step="2">You make a request to API</div>
+                    </div>
+                    <div style="color: #b0b0b0; margin-bottom: 10px;">Drop zones (in order):</div>
+                    <div style="display: grid; gap: 10px;">
+                        <div class="drop-zone" data-position="1">Step 1: Drop here</div>
+                        <div class="drop-zone" data-position="2">Step 2: Drop here</div>
+                        <div class="drop-zone" data-position="3">Step 3: Drop here</div>
+                        <div class="drop-zone" data-position="4">Step 4: Drop here</div>
+                    </div>
+                </div>
+                <button class="submit-btn" onclick="checkDragDrop()" id="submit-q2">Check Answer</button>
+                <div class="quiz-feedback" id="feedback2"></div>
+                <button class="next-btn" id="next2" onclick="nextQuestion(3)">Next Question →</button>
+            </div>
+
+            <!-- Question 3: Type the API Endpoint -->
+            <div class="quiz-question" id="q3">
+                <div class="question-number">Question 3 of 4</div>
+                <div class="question-text">If you want to get information about Snapdragon Stadium, what endpoint should you use?</div>
+                <div class="interactive-task">
+                    <div style="color: #b0b0b0; margin-bottom: 10px;">Type the correct API endpoint below:</div>
+                    <input type="text" class="api-input" id="endpoint-input" placeholder="GET /api/stadium?venue=_____">
+                    <div style="margin-top: 10px; color: #666; font-size: 0.9em;">Hint: Look at the examples above! Remember the venue name for Snapdragon Stadium.</div>
+                </div>
+                <button class="submit-btn" onclick="checkEndpoint()" id="submit-q3">Check Answer</button>
+                <div class="quiz-feedback" id="feedback3"></div>
+                <button class="next-btn" id="next3" onclick="nextQuestion(4)">Next Question →</button>
+            </div>
+
+            <!-- Question 4: Click the Correct Data Field -->
+            <div class="quiz-question" id="q4">
+                <div class="question-number">Question 4 of 4</div>
+                <div class="question-text">You made an API request and got this response. Click on the field that shows the stadium capacity:</div>
+                <div class="interactive-task">
+                    <div style="background: #0a0e27; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; color: #4fc3f7;">
+                        {<br>
+                        &nbsp;&nbsp;<span class="quiz-option" onclick="selectDataField(0, false)" style="display: inline; padding: 5px; margin: 2px; cursor: pointer;">"venue": "Petco Park"</span>,<br>
+                        &nbsp;&nbsp;<span class="quiz-option" onclick="selectDataField(1, false)" style="display: inline; padding: 5px; margin: 2px; cursor: pointer;">"team": "San Diego Padres"</span>,<br>
+                        &nbsp;&nbsp;<span class="quiz-option" onclick="selectDataField(2, true)" style="display: inline; padding: 5px; margin: 2px; cursor: pointer;">"capacity": 40209</span>,<br>
+                        &nbsp;&nbsp;<span class="quiz-option" onclick="selectDataField(3, false)" style="display: inline; padding: 5px; margin: 2px; cursor: pointer;">"location": "Downtown"</span><br>
+                        }
+                    </div>
+                </div>
+                <div class="quiz-feedback" id="feedback4"></div>
+                <button class="next-btn" id="next4" onclick="showResults()">See Results →</button>
+            </div>
+
+            <!-- Quiz Complete -->
+            <div class="quiz-complete" id="quiz-complete">
+                <h3 style="color: #ffa000; font-size: 2em; margin-bottom: 20px;">🎉 Quiz Complete!</h3>
+                <div class="quiz-score" id="final-score">4/4</div>
+                <p style="color: #b0b0b0; font-size: 1.2em; margin-bottom: 20px;" id="score-message">Perfect score! You're an API expert!</p>
+                <button class="restart-btn" onclick="restartQuiz()">🔄 Retake Quiz</button>
+            </div>
+        </div>
     </div>
 
     <script>
         const stadiumData = {
             petco: {
-                venue: "Petco Park",
-                team: "San Diego Padres",
-                sport: "Baseball",
-                league: "MLB",
-                capacity: 40209,
-                location: "Downtown San Diego",
-                opened: 2004,
-                surface: "Natural Grass"
-            },
-            snapdragon: {
-                venue: "Snapdragon Stadium",
-                team: "San Diego FC & San Diego Wave FC",
-                sport: "Soccer",
-                league: "MLS / NWSL",
-                capacity: 35000,
-                location: "SDSU Campus",
-                opened: 2022,
-                surface: "Natural Grass"
-            },
-            pechanga: {
-                venue: "Pechanga Arena",
-                team: "San Diego Gulls",
-                sport: "Hockey",
-                league: "AHL",
-                capacity: 12920,
-                location: "Midway District",
-                opened: 1966,
-                surface: "Ice"
-            },
-            all: {
-                city: "San Diego",
-                total_venues: 3,
-                venues: [
-                    {
-                        venue: "Petco Park",
-                        team: "San Diego Padres",
-                        sport: "Baseball"
-                    },
-                    {
-                        venue: "Snapdragon Stadium",
-                        team: "San Diego FC & Wave FC",
-                        sport: "Soccer"
-                    },
-                    {
-                        venue: "Pechanga Arena",
-                        team: "San Diego Gulls",
-                        sport: "Hockey"
-                    }
-                ]
-            }
-        };
-
-        function fetchVenue(type) {
-            const responseDiv = document.getElementById(`response-${type}`);
-            responseDiv.classList.add('active');
-            
-            // Step 1: Show loading
-            responseDiv.innerHTML = `
-                <div class="loading-animation">
-                    <div class="loading-text">🔄 Making API Request...</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-${type}"></div>
-                    </div>
-                    <div id="status-${type}" style="color: #666; font-size: 0.9em; margin-top: 10px;">
-                        Connecting to database...
-                    </div>
-                </div>
-            `;
-
-            const progressBar = document.getElementById(`progress-${type}`);
-            const statusText = document.getElementById(`status-${type}`);
-
-            // Step 2: Simulate API stages
-            setTimeout(() => {
-                progressBar.style.width = '33%';
-                statusText.textContent = '🔍 Searching for stadium data...';
-            }, 500);
-
-            setTimeout(() => {
-                progressBar.style.width = '66%';
-                statusText.textContent = '📦 Retrieving information...';
-            }, 1000);
-
-            setTimeout(() => {
-                progressBar.style.width = '100%';
-                statusText.textContent = '✅ Data received!';
-            }, 1500);
-
-            // Step 3: Show data reveal
-            setTimeout(() => {
-                const data = stadiumData[type];
-                
-                if (type === 'all') {
-                    // Special display for "all venues"
-                    responseDiv.innerHTML = `
-                        <div class="data-reveal">
-                            <h4 style="color: #002D62; margin-bottom: 15px; text-align: center;">📊 API Response: All Venues</h4>
-                            <div class="data-item">
-                                <span class="data-label">Total Venues Found:</span>
-                                <span class="data-value">${data.total_venues}</span>
-                            </div>
-                            ${data.venues.map(venue => `
-                                <div style="background: #e3f2fd; padding: 15px; margin: 10px 0; border-radius: 8px; border-left: 4px solid #002D62;">
-                                    <div style="font-weight: bold; color: #002D62; margin-bottom: 8px;">${venue.venue}</div>
-                                    <div style="color: #666;">🏆 ${venue.team}</div>
-                                    <div style="color: #666;">⚽ ${venue.sport}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="api-explanation">
-                            <strong>💡 What just happened?</strong><br>
-                            The API made ONE request and returned data for ALL ${data.total_venues} venues. This is efficient because you got multiple stadium records in a single call instead of making ${data.total_venues} separate requests!
-                        </div>
-                    `;
-                } else {
-                    // Individual venue display
-                    responseDiv.innerHTML = `
-                        <div class="request-preview">
-                            → Sending: GET /api/stadium?venue=${type}<br>
-                            ← Received: 200 OK (${Object.keys(data).length} fields)
-                        </div>
-                        <div class="data-reveal">
-                            <h4 style="color: #002D62; margin-bottom: 15px; text-align: center;">📊 API Response</h4>
-                            <div class="data-item">
-                                <span class="data-label">🏟️ Venue Name:</span>
-                                <span class="data-value">${data.venue}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">🏆 Team:</span>
-                                <span class="data-value">${data.team}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">⚽ Sport:</span>
-                                <span class="data-value">${data.sport}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">🎯 League:</span>
-                                <span class="data-value">${data.league}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">👥 Capacity:</span>
-                                <span class="data-value">${data.capacity.toLocaleString()} fans</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">📍 Location:</span>
-                                <span class="data-value">${data.location}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">📅 Year Opened:</span>
-                                <span class="data-value">${data.opened}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">🌱 Surface:</span>
-                                <span class="data-value">${data.surface}</span>
-                            </div>
-                        </div>
-                        <div class="api-explanation">
-                            <strong>💡 What just happened?</strong><br>
-                            You sent a request asking for "${type}" data. The API went to the database, found the matching stadium, and returned ONLY the information you needed. Notice how organized it is - each piece of data has a clear label and value!
-                        </div>
-                    `;
-                }
-
-                // Scroll to response
-                setTimeout(() => {
-                    responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100);
-            }, 2000);
-        }
-    </script>
-</body>
-</html>
+                venue: "
