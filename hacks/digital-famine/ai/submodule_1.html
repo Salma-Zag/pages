@@ -307,7 +307,7 @@ date: 2025-10-30
                     <textarea id="prompt-super" rows="3" placeholder="Type an ambitious prompt (e.g., 'Design a renewable energy plan for a small country')" class="w-full p-2 rounded text-black"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('super')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Super AI Response</button>
-                        <button onclick="fillAll()" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Fill All</button>
+                        <button onclick="fillAll()" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
                     </div>
                     <div class="ai-output mt-3">
                         <label class="block font-semibold">Output (Super AI):</label>
@@ -483,29 +483,34 @@ date: 2025-10-30
         }
 
         function fillAll() {
-            const narrowEl = document.getElementById('prompt-narrow');
-            const generalEl = document.getElementById('prompt-general');
-            const superEl = document.getElementById('prompt-super');
-            const narrow = narrowEl?.value.trim();
-            const general = generalEl?.value.trim();
-            const sup = superEl?.value.trim();
+            try {
+                const narrowEl = document.getElementById('prompt-narrow');
+                const generalEl = document.getElementById('prompt-general');
+                const superEl = document.getElementById('prompt-super');
 
-            // Distinct, type-appropriate demo prompts for each AI type
-            const demos = {
-                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
-                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
-                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
-            };
+                const narrowVal = narrowEl && narrowEl.value ? narrowEl.value.trim() : '';
+                const generalVal = generalEl && generalEl.value ? generalEl.value.trim() : '';
+                const superVal = superEl && superEl.value ? superEl.value.trim() : '';
 
-            // Only fill the textareas that are currently empty, and ensure each gets a prompt appropriate to its AI type
-            if (!narrow) narrowEl.value = demos.narrow;
-            if (!general) generalEl.value = demos.general;
-            if (!sup) superEl.value = demos.super;
+                // Distinct, type-appropriate demo prompts for each AI type
+                const demos = {
+                    narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
+                    general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
+                    superAI: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
+                };
 
-            // Generate outputs for all three types
-            generateResponse('narrow');
-            generateResponse('general');
-            generateResponse('super');
+                // Only fill the textareas that are currently empty (do not overwrite user-entered text)
+                if (narrowEl && !narrowVal) narrowEl.value = demos.narrow;
+                if (generalEl && !generalVal) generalEl.value = demos.general;
+                if (superEl && !superVal) superEl.value = demos.superAI;
+
+                // Use small timeouts to ensure the DOM updates before generating outputs
+                setTimeout(() => { try { generateResponse('narrow'); } catch (e) { console.error(e); } }, 50);
+                setTimeout(() => { try { generateResponse('general'); } catch (e) { console.error(e); } }, 100);
+                setTimeout(() => { try { generateResponse('super'); } catch (e) { console.error(e); } }, 150);
+            } catch (err) {
+                console.error('fillAll error:', err);
+            }
         }
 
         function copyOutput(id) {
