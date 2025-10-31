@@ -17,7 +17,7 @@ lxdData:
       Categories: ["Backend", "Flask", "Spring", "Databases"]
       Video: "/west-coast/backend/submodule_1-video"
       Lessons: "/west-coast/backend/submodule_1/"
-      Image: "/images/west-coast/petcopark.webp"
+      Image1: "/images/west-coast/petcopark.webp"
     - Title: "Los Angeles"
       Genre: "Project Creation"
       Level: 2
@@ -25,6 +25,7 @@ lxdData:
       Categories: ["Backend", "Flask", "Spring", "Databases"]
       Video: "/west-coast/backend/submodule_2-video"
       Lessons: "/west-coast/backend/submodule_2/"
+      Image2: "/images/west-coast/sofistadium.jpg"
     - Title: "San Francisco"
       Genre: "Project Creation"
       Level: 3
@@ -32,6 +33,7 @@ lxdData:
       Categories: ["Backend", "Flask", "Spring", "Databases"]
       Video: "/west-coast/backend/submodule_3-video"
       Lessons: "/west-coast/backend/submodule_3/"
+      Image3: "/images/west-coast/chasecenter.jpg"
     - Title: "Seattle"
       Genre: "Project Creation"
       Level: 4
@@ -39,6 +41,7 @@ lxdData:
       Categories: ["Backend", "Flask", "Spring", "Databases"]
       Video: "/west-coast/backend/submodule_4-video"
       Lessons: "/west-coast/backend/submodule_4/"
+      Image4: "/images/west-coast/seattlestadiums.webp"
 ---
 
 <style>
@@ -286,7 +289,10 @@ lxdData:
 
 
           <h3>{{ topic.Description }}</h3>
-          <img src="{{topic.Image}}">
+          <img src="{{topic.Image1}}">
+          <img src="{{topic.Image2}}">
+          <img src="{{topic.Image3}}">
+          <img src="{{topic.Image4}}">
           <div class="module-tags" alt="Petco Park">
             {% for category in topic.Categories %}
             <span class="tag">{{ category }}</span>
