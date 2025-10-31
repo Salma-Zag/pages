@@ -63,28 +63,7 @@ class MansionLevel5 {
 		down: {row: 0, start: 0, columns: 3},
 		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
         interact: function() {
-            // Spawn a new enemy using the sprite_data_enemy template.
-            // `this` will be the Npc instance when called via originalInteract.call(this)
-            try {
-                // Create a shallow copy so we can mutate INIT_POSITION and id per enemy
-                const enemyData = Object.assign({}, sprite_data_enemy);
-                // give the enemy a unique id
-                enemyData.id = `zombie_enemy_${Date.now()}_${Math.floor(Math.random()*1000)}`;
-                // Prefer spawning at the NPC's position (if available), otherwise use defaults
-                const spawnX = (this.position && typeof this.position.x === 'number') ? this.position.x : enemyData.INIT_POSITION?.x || (width / 2);
-                const spawnY = (this.position && typeof this.position.y === 'number') ? this.position.y : enemyData.INIT_POSITION?.y || (height / 4);
-                enemyData.INIT_POSITION = { x: spawnX, y: spawnY };
-
-                // Instantiate and add to the game environment
-                const spawned = new Enemy(enemyData, this.gameEnv);
-                if (!this.gameEnv.gameObjects) this.gameEnv.gameObjects = [];
-                this.gameEnv.gameObjects.push(spawned);
-
-                // Optional: small debug feedback
-                if (console && console.info) console.info('Spawned enemy', enemyData.id, 'at', enemyData.INIT_POSITION);
-            } catch (err) {
-                console.error('Error spawning enemy from NPC interact:', err);
-            }
+           
         }
 	};
 
@@ -259,7 +238,7 @@ class MansionLevel5 {
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
 	  { class: Player, data: sprite_data_player },
-	//   { class: Enemy, data: sprite_data_enemy },
+	  { class: Enemy, data: sprite_data_enemy },
 	  { class: Npc, data: sprite_data_npc}
 	];
   }
