@@ -4,6 +4,7 @@ title: Microblogging Communications Network Establishment
 description: Navigate through interconnected challenges in a satellite communication network
 permalink: /digital-famine/microblog/
 breadcrumb: true
+author: Lucas M
 ---
 
 To begin your mission, you'll have to repair Old Earth's communications network *Rampart-B*. The old *Rampart-A* network was a partnership between global agencies and the NSA to monitor all internet activity worldwide (monitoring at a rate of 3 terabits/sec!), but as an apocalyptic event occurred, the network was repurposed as a fallback communications network for humanity.
@@ -88,7 +89,7 @@ The system is now defunct, as humans took to the stars. We'll have the reestabli
          longTitle: 'Ground Station Delta',
          description: 'Ground station for southern hemisphere coverage.',
          tags: ['ground','coverage']},
-        {id: 5, label: 'Decentralization', url: '{{ base.siteurl }}/digital-famine/microblog/decentralization', title: 'Open Node 5',
+        {id: 5, label: 'Decentralization', url: '{{ base.siteurl }}/digital-famine/microblog/decentralization/', title: 'Open Node 5',
          image: defaultImgUrl,
          longTitle: 'Backup Array Epsilon',
          description: 'Cold backup array; bring spare modules to reactivate.',
