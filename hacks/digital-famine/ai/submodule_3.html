@@ -40,10 +40,12 @@ date: 2025-10-30
         .code-example pre {
             margin: 0;
             color: #e2e8f0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
         }
         .code-example code {
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
             font-size: 0.9rem;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -74,21 +76,26 @@ date: 2025-10-30
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
                 <button onclick="goToSection(3)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="3">
-                    <span class="text-2xl mb-1">💻</span>
-                    <span class="text-xs text-center">UI Layer</span>
+                    <span class="text-2xl mb-1">🔧</span>
+                    <span class="text-xs text-center">UI Framework</span>
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
                 <button onclick="goToSection(4)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="4">
+                    <span class="text-2xl mb-1">💻</span>
+                    <span class="text-xs text-center">UI Functionality</span>
+                </button>
+                <div class="w-8 h-0.5 bg-green-500/30"></div>
+                <button onclick="goToSection(5)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="5">
                     <span class="text-2xl mb-1">📡</span>
                     <span class="text-xs text-center">API Management</span>
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
-                <button onclick="goToSection(5)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="5">
+                <button onclick="goToSection(6)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="6">
                     <span class="text-2xl mb-1">🎮</span>
                     <span class="text-xs text-center">Demo</span>
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
-                <button onclick="goToSection(6)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="6">
+                <button onclick="goToSection(7)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="7">
                     <span class="text-2xl mb-1">🏆</span>
                     <span class="text-xs text-center">Quiz</span>
                 </button>
@@ -282,6 +289,113 @@ date: 2025-10-30
         </div>
 
         <div id="section-3" class="mission-section section-hidden">
+        <div class="space-y-6">
+            <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
+                <h2 class="text-3xl font-bold mb-6">🎨 UI Framework Layer</h2>
+                <div class="space-y-6 text-lg">
+                    <p>The UI Framework (opencs.html) provides the visual structure and basic panel behavior.</p>
+                    
+                    <div class="bg-slate-900/50 border border-blue-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">1. Conditional Loading</h4>
+                        <p class="mb-3">Only loads when <code class="bg-slate-800 px-2 py-1 rounded">microblog: true</code> is set in page frontmatter.</p>
+                        
+                        <div class="code-example">
+                            <pre><code>{%- if page.microblog %}
+    &lt;!-- Microblog loads here --&gt;
+    {%- endif %}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-purple-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">2. External Libraries</h4>
+                        <p class="mb-3">Loads required dependencies:</p>
+                        <ul class="text-sm space-y-1 ml-4">
+                            <li>• <strong>Tailwind CSS</strong> - Styling utilities</li>
+                            <li>• <strong>jQuery</strong> - DOM manipulation</li>
+                            <li>• <strong>DataTables</strong> - Table features (search, sort, pagination)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-green-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-green-300 mb-4">3. Sliding Panel</h4>
+                        <p class="mb-3">A fixed panel that slides in from the right:</p>
+                        
+                        <div class="code-example">
+                            <pre><code>&lt;aside id="microblog-panel" 
+        class="fixed right-0 transform translate-x-full 
+                transition-transform"&gt;
+    &lt;/aside&gt;</code></pre>
+                        </div>
+                        
+                        <p class="text-sm mt-3"><strong>Key classes:</strong></p>
+                        <ul class="text-sm space-y-1 ml-4">
+                            <li>• <code class="bg-slate-800 px-1 rounded">fixed</code> - Stays in place when scrolling</li>
+                            <li>• <code class="bg-slate-800 px-1 rounded">translate-x-full</code> - Hidden off-screen initially</li>
+                            <li>• <code class="bg-slate-800 px-1 rounded">transition-transform</code> - Smooth slide animation</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-orange-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-orange-300 mb-4">4. Toggle Button & JavaScript</h4>
+                        <p class="mb-3">Floating button controls panel visibility:</p>
+                        
+                        <div class="code-example">
+                            <pre><code>function openMicroblog() {
+    overlay.style.transform = 'translateX(0)';
+    toggleBtn.style.display = 'none';
+    }
+
+    function closeMicroblog() {
+    overlay.style.transform = 'translateX(100%)';
+    toggleBtn.style.display = '';
+    }</code></pre>
+                        </div>
+                        
+                        <p class="text-sm mt-3">Open: Panel slides in, button hides. Close: Panel slides out, button reappears.</p>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-cyan-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-cyan-300 mb-4">5. Responsive Design</h4>
+                        <p class="mb-3">Adapts to screen size:</p>
+                        
+                        <div class="code-example">
+                            <pre><code>@media (max-width: 600px) {
+    #microblog-panel { width: 100vw; }
+    #microblog-toggle-btn { border-radius: 50%; }
+    }</code></pre>
+                        </div>
+                        
+                        <p class="text-sm mt-3">Mobile: Full-width panel, circular button.</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="goToSection(4)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Continue to UI Functionality</button>
+        </div>
+    </div>
+
+    <style>
+    .code-example {
+        background: #1e293b;
+        border: 1px solid #475569;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+    }
+    .code-example pre {
+        margin: 0;
+        color: #e2e8f0;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+        line-height: 1.5;
+    }
+    .code-example code {
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    </style>
+
+        <div id="section-4" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">💻 JavaScript UI Functionality</h2>
@@ -382,11 +496,11 @@ date: 2025-10-30
                         </div>
                     </div>
                 </div>
-                <button onclick="goToSection(4)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
+                <button onclick="goToSection(5)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
             </div>
         </div>
 
-        <div id="section-4" class="mission-section section-hidden">
+        <div id="section-5" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🔌 API Management Layer</h2>
@@ -504,11 +618,11 @@ date: 2025-10-30
                         </div>
                     </div>
                 </div>
-                <button onclick="goToSection(5)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
+                <button onclick="goToSection(6)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
             </div>
         </div>
 
-        <div id="section-5" class="mission-section section-hidden">
+        <div id="section-6" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🎮 Interactive Microblog Demo</h2>
@@ -530,11 +644,11 @@ date: 2025-10-30
                         </button>
                     </div>
                 </div>
-                <button onclick="goToSection(6)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
+                <button onclick="goToSection(7)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
             </div>
         </div>
 
-        <div id="section-6" class="mission-section section-hidden">
+        <div id="section-7" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🏆 Knowledge Check</h2>
