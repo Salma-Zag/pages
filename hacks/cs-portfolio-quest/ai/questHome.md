@@ -44,7 +44,7 @@ lxdData:
       Categories: ["ChatGPT", "Prompting", "Vibe Coding"]
       Video: "/cs-portfolio-quest/ai/submodule_4-video"
       Lessons: "/cs-portfolio-quest/ai/submodule_4/"
-      Image: "/images/cs-portfolio-quest/ai.svg"
+      Image: "/images/cs-portfolio-quest/ai/submodule4.png"
       Alt: "AI Submodule 4"
 ---
 {%- include tailwind/cs-portfolio-mini_quest_info.html -%}
