@@ -11,6 +11,10 @@ categories: [CSP, Submodule, AIUsage]
 tags: [AI, submodule, AI_Functionality]
 author: "TheSprinters"
 date: 2025-10-21
+footer:
+  previous: /hacks/navigation0
+  home: /hacks/navigation
+  next: /hacks/navigation2
 ---
 <style>
     * {
