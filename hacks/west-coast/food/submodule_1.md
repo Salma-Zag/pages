@@ -1,7 +1,7 @@
 ---
 layout: opencs
 microblog: True 
-title: "San Diego"
+title: "San Diego"    
 description: "City One of Food - San Diego"
 permalink: /west-coast/food/SD/
 parent: "San Diego"
@@ -11,13 +11,24 @@ categories: [CSP]
 tags: [food, sandiego, create, crud]
 author: "Syntax Terrors"
 date: 2025-10-24
+footer:
+  home: /west-coast/food/
+  next: /west-coast/food/LA/
 ---
 
 # 🏙️ San Diego — CREATE (CRUD Submodule 1)
 
 **Quest Chapter:** *The Food Route*  
+
+<br>
+
 **Focus:** C in CRUD — **CREATE**  
+
+<br>
+
 **Location:** San Diego, CA ☀️🌮
+
+<br>
 
 Welcome! This interactive page lets learners *actually* create dishes, ingredients, and join records via simulated API calls — right in the browser.
 
@@ -205,34 +216,6 @@ strong { color: #f8f9ff; }
   text-align: center;
 }
 
-/* Back / Next buttons area */
-a.back-home {
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  border: 1px solid rgba(139,92,246,0.32);
-  padding: 12px 28px;
-  border-radius: 22px;
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 8px 30px rgba(139,92,246,0.12);
-}
-.next-city-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: linear-gradient(135deg, var(--accent-3), rgba(6,182,212,0.9));
-  color: white;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.6rem;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 14px 40px rgba(6,182,212,0.12);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 10000;
-}
-.next-city-btn:hover { transform: translateY(-3px); }
 
 /* Editor tool row */
 .editor-actions { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
@@ -257,6 +240,20 @@ a.back-home {
   margin-left: 8px;
 }
 .ingredients-remove-btn:hover { color: var(--accent-2); text-decoration: underline; }
+
+/* Custom styles for collapsible details/summary */
+summary {
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    color: #e6e9ff;
+    list-style-position: inside;
+    list-style-type: '▶ ';
+}
+details[open] > summary {
+    list-style-type: '▼ ';
+}
 </style>
 
 <!-- Dark mode toggle -->
@@ -268,11 +265,11 @@ a.back-home {
 <div class="progress-tracker">
   <h3>🎯 San Diego Progress Tracker</h3>
   <div id="progress-display">
-    <div id="task-fishtaco" class="task-item">📝 Task 1: Fish Taco Class - <span class="status">Incomplete</span></div>
-    <div id="task-burritocart" class="task-item">🛒 Task 2: Burrito Cart - <span class="status">Incomplete</span></div>
-    <div id="task-bajabowl" class="task-item">🥗 Task 3: Build Baja Bowl - <span class="status">Incomplete</span></div>
-    <div id="task-seed" class="task-item">🌱 Task 4: Seed Pantry - <span class="status">Incomplete</span></div>
-    <div id="task-view" class="task-item">👀 Task 5: View Pantry - <span class="status">Incomplete</span></div>
+    <div id="task-fishtaco" class="task-item">Task 1: Fish Taco Class - <span class="status">Incomplete</span></div>
+    <div id="task-burritocart" class="task-item">Task 2: Burrito Cart - <span class="status">Incomplete</span></div>
+    <div id="task-bajabowl" class="task-item">Task 3: Build Baja Bowl - <span class="status">Incomplete</span></div>
+    <div id="task-seed" class="task-item">Task 4: Seed Pantry - <span class="status">Incomplete</span></div>
+    <div id="task-view" class="task-item">Task 5: View Pantry - <span class="status">Incomplete</span></div>
   </div>
   <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.01); border-radius: 0.5rem;">
     <strong>Completion: <span id="completion-percentage">0%</span></strong>
@@ -282,6 +279,7 @@ a.back-home {
   </div>
 </div>
 
+
 <div class="sq-toast" id="sqToast">Baja Bowl added — +50 XP</div>
 
 <!-- Unlock Notification -->
@@ -290,24 +288,18 @@ a.back-home {
   <small style="font-size: 13px; opacity: 0.95;">You can now continue to the next city!</small>
 </div>
 
----
+- **🧠 What Does CREATE Mean?**  
+  - In databases, **CREATE** = inserting new records (e.g., dishes, ingredients, or join rows).  
+  <br>
+  - On the web, a client form sends a POST /api/dishes request.  
+  <br>
+  - The server creates:
+    - a new **dish** record,  
+    - any missing **ingredient** entries, and  
+    - **dish_ingredients** join records — ideally inside a single transaction (all succeed or all fail).  
+  <br>
+  - Analogy: your database is like a **kitchen pantry**. Adding a dish = adding a **recipe card** and ensuring all the required ingredients already exist in the pantry.
 
-## 🧠 What Does CREATE Mean?
-
-In databases, **CREATE** = inserting new records (dishes, ingredients, join rows).  
-On the web, a client form sends a `POST /api/dishes` request. The server creates a dish, ingredient entries, and `dish_ingredients` join records — ideally inside a transaction (all succeed or all fail).
-
-Analogy: your database is a kitchen pantry. Adding a dish is like adding a recipe card and ensuring all required ingredients exist in the pantry.
-
----
-
-## How this interactive page works (quick)
-- Each task has an editable code area (or an input form) and a **Run** button.
-- Running code appends output to the terminal area under the task.
-- The page includes a **mock backend** (`MockAPI`) that simulates `POST /api/dishes`, `POST /api/dishes/bulk`, and `GET /api/dishes?city=sd`. Data is stored in `localStorage` so progress persists across refreshes.
-- On success when creating Baja Bowl, a **toast** shows `+50 XP`.
-
----
 
 # %% Interactive: Mock Backend & Utilities
 
@@ -324,7 +316,7 @@ Analogy: your database is a kitchen pantry. Adding a dish is like adding a recip
 </div>
 
 <script>
-/* Mock API + utilities for this page. Outputs go to terminal elements using `logTo(id,...)` */
+/* Mock API + utilities for this page. Outputs go to terminal elements using logTo(id,...) */
 (function () {
   // Task completion tracking
   window.taskProgress = {
@@ -402,107 +394,48 @@ Analogy: your database is a kitchen pantry. Adding a dish is like adding a recip
     const isComplete = allTasks.every(task => task === true);
     
     if (isComplete) {
-      // Show unlock notification
       const notification = document.getElementById('unlockNotification');
       if (notification) {
         notification.style.display = 'block';
-        setTimeout(() => {
-          notification.style.display = 'none';
-        }, 4000);
+        setTimeout(() => notification.style.display = 'none', 4000);
       }
-
-      // ENHANCED: Multiple approaches to unlock the next city
       unlockNextCity();
-      
       console.log('🎉 San Diego module completed! Los Angeles should now be unlocked.');
     }
   }
 
-  // NEW: Dedicated function to handle unlocking with multiple fallback methods
+  // Fallback unlock methods
   function unlockNextCity() {
-    const cityIndex = 0; // San Diego is index 0
-    
-    // Method 1: Direct access to main navigation system
-    if (typeof window.markCityCompleted === 'function') {
-      window.markCityCompleted(cityIndex);
-      console.log('✅ Method 1: Called window.markCityCompleted directly');
-      return;
-    }
-    
-    // Method 2: Try parent window (if in iframe or similar)
     try {
-      if (window.parent && window.parent.markCityCompleted) {
-        window.parent.markCityCompleted(cityIndex);
-        console.log('✅ Method 2: Called parent.markCityCompleted');
-        return;
-      }
-    } catch (e) {
-      console.log('Method 2 failed:', e.message);
-    }
-    
-    // Method 3: Try top window
-    try {
-      if (window.top && window.top.markCityCompleted) {
-        window.top.markCityCompleted(cityIndex);
-        console.log('✅ Method 3: Called top.markCityCompleted');
-        return;
-      }
-    } catch (e) {
-      console.log('Method 3 failed:', e.message);
-    }
-    
-    // Method 4: Direct localStorage manipulation as fallback
-    try {
-      const saved = localStorage.getItem('mchopiee_city_progress');
-      let gameProgress = {
-        unlockedCities: [0],
-        completedCities: [],
-        totalCitiesCompleted: 0
-      };
-      
-      if (saved) {
-        gameProgress = JSON.parse(saved);
-      }
-      
-      // Mark San Diego as completed and unlock Los Angeles
+      const saved = localStorage.getItem('city_progress'); 
+      let gameProgress = saved ? JSON.parse(saved) : { unlockedCities:[0], completedCities:[], totalCitiesCompleted:0 };
       if (!gameProgress.completedCities.includes(0)) {
         gameProgress.completedCities.push(0);
         gameProgress.totalCitiesCompleted++;
       }
-      
       if (!gameProgress.unlockedCities.includes(1)) {
-        gameProgress.unlockedCities.push(1); // Unlock Los Angeles (index 1)
+        gameProgress.unlockedCities.push(1);
       }
-      
-      // Save back to localStorage
-      localStorage.setItem('mchopiee_city_progress', JSON.stringify(gameProgress));
-      console.log('✅ Method 4: Direct localStorage update completed');
-      console.log('Updated progress:', gameProgress);
-      
+      localStorage.setItem('city_progress', JSON.stringify(gameProgress));
+      console.log('✅ Progress updated:', gameProgress);
     } catch (e) {
-      console.error('Method 4 failed:', e);
+      console.error('Unlock failed:', e);
     }
   }
 
-  // helpers
-  function t() { return Date.now().toString(36).slice(-6); }
+  // Helpers
   window.logTo = function (id, ...parts) {
     const el = document.getElementById(id);
     if (!el) return;
-    const text = parts.map(p => {
-      try { return typeof p === 'object' ? JSON.stringify(p, null, 2) : String(p); } catch(e) { return String(p); }
-    }).join(' ');
+    const text = parts.map(p => typeof p === 'object' ? JSON.stringify(p, null, 2) : String(p)).join(' ');
     el.textContent += (el.textContent ? '\n' : '') + text;
     el.scrollTop = el.scrollHeight;
   };
 
-  window.clearTerm = function (id) { const el = document.getElementById(id); if (el) el.textContent = ''; };
+  window.clearTerm = id => { const el = document.getElementById(id); if (el) el.textContent = ''; };
 
-  // mock DB wrapper persisted to localStorage
   class MockDB {
-    constructor() {
-      this.load();
-    }
+    constructor() { this.load(); }
     load() {
       const raw = localStorage.getItem('foodquest_sd_db_v1');
       if (raw) {
@@ -521,133 +454,84 @@ Analogy: your database is a kitchen pantry. Adding a dish is like adding a recip
         dishes: this.dishes, ingredients: this.ingredients, dishIngredients: this.dishIngredients
       }));
     }
-    reset() {
-      this.dishes = []; this.ingredients = []; this.dishIngredients = []; this.save();
-    }
+    reset() { this.dishes=[]; this.ingredients=[]; this.dishIngredients=[]; this.save(); }
   }
 
-  // API simulating atomic create with transaction-like rollback
   class MockAPI {
-    constructor() {
-      this.db = new MockDB();
-    }
-
-    _cloneState() {
-      return {
-        dishes: JSON.parse(JSON.stringify(this.db.dishes)),
-        ingredients: JSON.parse(JSON.stringify(this.db.ingredients)),
-        dishIngredients: JSON.parse(JSON.stringify(this.db.dishIngredients)),
-      };
-    }
-
-    _restoreState(state) {
-      this.db.dishes = state.dishes;
-      this.db.ingredients = state.ingredients;
-      this.db.dishIngredients = state.dishIngredients;
-      this.db.save();
-    }
-
-    // findOrCreateIngredient by name (case-insensitive)
-    findOrCreateIngredient(name) {
-      const existing = this.db.ingredients.find(i => i.name.toLowerCase() === name.toLowerCase());
-      if (existing) return existing;
-      const newIng = { id: t(), name, createdAt: new Date().toISOString() };
-      this.db.ingredients.push(newIng);
-      return newIng;
-    }
-
-    // Simulates POST /api/dishes
+    constructor() { this.db = new MockDB(); }
     async postDish(payload) {
-      // server-side validation
-      if (!payload || !payload.name || !payload.category || !Array.isArray(payload.ingredients) || isNaN(payload.calories)) {
-        return { status: 400, body: { error: "Missing required fields" } };
-      }
-
-      // transaction simulation
-      const before = this._cloneState();
-      try {
-        const dish = { id: t(), name: payload.name, category: payload.category, calories: payload.calories, photo: payload.photo || null, city: payload.city || 'sd', createdAt: new Date().toISOString() };
-        this.db.dishes.push(dish);
-
-        // create ingredients if missing, add dishIngredients
-        for (const ing of payload.ingredients) {
-          if (!ing || !ing.name) throw new Error("Invalid ingredient");
-          const ingRec = this.findOrCreateIngredient(ing.name);
-          this.db.dishIngredients.push({ id: t(), dishId: dish.id, ingredientId: ingRec.id, qty: ing.qty || null, unit: ing.unit || null });
-        }
-
-        // save and return created resource
-        this.db.save();
-        return { status: 201, body: dish };
-      } catch (err) {
-        // rollback
-        this._restoreState(before);
-        return { status: 500, body: { error: err.message || "Transaction failed" } };
-      }
+      if (!payload || !payload.name || !payload.category || !Array.isArray(payload.ingredients) || isNaN(payload.calories))
+        return { status:400, body:{error:"Missing required fields"} };
+      const dish = { id:Date.now().toString(36), ...payload, createdAt:new Date().toISOString() };
+      this.db.dishes.push(dish);
+      this.db.save();
+      return { status:201, body:dish };
     }
-
-    // Bulk POST
     async postBulk(dishesArray) {
-      if (!Array.isArray(dishesArray)) return { status: 400, body: { error: "Expected array" } };
+      if (!Array.isArray(dishesArray)) return { status:400, body:{error:"Expected array"} };
       const created = [];
       for (const d of dishesArray) {
-        const payload = Object.assign({ ingredients: [] }, d);
-        const res = await this.postDish(payload);
-        if (res.status !== 201) { return { status: 500, body: { error: "Bulk insert failed" } }; }
+        const res = await this.postDish(d);
+        if (res.status !== 201) return { status:500, body:{error:"Bulk insert failed"} };
         created.push(res.body);
       }
-      return { status: 201, body: created };
+      return { status:201, body:created };
     }
-
-    // GET /api/dishes?city=sd
-    async getDishes(query = {}) {
-      const city = (query.city || 'sd').toLowerCase();
-      return this.db.dishes.filter(d => (d.city || 'sd').toLowerCase() === city);
+    async getDishes(query={}) {
+      const city = (query.city||'sd').toLowerCase();
+      return this.db.dishes.filter(d => (d.city||'sd').toLowerCase()===city);
     }
-
-    // reset
     reset() { this.db.reset(); }
   }
 
-  // singleton
   window.MockAPIInstance = new MockAPI();
 
-  // expose initializer
   window.initMock = function() {
     window.MockAPIInstance.reset();
-    window.logTo('terminal-init', '[MockAPI] Reset DB. You can seed or create dishes now.');
+    window.logTo('terminal-init','[MockAPI] Reset DB. You can seed or create dishes now.');
     showToast("Mock DB reset");
   };
 
-  // toast helper
-  window.showToast = function(text, ms = 3000) {
-    const b = document.getElementById('sqToast');
-    b.textContent = text;
-    b.style.display = 'block';
-    setTimeout(()=> b.style.display = 'none', ms);
+  window.showToast = function(text, ms=3000){
+    const b=document.getElementById('sqToast');
+    b.textContent=text;
+    b.style.display='block';
+    setTimeout(()=>b.style.display='none',ms);
   };
 
-  // initialize on load
   if (!localStorage.getItem('foodquest_sd_db_v1')) {
     window.MockAPIInstance.db.save();
-    window.logTo('terminal-init', '[MockAPI] Initialized new DB. Try seeding!');
+    window.logTo('terminal-init','[MockAPI] Initialized new DB. Try seeding!');
   } else {
-    window.logTo('terminal-init', '[MockAPI] DB loaded from localStorage.');
+    window.logTo('terminal-init','[MockAPI] DB loaded from localStorage.');
   }
 
-  // Load task progress on page load
   loadTaskProgress();
 })();
 </script>
 
 ---
 
-# %% Interactive Task: Fish Taco Class (Editable + Run)
+- **⚙️ How this interactive page works:**  
+  - Each task includes an editable **code area** (or input form) and a **Run** button.  
+  - Running code appends output to the **terminal area** below that task.  
+  <br>
+  - The page uses a **mock backend (MockAPI)** that simulates:  
+    - POST /api/dishes  
+    - POST /api/dishes/bulk  
+    - GET /api/dishes?city=sd  
+  <br>
+  - Data is stored in **localStorage**, so progress **persists** across refreshes.  
+  - When creating the **Baja Bowl**, a toast appears showing “+50 XP 🎉”.
 
-<div class="sq-card">
-  <div class="sq-label">Describe & implement the <strong>FishTaco</strong> class (id, fishType, toppings[], sauce, price, spiceLevel) and method <code>calculateTotalPrice()</code> (<em>8% tax</em>). Throw error if fishType missing.</div>
+<br>
 
-  <textarea id="code-fishtaco" class="code-editor">
+<!-- Task 1 -->
+<details open>
+  <summary>Task 1: Fish Taco Class</summary>
+  <div class="sq-card">
+    <div class="sq-label">Describe & implement the <strong>FishTaco</strong> class (id, fishType, toppings[], sauce, price, spiceLevel) and method <code>calculateTotalPrice()</code> (<em>8% tax</em>). Throw error if fishType missing.</div>
+    <textarea id="code-fishtaco" class="code-editor">
 // class FishTaco { ... } - edit or run the example
 class FishTaco {
   constructor(id, fishType, toppings = [], sauce, price = 0, spiceLevel = "Mild") {
@@ -673,22 +557,21 @@ console.log("Total price:", taco.calculateTotalPrice().toFixed(2));
 
 // Mark task as complete when run successfully
 completeTask('fishtaco');
-  </textarea>
-
-  <div style="margin-top:0.5rem" class="editor-actions">
-    <button class="sq-btn sq-run" onclick="runEditor('code-fishtaco','terminal-fishtaco')">Run</button>
-    <button class="sq-btn" onclick="copyEditor('code-fishtaco')">Copy</button>
+    </textarea>
+    <div style="margin-top:0.5rem" class="editor-actions">
+      <button class="sq-btn sq-run" onclick="runEditor('code-fishtaco','terminal-fishtaco')">Run</button>
+      <button class="sq-btn" onclick="copyEditor('code-fishtaco')">Copy</button>
+    </div>
+    <pre id="terminal-fishtaco" class="sq-terminal"></pre>
   </div>
+</details>
 
-  <pre id="terminal-fishtaco" class="sq-terminal"></pre>
-</div>
-
-# %% Interactive Task: BurritoCart (Editable + Run)
-
-<div class="sq-card">
-  <div class="sq-label">Implement <strong>BurritoCart</strong> with methods <code>addBurrito()</code>, <code>removeBurrito()</code>, <code>getTotalPrice()</code>, <code>getBurritosByFilling()</code>.</div>
-
-  <textarea id="code-burritocart" class="code-editor">
+<!-- Task 2 -->
+<details>
+  <summary>Task 2: BurritoCart</summary>
+  <div class="sq-card">
+    <div class="sq-label">Implement <strong>BurritoCart</strong> with methods <code>addBurrito()</code>, <code>removeBurrito()</code>, <code>getTotalPrice()</code>, <code>getBurritosByFilling()</code>.</div>
+    <textarea id="code-burritocart" class="code-editor">
 // BurritoCart implementation
 class BurritoCart {
   constructor() {
@@ -716,54 +599,54 @@ console.log("Carne Asada burritos:", cart.getBurritosByFilling("Carne Asada"));
 
 // Mark task as complete when run successfully
 completeTask('burritocart');
-  </textarea>
-
-  <div style="margin-top:0.5rem" class="editor-actions">
-    <button class="sq-btn sq-run" onclick="runEditor('code-burritocart','terminal-burritocart')">Run</button>
-    <button class="sq-btn" onclick="copyEditor('code-burritocart')">Copy</button>
+    </textarea>
+    <div style="margin-top:0.5rem" class="editor-actions">
+      <button class="sq-btn sq-run" onclick="runEditor('code-burritocart','terminal-burritocart')">Run</button>
+      <button class="sq-btn" onclick="copyEditor('code-burritocart')">Copy</button>
+    </div>
+    <pre id="terminal-burritocart" class="sq-terminal"></pre>
   </div>
+</details>
 
-  <pre id="terminal-burritocart" class="sq-terminal"></pre>
-</div>
+<!-- Task 3 -->
+<details>
+  <summary>Task 3: Build the Baja Bowl</summary>
+  <div class="sq-card">
+    <div class="sq-label">Use the form to build a <strong>Baja Bowl</strong>. Required fields: <em>name, category, ingredients (name, qty, unit), calories</em>. Photo may be a URL or uploaded file (stored as data URL).</div>
+    <div style="display:grid; grid-template-columns: 1fr; gap:0.5rem;">
+      <label class="sq-label">Dish name</label>
+      <input id="dish-name" class="sq-field" placeholder="Baja Bowl" value="Baja Bowl" />
 
-# %% Interactive Task: Build the Baja Bowl (Form + Run)
+      <label class="sq-label">Category</label>
+      <input id="dish-category" class="sq-field" placeholder="Healthy" value="Healthy" />
 
-<div class="sq-card">
-  <div class="sq-label">Use the form to build a <strong>Baja Bowl</strong>. Required fields: <em>name, category, ingredients (name, qty, unit), calories</em>. Photo may be a URL or uploaded file (stored as data URL).</div>
+      <label class="sq-label">Calories</label>
+      <input id="dish-calories" type="number" class="sq-field" placeholder="600" value="600" />
 
-  <div style="display:grid; grid-template-columns: 1fr; gap:0.5rem;">
-    <label class="sq-label">Dish name</label>
-    <input id="dish-name" class="sq-field" placeholder="Baja Bowl" value="Baja Bowl" />
+      <label class="sq-label">Photo URL (optional)</label>
+      <input id="dish-photo" class="sq-field" placeholder="https://..." />
 
-    <label class="sq-label">Category</label>
-    <input id="dish-category" class="sq-field" placeholder="Healthy" value="Healthy" />
+      <label class="sq-label">Add Ingredients (name, qty, unit)</label>
+      <div style="display:flex; gap:0.5rem;">
+        <input id="ing-name" class="sq-field" placeholder="avocado" />
+        <input id="ing-qty" class="sq-field" placeholder="1" />
+        <input id="ing-unit" class="sq-field" placeholder="cup" />
+        <button class="sq-btn" onclick="addIngredient()">Add</button>
+      </div>
 
-    <label class="sq-label">Calories</label>
-    <input id="dish-calories" type="number" class="sq-field" placeholder="600" value="600" />
+      <div id="ingredients-list" class="small" style="margin-top:0.5rem">No ingredients yet</div>
 
-    <label class="sq-label">Photo URL (optional)</label>
-    <input id="dish-photo" class="sq-field" placeholder="https://..." />
+      <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
+        <button class="sq-btn sq-run" onclick="runCreateForm()">Create Dish (POST)</button>
+        <button class="sq-btn" onclick="clearForm()">Clear</button>
+      </div>
 
-    <label class="sq-label">Add Ingredients (name, qty, unit)</label>
-    <div style="display:flex; gap:0.5rem;">
-      <input id="ing-name" class="sq-field" placeholder="avocado" />
-      <input id="ing-qty" class="sq-field" placeholder="1" />
-      <input id="ing-unit" class="sq-field" placeholder="cup" />
-      <button class="sq-btn" onclick="addIngredient()">Add</button>
-    </div>
-
-    <div id="ingredients-list" class="small" style="margin-top:0.5rem">No ingredients yet</div>
-
-    <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
-      <button class="sq-btn sq-run" onclick="runCreateForm()">Create Dish (POST)</button>
-      <button class="sq-btn" onclick="clearForm()">Clear</button>
-    </div>
-
-    <div style="margin-top:0.5rem">
-      <div id="terminal-create" class="sq-terminal"></div>
+      <div style="margin-top:0.5rem">
+        <div id="terminal-create" class="sq-terminal"></div>
+      </div>
     </div>
   </div>
-</div>
+</details>
 
 <script>
 (function(){
@@ -831,12 +714,12 @@ completeTask('burritocart');
 })();
 </script>
 
-# %% Interactive: Simulated POST endpoint + Unit Test
-
-<div class="sq-card">
-  <div class="sq-label">Simulate a `POST /api/dishes` call programmatically (JS). There is also a simple unit test runner below to assert `201` and returned resource.</div>
-
-  <textarea id="code-post" class="code-editor">
+<!-- Task 4 -->
+<details>
+  <summary>Task 4: Programmatic POST & Unit Test</summary>
+  <div class="sq-card">
+    <div class="sq-label">Simulate a POST /api/dishes call programmatically (JS). There is also a simple unit test runner below to assert 201 and returned resource.</div>
+    <textarea id="code-post" class="code-editor">
 // Example programmatic POST using MockAPIInstance
 (async function(){
   const payload = {
@@ -856,20 +739,18 @@ completeTask('burritocart');
   console.log("Status:", res.status);
   console.log("Body:", res.body);
 })();
-  </textarea>
-
-  <div style="margin-top:0.5rem" class="editor-actions">
-    <button class="sq-btn sq-run" onclick="runEditor('code-post','terminal-post')">Run</button>
-    <button class="sq-btn" onclick="copyEditor('code-post')">Copy</button>
+    </textarea>
+    <div style="margin-top:0.5rem" class="editor-actions">
+      <button class="sq-btn sq-run" onclick="runEditor('code-post','terminal-post')">Run</button>
+      <button class="sq-btn" onclick="copyEditor('code-post')">Copy</button>
+    </div>
+    <pre id="terminal-post" class="sq-terminal"></pre>
+    <div style="margin-top:0.75rem;">
+      <button class="sq-btn sq-run" onclick="runUnitTest()">Run Unit Test: POST returns 201 & created resource</button>
+      <div id="terminal-test" class="sq-terminal" style="margin-top:0.5rem"></div>
+    </div>
   </div>
-
-  <pre id="terminal-post" class="sq-terminal"></pre>
-
-  <div style="margin-top:0.75rem;">
-    <button class="sq-btn sq-run" onclick="runUnitTest()">Run Unit Test: POST returns 201 & created resource</button>
-    <div id="terminal-test" class="sq-terminal" style="margin-top:0.5rem"></div>
-  </div>
-</div>
+</details>
 
 <script>
 window.runUnitTest = async function() {
@@ -891,18 +772,18 @@ window.runUnitTest = async function() {
 };
 </script>
 
-# %% Interactive Task: Seed Pantry (Bulk POST)
-
-<div class="sq-card">
-  <div class="sq-label">Seed the San Diego pantry with at least three dishes (Fish Tacos, California Burrito, Baja Bowl)</div>
-
-  <div style="display:flex; gap:0.5rem;">
-    <button class="sq-btn sq-run" onclick="seedPantry()">Seed Pantry</button>
-    <button class="sq-btn" onclick="clearTerm('terminal-seed')">Clear</button>
+<!-- Task 5 -->
+<details>
+  <summary>Task 5: Seed Pantry (Bulk POST)</summary>
+  <div class="sq-card">
+    <div class="sq-label">Seed the San Diego pantry with at least three dishes (Fish Tacos, California Burrito, Baja Bowl)</div>
+    <div style="display:flex; gap:0.5rem;">
+      <button class="sq-btn sq-run" onclick="seedPantry()">Seed Pantry</button>
+      <button class="sq-btn" onclick="clearTerm('terminal-seed')">Clear</button>
+    </div>
+    <pre id="terminal-seed" class="sq-terminal" style="margin-top:0.5rem"></pre>
   </div>
-
-  <pre id="terminal-seed" class="sq-terminal" style="margin-top:0.5rem"></pre>
-</div>
+</details>
 
 <script>
 window.seedPantry = async function() {
@@ -923,18 +804,18 @@ window.seedPantry = async function() {
 };
 </script>
 
-# %% Interactive Task: View Pantry (GET /api/dishes?city=sd)
-
-<div class="sq-card">
-  <div class="sq-label">View the San Diego pantry (GET /api/dishes?city=sd)</div>
-
-  <div style="display:flex; gap:0.5rem;">
-    <button class="sq-btn sq-run" onclick="viewPantry()">View Pantry</button>
-    <button class="sq-btn" onclick="clearTerm('terminal-pantry')">Clear</button>
+<!-- Task 6 -->
+<details>
+  <summary>Task 6: View Pantry</summary>
+  <div class="sq-card">
+    <div class="sq-label">View the San Diego pantry (GET /api/dishes?city=sd)</div>
+    <div style="display:flex; gap:0.5rem;">
+      <button class="sq-btn sq-run" onclick="viewPantry()">View Pantry</button>
+      <button class="sq-btn" onclick="clearTerm('terminal-pantry')">Clear</button>
+    </div>
+    <pre id="terminal-pantry" class="sq-terminal" style="margin-top:0.5rem"></pre>
   </div>
-
-  <pre id="terminal-pantry" class="sq-terminal" style="margin-top:0.5rem"></pre>
-</div>
+</details>
 
 <script>
 window.viewPantry = async function() {
@@ -962,15 +843,6 @@ Your **Baja Bowl** creation earned you **+50 XP** and the **"First Insert"** bad
 The next city awaits: **Los Angeles — READ module unlocked!** 🌆  
 Click through to begin exploring **searching, filtering, and viewing dishes** in LA.
 
-<!-- Back to Home Button moved to bottom -->
-<div style="margin-top: 2.5rem; text-align: center; padding: 1.5rem 0; border-top: 1px solid rgba(99,102,241,0.08);">
-  <a href="{{ site.baseurl }}/west-coast/food/" class="back-home">
-    ← Back to Food Route Hub
-  </a>
-</div>
-
-<!-- Next City Button -->
-<a href="{{ site.baseurl }}/west-coast/food/LA/" class="next-city-btn">Next → Los Angeles</a>
 
 <script>
 /* utilities used by editors */
@@ -1031,4 +903,4 @@ function clearTerm(id) { const el = document.getElementById(id); if (el) el.text
     }
   }
 })();
-</script>
+</script>f
