@@ -138,7 +138,8 @@ class TriggerZone extends GameObject {
 }
 
 class BlackjackGameManager {
-    constructor() {
+    constructor(gameEnv) {
+        this.gameEnv = gameEnv; // Store reference to game environment
         this.money = 1000;
         this.currentBet = 0;
         this.goalMoney = 25000; // Changed from 100000 to 25000
@@ -155,7 +156,7 @@ class BlackjackGameManager {
     }
 
     createOverlay() {
-        // Create dark overlay
+        // Create dark overlay with initial opacity 0 for fade-in
         this.overlay = document.createElement('div');
         this.overlay.id = 'blackjack-overlay';
         this.overlay.style.cssText = `
@@ -171,7 +172,15 @@ class BlackjackGameManager {
             justify-content: center;
             align-items: center;
             padding: 20px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
         `;
+        
+        // Fade out the game canvas
+        if (this.gameEnv && this.gameEnv.canvas) {
+            this.gameEnv.canvas.style.transition = 'opacity 0.8s ease-in-out';
+            this.gameEnv.canvas.style.opacity = '0';
+        }
 
         // Create game container
         const gameContainer = document.createElement('div');
@@ -245,6 +254,11 @@ class BlackjackGameManager {
         gameContainer.appendChild(bettingSelector);
         this.overlay.appendChild(gameContainer);
         document.body.appendChild(this.overlay);
+        
+        // Trigger fade-in after a brief moment
+        setTimeout(() => {
+            this.overlay.style.opacity = '1';
+        }, 50);
 
         // Load blackjack game into container
         this.loadBlackjackHTML(gameContainer);
@@ -526,8 +540,21 @@ class BlackjackGameManager {
 
     exitGame() {
         if (this.overlay) {
-            document.body.removeChild(this.overlay);
-            this.overlay = null;
+            // Fade out overlay
+            this.overlay.style.opacity = '0';
+            
+            // Fade in the game canvas
+            if (this.gameEnv && this.gameEnv.canvas) {
+                this.gameEnv.canvas.style.opacity = '1';
+            }
+            
+            // Remove overlay after transition completes
+            setTimeout(() => {
+                if (this.overlay && this.overlay.parentNode) {
+                    document.body.removeChild(this.overlay);
+                }
+                this.overlay = null;
+            }, 800); // Match the transition duration
         }
         this.gameActive = false;
     }
@@ -547,7 +574,7 @@ class MansionLevel4 {
         let path = gameEnv.path;
 
         // Initialize blackjack manager
-        this.blackjackManager = new BlackjackGameManager();
+        this.blackjackManager = new BlackjackGameManager(gameEnv);
 
         // Background data
         const image_background = path + "/images/mansionGame/image_lvl4.png";
