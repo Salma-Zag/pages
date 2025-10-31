@@ -62,14 +62,9 @@ date: 2025-10-21
 </style>
 
 <div class="max-w-3xl mx-auto p-4">
-  <div class="flex justify-between items-start mb-2">
-    <div class="flex-1">
-      <h1 class="text-2xl font-bold mb-2">LinkedIn Profile Builder</h1>
-      <p class="text-gray-600 mb-4">Create a professional LinkedIn profile with AI assistance. Follow the steps to build your complete profile.</p>
-    </div>
-    <button onclick="fillDummyData()" class="px-3 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700">
-      Demo
-    </button>
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold mb-2">LinkedIn Profile Builder</h1>
+    <p class="text-gray-600 mb-4">Create a professional LinkedIn profile with AI assistance. Follow the steps to build your complete profile.</p>
   </div>
 
   <!-- Video: How to Create a LinkedIn Profile -->
@@ -97,12 +92,12 @@ date: 2025-10-21
   </div>
 
   <!-- Step 1: Profile Setup Basics -->
-  <section id="step1" data-step="0" class="space-y-3">
-    <h2 class="text-xl font-semibold">Step 1: LinkedIn Profile Basics</h2>
-    <p class="text-sm">We've pre-filled data from your resume. Review and adjust for LinkedIn.</p>
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-3">
-      <p class="text-sm font-medium">Auto-filled from Resume Builder</p>
-      <p class="text-xs mt-1">Your name, location, and education were imported. Add a professional headline.</p>
+  <section id="step1" data-step="0" class="space-y-4">
+    <h2 class="text-xl font-bold text-gray-900">Step 1: LinkedIn Profile Basics</h2>
+    <p class="text-sm text-gray-600">We've pre-filled data from your resume. Review and adjust for LinkedIn.</p>
+    <div class="bg-blue-100 border-l-4 border-blue-600 p-4">
+      <p class="text-sm font-bold text-gray-900">✓ Auto-filled from Resume Builder</p>
+      <p class="text-xs mt-1 text-gray-800">Your name, location, and education were imported. Add a professional headline.</p>
     </div>
     <div>
       <label class="block text-sm font-medium">Full Name *</label>
@@ -125,12 +120,17 @@ date: 2025-10-21
       <label class="block text-sm font-medium">Education</label>
       <textarea id="education" rows="2" class="w-full border rounded px-3 py-2" placeholder="B.S. Computer Science, UC San Diego, 2026"></textarea>
     </div>
+    <div class="pt-2">
+      <button onclick="fillDummyData()" class="px-4 py-2 bg-purple-600 text-white text-sm rounded hover:bg-purple-700">
+        Fill with Demo Data
+      </button>
+    </div>
   </section>
 
   <!-- Step 2: Profile Photo & Header -->
-  <section id="step2" data-step="1" class="space-y-3 hidden">
-    <h2 class="text-xl font-semibold">Step 2: Profile Photo & Header Image</h2>
-    <p class="text-sm">Your photo is the first thing people see. Make it count.</p>
+  <section id="step2" data-step="1" class="space-y-4 hidden">
+    <h2 class="text-xl font-bold text-gray-900">Step 2: Profile Photo & Header Image</h2>
+    <p class="text-sm text-gray-600">Your photo is the first thing people see. Make it count.</p>
     <details class="border rounded p-3">
       <summary class="font-medium cursor-pointer">Profile Photo Guidelines</summary>
       <div class="text-sm mt-2 space-y-2">
@@ -165,16 +165,31 @@ date: 2025-10-21
         <p class="mt-2"><b>Free resources:</b> Canva, Unsplash, Pexels</p>
       </div>
     </details>
-    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-3">
-      <p class="text-sm font-medium">Pro Tip</p>
-      <p class="text-xs mt-1">Profiles with photos get 21x more views and 36x more messages. Make sure yours is professional!</p>
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+      <p class="text-sm font-medium text-yellow-900">💡 Pro Tip</p>
+      <p class="text-xs mt-1 text-yellow-800">Profiles with photos get 21x more views and 36x more messages. Make sure yours is professional!</p>
+    </div>
+
+    <div class="border rounded p-3 mt-3">
+      <h3 class="font-medium mb-2">Create Your LinkedIn Header Image</h3>
+      <p class="text-sm text-gray-700 mb-2">We'll generate ideas for your header banner based on your profile.</p>
+      <button onclick="generateHeaderIdeas()" id="headerBtn" class="px-3 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm">
+        <span id="headerIcon">Generate Header Ideas</span>
+      </button>
+      <div id="headerIdeas" class="mt-3 p-3 border rounded bg-gray-50 hidden">
+        <div class="flex justify-between items-start mb-2">
+          <span class="font-medium text-sm">Your Header Image Ideas</span>
+          <button onclick="copyHeaderIdeas()" class="px-2 py-1 text-xs border rounded hover:bg-gray-50">Copy</button>
+        </div>
+        <div id="headerContent" class="text-sm whitespace-pre-wrap"></div>
+      </div>
     </div>
   </section>
 
   <!-- Step 3: About Section -->
-  <section id="step3" data-step="2" class="space-y-3 hidden">
-    <h2 class="text-xl font-semibold">Step 3: About Section</h2>
-    <p class="text-sm">Your About section is your story. Make it engaging and authentic.</p>
+  <section id="step3" data-step="2" class="space-y-4 hidden">
+    <h2 class="text-xl font-bold text-gray-900">Step 3: About Section</h2>
+    <p class="text-sm text-gray-600">Your About section is your story. Make it engaging and authentic.</p>
     <details class="border rounded p-3">
       <summary class="font-medium cursor-pointer">How to write a great About section</summary>
       <div class="text-sm mt-2 space-y-2">
@@ -197,12 +212,12 @@ date: 2025-10-21
   </section>
 
   <!-- Step 4: Experience -->
-  <section id="step4" data-step="3" class="space-y-3 hidden">
-    <h2 class="text-xl font-semibold">Step 4: Experience</h2>
-    <p class="text-sm">Show what you've accomplished. Data from your resume is pre-filled.</p>
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-3">
-      <p class="text-sm font-medium">Auto-filled from Experience Builder</p>
-      <p class="text-xs mt-1">Review and add any additional experiences for LinkedIn.</p>
+  <section id="step4" data-step="3" class="space-y-4 hidden">
+    <h2 class="text-xl font-bold text-gray-900">Step 4: Experience</h2>
+    <p class="text-sm text-gray-600">Show what you've accomplished. Data from your resume is pre-filled.</p>
+    <div class="bg-blue-100 border-l-4 border-blue-600 p-4">
+      <p class="text-sm font-bold text-gray-900">✓ Auto-filled from Experience Builder</p>
+      <p class="text-xs mt-1 text-gray-800">Review and add any additional experiences for LinkedIn.</p>
     </div>
     <div>
       <label class="block text-sm font-medium">Experience & Projects *</label>
@@ -216,9 +231,9 @@ date: 2025-10-21
   </section>
 
   <!-- Step 5: Professional Posting -->
-  <section id="step5" data-step="4" class="space-y-3 hidden">
-    <h2 class="text-xl font-semibold">Step 5: Professional Presence & Posting</h2>
-    <p class="text-sm">Learn how to maintain a professional LinkedIn presence.</p>
+  <section id="step5" data-step="4" class="space-y-4 hidden">
+    <h2 class="text-xl font-bold text-gray-900">Step 5: Professional Presence & Posting</h2>
+    <p class="text-sm text-gray-600">Learn how to maintain a professional LinkedIn presence.</p>
     
     <!-- Video: LinkedIn Networking -->
     <div class="border rounded p-3">
@@ -276,22 +291,16 @@ date: 2025-10-21
         </ul>
       </div>
     </details>
-    <div class="bg-green-50 border-l-4 border-green-500 p-3">
-      <p class="text-sm font-medium">Remember</p>
-      <p class="text-xs mt-1">LinkedIn is a professional network. Everything you post builds your personal brand. Be authentic, helpful, and professional.</p>
+    <div class="bg-green-50 border-l-4 border-green-600 p-4">
+      <p class="text-sm font-medium text-green-900">✓ Remember</p>
+      <p class="text-xs mt-1 text-green-800">LinkedIn is a professional network. Everything you post builds your personal brand. Be authentic, helpful, and professional.</p>
     </div>
   </section>
 
-  <!-- Nav -->
-  <div class="flex justify-between mt-4">
-    <button id="prevBtn" class="px-3 py-2 border rounded" onclick="prevStep()" disabled>Previous</button>
-    <button id="nextBtn" class="px-3 py-2 border rounded" onclick="nextStep()">Next</button>
-  </div>
-
   <!-- Step 6: Review -->
-  <section id="step6" data-step="5" class="space-y-3 hidden">
-    <h2 class="text-xl font-semibold">Step 6: Your Generated LinkedIn Profile</h2>
-    <p class="text-sm">Review your AI-generated profile and copy each section to LinkedIn.</p>
+  <section id="step6" data-step="5" class="space-y-4 hidden">
+    <h2 class="text-xl font-bold text-gray-900">Step 6: Your Generated LinkedIn Profile</h2>
+    <p class="text-sm text-gray-600">Review your AI-generated profile and copy each section to LinkedIn.</p>
     <div class="border rounded p-3">
       <div class="font-medium mb-2">How to use this:</div>
       <ol class="list-decimal ml-5 text-sm space-y-1">
@@ -354,13 +363,12 @@ date: 2025-10-21
       <a href="/cs-portfolio-quest/resume/" class="inline-block px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
         Next Lesson
       </a>
-    </div>
   </section>
 
   <!-- Nav -->
-  <div class="flex justify-between mt-4">
-    <button id="prevBtn" class="px-3 py-2 border rounded" onclick="prevStep()" disabled>Previous</button>
-    <button id="nextBtn" class="px-3 py-2 border rounded" onclick="nextStep()">Next</button>
+  <div class="flex justify-between items-center mt-6 pt-6 pb-4 border-t-2 border-gray-300 bg-white">
+    <button id="prevBtn" class="px-6 py-3 bg-gray-200 border-2 border-gray-400 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 disabled:opacity-40 disabled:cursor-not-allowed" onclick="prevStep()" disabled>← Previous</button>
+    <button id="nextBtn" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 shadow-md">Next →</button>
   </div>
 </div>
 
@@ -373,52 +381,69 @@ const STORAGE_KEY = 'linkedin_profile_v3';
 let currentStep = 1;
 let profileData = {
   about: '',
-  experience: ''
+  experience: '',
+  headerIdeas: ''
 };
 
 // Initialize on load
 window.addEventListener('DOMContentLoaded', () => {
-  autoFillFromOtherModules();
+  // First load any saved data from this module
   loadSavedData();
+  
+  // Then auto-fill from other modules (only if fields are empty)
+  autoFillFromOtherModules();
+  
+  // Setup auto-save
+  setTimeout(() => {
+    document.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', saveToLocal);
+    });
+  }, 100);
+  
   goToStep(1);
-});
-
-// Auto-save on input
-document.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('input', saveToLocal);
 });
 
 // Auto-fill from module 2 and 3 localStorage
 function autoFillFromOtherModules() {
   try {
+    // Check if fields are already filled (avoid duplicate auto-fill)
+    const fullNameField = document.getElementById('fullName');
+    const locationField = document.getElementById('location');
+    const skillsField = document.getElementById('skills');
+    const educationField = document.getElementById('education');
+    const experienceField = document.getElementById('experiencePrompt');
+    
     // Get data from Resume Builder (Module 2)
     const module2Data = localStorage.getItem('resume_builder_v2');
     if (module2Data) {
       const data = JSON.parse(module2Data);
-      if (data.fullName && !document.getElementById('fullName').value) {
-        document.getElementById('fullName').value = data.fullName;
+      
+      // Only fill if field is completely empty
+      if (data.fullName && fullNameField && fullNameField.value.trim() === '') {
+        fullNameField.value = data.fullName.trim();
       }
-      if (data.location && !document.getElementById('location').value) {
-        document.getElementById('location').value = data.location;
+      if (data.location && locationField && locationField.value.trim() === '') {
+        locationField.value = data.location.trim();
       }
-      if (data.skills && !document.getElementById('skills').value) {
-        document.getElementById('skills').value = data.skills;
+      if (data.skills && skillsField && skillsField.value.trim() === '') {
+        skillsField.value = data.skills.trim();
       }
-      if (data.education && !document.getElementById('education').value) {
-        document.getElementById('education').value = data.education;
+      if (data.education && educationField && educationField.value.trim() === '') {
+        educationField.value = data.education.trim();
       }
     }
     
     // Get data from Experience Builder (Module 3)
     const module3Data = localStorage.getItem('impact_exp_v1');
-    if (module3Data) {
+    if (module3Data && experienceField) {
       const data = JSON.parse(module3Data);
-      if (data.exp1 && !document.getElementById('experiencePrompt').value) {
+      // Only fill experience if field is empty
+      if (experienceField.value.trim() === '') {
         let expText = '';
-        if (data.exp1) expText += data.exp1 + '\n\n';
-        if (data.exp2) expText += data.exp2 + '\n\n';
-        if (data.exp3) expText += data.exp3;
-        document.getElementById('experiencePrompt').value = expText.trim();
+        if (data.exp1) expText += data.exp1.trim() + '\n\n';
+        if (data.exp2) expText += data.exp2.trim() + '\n\n';
+        if (data.exp3) expText += data.exp3.trim();
+        experienceField.value = expText.trim();
       }
     }
   } catch(e) {
@@ -447,31 +472,47 @@ function prevStep() {
 }
 
 function nextStep() {
+  console.log('Next button clicked, current step:', currentStep);
+  
   // Validate before moving forward
   if (currentStep === 1) {
-    const fullName = document.getElementById('fullName').value.trim();
-    const headline = document.getElementById('headline').value.trim();
-    if (!fullName || !headline) {
-      alert('Please fill in Name and Headline');
+    const fullName = document.getElementById('fullName');
+    const headline = document.getElementById('headline');
+    
+    if (!fullName || !fullName.value || fullName.value.trim() === '') {
+      alert('⚠️ Please enter your Full Name');
+      if (fullName) fullName.focus();
+      return;
+    }
+    if (!headline || !headline.value || headline.value.trim() === '') {
+      alert('⚠️ Please enter your Professional Headline');
+      if (headline) headline.focus();
       return;
     }
   } else if (currentStep === 3) {
-    const aboutPrompt = document.getElementById('aboutPrompt').value.trim();
-    if (!aboutPrompt) {
-      alert('Please write your About section');
+    const aboutPrompt = document.getElementById('aboutPrompt');
+    if (!aboutPrompt || !aboutPromp822t.value || aboutPrompt.value.trim() === '') {
+      alert('⚠️ Please write your About section');
+      if (aboutPrompt) aboutPrompt.focus();
       return;
     }
   } else if (currentStep === 4) {
-    const experiencePrompt = document.getElementById('experiencePrompt').value.trim();
-    if (!experiencePrompt) {
-      alert('Please add your Experience');
+    const experiencePrompt = document.getElementById('experiencePrompt');
+    if (!experiencePrompt || !experiencePrompt.value || experiencePrompt.value.trim() === '') {
+      alert('⚠️ Please add your Experience');
+      if (experiencePrompt) experiencePrompt.focus();
       return;
     }
     // Trigger generation instead of just going to next step
     generateProfile();
     return;
+  } else if (currentStep === 6) {
+    // On final step, go to next lesson
+    window.location.href = '/cs-portfolio-quest/resume/';
+    return;
   }
   
+  // Move to next step
   if (currentStep < 6) {
     goToStep(currentStep + 1);
   }
@@ -558,7 +599,15 @@ function updateStepIndicators() {
   if (progressBar) progressBar.style.width = percent + '%';
   if (progressLabel) progressLabel.textContent = `Step ${currentStep} / 6`;
   if (prevBtn) prevBtn.disabled = currentStep === 1;
-  if (nextBtn) nextBtn.textContent = currentStep === 6 ? 'Finish' : 'Next';
+  if (nextBtn) {
+    if (currentStep === 6) {
+      nextBtn.textContent = 'Continue to Next Lesson →';
+      nextBtn.className = 'px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 shadow-md';
+    } else {
+      nextBtn.textContent = 'Next →';
+      nextBtn.className = 'px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 shadow-md';
+    }
+  }
 }
 
 // Generate profile with AI
@@ -700,6 +749,53 @@ function updateLinkedInPreview() {
 
   // Update education
   document.getElementById('previewEducation').textContent = education || 'No education added';
+}
+
+// Generate header image ideas
+async function generateHeaderIdeas() {
+  const fullName = document.getElementById('fullName').value.trim();
+  const headline = document.getElementById('headline').value.trim();
+  
+  if (!fullName || !headline) {
+    alert('Please fill in your name and headline first');
+    return;
+  }
+  
+  const btn = document.getElementById('headerBtn');
+  const icon = document.getElementById('headerIcon');
+  btn.disabled = true;
+  icon.innerHTML = '<span class="loading"></span> Generating...';
+  
+  try {
+    const ideas = await callGeminiAPI(`Generate 3-4 creative LinkedIn header image ideas for:
+Name: ${fullName}
+Headline: ${headline}
+
+Provide specific, actionable ideas they can create in Canva or find on Unsplash. Include colors, themes, and specific elements. Format as a numbered list.`);
+    
+    profileData.headerIdeas = ideas;
+    document.getElementById('headerContent').textContent = ideas;
+    document.getElementById('headerIdeas').classList.remove('hidden');
+    btn.disabled = false;
+    icon.textContent = 'Regenerate Ideas';
+  } catch (error) {
+    alert('Failed to generate header ideas. Please try again.');
+    btn.disabled = false;
+    icon.textContent = 'Generate Header Ideas';
+  }
+}
+
+// Copy header ideas
+function copyHeaderIdeas() {
+  if (!profileData.headerIdeas) {
+    alert('Nothing to copy');
+    return;
+  }
+  navigator.clipboard.writeText(profileData.headerIdeas).then(() => {
+    alert('Header ideas copied!');
+  }).catch(() => {
+    alert('Failed to copy');
+  });
 }
 
 // Copy individual section
