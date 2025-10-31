@@ -13,7 +13,7 @@ date: 2025-10-21
 microblog: True
 ---
 
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
