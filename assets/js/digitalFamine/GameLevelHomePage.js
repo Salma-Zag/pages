@@ -593,47 +593,169 @@ class GameLevelHomePage {
     // Check if splashscreen element already exists
     let existingSplash = document.getElementById('splashscreen');
     if (!existingSplash) {
-      // Create if it doesn't exist
       existingSplash = document.createElement('div');
       existingSplash.id = 'splashscreen';
-      existingSplash.innerHTML = `
-        <h1>Welcome to Digital Famine</h1>
-        <h2>Save Earth from the Information Crisis</h2>
-        
-        <div class="story-content">
-          <p><strong>The year is 2157.</strong> Earth faces its greatest threat yet - not from war or climate change, but from a catastrophic information collapse known as the Digital Famine.</p>
-          
-          <p>Misinformation, cyber attacks, and AI manipulation have fractured society. Knowledge itself has become corrupted, and humanity teeters on the brink of a new dark age.</p>
-          
-          <p>You are Earth's last hope - a pilot sent to recover the four Ancient Pages of Digital Wisdom scattered across the galaxy. Each page contains essential knowledge to restore truth and security to our world:</p>
-          
-          <ul>
-            <li>📱 <strong>The Microblog Page</strong> - Master the art of digital communication</li>
-            <li>📰 <strong>The Media Literacy Page</strong> - Learn to discern truth from deception</li>
-            <li>🤖 <strong>The AI Page</strong> - Understand and control artificial intelligence</li>
-            <li>🔒 <strong>The Cybersecurity Page</strong> - Protect against digital threats</li>
-          </ul>
-          
-          <h3>Your Mission</h3>
-          <p>Navigate your rocket through the galaxy, visit each planet, and complete their challenges to earn the Ancient Pages. Only when all four pages are collected can Earth be saved.</p>
-          
-          <h3>Controls</h3>
-          <ul>
-            <li><strong>W/A/S/D</strong> - Move your rocket</li>
-            <li><strong>SPACE</strong> - Interact with planets</li>
-            <li><strong>T</strong> - Toggle satellite companion</li>
-          </ul>
-          
-          <!-- Space for additional manual content -->
-          <div class="additional-content">
-            <!-- You can add more content here manually -->
-          </div>
-          
-          <p class="ready-text">Are you ready to save humanity?</p>
-        </div>
-      `;
       document.body.appendChild(existingSplash);
     }
+
+    // Scene data
+    const scenes = [
+      {
+        title: "Welcome to Digital Famine",
+        subtitle: "Save Earth from the Information Crisis",
+        content: `
+          <div class="scene-content">
+            <p><strong>The year is 2157.</strong> Earth faces its greatest threat yet - not from war or climate change, but from a catastrophic information collapse known as the Digital Famine.</p>
+            
+            <p>Misinformation, cyber attacks, and AI manipulation have fractured society. Knowledge itself has become corrupted, and humanity teeters on the brink of a new dark age.</p>
+            
+            <p>You are Earth's last hope - a pilot sent to recover the four Ancient Pages of Digital Wisdom scattered across the galaxy.</p>
+          </div>
+        `,
+        image: "🌌"
+      },
+      {
+        title: "The Ancient Pages",
+        subtitle: "Collect the Four Pages of Digital Wisdom",
+        content: `
+          <div class="scene-content">
+            <p>Each page contains essential knowledge to restore truth and security to our world:</p>
+            
+            <div class="pages-grid">
+              <div class="page-card">
+                <div class="page-icon">📱</div>
+                <h4>Microblog Page</h4>
+                <p>Master the art of digital communication and identify misinformation patterns</p>
+              </div>
+              
+              <div class="page-card">
+                <div class="page-icon">📰</div>
+                <h4>Media Literacy Page</h4>
+                <p>Learn to discern truth from deception in modern media</p>
+              </div>
+              
+              <div class="page-card">
+                <div class="page-icon">🤖</div>
+                <h4>AI Page</h4>
+                <p>Understand and control artificial intelligence systems</p>
+              </div>
+              
+              <div class="page-card">
+                <div class="page-icon">🔒</div>
+                <h4>Cybersecurity Page</h4>
+                <p>Protect against digital threats and cyber attacks</p>
+              </div>
+            </div>
+          </div>
+        `,
+        image: "📚"
+      },
+      {
+        title: "Your Mission",
+        subtitle: "Navigate the Galaxy and Complete Challenges",
+        content: `
+          <div class="scene-content">
+            <p>Navigate your rocket through the galaxy, visit each planet, and complete their challenges to earn the Ancient Pages.</p>
+            
+            <div class="mission-steps">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Travel to Each Planet</h4>
+                  <p>Fly your rocket to different planets in the correct sequence</p>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Complete Challenges</h4>
+                  <p>Master digital literacy skills through interactive missions</p>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Collect Ancient Pages</h4>
+                  <p>Earn pages by successfully completing planet challenges</p>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Save Humanity</h4>
+                  <p>Return to Earth with all four pages to restore knowledge</p>
+                </div>
+              </div>
+            </div>
+            
+            <p class="warning-text">⚠️ Only when all four pages are collected can Earth be saved!</p>
+          </div>
+        `,
+        image: "🚀"
+      },
+      {
+        title: "Game Controls",
+        subtitle: "Master Your Rocket Ship",
+        content: `
+          <div class="scene-content">
+            <div class="controls-grid">
+              <div class="control-item">
+                <div class="key-display">W</div>
+                <p>Move Up</p>
+              </div>
+              
+              <div class="control-item">
+                <div class="key-display">A</div>
+                <p>Move Left</p>
+              </div>
+              
+              <div class="control-item">
+                <div class="key-display">S</div>
+                <p>Move Down</p>
+              </div>
+              
+              <div class="control-item">
+                <div class="key-display">D</div>
+                <p>Move Right</p>
+              </div>
+              
+              <div class="control-item">
+                <div class="key-display">E</div>
+                <p>Interact with Planets</p>
+              </div>
+              
+              <div class="control-item">
+                <div class="key-display">T</div>
+                <p>Toggle Satellite Companion</p>
+              </div>
+            </div>
+            
+            <div class="tips-section">
+              <h4>💡 Pro Tips</h4>
+              <ul>
+                <li>Planets must be completed in order: Microblog → Media Literacy → AI → Cybersecurity</li>
+                <li>Your satellite companion follows you around for moral support!</li>
+                <li>Look for glowing planets - they're ready for interaction</li>
+                <li>Check the page counter in the bottom-right to track your progress</li>
+              </ul>
+            </div>
+            
+            <div class="mobile-controls-info">
+              <h4>📱 Mobile/Touch Controls</h4>
+              <p>On mobile devices, use the on-screen joystick to move your rocket and tap the interact button when near planets.</p>
+            </div>
+            
+            <p class="ready-text">Are you ready to save humanity?</p>
+          </div>
+        `,
+        image: "🎮"
+      }
+    ];
+
+    let currentScene = 0;
 
     // Create overlay backdrop
     const overlay = document.createElement('div');
@@ -644,8 +766,8 @@ class GameLevelHomePage {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(8px);
       z-index: 99998;
       display: flex;
       justify-content: center;
@@ -660,87 +782,301 @@ class GameLevelHomePage {
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      max-width: 700px;
-      height: 80vh;
-      max-height: 600px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      max-width: 800px;
+      height: 85vh;
+      max-height: 650px;
+      background: linear-gradient(135deg, #0f1729 0%, #1a1f3a 100%);
       color: #ffffff;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 50px rgba(100, 200, 255, 0.5);
+      padding: 0;
+      border-radius: 24px;
+      box-shadow: 0 0 60px rgba(100, 200, 255, 0.6);
       z-index: 99999;
-      overflow-y: auto;
+      overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      border: 2px solid #00d4ff;
+      border: 3px solid #00d4ff;
       animation: slideIn 0.6s ease-out;
+      display: flex;
+      flex-direction: column;
     `;
 
-    // Add close button
+    // Create header with close button
+    const header = document.createElement('div');
+    header.style.cssText = `
+      padding: 25px 30px;
+      background: rgba(0, 0, 0, 0.3);
+      border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    `;
+
+    const sceneIndicator = document.createElement('div');
+    sceneIndicator.id = 'scene-indicator';
+    sceneIndicator.style.cssText = `
+      color: #00d4ff;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    `;
+    sceneIndicator.textContent = `SCENE 1 / ${scenes.length}`;
+
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '✕';
     closeButton.style.cssText = `
-      position: absolute;
-      top: 20px;
-      right: 20px;
       background: rgba(255, 255, 255, 0.1);
       border: 2px solid #00d4ff;
       color: #00d4ff;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      font-size: 24px;
+      font-size: 20px;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
     `;
-    
+
     closeButton.onmouseover = () => {
       closeButton.style.background = '#00d4ff';
-      closeButton.style.color = '#1a1a2e';
+      closeButton.style.color = '#0f1729';
       closeButton.style.transform = 'rotate(90deg)';
     };
-    
+
     closeButton.onmouseout = () => {
       closeButton.style.background = 'rgba(255, 255, 255, 0.1)';
       closeButton.style.color = '#00d4ff';
       closeButton.style.transform = 'rotate(0deg)';
     };
 
-    // Add start button
-    const startButton = document.createElement('button');
-    startButton.innerHTML = 'Begin Mission';
-    startButton.style.cssText = `
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
+    header.appendChild(sceneIndicator);
+    header.appendChild(closeButton);
+
+    // Create content area
+    const contentArea = document.createElement('div');
+    contentArea.id = 'splash-content-area';
+    contentArea.style.cssText = `
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+    `;
+
+    // Create scene container
+    const sceneContainer = document.createElement('div');
+    sceneContainer.id = 'scene-container';
+    sceneContainer.style.cssText = `
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    `;
+
+    contentArea.appendChild(sceneContainer);
+
+    // Create footer with navigation
+    const footer = document.createElement('div');
+    footer.style.cssText = `
+      padding: 20px 30px;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 2px solid rgba(0, 212, 255, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    `;
+
+    const prevButton = document.createElement('button');
+    prevButton.innerHTML = '← Previous';
+    prevButton.style.cssText = `
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #00d4ff;
+      color: #00d4ff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0.5;
+      pointer-events: none;
+    `;
+
+    const dotsContainer = document.createElement('div');
+    dotsContainer.style.cssText = `
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    `;
+
+    for (let i = 0; i < scenes.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'scene-dot';
+      dot.style.cssText = `
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: ${i === 0 ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)'};
+        transition: all 0.3s ease;
+        cursor: pointer;
+      `;
+      dot.onclick = () => goToScene(i);
+      dotsContainer.appendChild(dot);
+    }
+
+    const nextButton = document.createElement('button');
+    nextButton.innerHTML = 'Next →';
+    nextButton.style.cssText = `
       background: linear-gradient(135deg, #00d4ff, #0099cc);
       border: none;
       color: white;
-      padding: 15px 40px;
-      border-radius: 30px;
-      font-size: 18px;
-      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
     `;
-    
-    startButton.onmouseover = () => {
-      startButton.style.transform = 'translateX(-50%) scale(1.05)';
-      startButton.style.boxShadow = '0 7px 30px rgba(0, 212, 255, 0.6)';
-    };
-    
-    startButton.onmouseout = () => {
-      startButton.style.transform = 'translateX(-50%) scale(1)';
-      startButton.style.boxShadow = '0 5px 20px rgba(0, 212, 255, 0.4)';
+
+    nextButton.onmouseover = () => {
+      nextButton.style.transform = 'scale(1.05)';
+      nextButton.style.boxShadow = '0 6px 20px rgba(0, 212, 255, 0.6)';
     };
 
-    // Style internal elements
+    nextButton.onmouseout = () => {
+      nextButton.style.transform = 'scale(1)';
+      nextButton.style.boxShadow = '0 4px 15px rgba(0, 212, 255, 0.4)';
+    };
+
+    footer.appendChild(prevButton);
+    footer.appendChild(dotsContainer);
+    footer.appendChild(nextButton);
+
+    // Assemble splash screen
+    existingSplash.innerHTML = '';
+    existingSplash.appendChild(header);
+    existingSplash.appendChild(contentArea);
+    existingSplash.appendChild(footer);
+
+    // Function to render current scene
+    const renderScene = () => {
+      const scene = scenes[currentScene];
+      
+      sceneContainer.style.opacity = '0';
+      sceneContainer.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        sceneContainer.innerHTML = `
+          <div class="scene-icon" style="font-size: 64px; text-align: center; margin-bottom: 20px;">
+            ${scene.image}
+          </div>
+          <h1 style="font-size: 32px; text-align: center; margin-bottom: 10px; background: linear-gradient(135deg, #00d4ff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            ${scene.title}
+          </h1>
+          <h2 style="font-size: 18px; text-align: center; color: #00d4ff; margin-bottom: 30px; font-weight: 300;">
+            ${scene.subtitle}
+          </h2>
+          ${scene.content}
+        `;
+        
+        sceneContainer.style.transition = 'all 0.4s ease';
+        sceneContainer.style.opacity = '1';
+        sceneContainer.style.transform = 'translateY(0)';
+        
+        // Scroll to top
+        contentArea.scrollTop = 0;
+      }, 150);
+      
+      // Update scene indicator
+      sceneIndicator.textContent = `SCENE ${currentScene + 1} / ${scenes.length}`;
+      
+      // Update dots
+      const dots = dotsContainer.querySelectorAll('.scene-dot');
+      dots.forEach((dot, i) => {
+        dot.style.background = i === currentScene ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)';
+        dot.style.width = i === currentScene ? '12px' : '10px';
+        dot.style.height = i === currentScene ? '12px' : '10px';
+      });
+      
+      // Update buttons
+      if (currentScene === 0) {
+        prevButton.style.opacity = '0.5';
+        prevButton.style.pointerEvents = 'none';
+      } else {
+        prevButton.style.opacity = '1';
+        prevButton.style.pointerEvents = 'auto';
+        prevButton.onmouseover = () => {
+          prevButton.style.background = 'rgba(0, 212, 255, 0.2)';
+        };
+        prevButton.onmouseout = () => {
+          prevButton.style.background = 'rgba(255, 255, 255, 0.1)';
+        };
+      }
+      
+      if (currentScene === scenes.length - 1) {
+        nextButton.innerHTML = 'Begin Mission 🚀';
+        nextButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      } else {
+        nextButton.innerHTML = 'Next →';
+        nextButton.style.background = 'linear-gradient(135deg, #00d4ff, #0099cc)';
+      }
+    };
+
+    // Navigation functions
+    const goToScene = (index) => {
+      if (index >= 0 && index < scenes.length) {
+        currentScene = index;
+        renderScene();
+      }
+    };
+
+    const nextScene = () => {
+      if (currentScene < scenes.length - 1) {
+        currentScene++;
+        renderScene();
+      } else {
+        closeSplash();
+      }
+    };
+
+    const prevScene = () => {
+      if (currentScene > 0) {
+        currentScene--;
+        renderScene();
+      }
+    };
+
+    // Close function
+    const closeSplash = () => {
+      overlay.style.animation = 'fadeOut 0.3s ease-out';
+      existingSplash.style.animation = 'slideOut 0.3s ease-out';
+      
+      setTimeout(() => {
+        overlay.remove();
+        existingSplash.style.display = 'none';
+        sessionStorage.setItem('splashShown', 'true');
+      }, 300);
+    };
+
+    // Event listeners
+    closeButton.onclick = closeSplash;
+    nextButton.onclick = nextScene;
+    prevButton.onclick = prevScene;
+
+    // Keyboard navigation
+    const handleKeyboard = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Enter') {
+        nextScene();
+      } else if (e.key === 'ArrowLeft') {
+        prevScene();
+      } else if (e.key === 'Escape') {
+        closeSplash();
+        document.removeEventListener('keydown', handleKeyboard);
+      }
+    };
+    document.addEventListener('keydown', handleKeyboard);
+
+    // Add CSS styles
     const style = document.createElement('style');
     style.textContent = `
       @keyframes fadeIn {
@@ -759,124 +1095,6 @@ class GameLevelHomePage {
         }
       }
       
-      #splashscreen h1 {
-        font-size: 36px;
-        text-align: center;
-        margin-bottom: 10px;
-        background: linear-gradient(135deg, #00d4ff, #ff00ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-      }
-      
-      #splashscreen h2 {
-        font-size: 20px;
-        text-align: center;
-        color: #00d4ff;
-        margin-bottom: 30px;
-        font-weight: 300;
-      }
-      
-      #splashscreen h3 {
-        color: #00d4ff;
-        margin-top: 25px;
-        margin-bottom: 15px;
-        font-size: 24px;
-      }
-      
-      #splashscreen .story-content {
-        padding-bottom: 60px;
-        line-height: 1.6;
-      }
-      
-      #splashscreen p {
-        margin-bottom: 15px;
-        color: #e0e0e0;
-        font-size: 16px;
-      }
-      
-      #splashscreen ul {
-        margin: 20px 0;
-        padding-left: 20px;
-      }
-      
-      #splashscreen li {
-        margin-bottom: 12px;
-        color: #e0e0e0;
-        font-size: 16px;
-      }
-      
-      #splashscreen strong {
-        color: #ffffff;
-      }
-      
-      #splashscreen .ready-text {
-        text-align: center;
-        font-size: 20px;
-        color: #00d4ff;
-        margin-top: 30px;
-        font-weight: bold;
-        animation: pulse 2s infinite;
-      }
-      
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
-      }
-      
-      #splashscreen::-webkit-scrollbar {
-        width: 10px;
-      }
-      
-      #splashscreen::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-      }
-      
-      #splashscreen::-webkit-scrollbar-thumb {
-        background: #00d4ff;
-        border-radius: 10px;
-      }
-      
-      #splashscreen::-webkit-scrollbar-thumb:hover {
-        background: #0099cc;
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Close function
-    const closeSplash = () => {
-      overlay.style.animation = 'fadeOut 0.3s ease-out';
-      existingSplash.style.animation = 'slideOut 0.3s ease-out';
-      
-      setTimeout(() => {
-        overlay.remove();
-        existingSplash.style.display = 'none';
-        // Store that splash has been shown
-        sessionStorage.setItem('splashShown', 'true');
-      }, 300);
-    };
-
-    closeButton.onclick = closeSplash;
-    startButton.onclick = closeSplash;
-    
-    // Allow ESC key to close
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        closeSplash();
-        document.removeEventListener('keydown', handleEsc);
-      }
-    };
-    document.addEventListener('keydown', handleEsc);
-
-    // Add elements to DOM
-    existingSplash.appendChild(closeButton);
-    existingSplash.appendChild(startButton);
-    document.body.appendChild(overlay);
-
-    // Add closing animations
-    const closeStyle = document.createElement('style');
-    closeStyle.textContent = `
       @keyframes fadeOut {
         from { opacity: 1; }
         to { opacity: 0; }
@@ -892,8 +1110,225 @@ class GameLevelHomePage {
           transform: translate(-50%, -55%);
         }
       }
+      
+      .scene-content {
+        line-height: 1.8;
+      }
+      
+      .scene-content p {
+        margin-bottom: 20px;
+        color: #e0e0e0;
+        font-size: 16px;
+      }
+      
+      .scene-content strong {
+        color: #ffffff;
+        font-weight: 600;
+      }
+      
+      .pages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+      }
+      
+      .page-card {
+        background: rgba(0, 212, 255, 0.1);
+        border: 2px solid rgba(0, 212, 255, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+      
+      .page-card:hover {
+        transform: translateY(-5px);
+        border-color: #00d4ff;
+        box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+      }
+      
+      .page-icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+      
+      .page-card h4 {
+        color: #00d4ff;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+      
+      .page-card p {
+        font-size: 14px;
+        margin: 0;
+        color: #b0b0b0;
+      }
+      
+      .mission-steps {
+        margin: 25px 0;
+      }
+      
+      .step {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 25px;
+        align-items: start;
+      }
+      
+      .step-number {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #00d4ff, #0099cc);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+      }
+      
+      .step-content h4 {
+        color: #00d4ff;
+        margin-bottom: 8px;
+        font-size: 18px;
+      }
+      
+      .step-content p {
+        margin: 0;
+        color: #e0e0e0;
+        font-size: 15px;
+      }
+      
+      .warning-text {
+        text-align: center;
+        font-size: 18px;
+        color: #fbbf24;
+        margin-top: 30px;
+        font-weight: bold;
+        padding: 15px;
+        background: rgba(251, 191, 36, 0.1);
+        border-radius: 8px;
+        border: 2px solid rgba(251, 191, 36, 0.3);
+      }
+      
+      .controls-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+      }
+      
+      .control-item {
+        text-align: center;
+      }
+      
+      .key-display {
+        background: rgba(0, 212, 255, 0.2);
+        border: 3px solid #00d4ff;
+        border-radius: 12px;
+        padding: 15px 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #00d4ff;
+        margin-bottom: 10px;
+        display: inline-block;
+        min-width: 80px;
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+      }
+      
+      .control-item p {
+        margin: 0;
+        color: #e0e0e0;
+        font-size: 14px;
+      }
+      
+      .tips-section {
+        background: rgba(139, 92, 246, 0.1);
+        border: 2px solid rgba(139, 92, 246, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 25px 0;
+      }
+      
+      .tips-section h4 {
+        color: #a78bfa;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      
+      .tips-section ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+      
+      .tips-section li {
+        margin-bottom: 10px;
+        color: #e0e0e0;
+        font-size: 15px;
+      }
+      
+      .mobile-controls-info {
+        background: rgba(59, 130, 246, 0.1);
+        border: 2px solid rgba(59, 130, 246, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 25px 0;
+      }
+      
+      .mobile-controls-info h4 {
+        color: #60a5fa;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      
+      .mobile-controls-info p {
+        margin: 0;
+        color: #e0e0e0;
+        font-size: 15px;
+      }
+      
+      .ready-text {
+        text-align: center;
+        font-size: 22px;
+        color: #00d4ff;
+        margin-top: 30px;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      #splash-content-area::-webkit-scrollbar {
+        width: 10px;
+      }
+      
+      #splash-content-area::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+      }
+      
+      #splash-content-area::-webkit-scrollbar-thumb {
+        background: #00d4ff;
+        border-radius: 10px;
+      }
+      
+      #splash-content-area::-webkit-scrollbar-thumb:hover {
+        background: #0099cc;
+      }
     `;
-    document.head.appendChild(closeStyle);
+    document.head.appendChild(style);
+
+    // Add elements to DOM
+    document.body.appendChild(overlay);
+
+    // Render initial scene
+    renderScene();
   }
 
   initialize() {
