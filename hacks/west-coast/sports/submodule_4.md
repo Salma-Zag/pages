@@ -11,6 +11,9 @@ tags: [backend, submodule, zombies]
 author: "Zombies Team"
 date: 2025-10-21
 microblog: True
+footer:
+  previous: /west-coast/backend/submodule_3/
+  home: /west-coast/sports/
 ---
 
 
