@@ -263,11 +263,11 @@ async function viewSeattle(){
   }
   function unlockNextCity(){
     try{
-      const saved=localStorage.getItem('mchopiee_city_progress');
+      const saved=localStorage.getItem('city_progress');
       let gp={unlockedCities:[0,1,2,3],completedCities:[],totalCitiesCompleted:0};
       if(saved)gp=JSON.parse(saved);
       if(!gp.completedCities.includes(3)){gp.completedCities.push(3);gp.totalCitiesCompleted++;}
-      localStorage.setItem('mchopiee_city_progress',JSON.stringify(gp));
+      localStorage.setItem('city_progress',JSON.stringify(gp));
     }catch(e){console.error(e);}
   }
   window.showToast=(txt,ms=2000)=>{const b=document.getElementById('sqToast');b.textContent=txt;b.style.display='block';setTimeout(()=>b.style.display='none',ms);};

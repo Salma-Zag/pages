@@ -16,8 +16,16 @@ date: 2025-10-24
 # 🏙️ San Diego — CREATE (CRUD Submodule 1)
 
 **Quest Chapter:** *The Food Route*  
+
+<br>
+
 **Focus:** C in CRUD — **CREATE**  
+
+<br>
+
 **Location:** San Diego, CA ☀️🌮
+
+<br>
 
 Welcome! This interactive page lets learners *actually* create dishes, ingredients, and join records via simulated API calls — right in the browser.
 
@@ -307,11 +315,14 @@ details[open] > summary {
 
 - **🧠 What Does CREATE Mean?**  
   - In databases, **CREATE** = inserting new records (e.g., dishes, ingredients, or join rows).  
+  <br>
   - On the web, a client form sends a POST /api/dishes request.  
+  <br>
   - The server creates:
     - a new **dish** record,  
     - any missing **ingredient** entries, and  
     - **dish_ingredients** join records — ideally inside a single transaction (all succeed or all fail).  
+  <br>
   - Analogy: your database is like a **kitchen pantry**. Adding a dish = adding a **recipe card** and ensuring all the required ingredients already exist in the pantry.
 
 
@@ -421,7 +432,7 @@ details[open] > summary {
   // Fallback unlock methods
   function unlockNextCity() {
     try {
-      const saved = localStorage.getItem('mchopiee_city_progress');
+      const saved = localStorage.getItem('city_progress'); 
       let gameProgress = saved ? JSON.parse(saved) : { unlockedCities:[0], completedCities:[], totalCitiesCompleted:0 };
       if (!gameProgress.completedCities.includes(0)) {
         gameProgress.completedCities.push(0);
@@ -430,7 +441,7 @@ details[open] > summary {
       if (!gameProgress.unlockedCities.includes(1)) {
         gameProgress.unlockedCities.push(1);
       }
-      localStorage.setItem('mchopiee_city_progress', JSON.stringify(gameProgress));
+      localStorage.setItem('city_progress', JSON.stringify(gameProgress));
       console.log('✅ Progress updated:', gameProgress);
     } catch (e) {
       console.error('Unlock failed:', e);
@@ -526,13 +537,15 @@ details[open] > summary {
 
 ---
 
-- **⚙️ How this interactive page works (quick):**  
+- **⚙️ How this interactive page works:**  
   - Each task includes an editable **code area** (or input form) and a **Run** button.  
   - Running code appends output to the **terminal area** below that task.  
+  <br>
   - The page uses a **mock backend (MockAPI)** that simulates:  
     - POST /api/dishes  
     - POST /api/dishes/bulk  
     - GET /api/dishes?city=sd  
+  <br>
   - Data is stored in **localStorage**, so progress **persists** across refreshes.  
   - When creating the **Baja Bowl**, a toast appears showing “+50 XP 🎉”.
 
@@ -924,4 +937,4 @@ function clearTerm(id) { const el = document.getElementById(id); if (el) el.text
     }
   }
 })();
-</script>
+</script>f
