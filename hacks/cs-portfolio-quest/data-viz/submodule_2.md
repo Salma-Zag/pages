@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: cs-portfolio-lesson
 title: "Submodule 2"
 description: "Search & Data Filtering with Spring Boot"
 permalink: /cs-portfolio-quest/data-viz/submodule_2/
@@ -15,10 +15,6 @@ date: 2025-10-21
 # Submodule 2 · Search & Data Filtering — **Concluding Module (Black · Interactive · Compact)**
 
 
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Submodule 2: Search & Data Filtering — Conclusion</title>
 <style>
 :root{
   --bg:#000;--text:#fff;--muted:#bbb;--muted-2:#888;--border:#333;--panel:#0b0b0b;--panel-2:#111;--accent:#ddd;--accent-2:#aaa;
@@ -97,8 +93,7 @@ button:hover{transform:translateY(-1px);border-color:var(--accent-2)}
 /* Small helper text */
 .note{font-size:12px;color:#888}
 </style>
-</head>
-<body>
+
 <div class="container">
   <h1> Submodule 2: Search & Data Filtering — Conclusion <span class="badge">recap + interactive</span></h1>
   <p>This closing module **cements** the core skills you built: derived queries, JPQL, Specifications, and Pageable. Use the widgets to prove mastery, then export your checklist.</p>
@@ -453,4 +448,3 @@ function exportNotes(){
 // Init
 renderQuiz();
 </script>
-</body>

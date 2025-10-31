@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: cs-portfolio-lesson
 title: "Submodule 1"
 description: "Spring Boot RESTful Company Profile System"
 permalink: /cs-portfolio-quest/data-viz/submodule_1/
@@ -15,26 +15,9 @@ date: 2025-10-21
 # Submodule 1 · Company Profile & REST APIs — Minimal Interactive (Styling Preserved)
 
 
-
-
-
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Submodule 1 · Company REST APIs — Mini</title>
-
 <!-- NOTE: Styling essence preserved — black background & minimal chrome remain unchanged -->
 <style>
-:root{--bg:#000;--fg:#fff;--muted:#bdbdbd;--b:#333;--p:#0f0f0f;--p2:#151515;--hint:#aaa}
-*{box-sizing:border-box}
 html,body{height:100%}
-body{
-  margin:0 auto;
-  max-width:1100px;
-  background:var(--bg);   /* background kept intact */
-  color:var(--fg);
-  font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-}
 h1{margin:16px 0 8px;border-bottom:1px solid var(--b);padding-bottom:8px}
 .container{padding:18px}
 
@@ -73,9 +56,7 @@ hr{border:none;border-top:1px solid var(--b);margin:18px 0}
 .grid{display:grid;gap:10px}
 .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 </style>
-</head>
 
-<body>
 <div class="container">
   <h1> Submodule 1 · Company Profile & REST APIs <span class="badge">minimal</span></h1>
   <p style="color:#bdbdbd;margin:6px 0 12px">
@@ -340,5 +321,5 @@ function builderAdd(){
 // Init
 uiEP(); renderList(); renderQuiz();
 </script>
-</body>
+
 
