@@ -113,8 +113,6 @@ setTimeout(()=>{
 </body>
 </html>
 
-
-<!DOCTYPE html>
 <html>
 <head>
 <title>Universal Studios Button Lesson</title>
