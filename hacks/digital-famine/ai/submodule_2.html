@@ -555,11 +555,25 @@ date: 2025-10-30
                 parseJSON = false
             } = config;
 
+            // Determine backend URL based on environment
+            let pythonURI;
+            if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+                pythonURI = "http://localhost:8587";
+            } else {
+                pythonURI = "https://flask.opencodingsociety.com";
+            }
+
+            const fullURL = pythonURI + endpoint;
+
             try {
-                const response = await fetch(endpoint, {
+                const response = await fetch(fullURL, {
                     method: 'POST',
+                    mode: 'cors',
+                    cache: 'default',
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
+                        'X-Origin': 'client'
                     },
                     body: JSON.stringify({
                         prompt: prompt,
