@@ -52,849 +52,311 @@ body{background:#009688;font-family:'Open Sans',sans-serif;margin:0;padding:0}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Universal Studios Hollywood</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    overflow-x: hidden;
-    background: #1a1a2e;
-}
-
-/* Sky and Background */
-.scene {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(to bottom, 
-        #87ceeb 0%, 
-        #b0d8f0 40%, 
-        #e8b4b8 70%, 
-        #ffcccb 100%);
-    overflow: hidden;
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arial',sans-serif;overflow-x:hidden;background:#1a1a2e}
+.scene{
+  position:relative;width:100%;min-height:100vh;
+  background:linear-gradient(to bottom,#87ceeb 0%,#b0d8f0 40%,#e8b4b8 70%,#ffcccb 100%);
+  overflow:hidden;
 }
 
 /* Sun */
-.sun {
-    position: absolute;
-    top: 8%;
-    right: 10%;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle at 35% 35%, #fff9e6, #ffeb3b, #ff9800);
-    border-radius: 50%;
-    box-shadow: 0 0 80px rgba(255, 235, 59, 0.8);
-    animation: sunPulse 4s ease-in-out infinite;
-}
-
-@keyframes sunPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-}
+.sun{position:absolute;top:10%;right:15%;width:120px;height:120px;
+  background:radial-gradient(circle at 35% 35%,#fff9e6,#ffeb3b,#ff9800);
+  border-radius:50%;box-shadow:0 0 100px rgba(255,235,59,.9);animation:sunPulse 4s ease-in-out infinite}
+@keyframes sunPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 
 /* Clouds */
-.cloud {
-    position: absolute;
-    background: white;
-    border-radius: 100px;
-    opacity: 0.9;
-}
-
-.cloud::before,
-.cloud::after {
-    content: '';
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-}
-
-.cloud1 {
-    width: 120px;
-    height: 40px;
-    top: 15%;
-    left: 10%;
-    animation: cloudFloat 40s linear infinite;
-}
-
-.cloud1::before {
-    width: 60px;
-    height: 60px;
-    top: -30px;
-    left: 20px;
-}
-
-.cloud1::after {
-    width: 80px;
-    height: 80px;
-    top: -40px;
-    right: 20px;
-}
-
-.cloud2 {
-    width: 100px;
-    height: 35px;
-    top: 25%;
-    left: 50%;
-    animation: cloudFloat 35s linear infinite;
-    animation-delay: -10s;
-}
-
-.cloud2::before {
-    width: 50px;
-    height: 50px;
-    top: -25px;
-    left: 15px;
-}
-
-.cloud2::after {
-    width: 70px;
-    height: 70px;
-    top: -35px;
-    right: 15px;
-}
-
-.cloud3 {
-    width: 90px;
-    height: 30px;
-    top: 10%;
-    left: 70%;
-    animation: cloudFloat 45s linear infinite;
-    animation-delay: -20s;
-}
-
-.cloud3::before {
-    width: 45px;
-    height: 45px;
-    top: -22px;
-    left: 12px;
-}
-
-.cloud3::after {
-    width: 60px;
-    height: 60px;
-    top: -30px;
-    right: 12px;
-}
-
-@keyframes cloudFloat {
-    0% { transform: translateX(-150px); }
-    100% { transform: translateX(calc(100vw + 150px)); }
-}
-
-/* Mountains/Buildings Background */
-.mountains {
-    position: absolute;
-    bottom: 35%;
-    left: 0;
-    width: 100%;
-    height: 40%;
-    background: linear-gradient(to bottom, #8b7d6b, #6b5d4f);
-    clip-path: polygon(
-        0 100%, 0 80%, 
-        8% 70%, 15% 85%, 
-        22% 60%, 30% 75%, 
-        40% 55%, 48% 70%, 
-        58% 50%, 65% 65%, 
-        75% 45%, 82% 60%, 
-        90% 55%, 95% 70%, 
-        100% 65%, 100% 100%
-    );
-    box-shadow: inset 0 20px 40px rgba(0,0,0,0.2);
-}
-
-/* Ground */
-.ground {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 35%;
-    background: linear-gradient(to bottom, #8fbc8f, #6b8e6b, #556b55);
-    box-shadow: inset 0 15px 30px rgba(0,0,0,0.2);
-}
-
-/* Path/Plaza */
-.plaza {
-    position: absolute;
-    bottom: 30%;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background: repeating-linear-gradient(
-        90deg,
-        #d4c4b0 0px, #d4c4b0 80px,
-        #c9b89d 80px, #c9b89d 160px
-    );
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-}
-
-/* Iconic Globe */
-.globe-container {
-    position: absolute;
-    bottom: 40%;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: globeFloat 6s ease-in-out infinite;
-}
-
-.globe {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle at 35% 35%, #64b5f6, #2196f3, #1565c0);
-    border-radius: 50%;
-    box-shadow: 
-        inset -25px -25px 50px rgba(0,0,0,0.4),
-        inset 25px 25px 50px rgba(255,255,255,0.15),
-        0 20px 60px rgba(0,0,0,0.5);
-}
-
-.globe::before {
-    content: '';
-    position: absolute;
-    top: 25px;
-    left: 35px;
-    width: 70px;
-    height: 70px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    filter: blur(15px);
-}
-
-.latitude {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: rgba(255,255,255,0.25);
-}
-
-.lat1 { top: 25%; }
-.lat2 { top: 50%; }
-.lat3 { top: 75%; }
-
-.longitude {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: rgba(255,255,255,0.25);
-}
-
-.lon1 { left: 25%; }
-.lon2 { left: 50%; }
-.lon3 { left: 75%; }
-
-.globe-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 220px;
-    height: 220px;
-    border: 4px solid rgba(255,255,255,0.4);
-    border-radius: 50%;
-}
-
-.universal-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 36px;
-    font-weight: 900;
-    color: white;
-    text-shadow: 
-        3px 3px 6px rgba(0,0,0,0.6),
-        0 0 20px rgba(255,255,255,0.4);
-    letter-spacing: 3px;
-}
-
-@keyframes globeFloat {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-15px); }
-}
-
-/* Ferris Wheel */
-.ferris-wheel {
-    position: absolute;
-    bottom: 48%;
-    right: 15%;
-    width: 140px;
-    height: 140px;
-    animation: rotate 20s linear infinite;
-}
-
-.wheel-structure {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 4px solid #555;
-    border-radius: 50%;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
-}
-
-.wheel-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background: #333;
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.spoke {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 3px;
-    height: 70px;
-    background: #666;
-    transform-origin: bottom center;
-}
-
-.spoke1 { transform: translate(-50%, -100%) rotate(0deg); }
-.spoke2 { transform: translate(-50%, -100%) rotate(45deg); }
-.spoke3 { transform: translate(-50%, -100%) rotate(90deg); }
-.spoke4 { transform: translate(-50%, -100%) rotate(135deg); }
-.spoke5 { transform: translate(-50%, -100%) rotate(180deg); }
-.spoke6 { transform: translate(-50%, -100%) rotate(225deg); }
-.spoke7 { transform: translate(-50%, -100%) rotate(270deg); }
-.spoke8 { transform: translate(-50%, -100%) rotate(315deg); }
-
-.gondola {
-    position: absolute;
-    width: 18px;
-    height: 22px;
-    background: linear-gradient(to bottom, #e74c3c, #c0392b);
-    border-radius: 4px;
-    border: 2px solid #922b21;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
-}
-
-.g1 { top: -10px; left: 50%; transform: translateX(-50%); }
-.g2 { top: 20px; right: -10px; }
-.g3 { bottom: -10px; left: 50%; transform: translateX(-50%); }
-.g4 { top: 20px; left: -10px; }
-.g5 { top: 10px; right: 10px; }
-.g6 { bottom: 10px; right: 10px; }
-.g7 { bottom: 10px; left: 10px; }
-.g8 { top: 10px; left: 10px; }
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Roller Coaster */
-.coaster-container {
-    position: absolute;
-    bottom: 42%;
-    left: 10%;
-    width: 250px;
-    height: 120px;
-}
-
-.coaster-track {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    background: #444;
-    border-radius: 2px;
-}
-
-.track-support {
-    position: absolute;
-    bottom: 0;
-    width: 3px;
-    background: #666;
-}
-
-.support1 { left: 20%; height: 25px; }
-.support2 { left: 40%; height: 70px; }
-.support3 { left: 60%; height: 40px; }
-.support4 { left: 80%; height: 85px; }
-
-.hill1 {
-    position: absolute;
-    bottom: 0;
-    left: 15%;
-    width: 80px;
-    height: 70px;
-    border-left: 4px solid #444;
-    border-top: 4px solid #444;
-    border-top-left-radius: 100%;
-}
-
-.hill2 {
-    position: absolute;
-    bottom: 0;
-    right: 10%;
-    width: 90px;
-    height: 85px;
-    border-left: 4px solid #444;
-    border-top: 4px solid #444;
-    border-top-left-radius: 100%;
-}
-
-.coaster-train {
-    position: absolute;
-    width: 40px;
-    height: 25px;
-    background: linear-gradient(to bottom, #f39c12, #d68910);
-    border-radius: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    animation: coasterRide 6s ease-in-out infinite;
-}
-
-.coaster-train::before {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 5px;
-    width: 8px;
-    height: 8px;
-    background: #333;
-    border-radius: 50%;
-    box-shadow: 20px 0 0 #333;
-}
-
-@keyframes coasterRide {
-    0% { left: 0; bottom: 4px; }
-    20% { left: 18%; bottom: 55px; }
-    35% { left: 40%; bottom: 10px; }
-    60% { left: 60%; bottom: 70px; }
-    80% { left: 85%; bottom: 8px; }
-    100% { left: 0; bottom: 4px; }
-}
-
-/* Spinning Ride */
-.spinner-ride {
-    position: absolute;
-    bottom: 45%;
-    left: 35%;
-    width: 100px;
-    height: 100px;
-}
-
-.spinner-base {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 30px;
-    background: #7f8c8d;
-    border-radius: 4px;
-}
-
-.spinner-platform {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
-    animation: spin 4s linear infinite;
-}
-
-.spinner-arm {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 50px;
-    background: #555;
-    transform-origin: top center;
-}
-
-.arm1 { transform: translate(-50%, -100%) rotate(0deg); }
-.arm2 { transform: translate(-50%, -100%) rotate(90deg); }
-.arm3 { transform: translate(-50%, -100%) rotate(180deg); }
-.arm4 { transform: translate(-50%, -100%) rotate(270deg); }
-
-.spinner-seat {
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 16px;
-    height: 18px;
-    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-@keyframes spin {
-    0% { transform: translateX(-50%) rotate(0deg); }
-    100% { transform: translateX(-50%) rotate(360deg); }
-}
-
-/* People Walking */
-.person {
-    position: absolute;
-    bottom: 30%;
-    width: 16px;
-    height: 40px;
-}
-
-.head {
-    width: 14px;
-    height: 14px;
-    background: #f4d03f;
-    border-radius: 50%;
-    margin: 0 auto 2px;
-}
-
-.body {
-    width: 16px;
-    height: 20px;
-    border-radius: 6px 6px 0 0;
-}
-
-.legs {
-    position: relative;
-    width: 16px;
-    height: 16px;
-}
-
-.leg {
-    position: absolute;
-    bottom: 0;
-    width: 6px;
-    height: 16px;
-    background: #34495e;
-    border-radius: 3px;
-}
-
-.leg-left {
-    left: 2px;
-    animation: walkLeft 0.6s ease-in-out infinite;
-}
-
-.leg-right {
-    right: 2px;
-    animation: walkRight 0.6s ease-in-out infinite;
-}
-
-@keyframes walkLeft {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-30deg); }
-}
-
-@keyframes walkRight {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(30deg); }
-}
-
-.person1 {
-    animation: walk1 12s linear infinite;
-}
-.person1 .body { background: #e74c3c; }
-
-.person2 {
-    animation: walk2 14s linear infinite;
-    animation-delay: 3s;
-}
-.person2 .body { background: #3498db; }
-
-.person3 {
-    animation: walk3 13s linear infinite;
-    animation-delay: 6s;
-}
-.person3 .body { background: #2ecc71; }
-
-.person4 {
-    animation: walk4 15s linear infinite;
-    animation-delay: 2s;
-}
-.person4 .body { background: #9b59b6; }
-
-.person5 {
-    animation: walk5 11s linear infinite;
-    animation-delay: 8s;
-}
-.person5 .body { background: #f39c12; }
-
-@keyframes walk1 {
-    0% { left: -50px; }
-    100% { left: calc(100% + 50px); }
-}
-
-@keyframes walk2 {
-    0% { left: calc(100% + 50px); }
-    100% { left: -50px; }
-}
-
-@keyframes walk3 {
-    0% { left: -50px; }
-    100% { left: calc(100% + 50px); }
-}
-
-@keyframes walk4 {
-    0% { left: calc(100% + 50px); }
-    100% { left: -50px; }
-}
-
-@keyframes walk5 {
-    0% { left: -50px; }
-    100% { left: calc(100% + 50px); }
-}
-
-/* Food Stand */
-.food-stand {
-    position: absolute;
-    bottom: 31%;
-    right: 20%;
-    width: 60px;
-    height: 70px;
-}
-
-.stand-umbrella {
-    width: 80px;
-    height: 12px;
-    background: linear-gradient(to bottom, #e74c3c, #c0392b);
-    border-radius: 50% 50% 0 0;
-    position: relative;
-    left: -10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.stand-umbrella::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 15px;
-    background: #7f8c8d;
-}
-
-.stand-counter {
-    width: 60px;
-    height: 50px;
-    background: linear-gradient(to bottom, #f39c12, #d68910);
-    border-radius: 6px;
-    margin-top: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    position: relative;
-}
-
-.stand-counter::before {
-    content: '🍿';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-}
-
-/* Title */
-.title {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-.title h1 {
-    font-size: 48px;
-    font-weight: 900;
-    color: white;
-    text-shadow: 
-        4px 4px 8px rgba(0,0,0,0.7),
-        0 0 30px rgba(255,255,255,0.5);
-    letter-spacing: 4px;
-    margin-bottom: 10px;
-}
-
-.title p {
-    font-size: 20px;
-    color: #ffd700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    letter-spacing: 2px;
-}
-
-/* Marquee */
-.marquee {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.8);
-    padding: 12px 0;
-    overflow: hidden;
-}
-
-.marquee-content {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marqueeScroll 25s linear infinite;
-    color: #ffd700;
-    font-size: 16px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-@keyframes marqueeScroll {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
+.cloud{position:absolute;background:#fff;border-radius:100px;opacity:.9}
+.cloud::before,.cloud::after{content:'';position:absolute;background:#fff;border-radius:50%}
+.cloud1{width:120px;height:40px;top:15%;left:10%;animation:cloudFloat 40s linear infinite}
+.cloud1::before{width:60px;height:60px;top:-30px;left:20px}
+.cloud1::after{width:80px;height:80px;top:-40px;right:20px}
+.cloud2{width:100px;height:35px;top:25%;left:50%;animation:cloudFloat 35s linear infinite;animation-delay:-10s}
+.cloud2::before{width:50px;height:50px;top:-25px;left:15px}
+.cloud2::after{width:70px;height:70px;top:-35px;right:15px}
+.cloud3{width:90px;height:30px;top:10%;left:70%;animation:cloudFloat 45s linear infinite;animation-delay:-20s}
+.cloud3::before{width:45px;height:45px;top:-22px;left:12px}
+.cloud3::after{width:60px;height:60px;top:-30px;right:12px}
+@keyframes cloudFloat{0%{transform:translateX(-150px)}100%{transform:translateX(calc(100vw + 150px))}}
+
+/* Mountains/Buildings */
+.mountains{
+  position:absolute;bottom:35%;left:0;width:100%;height:40%;
+  background:linear-gradient(to bottom,#8b7d6b,#6b5d4f);
+  clip-path:polygon(0 100%,0 80%,8% 70%,15% 85%,22% 60%,30% 75%,40% 55%,48% 70%,58% 50%,65% 65%,75% 45%,82% 60%,90% 55%,95% 70%,100% 65%,100% 100%);
+  box-shadow:inset 0 20px 40px rgba(0,0,0,.2);
+}
+
+/* Ground + Plaza */
+.ground{position:absolute;bottom:0;left:0;width:100%;height:35%;background:linear-gradient(to bottom,#8fbc8f,#6b8e6b,#556b55);box-shadow:inset 0 15px 30px rgba(0,0,0,.2)}
+.plaza{
+  position:absolute;bottom:30%;left:0;width:100%;height:60px;
+  background:repeating-linear-gradient(90deg,#d4c4b0 0px,#d4c4b0 80px,#c9b89d 80px,#c9b89d 160px);
+  box-shadow:0 5px 20px rgba(0,0,0,.15)
+}
+
+/* Universal Globe */
+.globe-container{position:absolute;bottom:40%;left:50%;transform:translateX(-50%);animation:globeFloat 6s ease-in-out infinite;z-index:5}
+.globe{
+  position:relative;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#64b5f6,#2196f3,#1565c0);
+  box-shadow:inset -25px -25px 50px rgba(0,0,0,.4),inset 25px 25px 50px rgba(255,255,255,.15),0 20px 60px rgba(0,0,0,.5)
+}
+.globe::before{content:'';position:absolute;top:25px;left:35px;width:70px;height:70px;background:rgba(255,255,255,.2);border-radius:50%;filter:blur(15px)}
+.latitude{position:absolute;left:0;right:0;height:2px;background:rgba(255,255,255,.25)}
+.lat1{top:25%}.lat2{top:50%}.lat3{top:75%}
+.longitude{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.25)}
+.lon1{left:25%}.lon2{left:50%}.lon3{left:75%}
+.globe-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:220px;height:220px;border:4px solid rgba(255,255,255,.4);border-radius:50%}
+.universal-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:36px;font-weight:900;color:#fff;
+  text-shadow:3px 3px 6px rgba(0,0,0,.6),0 0 20px rgba(255,255,255,.4);letter-spacing:3px
+}
+@keyframes globeFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-15px)}}
+
+/* === DROP TOWER RIDE (replaces ferris wheel) === */
+.drop-tower{
+  position:absolute;
+  right:10%;
+  bottom:31%;              /* sit on plaza */
+  width:140px;
+  height:260px;
+  z-index:4;
+  pointer-events:none;
+}
+
+/* base platform */
+.dt-base{
+  position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+  width:160px;height:18px;border-radius:6px;
+  background:linear-gradient(to bottom,#666,#333);
+  box-shadow:0 8px 18px rgba(0,0,0,.55);
+}
+
+/* shaft */
+.dt-shaft{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:26px;height:100%;
+  background:linear-gradient(180deg,#9aa1a6,#7c858b);
+  border:3px solid #5b6368;border-radius:10px;
+  box-shadow:inset 0 0 12px rgba(0,0,0,.35),0 8px 20px rgba(0,0,0,.35)
+}
+
+/* side guide rails */
+.dt-rail{position:absolute;bottom:0;width:6px;height:100%;background:linear-gradient(#bbb,#888);border-radius:6px}
+.dt-rail.left{left:18px}
+.dt-rail.right{right:18px}
+
+/* tower lights */
+.dt-light{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:#ffd54f;box-shadow:0 0 10px #ffd54f,0 0 18px rgba(255,213,79,.7)
+}
+.dt-light.l1{top:12%}.dt-light.l2{top:28%}.dt-light.l3{top:44%}.dt-light.l4{top:60%}.dt-light.l5{top:76%}
+
+/* car + harness */
+.dt-car{
+  position:absolute;left:50%;bottom:0;transform:translate(-50%,0);
+  width:110px;height:44px;border-radius:10px;
+  background:linear-gradient(180deg,#ff7043,#c0392b);
+  border:3px solid #9b2c22;box-shadow:0 10px 22px rgba(0,0,0,.55);
+  display:flex;align-items:flex-end;justify-content:space-around;padding:0 8px 6px;
+  animation:dropCycle 7.5s ease-in-out infinite;
+  will-change:transform
+}
+
+.seat{width:16px;height:18px;background:#263238;border-radius:3px 3px 2px 2px}
+.harness{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:92%;height:12px;border-radius:12px;
+  background:linear-gradient(180deg,#222,#111);border:2px solid #333
+}
+
+/* thin cables */
+.dt-cable{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:1.5px;height:100%;background:rgba(30,30,30,.8)
+}
+.dt-cable.c1{transform:translateX(-28px)}
+.dt-cable.c2{transform:translateX(0)}
+.dt-cable.c3{transform:translateX(28px)}
+
+/* car windows */
+.car-window{position:absolute;top:10px;left:10px;width:22px;height:10px;background:rgba(135,206,235,.7);border-radius:3px;box-shadow:26px 0 0 rgba(135,206,235,.7),52px 0 0 rgba(135,206,235,.7)}
+
+/* ride motion: rise, brief hold, fast drop, bounce, settle */
+@keyframes dropCycle{
+  0%   { transform:translate(-50%,0) }
+  35%  { transform:translate(-50%,-170px) }  /* lift */
+  45%  { transform:translate(-50%,-180px) }  /* tiny overshoot */
+  55%  { transform:translate(-50%,-180px) }  /* hold */
+  66%  { transform:translate(-50%,0); animation-timing-function:cubic-bezier(.1,.9,.2,1) } /* drop */
+  74%  { transform:translate(-50%,-22px) }   /* bounce up */
+  82%  { transform:translate(-50%,0) }       /* settle */
+  100% { transform:translate(-50%,0) }
+}
+
+/* ROLLER COASTER (unchanged) */
+.coaster-area{position:absolute;bottom:38%;left:5%;width:350px;height:160px;z-index:2}
+.track-support{position:absolute;bottom:0;width:5px;background:linear-gradient(to bottom,#666,#333);box-shadow:2px 0 5px rgba(0,0,0,.4)}
+.support-1{left:12%;height:35px}.support-2{left:25%;height:70px}.support-3{left:38%;height:50px}.support-4{left:51%;height:95px}.support-5{left:64%;height:60px}.support-6{left:77%;height:110px}.support-7{left:90%;height:45px}
+.track-curve{position:absolute;border:5px solid #444;box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.curve-1{bottom:0;left:0;width:120px;height:70px;border-left:none;border-bottom:none;border-top-right-radius:100%}
+.curve-2{bottom:0;left:110px;width:110px;height:100px;border-right:none;border-bottom:none;border-top-left-radius:100%}
+.curve-3{bottom:0;left:210px;width:90px;height:60px;border-left:none;border-bottom:none;border-top-right-radius:100%}
+.curve-4{bottom:0;right:0;width:100px;height:115px;border-right:none;border-bottom:none;border-top-left-radius:100%}
+.coaster-train{position:absolute;width:50px;height:32px;background:linear-gradient(135deg,#f39c12 0%,#e67e22 100%);border-radius:10px 10px 5px 5px;box-shadow:0 6px 18px rgba(0,0,0,.6);animation:coasterRide 9s ease-in-out infinite}
+.train-windows{position:absolute;top:8px;left:8px;width:14px;height:10px;background:rgba(52,152,219,.7);border-radius:3px;box-shadow:18px 0 0 rgba(52,152,219,.7)}
+.train-wheels{position:absolute;bottom:-12px;left:10px;width:12px;height:12px;background:#222;border-radius:50%;border:2px solid #444;box-shadow:25px 0 0 #222,25px 0 0 0 2px #444}
+@keyframes coasterRide{
+  0%{left:-60px;bottom:0;transform:rotate(0)}
+  12%{left:11%;bottom:58px;transform:rotate(-18deg)}
+  25%{left:24%;bottom:18px;transform:rotate(12deg)}
+  37%{left:36%;bottom:88px;transform:rotate(-22deg)}
+  50%{left:50%;bottom:28px;transform:rotate(15deg)}
+  62%{left:64%;bottom:105px;transform:rotate(-20deg)}
+  75%{left:78%;bottom:15px;transform:rotate(10deg)}
+  88%{left:92%;bottom:5px;transform:rotate(5deg)}
+  100%{left:110%;bottom:0;transform:rotate(0)}
+}
+
+/* FOOD STANDS */
+.stand{position:absolute;bottom:31%;width:60px;z-index:4}
+.popcorn{right:25%}.hotdog{right:42%}.icecream{left:22%}.pretzel{left:38%}.soda{left:54%}
+.stand-canopy{width:80px;height:18px;border-radius:50% 50% 0 0;position:relative;left:-10px;box-shadow:0 5px 12px rgba(0,0,0,.4)}
+.stand-canopy::before{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:6px;height:25px;background:#7f8c8d;border-radius:3px}
+.stand-canopy::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(255,255,255,.3)}
+.popcorn .stand-canopy{background:linear-gradient(to bottom,#e74c3c,#c0392b)}
+.hotdog .stand-canopy{background:linear-gradient(to bottom,#f39c12,#d68910)}
+.icecream .stand-canopy{background:linear-gradient(to bottom,#ff69b4,#ff1493)}
+.pretzel .stand-canopy{background:linear-gradient(to bottom,#8e44ad,#71368a)}
+.soda .stand-canopy{background:linear-gradient(to bottom,#3498db,#2980b9)}
+.stand-counter{width:60px;height:55px;background:linear-gradient(to bottom,#d4a574,#c49563);border-radius:8px;margin-top:12px;box-shadow:0 5px 12px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:32px}
+
+/* PEOPLE */
+.visitor{position:absolute;bottom:30%;width:18px;height:44px;z-index:6}
+.visitor-head{width:16px;height:16px;background:#f4d03f;border-radius:50%;margin:0 auto 2px;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+.visitor-body{width:18px;height:22px;border-radius:8px 8px 0 0;box-shadow:0 3px 6px rgba(0,0,0,.3)}
+.visitor-legs{position:relative;width:18px;height:18px}
+.visitor-leg{position:absolute;bottom:0;width:7px;height:18px;background:#34495e;border-radius:4px}
+.leg-l{left:2px;animation:stepLeft .6s ease-in-out infinite}
+.leg-r{right:2px;animation:stepRight .6s ease-in-out infinite}
+@keyframes stepLeft{0%,100%{transform:rotate(0)}50%{transform:rotate(-35deg)}}
+@keyframes stepRight{0%,100%{transform:rotate(0)}50%{transform:rotate(35deg)}}
+.v1{animation:moveRight 14s linear infinite}.v1 .visitor-body{background:#e74c3c}
+.v2{animation:moveLeft 16s linear infinite;animation-delay:4s}.v2 .visitor-body{background:#3498db}
+.v3{animation:moveRight 15s linear infinite;animation-delay:8s}.v3 .visitor-body{background:#2ecc71}
+.v4{animation:moveLeft 17s linear infinite;animation-delay:2s}.v4 .visitor-body{background:#9b59b6}
+.v5{animation:moveRight 13s linear infinite;animation-delay:10s}.v5 .visitor-body{background:#f39c12}
+.v6{animation:moveLeft 18s linear infinite;animation-delay:6s}.v6 .visitor-body{background:#1abc9c}
+.v7{animation:moveRight 16s linear infinite;animation-delay:12s}.v7 .visitor-body{background:#e67e22}
+@keyframes moveRight{0%{left:-60px}100%{left:calc(100% + 60px)}}
+@keyframes moveLeft{0%{left:calc(100% + 60px)}100%{left:-60px}}
+
+/* Title + Marquee */
+.title{position:absolute;top:25px;left:50%;transform:translateX(-50%);text-align:center;z-index:100}
+.title h1{font-size:52px;font-weight:900;color:#fff;text-shadow:4px 4px 10px rgba(0,0,0,.8),0 0 40px rgba(255,255,255,.6);letter-spacing:5px;margin-bottom:8px}
+.title p{font-size:22px;color:#ffd700;text-shadow:3px 3px 6px rgba(0,0,0,.8);letter-spacing:3px;font-weight:bold}
+.marquee{position:absolute;bottom:8px;left:0;width:100%;background:rgba(0,0,0,.85);padding:14px 0;overflow:hidden;z-index:100}
+.marquee-text{display:inline-block;white-space:nowrap;animation:scroll 30s linear infinite;color:#ffd700;font-size:17px;font-weight:bold;letter-spacing:2px}
+@keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 </style>
 </head>
 <body>
 <div class="scene">
-    <!-- Sky Elements -->
-    <div class="sun"></div>
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-    <div class="cloud cloud3"></div>
-    
-    <!-- Title -->
-    <div class="title">
-        <h1>UNIVERSAL STUDIOS</h1>
-        <p>HOLLYWOOD</p>
+  <div class="sun"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
+  <div class="title">
+    <h1>UNIVERSAL STUDIOS</h1>
+    <p>HOLLYWOOD</p>
+  </div>
+
+  <div class="mountains"></div>
+  <div class="ground"></div>
+  <div class="plaza"></div>
+
+  <div class="globe-container">
+    <div class="globe">
+      <div class="latitude lat1"></div>
+      <div class="latitude lat2"></div>
+      <div class="latitude lat3"></div>
+      <div class="longitude lon1"></div>
+      <div class="longitude lon2"></div>
+      <div class="longitude lon3"></div>
+      <div class="universal-text">UNIVERSAL</div>
     </div>
-    
-    <!-- Background -->
-    <div class="mountains"></div>
-    <div class="ground"></div>
-    <div class="plaza"></div>
-    
-    <!-- Universal Globe -->
-    <div class="globe-container">
-        <div class="globe">
-            <div class="latitude lat1"></div>
-            <div class="latitude lat2"></div>
-            <div class="latitude lat3"></div>
-            <div class="longitude lon1"></div>
-            <div class="longitude lon2"></div>
-            <div class="longitude lon3"></div>
-            <div class="universal-text">UNIVERSAL</div>
-        </div>
-        <div class="globe-ring"></div>
+    <div class="globe-ring"></div>
+  </div>
+
+  <!-- === DROP TOWER (new) === -->
+  <div class="drop-tower">
+    <div class="dt-base"></div>
+    <div class="dt-rail left"></div>
+    <div class="dt-rail right"></div>
+    <div class="dt-shaft">
+      <div class="dt-light l1"></div>
+      <div class="dt-light l2"></div>
+      <div class="dt-light l3"></div>
+      <div class="dt-light l4"></div>
+      <div class="dt-light l5"></div>
+      <div class="dt-cable c1"></div>
+      <div class="dt-cable c2"></div>
+      <div class="dt-cable c3"></div>
+      <div class="dt-car">
+        <div class="harness"></div>
+        <div class="car-window"></div>
+        <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+      </div>
     </div>
-    
-    <!-- Ferris Wheel -->
-    <div class="ferris-wheel">
-        <div class="wheel-structure"></div>
-        <div class="wheel-center"></div>
-        <div class="spoke spoke1"></div>
-        <div class="spoke spoke2"></div>
-        <div class="spoke spoke3"></div>
-        <div class="spoke spoke4"></div>
-        <div class="spoke spoke5"></div>
-        <div class="spoke spoke6"></div>
-        <div class="spoke spoke7"></div>
-        <div class="spoke spoke8"></div>
-        <div class="gondola g1"></div>
-        <div class="gondola g2"></div>
-        <div class="gondola g3"></div>
-        <div class="gondola g4"></div>
-        <div class="gondola g5"></div>
-        <div class="gondola g6"></div>
-        <div class="gondola g7"></div>
-        <div class="gondola g8"></div>
+  </div>
+  <!-- === END DROP TOWER === -->
+
+  <!-- ROLLER COASTER -->
+  <div class="coaster-area">
+    <div class="track-support support-1"></div>
+    <div class="track-support support-2"></div>
+    <div class="track-support support-3"></div>
+    <div class="track-support support-4"></div>
+    <div class="track-support support-5"></div>
+    <div class="track-support support-6"></div>
+    <div class="track-support support-7"></div>
+    <div class="track-curve curve-1"></div>
+    <div class="track-curve curve-2"></div>
+    <div class="track-curve curve-3"></div>
+    <div class="track-curve curve-4"></div>
+    <div class="coaster-train">
+      <div class="train-windows"></div>
+      <div class="train-wheels"></div>
     </div>
-    
-    <!-- Roller Coaster -->
-    <div class="coaster-container">
-        <div class="track-support support1"></div>
-        <div class="track-support support2"></div>
-        <div class="track-support support3"></div>
-        <div class="track-support support4"></div>
-        <div class="hill1"></div>
-        <div class="hill2"></div>
-        <div class="coaster-track"></div>
-        <div class="coaster-train"></div>
+  </div>
+
+  <!-- FOOD STANDS -->
+  <div class="stand popcorn"><div class="stand-canopy"></div><div class="stand-counter">🍿</div></div>
+  <div class="stand hotdog"><div class="stand-canopy"></div><div class="stand-counter">🌭</div></div>
+  <div class="stand icecream"><div class="stand-canopy"></div><div class="stand-counter">🍦</div></div>
+  <div class="stand pretzel"><div class="stand-canopy"></div><div class="stand-counter">🥨</div></div>
+  <div class="stand soda"><div class="stand-canopy"></div><div class="stand-counter">🥤</div></div>
+
+  <!-- VISITORS -->
+  <div class="visitor v1"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+  <div class="visitor v2"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+  <div class="visitor v3"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+  <div class="visitor v4"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+  <div class="visitor v5"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+  <div class="visitor v6"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+  <div class="visitor v7"><div class="visitor-head"></div><div class="visitor-body"></div><div class="visitor-legs"><div class="visitor-leg leg-l"></div><div class="visitor-leg leg-r"></div></div></div>
+
+  <div class="marquee">
+    <div class="marquee-text">
+      🎬 WELCOME TO UNIVERSAL STUDIOS HOLLYWOOD • FEATURING: WIZARDING WORLD OF HARRY POTTER • JURASSIC WORLD • TRANSFORMERS • THE MUMMY • SUPER
     </div>
-    
-    <!-- Spinning Ride -->
-    <div class="spinner-ride">
-        <div class="spinner-base"></div>
-        <div class="spinner-platform">
-            <div class="spinner-arm arm1">
-                <div class="spinner-seat"></div>
-            </div>
-            <div class="spinner-arm arm2">
-                <div class="spinner-seat"></div>
-            </div>
-            <div class="spinner-arm arm3">
-                <div class="spinner-seat"></div>
-            </div>
-            <div class="spinner-arm arm4">
-                <div class="spinner-seat"></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Food Stand -->
-    <div class="food-stand">
-        <div class="stand-umbrella"></div>
-        <div class="stand-counter"></div>
-    </div>
-    
-    <!-- People -->
-    <div class="person person1">
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="legs">
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-        </div>
-    </div>
-    
-    <div class="person person2">
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="legs">
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-        </div>
-    </div>
-    
-    <div class="person person3">
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="legs">
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-        </div>
-    </div>
-    
-    <div class="person person4">
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="legs">
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-        </div>
-    </div>
-    
-    <div class="person person5">
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="legs">
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-        </div>
-    </div>
-    
-    <!-- Marquee -->
-    <div class="marquee">
-        <div class="marquee-content">
-            🎬 WELCOME TO UNIVERSAL STUDIOS HOLLYWOOD • FEATURING: WIZARDING WORLD OF HARRY POTTER • JURASSIC WORLD • TRANSFORMERS • THE MUMMY • SUPER NINTENDO WORLD • AND MORE! 🎬
-        </div>
-    </div>
+  </div>
 </div>
 </body>
 <!-- Truck intro -->
@@ -909,21 +371,7 @@ body {
 </div>
 <p>Heading to Universal Studios Hollywood…</p>
 </div>
-<!-- Scene -->
-<main class="scene hidden" id="scene">
-<div class="sun"></div>
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="studio-buildings"></div>
-<div class="ground"></div>
-<div class="plaza"></div>
-<div class="globe"></div>
-<div class="globe-ring"></div>
-<div class="globe-text">UNIVERSAL</div>
-<div class="neon-sign"></div>
-<div class="neon-text">HOLLYWOOD</div>
-<div class="marquee"><div class="marquee-text">🎬 NOW SHOWING: WIZARDING WORLD • TRANSFORMERS • JURASSIC WORLD • THE MUMMY • ✨</div></div>
-<div class="caption">🎬 Universal Studios Hollywood</div>
+
 </main>
 <!-- Lesson Content -->
 <div class="lesson-content hidden" id="lessonContent">
