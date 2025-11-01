@@ -9,7 +9,7 @@ team: "Debuggers"
 submodule: 4
 categories: [CSP, Submodule, AIUsage]
 tags: [ai, debuggers, mini-game]
-author: "Debuggers Team - Lillian Wu, Ruchika Kench"
+author: "Debuggers Team - Lillian Wu, Ruchika Kench, Anishka Sanghvi"
 date: 2025-10-21
 ---
 <!DOCTYPE html>
@@ -489,6 +489,22 @@ date: 2025-10-21
 </head>
 
 <body>
+    <div id="code-entry-overlay" class="code-entry-overlay">
+        <div class="code-entry-box">
+            <div class="code-entry-title">🔐 Enter Vault Code</div>
+            <p class="code-entry-text">
+                You've collected codes from all three modules.<br>
+                Enter the 3-digit code to unlock the final challenge!
+            </p>
+            <input type="text" id="code-input" class="code-input" maxlength="3" placeholder="•••" autocomplete="off">
+            <div id="code-error" style="color: #ef4444; margin-top: 10px; font-size: 16px;"></div>
+            <button onclick="verifyCode()" style="width: 100%; padding: 16px; background: #16a34a; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px;">Unlock Vault</button>
+            <p style="color: #9ca3af; font-size: 14px; margin-top: 20px;">
+                Hint: Module 1 = 2, Module 2 = 6, Module 3 = 1
+            </p>
+        </div>
+    </div>
+
     <div id="roadblock-overlay" class="roadblock-overlay hidden">
         <div class="roadblock-text" id="roadblock-text"></div>
     </div>
@@ -526,7 +542,6 @@ date: 2025-10-21
             <div class="treasure-box">
                 <p class="treasure-text">💎 TREASURE ACQUIRED 💎</p>
             </div>
-            <button class="play-again-btn" onclick="proceedForward()">Vault Unlocked, Proceed Forward!</button>
         </div>
     </div>
 
@@ -537,11 +552,12 @@ date: 2025-10-21
                 emoji: '🚪',
                 question: "A company develops an AI that can diagnose diseases using medical images. It can outperform human doctors in this one task, but cannot drive a car or play chess. Drag each statement to TRUE or FALSE:",
                 hint: "Think about whether the AI is specialized in only one area or capable of doing many human tasks",
-                options: [
-                    { id: 'a', text: "This AI is specialized in a single task (medical diagnosis)", correct: true },
-                    { id: 'b', text: "This AI has human-level intelligence across all domains", correct: false },
-                    { id: 'c', text: "This AI cannot perform tasks outside its training area", correct: true },
-                    { id: 'd', text: "This AI can improve itself and create new technologies", correct: false }
+                isTrueFalse: true,
+                statements: [
+                    { id: 's1', text: "This AI is specialized in a single task (medical diagnosis)", answer: 'true' },
+                    { id: 's2', text: "This AI has human-level intelligence across all domains", answer: 'false' },
+                    { id: 's3', text: "This AI cannot perform tasks outside its training area", answer: 'true' },
+                    { id: 's4', text: "This AI can improve itself and create new technologies", answer: 'false' }
                 ],
                 roadblockText: "🚧 ROADBLOCK 1 🚧"
             },
@@ -562,24 +578,25 @@ date: 2025-10-21
             },
             {
                 id: 3,
-                emoji: '🏛️',
-                question: "Researchers create an AI that can reason, plan, solve unfamiliar problems, and learn any intellectual task a human can. It matches human intelligence across all areas. Drag each statement to TRUE or FALSE:",
-                hint: "This kind of AI would have the same capabilities as a human",
-                options: [
-                    { id: 'a', text: "This AI can perform any cognitive task a human can do", correct: true },
-                    { id: 'b', text: "This AI is limited to one specific domain or task", correct: false },
-                    { id: 'c', text: "This AI has human-level reasoning and learning abilities", correct: true },
-                    { id: 'd', text: "This AI has superhuman intelligence beyond human comprehension", correct: false }
+                emoji: '🌐',
+                question: "Sort these statements about AI APIs into TRUE or FALSE:",
+                hint: "Think about how AI APIs work and what they provide to developers",
+                isTrueFalse: true,
+                statements: [
+                    { id: 's1', text: "AI APIs allow developers to access pre-trained AI models without building from scratch", answer: 'true' },
+                    { id: 's2', text: "You need to train your own model before using any AI API", answer: 'false' },
+                    { id: 's3', text: "AI APIs can be integrated into applications using HTTP requests", answer: 'true' },
+                    { id: 's4', text: "All AI APIs are completely free with no usage limits", answer: 'false' }
                 ],
-                roadblockText: "🚧 ROADBLOCK 3 🚧"
+                roadblockText: "🚧 ROADBLOCK 3: AI APIs Challenge 🚧"
             }
         ];
 
         let currentRoadblock = 0;
-        let draggedElement = null;
         let placements = {};
         let showFeedback = false;
         let dragDropState = {};
+        let draggedElement = null;
 
         function showRoadblockOverlay() {
             const overlay = document.getElementById('roadblock-overlay');
@@ -605,6 +622,8 @@ date: 2025-10-21
 
             if (current.isDragDrop) {
                 setupDragDropUI(current);
+            } else if (current.isTrueFalse) {
+                setupTrueFalseUI(current);
             } else {
                 current.options.forEach(option => {
                     const btn = document.createElement('button');
@@ -683,7 +702,148 @@ date: 2025-10-21
             dragDropState = {};
         }
 
-        let draggedElement = null;
+        function setupTrueFalseUI(roadblock) {
+            const container = document.getElementById('options');
+
+            // Shuffle statements
+            const shuffled = [...roadblock.statements].sort(() => Math.random() - 0.5);
+
+            // Create statements container
+            const statementsDiv = document.createElement('div');
+            statementsDiv.className = 'prompt-items';
+            statementsDiv.id = 'statement-items';
+            statementsDiv.innerHTML = '<div class="prompt-items-title">📝 Drag statements to TRUE or FALSE:</div>';
+
+            shuffled.forEach(statement => {
+                const item = document.createElement('div');
+                item.className = 'prompt-item';
+                item.draggable = true;
+                item.id = statement.id;
+                item.textContent = statement.text;
+                item.dataset.answer = statement.answer;
+
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+
+                statementsDiv.appendChild(item);
+            });
+
+            // Create TRUE/FALSE drop zones
+            const dropContainer = document.createElement('div');
+            dropContainer.className = 'drag-drop-container';
+
+            const trueZone = document.createElement('div');
+            trueZone.className = 'drop-zone good';
+            trueZone.id = 'true-zone';
+            trueZone.innerHTML = '<div class="drop-zone-title">✅ TRUE</div>';
+
+            const falseZone = document.createElement('div');
+            falseZone.className = 'drop-zone bad';
+            falseZone.id = 'false-zone';
+            falseZone.innerHTML = '<div class="drop-zone-title">❌ FALSE</div>';
+
+            [trueZone, falseZone].forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('dragleave', handleDragLeave);
+                zone.addEventListener('drop', handleDrop);
+            });
+
+            dropContainer.appendChild(trueZone);
+            dropContainer.appendChild(falseZone);
+
+            container.appendChild(statementsDiv);
+            container.appendChild(dropContainer);
+
+            // Add check answer button
+            const checkBtn = document.createElement('button');
+            checkBtn.className = 'check-answer-btn';
+            checkBtn.textContent = 'Check Answer';
+            checkBtn.onclick = checkTrueFalseAnswer;
+            container.appendChild(checkBtn);
+        }
+
+        function checkTrueFalseAnswer() {
+            const trueZone = document.getElementById('true-zone');
+            const falseZone = document.getElementById('false-zone');
+            const statementItems = document.getElementById('statement-items');
+
+            const trueItems = Array.from(trueZone.querySelectorAll('.prompt-item'));
+            const falseItems = Array.from(falseZone.querySelectorAll('.prompt-item'));
+            const unsortedItems = Array.from(statementItems.querySelectorAll('.prompt-item'));
+
+            // Check if all items have been sorted
+            if (unsortedItems.length > 0) {
+                const feedback = document.getElementById('feedback');
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = '<span style="font-size: 24px;">❌</span><span>Please sort ALL statements before checking your answer.</span>';
+                feedback.classList.remove('hidden');
+
+                const actionButtonContainer = document.getElementById('action-button');
+                actionButtonContainer.innerHTML = '';
+                const actionBtn = document.createElement('button');
+                actionBtn.className = 'action-btn retry';
+                actionBtn.textContent = 'Continue Sorting';
+                actionBtn.onclick = () => {
+                    feedback.classList.add('hidden');
+                };
+                actionButtonContainer.appendChild(actionBtn);
+                return;
+            }
+
+            // Reset all item styles
+            [...trueItems, ...falseItems].forEach(item => {
+                item.style.background = '';
+                item.style.borderColor = '';
+            });
+
+            let allCorrect = true;
+
+            trueItems.forEach(item => {
+                if (item.dataset.answer !== 'true') {
+                    allCorrect = false;
+                    item.style.background = '#7f1d1d';
+                    item.style.borderColor = '#ef4444';
+                }
+            });
+
+            falseItems.forEach(item => {
+                if (item.dataset.answer !== 'false') {
+                    allCorrect = false;
+                    item.style.background = '#7f1d1d';
+                    item.style.borderColor = '#ef4444';
+                }
+            });
+
+            showFeedback = true;
+
+            const feedback = document.getElementById('feedback');
+            feedback.className = `feedback ${allCorrect ? 'correct' : 'incorrect'}`;
+            feedback.innerHTML = allCorrect
+                ? '<span style="font-size: 24px;">✅</span><span>Perfect! All statements sorted correctly!</span>'
+                : '<span style="font-size: 24px;">❌</span><span>Not quite right. Red statements are in the wrong category.</span>';
+            feedback.classList.remove('hidden');
+
+            const actionButtonContainer = document.getElementById('action-button');
+            actionButtonContainer.innerHTML = '';
+
+            const actionBtn = document.createElement('button');
+            actionBtn.className = `action-btn ${allCorrect ? 'next' : 'retry'}`;
+
+            if (allCorrect) {
+                actionBtn.textContent = currentRoadblock < roadblocks.length - 1
+                    ? 'Proceed to Next Roadblock →'
+                    : 'Open Vault! 🔓';
+                actionBtn.onclick = nextRoadblock;
+            } else {
+                actionBtn.textContent = 'Try Again';
+                actionBtn.onclick = () => {
+                    showFeedback = false;
+                    updateUI();
+                };
+            }
+
+            actionButtonContainer.appendChild(actionBtn);
+        }
 
         function handleDragStart(e) {
             draggedElement = e.target;
@@ -905,6 +1065,20 @@ date: 2025-10-21
         function proceedForward() {
             // Empty function - button doesn't lead anywhere yet
             console.log('Proceeding forward...');
+        }
+
+        function verifyCode() {
+            const input = document.getElementById('code-input').value;
+            const errorDiv = document.getElementById('code-error');
+            const correctCode = '261'; // Module 1 = 2, Module 2 = 6, Module 3 = 1
+
+            if (input === correctCode) {
+                document.getElementById('code-entry-overlay').classList.add('hidden');
+                errorDiv.textContent = '';
+            } else {
+                errorDiv.textContent = '❌ Incorrect code. Try again!';
+                document.getElementById('code-input').value = '';
+            }
         }
 
         // Initialize game
