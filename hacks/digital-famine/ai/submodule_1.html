@@ -43,26 +43,21 @@ date: 2025-10-30
         <div class="bg-slate-800/50 backdrop-blur border border-blue-500/30 rounded-lg p-6 mb-8">
             <div class="flex items-center justify-between overflow-x-auto pb-2 gap-2">
                 <button onclick="goToSection(0)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-blue-600" data-section="0">
-                    <span class="text-2xl mb-1">🤖</span>
-                    <span class="text-xs text-center">Introduction</span>
-                </button>
-                <div class="w-8 h-0.5 bg-blue-500/30"></div>
-                <button onclick="goToSection(1)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="1">
                     <span class="text-2xl mb-1">🎯</span>
                     <span class="text-xs text-center">Narrow AI</span>
                 </button>
                 <div class="w-8 h-0.5 bg-blue-500/30"></div>
-                <button onclick="goToSection(2)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="2">
+                <button onclick="goToSection(1)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="1">
                     <span class="text-2xl mb-1">🧠</span>
                     <span class="text-xs text-center">General AI</span>
                 </button>
                 <div class="w-8 h-0.5 bg-blue-500/30"></div>
-                <button onclick="goToSection(3)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="3">
+                <button onclick="goToSection(2)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="2">
                     <span class="text-2xl mb-1">⚡</span>
                     <span class="text-xs text-center">Super AI</span>
                 </button>
                 <div class="w-8 h-0.5 bg-blue-500/30"></div>
-                <button onclick="goToSection(4)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="4">
+                <button onclick="goToSection(3)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="3">
                     <span class="text-2xl mb-1">🏆</span>
                     <span class="text-xs text-center">Quiz</span>
                 </button>
@@ -70,36 +65,6 @@ date: 2025-10-30
         </div>
 
         <div id="section-0" class="mission-section">
-            <div class="space-y-6">
-                <div class="bg-slate-800/70 backdrop-blur border border-blue-500/50 rounded-lg p-8">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-4xl pulse">🤖</span>
-                        <h2 class="text-3xl font-bold text-blue-400">Welcome to Types of AI</h2>
-                    </div>
-                    <div class="space-y-4 text-lg">
-                        <p>AI has become one of the most influential inventions of our generation. It powers the apps we use, the websites we visit, and the tools that make work and communication faster.</p>
-                        <p class="text-blue-300">In this module, you'll explore the three main types of AI: Narrow AI, General AI, and Super AI. Each represents a different level of capability and intelligence.</p>
-                        <div class="grid grid-cols-3 gap-4 mt-6 text-center">
-                            <div class="bg-slate-900/50 p-4 rounded-lg border border-blue-500/30">
-                                <p class="text-blue-400 font-semibold">Time</p>
-                                <p class="text-2xl">20-30 min</p>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-lg border border-blue-500/30">
-                                <p class="text-blue-400 font-semibold">Difficulty</p>
-                                <p class="text-2xl">⭐☆☆☆☆</p>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-lg border border-blue-500/30">
-                                <p class="text-blue-400 font-semibold">Badge</p>
-                                <p class="text-2xl text-yellow-400">AI Explorer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="goToSection(1)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Begin Learning</button>
-            </div>
-        </div>
-
-        <div id="section-1" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-blue-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🎯 Narrow AI (Weak AI)</h2>
@@ -146,7 +111,7 @@ date: 2025-10-30
                 <!-- Narrow AI interactive prompt -->
                 <div class="ai-prompt-widget mt-6">
                     <label for="prompt-narrow" class="block font-semibold mb-2">Try a prompt for Narrow AI</label>
-                    <textarea id="prompt-narrow" rows="3" placeholder="Type a short prompt here (e.g., 'Write a polite email declining an event')" class="w-full p-2 rounded text-black"></textarea>
+                    <textarea id="prompt-narrow" rows="3" placeholder="Type a short prompt here (e.g., 'Write a polite email declining an event')" class="w-full p-2 rounded text-white bg-slate-700"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('narrow')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Narrow AI Response</button>
                         <button onclick="autoFill('narrow')" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
@@ -157,11 +122,11 @@ date: 2025-10-30
                         <button onclick="copyOutput('output-narrow')" class="mt-2 px-3 py-1 bg-slate-700 rounded text-white">Copy</button>
                     </div>
                 </div>
-                <button onclick="goToSection(2)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Continue to General AI</button>
+                <button onclick="goToSection(1)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Continue to General AI</button>
             </div>
         </div>
 
-        <div id="section-2" class="mission-section section-hidden">
+        <div id="section-1" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-blue-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🧠 General AI (Strong AI)</h2>
@@ -220,7 +185,7 @@ date: 2025-10-30
                 <!-- General AI interactive prompt -->
                 <div class="ai-prompt-widget mt-6">
                     <label for="prompt-general" class="block font-semibold mb-2">Try a prompt for General AI</label>
-                    <textarea id="prompt-general" rows="3" placeholder="Type a prompt that requires general reasoning (e.g., 'Plan a 3-day beginner coding workshop')" class="w-full p-2 rounded text-black"></textarea>
+                    <textarea id="prompt-general" rows="3" placeholder="Type a prompt that requires general reasoning (e.g., 'Plan a 3-day beginner coding workshop')" class="w-full p-2 rounded text-white bg-slate-700"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('general')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate General AI Response</button>
                         <button onclick="autoFill('general')" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
@@ -231,11 +196,11 @@ date: 2025-10-30
                         <button onclick="copyOutput('output-general')" class="mt-2 px-3 py-1 bg-slate-700 rounded text-white">Copy</button>
                     </div>
                 </div>
-                <button onclick="goToSection(3)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Continue to Super AI</button>
+                <button onclick="goToSection(2)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Continue to Super AI</button>
             </div>
         </div>
 
-        <div id="section-3" class="mission-section section-hidden">
+        <div id="section-2" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-blue-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">⚡ Super AI (Superintelligence)</h2>
@@ -305,7 +270,7 @@ date: 2025-10-30
                 <!-- Super AI interactive prompt -->
                 <div class="ai-prompt-widget mt-6">
                     <label for="prompt-super" class="block font-semibold mb-2">Try a prompt for Super AI</label>
-                    <textarea id="prompt-super" rows="3" placeholder="Type an ambitious prompt (e.g., 'Design a renewable energy plan for a small country')" class="w-full p-2 rounded text-black"></textarea>
+                    <textarea id="prompt-super" rows="3" placeholder="Type an ambitious prompt (e.g., 'Design a renewable energy plan for a small country')" class="w-full p-2 rounded text-white bg-slate-700"></textarea>
                     <div class="ai-actions mt-2">
                         <button onclick="generateResponse('super')" class="px-4 py-2 bg-blue-600 rounded text-white">Generate Super AI Response</button>
                         <button onclick="autoFill('super')" class="px-4 py-2 bg-slate-700 rounded text-white ml-2">Auto-fill</button>
@@ -316,11 +281,11 @@ date: 2025-10-30
                         <button onclick="copyOutput('output-super')" class="mt-2 px-3 py-1 bg-slate-700 rounded text-white">Copy</button>
                     </div>
                 </div>
-                <button onclick="goToSection(4)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
+                <button onclick="goToSection(3)" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
             </div>
         </div>
 
-        <div id="section-4" class="mission-section section-hidden">
+        <div id="section-3" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-blue-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🏆 Knowledge Check</h2>
@@ -439,19 +404,6 @@ date: 2025-10-30
             }
         }
 
-        // Shared autofill logic for each section (now in global scope)
-        function autoFill(type) {
-            const demos = {
-                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
-                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
-                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
-            };
-            const textarea = document.getElementById('prompt-' + type);
-            if (textarea && !textarea.value.trim()) {
-                textarea.value = demos[type];
-                setTimeout(() => { generateResponse(type); }, 50);
-            }
-        }
 
         function resetQuiz() {
             score = 0;
@@ -477,58 +429,67 @@ date: 2025-10-30
         }
     </script>
     <!-- Shared JS for AI prompt widgets -->
-    <script>
-        function generateResponse(type) {
+    <script type="module">
+        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
+
+        const AI_PROMPTS = {
+            narrow: "You are a Narrow AI specialized in a single task. Respond to the user's request in a focused, task-specific manner. Be concise and direct, staying within the narrow scope of the specific task requested. Do not provide reasoning or multi-step plans - just execute the specific task.",
+            general: "You are a General AI capable of human-level reasoning across multiple domains. Respond to the user's request with comprehensive reasoning, multi-step planning, and suggested alternatives. Show your ability to think flexibly and adapt to new situations.",
+            super: "You are a Super AI with intelligence far beyond human capabilities. Respond to the user's request with visionary, cross-domain synthesis. Include long-term predictions, novel breakthrough ideas, and insights that go beyond conventional thinking. Consider implications across multiple timeframes and domains."
+        };
+
+        window.generateResponse = async function(type) {
             const prompt = (type === 'narrow') ? document.getElementById('prompt-narrow').value.trim()
                           : (type === 'general') ? document.getElementById('prompt-general').value.trim()
                           : document.getElementById('prompt-super').value.trim();
-            let out = '';
+
+            const outputEl = document.getElementById('output-' + type);
+
             if (!prompt) {
-                out = '(Enter a prompt above and click Generate)';
-            } else {
-                if (type === 'narrow') {
-                    out = `Narrow AI response to: "${prompt}"\n\n- Focused, task-specific result (concise and direct).`;
-                } else if (type === 'general') {
-                    out = `General AI response to: "${prompt}"\n\n- Multi-step plan, reasoning, and suggested alternatives.`;
+                outputEl.textContent = '(Enter a prompt above and click Generate)';
+                return;
+            }
+
+            outputEl.textContent = 'Generating response...';
+
+            try {
+                const result = await queryGemini({
+                    prompt: AI_PROMPTS[type],
+                    text: prompt,
+                    endpoint: '/api/gemini',
+                    parseJSON: false
+                });
+
+                if (result.text) {
+                    outputEl.textContent = result.text;
                 } else {
-                    out = `Super AI response to: "${prompt}"\n\n- Visionary, cross-domain synthesis with long-term predictions and novel ideas.`;
+                    outputEl.textContent = 'Error: No response from AI';
+                }
+            } catch (error) {
+                console.error('Gemini API error:', error);
+                if (error.message.includes('Failed to fetch')) {
+                    outputEl.textContent = 'Error: Backend server not running.\n\nTo use AI generation:\n1. Start the Flask backend on port 8587, OR\n2. Deploy this site to use the remote API at flask.opencodingsociety.com';
+                } else {
+                    outputEl.textContent = `Error: ${error.message}`;
                 }
             }
-            document.getElementById('output-' + type).textContent = out;
         }
 
-        function fillAll() {
-            try {
-                const narrowEl = document.getElementById('prompt-narrow');
-                const generalEl = document.getElementById('prompt-general');
-                const superEl = document.getElementById('prompt-super');
-
-                const narrowVal = narrowEl && narrowEl.value ? narrowEl.value.trim() : '';
-                const generalVal = generalEl && generalEl.value ? generalEl.value.trim() : '';
-                const superVal = superEl && superEl.value ? superEl.value.trim() : '';
-
-                // Distinct, type-appropriate demo prompts for each AI type
-                const demos = {
-                    narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
-                    general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
-                    superAI: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
-                };
-
-                // Only fill the textareas that are currently empty (do not overwrite user-entered text)
-                if (narrowEl && !narrowVal) narrowEl.value = demos.narrow;
-                if (generalEl && !generalVal) generalEl.value = demos.general;
-                if (superEl && !superVal) superEl.value = demos.superAI;
-
-                // Use small timeouts to ensure the DOM updates before generating outputs
-                setTimeout(() => { try { generateResponse('narrow'); } catch (e) { console.error(e); } }, 50);
-                setTimeout(() => { try { generateResponse('general'); } catch (e) { console.error(e); } }, 100);
-                setTimeout(() => { try { generateResponse('super'); } catch (e) { console.error(e); } }, 150);
-            } catch (err) {
-                console.error('fillAll error:', err);
+        // Shared autofill logic for each section
+        window.autoFill = function(type) {
+            const demos = {
+                narrow: "Generate a short subject line and a 2-sentence summary for an email confirming a doctor's appointment.",
+                general: "Design a flexible 3-day beginner workshop plan that teaches HTML, CSS, and JavaScript, including learning objectives and activities.",
+                super: "Outline a high-level, multi-decade national strategy to transition a small country to 100% renewable energy, including innovations and long-term social impacts."
+            };
+            const textarea = document.getElementById('prompt-' + type);
+            if (textarea && !textarea.value.trim()) {
+                textarea.value = demos[type];
+                setTimeout(() => { generateResponse(type); }, 50);
             }
         }
 
-        function copyOutput(id) {
+        window.copyOutput = function(id) {
             const text = document.getElementById(id).textContent;
             navigator.clipboard?.writeText(text).then(() => {
                 alert('Copied to clipboard');
@@ -555,7 +516,41 @@ date: 2025-10-30
             margin-right: 0;
         }
     </style>
+
+    <footer class="module-footer">
+        <a href="{{ '/digital-famine/ai/' | prepend: site.baseurl }}" class="footer-link">
+            ← Back to AI Quest Home
+        </a>
+    </footer>
+
+    <style>
+        .module-footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 2px solid rgba(96, 165, 250, 0.3);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-link {
+            display: inline-block;
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .footer-link:hover {
+            background: rgba(96, 165, 250, 0.2);
+            border-color: rgba(96, 165, 250, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+        }
+    </style>
 </body>
 </html>
-footer:
-questHome:

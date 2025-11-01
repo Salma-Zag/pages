@@ -60,7 +60,7 @@ date: 2025-10-30
             <div class="flex items-center justify-between overflow-x-auto pb-2 gap-2">
                 <button onclick="goToSection(0)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-green-600" data-section="0">
                     <span class="text-2xl mb-1">🔌</span>
-                    <span class="text-xs text-center">Introduction</span>
+                    <span class="text-xs text-center">AI APIs</span>
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
                 <button onclick="goToSection(1)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="1">
@@ -126,21 +126,6 @@ date: 2025-10-30
                         <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mt-4">
                             <p class="font-semibold">💡 Real World Example:</p>
                             <p>When you use Google, Uber, ApplePay, or any service that needs AI analysis, you're using AI APIs. They combine our world digitally!</p>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-4 mt-6 text-center">
-                            <div class="bg-slate-900/50 p-4 rounded-lg border border-green-500/30">
-                                <p class="text-green-400 font-semibold">Time</p>
-                                <p class="text-2xl">45-60 min</p>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-lg border border-green-500/30">
-                                <p class="text-green-400 font-semibold">Difficulty</p>
-                                <p class="text-2xl">⭐⭐⭐☆☆</p>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-lg border border-green-500/30">
-                                <p class="text-green-400 font-semibold">Badge</p>
-                                <p class="text-2xl text-yellow-400">API Builder</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -556,5 +541,41 @@ date: 2025-10-30
             }
         });
     </script>
+
+    <footer class="module-footer">
+        <a href="{{ '/digital-famine/ai/' | prepend: site.baseurl }}" class="footer-link">
+            ← Back to AI Quest Home
+        </a>
+    </footer>
+
+    <style>
+        .module-footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 2px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-link {
+            display: inline-block;
+            color: #34d399;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(16, 185, 129, 0.4);
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .footer-link:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+    </style>
 </body>
 </html>
