@@ -244,13 +244,13 @@ button:active {
     border: 2px solid #ddd;
     border-radius: 5px;
     margin-bottom: 10px;
-    color: #000;
+    color: #f3ececff;
 }
 .quiz-section button {
     margin-top: 10px;
 }
 #quiz-result {
-    color: #000 !important;
+    color: #f4f0f0ff !important;
     font-size: 18px;
     font-weight: bold;
     margin-top: 20px;
