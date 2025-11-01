@@ -36,21 +36,15 @@ class Projectile extends Character {
             this.spriteSheet.src = path + "/images/mansionGame/arrow.png";
             this.isAnimated = false;
         } else if (type === "FIREBALL") {
+            // Fireball is a single-frame static image (178x123 source). Use a scaled size preserving aspect ratio.
             this.spriteSheet = new Image();
             this.frameIndex = 0;
-            this.frameCount = 4; // 2x2 grid
-            this.frameCols = 2;
-            this.frameRows = 2;
+            this.frameCount = 1; // single frame
+            // source aspect ~ 178 / 123 => width is larger; scale to a reasonable in-game size
             this.width = 64;
-            this.height = 64;
+            this.height = 44; // keep aspect roughly (64 * 123 / 178 ≈ 44)
             this.spriteSheet.onload = () => this.imageLoaded = true;
             this.spriteSheet.src = path + "/images/mansionGame/staticfireball.png";
-            this.frameIndex = 0;
-            this.frameCount = 4; // 2x2 grid
-            this.frameCols = 2;
-            this.frameRows = 2;
-            this.width = 64;
-            this.height = 64;
             this.isAnimated = false;
         }
 
@@ -86,33 +80,67 @@ class Projectile extends Character {
         if (!this.imageLoaded) {
             return;  // Don't try to draw until image is loaded
         }
+        // Rotate projectile to face travel direction (handles diagonal travel)
+        // Compute angle of travel
+        const travelAngle = Math.atan2(this.velocity.y, this.velocity.x); // radians
+
+        // Base angle depends on how the sprite image faces by default
+        // Arrow image faces left -> baseAngle = PI
+        // Fireball image faces right -> baseAngle = 0
+        const baseAngle = (this.type === 'ARROW') ? Math.PI : 0;
+
+        // Angle to rotate the sprite so it faces travel direction
+        const drawAngle = travelAngle - baseAngle;
 
         if (this.isAnimated && this.spriteSheet.complete) {
-            // Animate 2x2 sprite sheet
-            const frameWidth = this.spriteSheet.width / this.frameCols;
-            const frameHeight = this.spriteSheet.height / this.frameRows;
+            const frameWidth = Math.floor(this.spriteSheet.width / this.frameCols);
+            const frameHeight = Math.floor(this.spriteSheet.height / this.frameRows);
             const col = this.frameIndex % this.frameCols;
-            const row = Math.floor(this.frameIndex / this.frameCols);
+            const row = Math.floor(this.frameIndex / this.frameRows);
 
+            // Use logical display dimensions for rotation to avoid clipping
+            const dstW = Math.max(1, Math.floor(this.width));
+            const dstH = Math.max(1, Math.floor(this.height));
+
+            // Resize canvas to destination size
+            this.canvas.width = dstW;
+            this.canvas.height = dstH;
+
+            // Draw rotated frame centered
+            ctx.save();
+            ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+            ctx.rotate(drawAngle);
             ctx.drawImage(
                 this.spriteSheet,
                 col * frameWidth, row * frameHeight, frameWidth, frameHeight,
-                0, 0, this.width, this.height
+                -dstW / 2, -dstH / 2, dstW, dstH
             );
+            ctx.restore();
 
             // Advance frame
             this.frameIndex = (this.frameIndex + 1) % this.frameCount;
 
         } else if (this.spriteSheet.complete) {
-            // Draw arrow or any single-image projectile
-            /*
+            // Non-animated: draw the full image scaled to desired logical size
+            const srcW = this.spriteSheet.naturalWidth || this.spriteSheet.width;
+            const srcH = this.spriteSheet.naturalHeight || this.spriteSheet.height;
+            const dstW = Math.max(1, Math.floor(this.width));
+            const dstH = Math.max(1, Math.floor(this.height));
+
+            // Resize canvas to destination size
+            this.canvas.width = dstW;
+            this.canvas.height = dstH;
+
+            // Draw rotated image centered on canvas
+            ctx.save();
+            ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+            ctx.rotate(drawAngle);
             ctx.drawImage(
                 this.spriteSheet,
-                0, 0, this.spriteSheet.naturalWidth, this.spriteSheet.naturalHeight,
-                0, 0, this.width, this.height
+                0, 0, srcW, srcH,
+                -dstW / 2, -dstH / 2, dstW, dstH
             );
-            */
-           ctx.drawImage(this.spriteSheet, 0, 0, this.width, this.height);
+            ctx.restore();
         }
 
         // Draw to screen
