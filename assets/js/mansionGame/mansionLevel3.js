@@ -11,7 +11,7 @@ class MansionLevel3 {
     const image_background = path + "/images/mansionGame/library_lvl3.png";
     const image_data_background = {
         name: 'background',
-        greeting: "Welcome to the Library — find the hidden key to unlock the mansion’s secret chamber.",
+        greeting: "Welcome to the Stairs — find the hidden key to unlock the mansion’s secret chamber.",
         src: image_background,
         pixels: {height: 580, width: 1038},
         mode: 'contain',
