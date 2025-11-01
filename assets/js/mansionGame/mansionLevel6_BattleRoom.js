@@ -2,7 +2,7 @@ import GameEnvBackground from "./GameEngine/GameEnvBackground.js";
 import Player from "./GameEngine/Player.js";
 import Boss from './CustomGameClasses/Boss.js';
 import showDeathScreen from './CustomGameClasses/DeathScreen.js';
-import { createBossHealthBar, createPlayerHealthBar } from './CustomGameClasses/HealthBars.js';
+import { createBossHealthBar, createPlayerHealthBar, updatePlayerHealthBar } from './CustomGameClasses/HealthBars.js';
 
 class MansionLevel6_BattleRoom {
     constructor(gameEnv) {
@@ -154,6 +154,9 @@ class MansionLevel6_BattleRoom {
                         } catch (e) { /* ignore */ }
                         
                         // Execute the death
+                        nearest.data.health = 0;
+                        const pct = Math.max(0, Math.min(100, nearest.data.health || 0));
+                        updatePlayerHealthBar(pct);
                         showDeathScreen(nearest);
                         break;
                     }
