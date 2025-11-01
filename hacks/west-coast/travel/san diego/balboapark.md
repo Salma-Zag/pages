@@ -20,7 +20,7 @@ date: 2025-10-21
   
   body {
     font-family: system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #00a8cc, #005f73);
+    background: #001f3f;
     min-height: 100vh;
     padding: 40px 0;
   }
@@ -273,7 +273,7 @@ date: 2025-10-21
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
-    background: white;
+    background: #001f3f;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
     margin-bottom: 40px;
@@ -284,33 +284,33 @@ date: 2025-10-21
   }
   
   .audio-container h1 {
-    color: #005f73;
+    color: #ffffff;
     margin-bottom: 10px;
     font-size: 32px;
   }
   
   .audio-container h2 {
-    color: #00a8cc;
+    color: #ffffff;
     margin-top: 30px;
     margin-bottom: 15px;
     font-size: 24px;
   }
   
   .audio-container h3 {
-    color: #005f73;
+    color: #ffffff;
     margin-top: 25px;
     margin-bottom: 10px;
     font-size: 20px;
   }
   
   .audio-container p {
-    color: #333;
+    color: #ffffff;
     line-height: 1.6;
     margin-bottom: 15px;
   }
   
   .audio-container pre {
-    background: #f5f5f5;
+    background: #003366;
     padding: 15px;
     border-radius: 8px;
     overflow-x: auto;
@@ -319,15 +319,23 @@ date: 2025-10-21
   
   .audio-container code {
     font-family: 'Courier New', monospace;
-    color: #005f73;
+    color: #ffffff;
   }
   
   .example-section {
-    background: #f0f8ff;
+    background: #003366;
     padding: 25px;
     border-radius: 12px;
     margin-top: 30px;
-    border-left: 4px solid #00a8cc;
+    border-left: 4px solid #0066cc;
+  }
+  
+  .example-section h2 {
+    color: #ffffff;
+  }
+  
+  .example-section p {
+    color: #ffffff;
   }
   
   .example-section audio {
@@ -337,7 +345,7 @@ date: 2025-10-21
   
   .source-text {
     font-style: italic;
-    color: #666;
+    color: #cccccc;
     font-size: 14px;
   }
 </style>
