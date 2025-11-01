@@ -263,6 +263,7 @@ date: 2025-10-30
                                         </div>
                                         <div class="bg-red-900/30 p-3 rounded">
                                             <p class="text-xs text-red-300 mb-1">❌ Bad:</p>
+                                            <p class="text-xs text-red-300 mb-1">❌ Bad:</p>
                                             <p class="text-sm">"London weather?"</p>
                                         </div>
                                     </div>
@@ -531,7 +532,9 @@ date: 2025-10-30
         </div>
     </div>
 
+    <!-- SINGLE SCRIPT SECTION - All functions defined here -->
     <script>
+        // Define all functions immediately when script loads
         function goToSection(n) {
             document.querySelectorAll('.mission-section').forEach(s => s.classList.add('section-hidden'));
             document.getElementById('section-' + n).classList.remove('section-hidden');
@@ -542,12 +545,60 @@ date: 2025-10-30
             document.querySelector('.nav-btn[data-section="' + n + '"]').classList.add('bg-purple-600');
             window.scrollTo(0, 0);
         }
-    </script>
 
-    <script type="module">
-        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
+        // Inline Gemini API function
+        async function queryGemini(config) {
+            const {
+                prompt,
+                text,
+                endpoint = '/api/gemini',
+                parseJSON = false
+            } = config;
 
-        window.autoFillBad = function () {
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        text: text
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.error || 'API request failed');
+                }
+
+                return {
+                    success: true,
+                    text: result.text
+                };
+
+            } catch (error) {
+                console.error('Gemini API Error:', error);
+                throw new Error(`Failed to get AI response: ${error.message}`);
+            }
+        }
+
+        function handleApiError(outputEl, error) {
+            if (error.message.includes('Failed to fetch')) {
+                outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint';
+            } else {
+                outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
+            }
+        }
+
+        // Define global functions immediately
+        function autoFillBad() {
+            console.log('autoFillBad called');
             const textarea = document.getElementById('bad-prompt');
             if (!textarea.value.trim()) {
                 textarea.value = "tell me about space";
@@ -555,7 +606,8 @@ date: 2025-10-30
             }
         }
 
-        window.autoFillGood = function () {
+        function autoFillGood() {
+            console.log('autoFillGood called');
             const textarea = document.getElementById('good-prompt');
             if (!textarea.value.trim()) {
                 textarea.value = "Write a 200-word informative explanation about the Solar System, including details about the eight planets, their order from the Sun, and one unique characteristic of each planet.";
@@ -563,7 +615,8 @@ date: 2025-10-30
             }
         }
 
-        window.generateBadPrompt = async function () {
+        async function generateBadPrompt() {
+            console.log('generateBadPrompt called');
             const badPrompt = document.getElementById('bad-prompt').value.trim();
             const outputEl = document.getElementById('output-bad');
 
@@ -595,7 +648,8 @@ date: 2025-10-30
             }
         }
 
-        window.generateGoodPrompt = async function () {
+        async function generateGoodPrompt() {
+            console.log('generateGoodPrompt called');
             const goodPrompt = document.getElementById('good-prompt').value.trim();
             const outputEl = document.getElementById('output-good');
 
@@ -627,13 +681,24 @@ date: 2025-10-30
             }
         }
 
-        function handleApiError(outputEl, error) {
-            if (error.message.includes('Failed to fetch')) {
-                outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint';
-            } else {
-                outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
-            }
-        }
+        // Make functions globally accessible
+        window.autoFillBad = autoFillBad;
+        window.autoFillGood = autoFillGood;
+        window.generateBadPrompt = generateBadPrompt;
+        window.generateGoodPrompt = generateGoodPrompt;
+
+        // Test functions when DOM is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Page loaded. Testing function availability:');
+            console.log('autoFillBad:', typeof window.autoFillBad);
+            console.log('autoFillGood:', typeof window.autoFillGood);
+            console.log('generateBadPrompt:', typeof window.generateBadPrompt);
+            console.log('generateGoodPrompt:', typeof window.generateGoodPrompt);
+
+            // Test if we can access the elements
+            console.log('bad-prompt element:', document.getElementById('bad-prompt'));
+            console.log('good-prompt element:', document.getElementById('good-prompt'));
+        });
     </script>
 
     <footer class="module-footer">
