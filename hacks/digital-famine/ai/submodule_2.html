@@ -549,7 +549,7 @@ date: 2025-10-30
             window.scrollTo(0, 0);
         }
 
-        // Make goToSection globally accessible
+        // Make ALL functions globally accessible for onclick handlers
         window.goToSection = goToSection;
 
         // Define global functions immediately
@@ -646,6 +646,7 @@ date: 2025-10-30
         // Test functions when DOM is ready
         document.addEventListener('DOMContentLoaded', function () {
             console.log('Page loaded. Testing function availability:');
+            console.log('goToSection:', typeof window.goToSection);
             console.log('autoFillBad:', typeof window.autoFillBad);
             console.log('autoFillGood:', typeof window.autoFillGood);
             console.log('generateBadPrompt:', typeof window.generateBadPrompt);
@@ -654,6 +655,13 @@ date: 2025-10-30
             // Test if we can access the elements
             console.log('bad-prompt element:', document.getElementById('bad-prompt'));
             console.log('good-prompt element:', document.getElementById('good-prompt'));
+
+            // Test goToSection manually
+            if (typeof window.goToSection === 'function') {
+                console.log('goToSection is accessible globally');
+            } else {
+                console.error('goToSection is NOT accessible globally');
+            }
         });
     </script>
 
