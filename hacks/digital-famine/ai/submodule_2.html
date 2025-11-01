@@ -533,7 +533,10 @@ date: 2025-10-30
     </div>
 
     <!-- SINGLE SCRIPT SECTION - All functions defined here -->
-    <script>
+    <script type="module">
+        // Import the modular API (same as plagiarism code)
+        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
+
         // Define all functions immediately when script loads
         function goToSection(n) {
             document.querySelectorAll('.mission-section').forEach(s => s.classList.add('section-hidden'));
@@ -546,90 +549,29 @@ date: 2025-10-30
             window.scrollTo(0, 0);
         }
 
-        // Inline Gemini API function
-        async function queryGemini(config) {
-            const {
-                prompt,
-                text,
-                endpoint = '/api/gemini',
-                parseJSON = false
-            } = config;
-
-            // Determine backend URL based on environment
-            let pythonURI;
-            if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-                pythonURI = "http://localhost:8587";
-            } else {
-                pythonURI = "https://flask.opencodingsociety.com";
-            }
-
-            const fullURL = pythonURI + endpoint;
-
-            try {
-                const response = await fetch(fullURL, {
-                    method: 'POST',
-                    mode: 'cors',
-                    cache: 'default',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Origin': 'client'
-                    },
-                    body: JSON.stringify({
-                        prompt: prompt,
-                        text: text
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-
-                if (!result.success) {
-                    throw new Error(result.error || 'API request failed');
-                }
-
-                return {
-                    success: true,
-                    text: result.text
-                };
-
-            } catch (error) {
-                console.error('Gemini API Error:', error);
-                throw new Error(`Failed to get AI response: ${error.message}`);
-            }
-        }
-
-        function handleApiError(outputEl, error) {
-            if (error.message.includes('Failed to fetch')) {
-                outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint';
-            } else {
-                outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
-            }
-        }
+        // Make goToSection globally accessible
+        window.goToSection = goToSection;
 
         // Define global functions immediately
-        function autoFillBad() {
+        window.autoFillBad = function() {
             console.log('autoFillBad called');
             const textarea = document.getElementById('bad-prompt');
             if (!textarea.value.trim()) {
                 textarea.value = "tell me about space";
-                setTimeout(() => { generateBadPrompt(); }, 50);
+                setTimeout(() => { window.generateBadPrompt(); }, 50);
             }
-        }
+        };
 
-        function autoFillGood() {
+        window.autoFillGood = function() {
             console.log('autoFillGood called');
             const textarea = document.getElementById('good-prompt');
             if (!textarea.value.trim()) {
                 textarea.value = "Write a 200-word informative explanation about the Solar System, including details about the eight planets, their order from the Sun, and one unique characteristic of each planet.";
-                setTimeout(() => { generateGoodPrompt(); }, 50);
+                setTimeout(() => { window.generateGoodPrompt(); }, 50);
             }
-        }
+        };
 
-        async function generateBadPrompt() {
+        window.generateBadPrompt = async function() {
             console.log('generateBadPrompt called');
             const badPrompt = document.getElementById('bad-prompt').value.trim();
             const outputEl = document.getElementById('output-bad');
@@ -645,9 +587,8 @@ date: 2025-10-30
             try {
                 const result = await queryGemini({
                     prompt: "You are an AI assistant. Respond to this user prompt as you normally would, but because the prompt is vague or poorly structured, your response will naturally be less helpful or generic.",
-                    text: badPrompt,
-                    endpoint: '/api/gemini',
-                    parseJSON: false
+                    text: badPrompt
+                    // parseJSON: false is default - returns raw text
                 });
 
                 console.log('Bad prompt result:', result);
@@ -658,11 +599,15 @@ date: 2025-10-30
                 }
             } catch (error) {
                 console.error('Gemini API error:', error);
-                handleApiError(outputEl, error);
+                if (error.message.includes('Failed to fetch') || error.message.includes('HTTP')) {
+                    outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint at flask.opencodingsociety.com';
+                } else {
+                    outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
+                }
             }
-        }
+        };
 
-        async function generateGoodPrompt() {
+        window.generateGoodPrompt = async function() {
             console.log('generateGoodPrompt called');
             const goodPrompt = document.getElementById('good-prompt').value.trim();
             const outputEl = document.getElementById('output-good');
@@ -678,9 +623,8 @@ date: 2025-10-30
             try {
                 const result = await queryGemini({
                     prompt: "You are an AI assistant. Respond to this well-structured user prompt with a comprehensive, clear, and helpful response that addresses all aspects of the request.",
-                    text: goodPrompt,
-                    endpoint: '/api/gemini',
-                    parseJSON: false
+                    text: goodPrompt
+                    // parseJSON: false is default - returns raw text
                 });
 
                 console.log('Good prompt result:', result);
@@ -691,15 +635,13 @@ date: 2025-10-30
                 }
             } catch (error) {
                 console.error('Gemini API error:', error);
-                handleApiError(outputEl, error);
+                if (error.message.includes('Failed to fetch') || error.message.includes('HTTP')) {
+                    outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint at flask.opencodingsociety.com';
+                } else {
+                    outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
+                }
             }
-        }
-
-        // Make functions globally accessible
-        window.autoFillBad = autoFillBad;
-        window.autoFillGood = autoFillGood;
-        window.generateBadPrompt = generateBadPrompt;
-        window.generateGoodPrompt = generateGoodPrompt;
+        };
 
         // Test functions when DOM is ready
         document.addEventListener('DOMContentLoaded', function () {
