@@ -11,6 +11,9 @@ categories: [CSP]
 tags: [food, seattle]
 author: "Syntax Terrors"
 date: 2025-10-24
+footer:
+  home: /west-coast/food/
+  previous: /west-coast/food/SF/
 ---
 
 # 🌲 Seattle — DELETE & ANALYTICS (CRUD Submodule 4)

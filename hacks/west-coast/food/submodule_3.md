@@ -11,6 +11,10 @@ categories: [CSP]
 tags: [food, sanfrancisco, update, crud]
 author: "Syntax Terrors"
 date: 2025-10-24
+footer:
+  previous: /west-coast/food/LA/
+  home: /west-coast/food/
+  next: /west-coast/food/SEA/
 ---
 
 <style>
