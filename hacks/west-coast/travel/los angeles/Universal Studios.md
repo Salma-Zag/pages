@@ -9,7 +9,6 @@ submodule: 1
 author: "Cool Collaborators"
 date: 2025-10-21
 ---
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -65,7 +64,6 @@ body{background:#009688;font-family:'Open Sans',sans-serif;margin:0;padding:0}
 .fw.f2{left:64%;top:18%;animation-delay:.5s}.fw.f3{left:42%;top:26%;animation-delay:1.1s}
 @keyframes boom{0%{transform:scale(1);opacity:1;box-shadow:0 0 0 0 #ffd700}45%{transform:scale(4);box-shadow:0 0 34px 16px #ffd700,20px 20px 30px 10px #ff6b6b}100%{transform:scale(1);opacity:0}}
 .caption{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;color:#1a2a2a;font-weight:700;background:rgba(255,255,255,.8);padding:8px 14px;border-radius:10px}
-
 /* ===== Lesson Content ===== */
 .lesson-content {
     background: #2874a6;
@@ -74,25 +72,21 @@ body{background:#009688;font-family:'Open Sans',sans-serif;margin:0;padding:0}
     font-family: Arial, sans-serif;
     line-height: 1.6;
 }
-
 .container {
     max-width: 800px;
     margin: 0 auto;
 }
-
 h1, h2, h3 {
     color: #fff;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0 10px 0;
 }
-
 p {
     color: #fff;
     font-size: 16px;
     margin: 10px 0;
 }
-
 pre {
     background: #1a1a1a;
     padding: 15px;
@@ -101,19 +95,16 @@ pre {
     color: #fff;
     font-size: 14px;
 }
-
 code {
     color: #fff;
     font-size: 14px;
 }
-
 .example-section {
     margin: 40px 0;
     padding: 30px;
     background: #1a1a1a;
     border-radius: 10px;
 }
-
 .demo-container {
     display: flex;
     flex-direction: column;
@@ -126,12 +117,10 @@ code {
     margin-top: 20px;
     overflow: hidden;
 }
-
 .button-container {
     margin-bottom: 50px;
     z-index: 10;
 }
-
 button {
     background-color: #e74c3c;
     color: white;
@@ -145,37 +134,31 @@ button {
     transition: all 0.3s ease;
     text-transform: uppercase;
 }
-
 button:hover {
     background-color: #c0392b;
     transform: translateY(-3px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.4);
 }
-
 button:active {
     transform: translateY(0);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
-
 #universalContainer {
     opacity: 0;
     transform: scale(0.5) translateY(50px);
     transition: all 1s ease;
     z-index: 10;
 }
-
 #universalContainer.show {
     opacity: 1;
     transform: scale(1) translateY(0);
 }
-
 .globe-container {
     position: relative;
     width: 250px;
     height: 250px;
     animation: float 3s ease-in-out infinite;
 }
-
 .globe {
     position: relative;
     width: 200px;
@@ -189,7 +172,6 @@ button:active {
         0 10px 30px rgba(0,0,0,0.4);
     animation: globeAppear 0.8s ease backwards;
 }
-
 .globe::before {
     content: '';
     position: absolute;
@@ -201,7 +183,6 @@ button:active {
     border-radius: 50%;
     filter: blur(10px);
 }
-
 .latitude-line {
     position: absolute;
     left: 0;
@@ -209,11 +190,9 @@ button:active {
     height: 2px;
     background: rgba(255,255,255,0.2);
 }
-
 .lat1 { top: 30%; }
 .lat2 { top: 50%; }
 .lat3 { top: 70%; }
-
 .longitude-line {
     position: absolute;
     top: 0;
@@ -223,7 +202,6 @@ button:active {
     left: 50%;
     transform: translateX(-50%);
 }
-
 .universal-text {
     position: absolute;
     top: 50%;
@@ -240,14 +218,12 @@ button:active {
     animation: textAppear 0.8s ease backwards;
     animation-delay: 0.4s;
 }
-
 .ring {
     position: absolute;
     border: 3px solid rgba(255,255,255,0.4);
     border-radius: 50%;
     animation: ringAppear 0.8s ease backwards;
 }
-
 .ring1 {
     top: -15px;
     left: -15px;
@@ -255,7 +231,6 @@ button:active {
     bottom: -15px;
     animation-delay: 0.2s;
 }
-
 .ring2 {
     top: -30px;
     left: -30px;
@@ -263,7 +238,6 @@ button:active {
     bottom: -30px;
     animation-delay: 0.3s;
 }
-
 @keyframes globeAppear {
     from {
         opacity: 0;
@@ -274,7 +248,6 @@ button:active {
         transform: scale(1) rotateY(0deg);
     }
 }
-
 @keyframes textAppear {
     from {
         opacity: 0;
@@ -285,7 +258,6 @@ button:active {
         transform: translate(-50%, -50%) scale(1);
     }
 }
-
 @keyframes ringAppear {
     from {
         opacity: 0;
@@ -296,7 +268,6 @@ button:active {
         transform: scale(1);
     }
 }
-
 @keyframes float {
     0%, 100% {
         transform: translateY(0px);
@@ -304,6 +275,66 @@ button:active {
     50% {
         transform: translateY(-15px);
     }
+}
+/* ===== Quiz Section Styles ===== */
+.quiz-section {
+    background: #fff;
+    color: #000 !important;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.quiz-section h2 {
+    color: #000 !important;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.quiz-section p {
+    color: #000 !important;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.quiz-section label {
+    color: #000 !important;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+}
+.quiz-section code {
+    background: #f4f4f4;
+    color: #000 !important;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.quiz-section input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #000;
+}
+.quiz-section button {
+    margin-top: 10px;
+}
+#quiz-result {
+    color: #000 !important;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+#button-demo {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+#button-demo p {
+    color: #000 !important;
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 </style>
 </head>
@@ -320,7 +351,6 @@ button:active {
 </div>
 <p>Heading to Universal Studios Hollywood…</p>
 </div>
-
 <!-- Scene -->
 <main class="scene hidden" id="scene">
 <div class="studios"></div><div class="ground"></div><div class="plaza"></div>
@@ -340,41 +370,34 @@ button:active {
 <div class="fw" style="left:16%;top:12%"></div><div class="fw f2"></div><div class="fw f3"></div>
 <div class="caption">🎬 Universal Studios — coaster & fireworks</div>
 </main>
-
 <!-- Lesson Content -->
 <div class="lesson-content hidden" id="lessonContent">
 <div class="container">
 <h1>Los Angeles</h1>
 <h2>Universal Studios Button Lesson</h2>
-
 <h3>Step 1: Set Up Your HTML File</h3>
 <p>First, create a new file and save it as button.html. Every HTML file needs this basic structure:</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;title&gt;My Button&lt;/title&gt;
+&lt;title&gt;My Button&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-
 <p>What this means:</p>
 <p>&lt;!DOCTYPE html&gt; tells the browser this is an HTML file</p>
 <p>&lt;html&gt; wraps everything</p>
 <p>&lt;head&gt; contains information about the page</p>
 <p>&lt;body&gt; is where your visible content goes</p>
-
 <h3>Step 2: Create Your First Button</h3>
 <p>Inside the &lt;body&gt; tags, add a button:</p>
 <pre><code>&lt;body&gt;
-    &lt;button&gt;Click Me!&lt;/button&gt;
+&lt;button&gt;Click Me!&lt;/button&gt;
 &lt;/body&gt;</code></pre>
-
 <h3>Step 3: Make the Button Do Something</h3>
 <p>Add an onclick attribute to make something happen when clicked:</p>
 <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code></pre>
-
 <div class="example-section">
 <h3>Here's an example button!</h3>
 <div class="demo-container">
@@ -396,46 +419,34 @@ button:active {
 </div>
 </div>
 </div>
-
 <h2>Button Design Tips</h2>
-
 <h3>What is a Button?</h3>
 <p>A button triggers an action when clicked. Think of Universal Studios' iconic globe—bold, recognizable, and inviting. Good buttons work the same way.</p>
-
 <h3>The 3 Button States</h3>
 <p><strong>Default (Globe at Rest)</strong> - How it looks normally—waiting to be clicked.</p>
 <p><strong>Hover (Globe Spinning)</strong> - When you move your mouse over it—shows it's interactive.</p>
 <p><strong>Clicked (Lights Activate)</strong> - The moment you click—confirms the action.</p>
-
 <h3>5 Design Tips</h3>
-
 <p><strong>1. Make it Bold</strong></p>
 <p>Like the Universal globe—easy to see from everywhere. Use size and contrast.</p>
-
 <p><strong>2. Use Clear Labels</strong></p>
 <p>"UNIVERSAL" is obvious—your button should be too. "Buy Tickets" not "Click Here". "Enter Park" not "Submit".</p>
-
 <p><strong>3. Show it's Clickable</strong></p>
 <p>The globe looks interactive and inviting. Add rounded corners or shadows. Use hover effects.</p>
-
 <p><strong>4. Create Contrast</strong></p>
 <p>Blue globe against bright sky—maximum visibility. Button color should pop from the background.</p>
-
 <p><strong>5. Size Matters</strong></p>
 <p>Big enough to see and click easily. At least 44x44px on mobile.</p>
-
 <h3>Button Types</h3>
 <p><strong>Primary:</strong> Most important action (the main entrance)</p>
 <p><strong>Secondary:</strong> Supporting actions (ride queues)</p>
 <p><strong>Tertiary:</strong> Minor actions (information kiosks)</p>
-
 <h3>Common Mistakes</h3>
 <p>1. Vague labels like "Click" or "Submit"</p>
 <p>2. No hover effect</p>
 <p>3. Too many bold buttons</p>
 <p>4. Too small to tap</p>
 <p>5. Unclear what happens when clicked</p>
-
 <h3>Quick Tips</h3>
 <p>- Use action verbs: "Explore," "Buy," "Enter"</p>
 <p>- One primary button per section</p>
@@ -443,75 +454,61 @@ button:active {
 <p>- Test on mobile</p>
 </div>
 </div>
-
 <section class="quiz-section">
-  <h2>🧠 Quick Quiz: Build Your Own Button!</h2>
-  <p>Fill in the blanks to complete your HTML file. If you get both right, your button will appear!</p>
-
-  <form id="button-quiz">
-    <!-- Question 1 -->
-    <label for="q1">
+<h2>🧠 Quick Quiz: Build Your Own Button!</h2>
+<p>Fill in the blanks to complete your HTML file. If you get both right, your button will appear!</p>
+<form id="button-quiz">
+<!-- Question 1 -->
+<label for="q1">
       1️⃣ Every HTML file starts with this declaration: <br>
-      <code>&lt;!________ html&gt;</code>
-    </label><br>
-    <input type="text" id="q1" placeholder="Type your answer here"><br><br>
-
+<code>&lt;!________ html&gt;</code>
+</label><br>
+<input type="text" id="q1" placeholder="Type your answer here"><br><br>
     <!-- Question 2 -->
     <label for="q2">
       2️⃣ Add the missing part to make your button show an alert when clicked: <br>
       <code>&lt;button ________="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code>
     </label><br>
     <input type="text" id="q2" placeholder="Type your answer here"><br><br>
-
     <button type="button" onclick="checkAnswers()">Check Answers</button>
-  </form>
-
-  <div id="quiz-result"></div>
-  <div id="button-demo"></div>
-
-  <script>
-    function checkAnswers() {
-      const a1 = document.getElementById("q1").value.trim().toLowerCase();
-      const a2 = document.getElementById("q2").value.trim().toLowerCase();
-      const result = document.getElementById("quiz-result");
-      const demo = document.getElementById("button-demo");
-      demo.innerHTML = "";
-      let score = 0;
-
-      if (a1 === "doctype") score++;
-      if (a2 === "onclick") score++;
-
-      result.textContent = "✅ You got " + score + "/2 correct!";
-
-      if (score === 2) {
-        demo.innerHTML = `
+</form>
+<div id="quiz-result"></div>
+<div id="button-demo"></div>
+</section>
+<script>
+setTimeout(()=>{
+document.getElementById('intro').classList.add('hidden');
+document.getElementById('scene').classList.remove('hidden');
+document.body.style.background='linear-gradient(#87CEEB,#bfe6ff)';
+// Show lesson content after another delay
+setTimeout(()=>{
+document.getElementById('lessonContent').classList.remove('hidden');
+    }, 2000);
+}, 8000);
+function generateUniversal() {
+var universalContainer = document.getElementById('universalContainer');
+universalContainer.classList.remove('show');
+setTimeout(function() {
+universalContainer.classList.add('show');
+    }, 50);
+}
+function checkAnswers() {
+const a1 = document.getElementById("q1").value.trim().toLowerCase();
+const a2 = document.getElementById("q2").value.trim().toLowerCase();
+const result = document.getElementById("quiz-result");
+const demo = document.getElementById("button-demo");
+demo.innerHTML = "";
+let score = 0;
+if (a1 === "doctype") score++;
+if (a2 === "onclick") score++;
+result.textContent = "✅ You got " + score + "/2 correct!";
+if (score === 2) {
+demo.innerHTML = `
           <p>🎉 Great job! Here's your working button:</p>
           <button onclick="alert('Hello!')">Click Me!</button>
         `;
       }
     }
-  </script>
-</section>
-
-<script>
-setTimeout(()=>{
-    document.getElementById('intro').classList.add('hidden');
-    document.getElementById('scene').classList.remove('hidden');
-    document.body.style.background='linear-gradient(#87CEEB,#bfe6ff)';
-    
-    // Show lesson content after another delay
-    setTimeout(()=>{
-        document.getElementById('lessonContent').classList.remove('hidden');
-    }, 2000);
-}, 8000);
-
-function generateUniversal() {
-    var universalContainer = document.getElementById('universalContainer');
-    universalContainer.classList.remove('show');
-    setTimeout(function() {
-        universalContainer.classList.add('show');
-    }, 50);
-}
 </script>
 </body>
 </html>

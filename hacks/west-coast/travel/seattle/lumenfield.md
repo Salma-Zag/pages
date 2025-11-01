@@ -10,7 +10,7 @@ date: 2025-10-21
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mount Rainier National Park</title>
+<title>Lumen Field - Seattle</title>
 <style>
   * {
     box-sizing: border-box;
@@ -22,275 +22,199 @@ date: 2025-10-21
     font-family: system-ui, -apple-system, sans-serif;
     background: linear-gradient(135deg, #2c5f7c, #1a3f56);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    padding: 20px;
+    color: #000;
   }
   
   .container {
-    width: min(1200px, 95vw);
-    height: min(700px, 90vh);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    color: #000;
+  }
+  
+  .lumen-scene {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    width: 100%;
+    height: 500px;
     position: relative;
   }
   
-  .rainier-scene {
-    background: linear-gradient(180deg, #87CEEB 0%, #a4c8e1 40%, #d5e5f0 100%);
+  .stadium-lights {
+    position: absolute;
     width: 100%;
     height: 100%;
+  }
+  
+  .light-tower {
+    position: absolute;
+    width: 30px;
+    height: 120px;
+    background: linear-gradient(135deg, #555, #333);
+    border: 2px solid #222;
+    border-radius: 4px;
+  }
+  
+  .lt1 { top: 15%; left: 10%; }
+  .lt2 { top: 15%; right: 10%; }
+  .lt3 { bottom: 40%; left: 8%; }
+  .lt4 { bottom: 40%; right: 8%; }
+  
+  .light-beam {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 60px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,150,.4), transparent 70%);
+    animation: lightPulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes lightPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  
+  .stadium-structure {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    right: 10%;
+    height: 180px;
+    background: linear-gradient(135deg, #2c5f7c, #1a3f56);
+    border: 4px solid #0d2a3a;
+    border-radius: 80px 80px 0 0;
+    box-shadow: inset 0 -20px 40px rgba(0,0,0,.4);
+  }
+  
+  .stadium-seats {
+    position: absolute;
+    inset: 20px;
+    background: repeating-linear-gradient(
+      180deg,
+      #4a7c4e 0px,
+      #4a7c4e 8px,
+      #3a6b3f 8px,
+      #3a6b3f 16px
+    );
+    border-radius: 60px 60px 0 0;
+  }
+  
+  .football-field {
+    position: absolute;
+    bottom: 20%;
+    left: 15%;
+    right: 15%;
+    height: 25%;
+    background: linear-gradient(90deg, #2d5016 0%, #3a6b3f 50%, #2d5016 100%);
+    border: 3px solid #fff;
+  }
+  
+  .yard-line {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: rgba(255,255,255,.6);
+    left: var(--x);
+  }
+  
+  .midfield {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(255,255,255,.3);
+  }
+  
+  .football-player {
+    position: absolute;
+    bottom: 23%;
+    width: 30px;
+    height: 60px;
+    animation: run 4s linear infinite;
+  }
+  
+  .player-helmet {
+    width: 26px;
+    height: 20px;
+    background: linear-gradient(135deg, #002244, #69be28);
+    border-radius: 50% 50% 30% 30%;
+    margin: 0 auto 2px;
+    border: 2px solid #001122;
     position: relative;
   }
   
-  .mountain-sky {
+  .facemask {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 65%;
-  }
-  
-  .mountain-cloud {
-    position: absolute;
-    background: rgba(255,255,255,.75);
-    border-radius: 100px;
-    animation: driftCloud 35s linear infinite;
-  }
-  
-  .mc1 {
-    width: 120px;
-    height: 50px;
-    top: 15%;
-    left: -150px;
-  }
-  
-  .mc1:before {
-    content: "";
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background: rgba(255,255,255,.75);
-    border-radius: 50%;
-    top: -25px;
-    left: 30px;
-  }
-  
-  .mc2 {
-    width: 100px;
-    height: 45px;
-    top: 25%;
-    left: -200px;
-    animation-delay: 10s;
-  }
-  
-  @keyframes driftCloud {
-    to { transform: translateX(calc(100vw + 250px)); }
-  }
-  
-  .mount-rainier {
-    position: absolute;
-    bottom: 35%;
+    bottom: 2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 500px;
-    height: 350px;
-  }
-  
-  .mountain-peak {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 250px solid transparent;
-    border-right: 250px solid transparent;
-    border-bottom: 350px solid #8a9ba8;
-    filter: drop-shadow(0 10px 30px rgba(0,0,0,.3));
-  }
-  
-  .snow-cap {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-bottom: 200px solid #fff;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,.8));
-  }
-  
-  .glacier {
-    position: absolute;
-    width: 80px;
-    height: 150px;
-    background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(200,220,240,.7));
-    top: 140px;
-    clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
-  }
-  
-  .g1 { left: 35%; }
-  .g2 { right: 35%; }
-  
-  .forest-base {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 35%;
-    background: linear-gradient(180deg, #2d5016 0%, #1e3a0f 100%);
-  }
-  
-  .tree {
-    position: absolute;
-    bottom: 35%;
-    width: 30px;
-    height: 80px;
-  }
-  
-  .tree-trunk {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 25px;
-    background: #5a3a1f;
-    border-radius: 2px;
-  }
-  
-  .tree-foliage {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 60px solid #2d5016;
-  }
-  
-  .tree.t1 { left: 15%; }
-  .tree.t2 { left: 25%; bottom: 32%; }
-  .tree.t3 { left: 35%; }
-  .tree.t4 { right: 30%; }
-  .tree.t5 { right: 20%; bottom: 33%; }
-  .tree.t6 { right: 10%; }
-  
-  .deer {
-    position: absolute;
-    bottom: 35%;
-    left: 45%;
-    width: 50px;
-    height: 60px;
-    animation: graze 6s ease-in-out infinite;
-  }
-  
-  .deer-body {
-    width: 40px;
-    height: 30px;
-    background: linear-gradient(135deg, #8b6f47, #6d5838);
-    border-radius: 40%;
-    position: absolute;
-    bottom: 20px;
-    border: 2px solid #5a3a1f;
-  }
-  
-  .deer-head {
-    width: 20px;
-    height: 24px;
-    background: #8b6f47;
-    border-radius: 50% 50% 40% 40%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 2px solid #5a3a1f;
-  }
-  
-  .antler {
-    position: absolute;
-    width: 3px;
-    height: 15px;
-    background: #5a3a1f;
-    top: -2px;
-  }
-  
-  .antler.left { left: 4px; transform: rotate(-20deg); }
-  .antler.right { right: 4px; transform: rotate(20deg); }
-  
-  .antler:before {
-    content: "";
-    position: absolute;
-    width: 3px;
+    width: 18px;
     height: 8px;
-    background: #5a3a1f;
-    top: 4px;
-    left: -3px;
-    transform: rotate(-45deg);
+    border: 2px solid #ccc;
+    border-radius: 0 0 8px 8px;
+    border-top: none;
   }
   
-  .deer-leg {
-    width: 6px;
+  .jersey {
+    width: 30px;
+    height: 28px;
+    background: linear-gradient(135deg, #002244, #003366);
+    margin: 0 auto;
+    border-radius: 6px;
+    border: 2px solid #001122;
+  }
+  
+  .player-legs {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 6px;
+  }
+  
+  .player-leg {
+    width: 10px;
     height: 20px;
-    background: #6d5838;
-    position: absolute;
-    bottom: 0;
-    border-radius: 2px;
-    border: 1px solid #5a3a1f;
+    background: #e8e8e8;
+    border-radius: 4px;
+    border: 1px solid #ccc;
   }
   
-  .dl1 { left: 8px; }
-  .dl2 { left: 18px; }
-  .dl3 { right: 10px; }
-  .dl4 { right: 2px; }
-  
-  @keyframes graze {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(30px); }
+  @keyframes run {
+    0% { left: 15%; }
+    100% { left: 85%; }
   }
   
-  .eagle {
+  .football {
     position: absolute;
-    width: 40px;
-    height: 18px;
-    top: 20%;
-    left: -60px;
-    animation: soar 20s linear infinite;
-  }
-  
-  .eagle:before,
-  .eagle:after {
-    content: "";
-    position: absolute;
+    bottom: 35%;
+    left: 40%;
     width: 20px;
     height: 12px;
-    background: transparent;
-    border-top: 4px solid #5a3a1f;
+    background: linear-gradient(135deg, #8b4513, #654321);
     border-radius: 50%;
+    border: 2px solid #5a3010;
+    animation: spiral 4s ease-in-out infinite;
   }
   
-  .eagle:before {
-    left: 0;
-    animation: eagleFlap 2s ease-in-out infinite;
+  .laces {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 2px;
+    background: #fff;
   }
   
-  .eagle:after {
-    right: 0;
-    animation: eagleFlap 2s ease-in-out infinite reverse;
-  }
-  
-  @keyframes soar {
-    to { left: 110%; top: 30%; }
-  }
-  
-  @keyframes eagleFlap {
-    0%, 100% { transform: rotateX(0deg); }
-    50% { transform: rotateX(40deg); }
+  @keyframes spiral {
+    0%, 100% { left: 40%; bottom: 35%; transform: rotate(0deg); }
+    50% { left: 70%; bottom: 50%; transform: rotate(720deg); }
   }
   
   .label {
@@ -305,113 +229,214 @@ date: 2025-10-21
     color: #1a3f56;
     box-shadow: 0 8px 20px rgba(0,0,0,.3);
   }
+  
+  .content {
+    padding: 60px 80px;
+    background: white;
+    color: #000 !important;
+  }
+  
+  .content h1 {
+    font-size: 2.5em;
+    color: #000 !important;
+    margin-bottom: 30px;
+  }
+  
+  .content h2 {
+    font-size: 2em;
+    color: #000 !important;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .content h3 {
+    font-size: 1.5em;
+    color: #000 !important;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  .content p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #000 !important;
+  }
+  
+  .content ul {
+    margin: 20px 0 20px 30px;
+    color: #000 !important;
+  }
+  
+  .content li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #000 !important;
+  }
+  
+  .example-box {
+    background: #f0f8ff;
+    border-left: 4px solid #002244;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 8px;
+    color: #000;
+  }
+  
+  .example-box strong {
+    color: #000;
+  }
+  
+  @media (max-width: 768px) {
+    .content {
+      padding: 40px 30px;
+    }
+    
+    .content h1 {
+      font-size: 2em;
+    }
+    
+    .content h2 {
+      font-size: 1.6em;
+    }
+  }
 </style>
 </head>
 <body>
   <div class="container">
-    <div class="rainier-scene">
-      <div class="label">⛰️ Mount Rainier</div>
+    <div class="lumen-scene">
+      <div class="label">🏈 Lumen Field</div>
       
-      <div class="mountain-sky">
-        <div class="mountain-cloud mc1"></div>
-        <div class="mountain-cloud mc2"></div>
-      </div>
-      
-      <div class="mount-rainier">
-        <div class="mountain-peak">
-          <div class="snow-cap"></div>
-          <div class="glacier g1"></div>
-          <div class="glacier g2"></div>
+      <div class="stadium-lights">
+        <div class="light-tower lt1">
+          <div class="light-beam"></div>
+        </div>
+        <div class="light-tower lt2">
+          <div class="light-beam"></div>
+        </div>
+        <div class="light-tower lt3">
+          <div class="light-beam"></div>
+        </div>
+        <div class="light-tower lt4">
+          <div class="light-beam"></div>
         </div>
       </div>
       
-      <div class="tree t1">
-        <div class="tree-trunk"></div>
-        <div class="tree-foliage"></div>
-      </div>
-      <div class="tree t2">
-        <div class="tree-trunk"></div>
-        <div class="tree-foliage"></div>
-      </div>
-      <div class="tree t3">
-        <div class="tree-trunk"></div>
-        <div class="tree-foliage"></div>
-      </div>
-      <div class="tree t4">
-        <div class="tree-trunk"></div>
-        <div class="tree-foliage"></div>
-      </div>
-      <div class="tree t5">
-        <div class="tree-trunk"></div>
-        <div class="tree-foliage"></div>
-      </div>
-      <div class="tree t6">
-        <div class="tree-trunk"></div>
-        <div class="tree-foliage"></div>
+      <div class="stadium-structure">
+        <div class="stadium-seats"></div>
       </div>
       
-      <div class="deer">
-        <div class="deer-head">
-          <div class="antler left"></div>
-          <div class="antler right"></div>
+      <div class="football-field">
+        <div class="yard-line" style="--x: 20%"></div>
+        <div class="yard-line" style="--x: 40%"></div>
+        <div class="yard-line" style="--x: 60%"></div>
+        <div class="yard-line" style="--x: 80%"></div>
+        <div class="midfield">12</div>
+      </div>
+      
+      <div class="football-player">
+        <div class="player-helmet">
+          <div class="facemask"></div>
         </div>
-        <div class="deer-body"></div>
-        <div class="deer-leg dl1"></div>
-        <div class="deer-leg dl2"></div>
-        <div class="deer-leg dl3"></div>
-        <div class="deer-leg dl4"></div>
+        <div class="jersey"></div>
+        <div class="player-legs">
+          <div class="player-leg"></div>
+          <div class="player-leg"></div>
+        </div>
       </div>
       
-      <div class="eagle"></div>
-      
-      <div class="forest-base"></div>
+      <div class="football">
+        <div class="laces"></div>
+      </div>
+    </div>
+    
+    <div class="content">
+      <h1>Progress Bar Lesson: Lumen Field Theme</h1>
+
+      <h2>What is a Progress Bar?</h2>
+      <p>A progress bar shows how much of a task is complete. Think of Lumen Field—fans watching the game clock count down, or the "12th Man" flag raising before kickoff. It shows where you are and how much is left.</p>
+
+      <h2>The 3 Parts of a Progress Bar</h2>
+
+      <h3>The Track (The Field)</h3>
+      <p>The full 100 yards—represents the total task.</p>
+      <ul>
+        <li>Background bar showing the complete distance</li>
+      </ul>
+
+      <h3>The Fill (Yards Gained)</h3>
+      <p>Progress down the field—shows how far you've come.</p>
+      <ul>
+        <li>Colored bar that grows as you complete the task</li>
+      </ul>
+
+      <h3>The Label (Scoreboard)</h3>
+      <p>Game stats and time remaining—tells you exactly where you are.</p>
+      <ul>
+        <li>Text showing percentage or "3 of 10 steps complete"</li>
+      </ul>
+
+      <h2>5 Design Tips</h2>
+
+      <h3>1. Make it Visible</h3>
+      <p>Like the giant scoreboard—easy to see from anywhere.</p>
+      <ul>
+        <li>Use clear colors with good contrast</li>
+        <li>Make it big enough to notice</li>
+      </ul>
+
+      <h3>2. Show Real Progress</h3>
+      <p>Like yard markers on the field—accurate and honest.</p>
+      <ul>
+        <li>Update smoothly as tasks complete</li>
+        <li>Never fake progress or go backwards</li>
+      </ul>
+
+      <h3>3. Use Team Colors</h3>
+      <p>Seahawks blue and green create excitement.</p>
+      <ul>
+        <li>Match your brand colors</li>
+        <li>Use color to show status (green = good, red = error)</li>
+      </ul>
+
+      <h3>4. Add Context</h3>
+      <p>Like the play clock—tell users what's happening.</p>
+      <ul>
+        <li>"Uploading files... 60%"</li>
+        <li>"2 of 5 questions answered"</li>
+      </ul>
+
+      <h3>5. Keep it Simple</h3>
+      <p>Don't overcomplicate like a confusing penalty call.</p>
+      <ul>
+        <li>One bar, clear message</li>
+        <li>Avoid fancy animations that distract</li>
+      </ul>
+
+      <h2>Common Mistakes</h2>
+      <ul>
+        <li>No feedback—users don't know if anything is happening</li>
+        <li>Jumping progress—going from 10% to 90% instantly feels fake</li>
+        <li>Stuck at 99%—like being at the 1-yard line forever</li>
+        <li>Too small—like trying to read the scoreboard from the parking lot</li>
+        <li>No message—progress without context confuses users</li>
+      </ul>
+
+      <h2>Quick Example</h2>
+      <div class="example-box">
+        <p><strong>Good:</strong> "Processing images... [████████░░] 80% - 2 minutes left"</p>
+        <p><strong>Bad:</strong> [░░░░░░░░░░] (no message, unclear progress)</p>
+      </div>
+
+      <h2>Quick Tips</h2>
+      <ul>
+        <li>Always show feedback when users wait</li>
+        <li>Smooth animations feel more professional</li>
+        <li>Add estimated time if possible: "About 2 minutes remaining"</li>
+        <li>Use motion to show it's working, not frozen</li>
+        <li>Celebrate completion—like a touchdown celebration!</li>
+      </ul>
     </div>
   </div>
 </body>
 </html>
-
-# Progress Bar Lesson: Lumen Field Theme
-
-## What is a Progress Bar?
-A progress bar shows how much of a task is complete. Think of Lumen Field—fans watching the game clock count down, or the "12th Man" flag raising before kickoff. It shows where you are and how much is left.
-
-## The 3 Parts of a Progress Bar
-
-### The Track (The Field)
-The full 100 yards—represents the total task.
-- Background bar showing the complete distance
-
-### The Fill (Yards Gained)
-Progress down the field—shows how far you've come.
-- Colored bar that grows as you complete the task
-
-### The Label (Scoreboard)
-Game stats and time remaining—tells you exactly where you are.
-- Text showing percentage or "3 of 10 steps complete"
-
-## 5 Design Tips
-
-### 1. Make it Visible
-Like the giant scoreboard—easy to see from anywhere.
-- Use clear colors with good contrast
-- Make it big enough to notice
-
-### 2. Show Real Progress
-Like yard markers on the field—accurate and honest.
-- Update smoothly as tasks complete
-- Never fake progress or go backwards
-
-### 3. Use Team Colors
-Seahawks blue and green create excitement.
-- Match your brand colors
-- Use color to show status (green = good, red = error)
-
-### 4. Add Context
-Like the play clock—tell users what's happening.
-- "Uploading files... 60%"
-- "2 of 5 questions answered"
-
-### 5. Keep it Simple
-Don't overcomplicate like a confusing penalty call.
-- One bar, clear message
-- Avoid f
