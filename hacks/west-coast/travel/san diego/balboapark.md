@@ -454,3 +454,315 @@ date: 2025-10-21
   </div>
 </body>
 </html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balboa Park Audio Quiz</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #001f3f;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .quiz-container {
+    max-width: 800px;
+    width: 100%;
+    background: linear-gradient(135deg, #003366, #004080);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+  
+  h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 32px;
+  }
+  
+  .subtitle {
+    color: #87CEEB;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 18px;
+  }
+  
+  .question {
+    background: rgba(255,255,255,.1);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border: 2px solid rgba(255,255,255,.2);
+    transition: all 0.3s ease;
+  }
+  
+  .question.correct {
+    border-color: #4ade80;
+    background: rgba(74,222,128,.15);
+    animation: successPulse 0.5s ease;
+  }
+  
+  @keyframes successPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  .question-number {
+    color: #ffd700;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .question-text {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .fill-blank {
+    display: inline-block;
+    background: rgba(255,255,255,.2);
+    border: 2px solid #87CEEB;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #ffffff;
+    font-size: 16px;
+    min-width: 150px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .fill-blank:focus {
+    border-color: #ffd700;
+    background: rgba(255,255,255,.3);
+  }
+  
+  .fill-blank.correct {
+    border-color: #4ade80;
+    background: rgba(74,222,128,.2);
+  }
+  
+  .feedback {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
+  }
+  
+  .feedback.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .feedback.correct {
+    background: rgba(74,222,128,.2);
+    color: #4ade80;
+    border: 2px solid #4ade80;
+  }
+  
+  .feedback.incorrect {
+    background: rgba(239,68,68,.2);
+    color: #ef4444;
+    border: 2px solid #ef4444;
+  }
+  
+  .audio-reward {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255,215,0,.1);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    display: none;
+  }
+  
+  .audio-reward.show {
+    display: block;
+    animation: slideIn 0.5s ease;
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .audio-reward h3 {
+    color: #ffd700;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .audio-reward p {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  audio {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .completion-message {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    margin-top: 30px;
+  }
+  
+  .completion-message.show {
+    display: block;
+    animation: bounceIn 0.6s ease;
+  }
+  
+  @keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .completion-message h2 {
+    color: #003366;
+    margin-bottom: 10px;
+  }
+  
+  .completion-message p {
+    color: #004080;
+    font-size: 18px;
+  }
+  
+  .hint {
+    color: #87CEEB;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🏛️ Balboa Park Audio Quiz</h1>
+    <p class="subtitle">Fill in the blanks to unlock the organ music!</p>
+    
+    <div class="question" id="q1">
+      <div class="question-number">Question 1</div>
+      <div class="question-text">
+        The HTML tag used to play audio clips directly in the browser is called the 
+        <input type="text" class="fill-blank" id="answer1" placeholder="Type here..."> tag.
+      </div>
+      <p class="hint">Hint: It's a 5-letter word that starts with 'a'</p>
+      <div class="feedback" id="feedback1"></div>
+      <div class="audio-reward" id="reward1">
+        <h3>🎵 Correct! Here's your reward:</h3>
+        <p>Listen to the majestic sounds of the Spreckels Organ at Balboa Park</p>
+        <audio controls id="audio1">
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    
+    <div class="question" id="q2">
+      <div class="question-number">Question 2</div>
+      <div class="question-text">
+        To display playback controls (play, pause, volume) on the audio player, you add the 
+        <input type="text" class="fill-blank" id="answer2" placeholder="Type here..."> attribute to the audio tag.
+      </div>
+      <p class="hint">Hint: This attribute lets users control playback</p>
+      <div class="feedback" id="feedback2"></div>
+      <div class="audio-reward" id="reward2">
+        <h3>🎵 Excellent! Enjoy the music:</h3>
+        <p>One of the world's largest outdoor pipe organs, filling the park with rich, powerful tones</p>
+        <audio controls id="audio2">
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    
+    <div class="completion-message" id="completion">
+      <h2>🎉 Quiz Complete!</h2>
+      <p>You've mastered the basics of adding audio to webpages!</p>
+    </div>
+  </div>
+
+  <script>
+    const answers = {
+      q1: ['audio', '<audio>', 'audio tag'],
+      q2: ['controls']
+    };
+    
+    let correctCount = 0;
+    
+    function checkAnswer(questionNum) {
+      const input = document.getElementById(`answer${questionNum}`);
+      const feedback = document.getElementById(`feedback${questionNum}`);
+      const reward = document.getElementById(`reward${questionNum}`);
+      const question = document.getElementById(`q${questionNum}`);
+      const audio = document.getElementById(`audio${questionNum}`);
+      
+      const userAnswer = input.value.trim().toLowerCase();
+      const correctAnswers = answers[`q${questionNum}`];
+      
+      if (correctAnswers.includes(userAnswer)) {
+        feedback.textContent = '✓ Correct! Great job!';
+        feedback.className = 'feedback correct show';
+        input.className = 'fill-blank correct';
+        question.className = 'question correct';
+        reward.className = 'audio-reward show';
+        input.disabled = true;
+        
+        // Auto-play audio
+        setTimeout(() => {
+          audio.play().catch(e => console.log('Autoplay prevented'));
+        }, 500);
+        
+        correctCount++;
+        
+        if (correctCount === 2) {
+          setTimeout(() => {
+            document.getElementById('completion').className = 'completion-message show';
+          }, 1000);
+        }
+      } else if (userAnswer !== '') {
+        feedback.textContent = '✗ Not quite. Try again!';
+        feedback.className = 'feedback incorrect show';
+      }
+    }
+    
+    document.getElementById('answer1').addEventListener('input', () => checkAnswer(1));
+    document.getElementById('answer2').addEventListener('input', () => checkAnswer(2));
+    
+    // Also check on Enter key
+    document.getElementById('answer1').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkAnswer(1);
+    });
+    document.getElementById('answer2').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkAnswer(2);
+    });
+  </script>
+</body>
+</html>
