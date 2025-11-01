@@ -532,9 +532,18 @@ date: 2025-10-30
         </div>
     </div>
 
-    <!-- Non-module script for UI functions that need to be available immediately -->
+    <!-- Module script - Import API first -->
+    <script type="module">
+        // Import the modular API (same as plagiarism code)
+        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
+
+        // Store queryGemini globally so non-module code can use it
+        window.queryGeminiAPI = queryGemini;
+    </script>
+
+    <!-- Non-module script for all UI functions that need to be available immediately -->
     <script>
-        // Define UI functions immediately (before DOM loads) and make globally accessible
+        // Define UI navigation function
         window.goToSection = function(n) {
             document.querySelectorAll('.mission-section').forEach(s => s.classList.add('section-hidden'));
             document.getElementById('section-' + n).classList.remove('section-hidden');
@@ -545,14 +554,8 @@ date: 2025-10-30
             document.querySelector('.nav-btn[data-section="' + n + '"]').classList.add('bg-purple-600');
             window.scrollTo(0, 0);
         };
-    </script>
 
-    <!-- Module script for API functions -->
-    <script type="module">
-        // Import the modular API (same as plagiarism code)
-        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
-
-        // Define global functions immediately
+        // Define auto-fill functions
         window.autoFillBad = function() {
             console.log('autoFillBad called');
             const textarea = document.getElementById('bad-prompt');
@@ -571,6 +574,7 @@ date: 2025-10-30
             }
         };
 
+        // Define generate functions
         window.generateBadPrompt = async function() {
             console.log('generateBadPrompt called');
             const badPrompt = document.getElementById('bad-prompt').value.trim();
@@ -584,11 +588,16 @@ date: 2025-10-30
             outputEl.textContent = 'Generating response...';
             console.log('Generating bad prompt response:', badPrompt);
 
+            // Wait for queryGeminiAPI to be available
+            if (!window.queryGeminiAPI) {
+                outputEl.textContent = 'Loading API... Please try again in a moment.';
+                return;
+            }
+
             try {
-                const result = await queryGemini({
+                const result = await window.queryGeminiAPI({
                     prompt: "You are an AI assistant. Respond to this user prompt as you normally would, but because the prompt is vague or poorly structured, your response will naturally be less helpful or generic.",
                     text: badPrompt
-                    // parseJSON: false is default - returns raw text
                 });
 
                 console.log('Bad prompt result:', result);
@@ -620,11 +629,16 @@ date: 2025-10-30
             outputEl.textContent = 'Generating response...';
             console.log('Generating good prompt response:', goodPrompt);
 
+            // Wait for queryGeminiAPI to be available
+            if (!window.queryGeminiAPI) {
+                outputEl.textContent = 'Loading API... Please try again in a moment.';
+                return;
+            }
+
             try {
-                const result = await queryGemini({
+                const result = await window.queryGeminiAPI({
                     prompt: "You are an AI assistant. Respond to this well-structured user prompt with a comprehensive, clear, and helpful response that addresses all aspects of the request.",
                     text: goodPrompt
-                    // parseJSON: false is default - returns raw text
                 });
 
                 console.log('Good prompt result:', result);
