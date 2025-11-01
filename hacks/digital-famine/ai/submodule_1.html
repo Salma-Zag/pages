@@ -451,6 +451,8 @@ date: 2025-10-30
             }
 
             outputEl.textContent = 'Generating response...';
+            console.log('Generating response for type:', type);
+            console.log('Prompt:', prompt);
 
             try {
                 const result = await queryGemini({
@@ -460,6 +462,7 @@ date: 2025-10-30
                     parseJSON: false
                 });
 
+                console.log('Gemini result:', result);
                 if (result.text) {
                     outputEl.textContent = result.text;
                 } else {
@@ -468,9 +471,9 @@ date: 2025-10-30
             } catch (error) {
                 console.error('Gemini API error:', error);
                 if (error.message.includes('Failed to fetch')) {
-                    outputEl.textContent = 'Error: Backend server not running.\n\nTo use AI generation:\n1. Start the Flask backend on port 8587, OR\n2. Deploy this site to use the remote API at flask.opencodingsociety.com';
+                    outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint\n2. Or use the demo responses below (coming soon)';
                 } else {
-                    outputEl.textContent = `Error: ${error.message}`;
+                    outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
                 }
             }
         }
