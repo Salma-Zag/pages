@@ -40,10 +40,12 @@ date: 2025-10-30
         .code-example pre {
             margin: 0;
             color: #e2e8f0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
         }
         .code-example code {
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
             font-size: 0.9rem;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -74,16 +76,26 @@ date: 2025-10-30
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
                 <button onclick="goToSection(3)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="3">
-                    <span class="text-2xl mb-1">💻</span>
-                    <span class="text-xs text-center">UI Layer</span>
+                    <span class="text-2xl mb-1">🔧</span>
+                    <span class="text-xs text-center">UI Framework</span>
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
                 <button onclick="goToSection(4)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="4">
+                    <span class="text-2xl mb-1">💻</span>
+                    <span class="text-xs text-center">UI Functionality</span>
+                </button>
+                <div class="w-8 h-0.5 bg-green-500/30"></div>
+                <button onclick="goToSection(5)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="5">
+                    <span class="text-2xl mb-1">📡</span>
+                    <span class="text-xs text-center">API Management</span>
+                </button>
+                <div class="w-8 h-0.5 bg-green-500/30"></div>
+                <button onclick="goToSection(6)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="6">
                     <span class="text-2xl mb-1">🎮</span>
                     <span class="text-xs text-center">Demo</span>
                 </button>
                 <div class="w-8 h-0.5 bg-green-500/30"></div>
-                <button onclick="goToSection(5)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="5">
+                <button onclick="goToSection(7)" class="nav-btn flex flex-col items-center min-w-[100px] px-3 py-2 rounded-lg transition-all bg-slate-700/50" data-section="7">
                     <span class="text-2xl mb-1">🏆</span>
                     <span class="text-xs text-center">Quiz</span>
                 </button>
@@ -212,35 +224,41 @@ date: 2025-10-30
                         <p>Understanding how a complete application works helps you build better AI integrations. Let's explore the microblog system as an example.</p>
                         
                         <div class="bg-slate-900/50 border border-blue-500/20 rounded-lg p-6">
-                            <h4 class="text-xl font-bold text-blue-300 mb-4">Layer 1: Layout Layer</h4>
-                            <p class="mb-3">Handles the visual structure and dependencies.</p>
+                            <h4 class="text-xl font-bold text-blue-300 mb-4">Layer 1: UI Framework (opencs.html)</h4>
+                            <p class="mb-3">Provides the structure, layout, and dependencies for the microblog panel.</p>
                             <ul class="space-y-2 text-sm ml-4">
-                                <li>• Includes required CSS and JavaScript libraries (Tailwind, jQuery)</li>
-                                <li>• Injects the microblog overlay panel and floating button</li>
-                                <li>• Reads frontmatter (<code class="bg-slate-800 px-2 py-1 rounded">microblog: true</code>) to activate features</li>
-                                <li>• Ensures consistent styling across all enabled pages</li>
+                                <li>• Includes CSS and JavaScript libraries (Tailwind, jQuery, DataTables)</li>
+                                <li>• Creates the sliding panel structure with HTML elements</li>
+                                <li>• Defines CSS styles for panel positioning and animations</li>
+                                <li>• Adds floating toggle button and close button</li>
+                                <li>• Implements basic open/close functionality for the panel</li>
+                                <li>• Checks page frontmatter (<code class="bg-slate-800 px-2 py-1 rounded">microblog: true</code>) to activate features</li>
                             </ul>
                         </div>
 
                         <div class="bg-slate-900/50 border border-purple-500/20 rounded-lg p-6">
-                            <h4 class="text-xl font-bold text-purple-300 mb-4">Layer 2: JavaScript Layer (UI)</h4>
-                            <p class="mb-3">Makes the interface interactive and dynamic.</p>
+                            <h4 class="text-xl font-bold text-purple-300 mb-4">Layer 2: UI Functionality (microblog_foundation.html)</h4>
+                            <p class="mb-3">Makes the microblog interactive by handling user actions and data display.</p>
                             <ul class="space-y-2 text-sm ml-4">
-                                <li>• Handles all user interactions (opening/closing panel, posting, replying)</li>
-                                <li>• Manages API calls to the backend (fetching, posting, reacting)</li>
-                                <li>• Implements error handling and loading states</li>
-                                <li>• Uses modern patterns (Promises, async/await) for maintainability</li>
+                                <li>• Manages modal window for creating/editing posts</li>
+                                <li>• Handles form submission and data collection</li>
+                                <li>• Renders the table of microblog posts dynamically</li>
+                                <li>• Implements filter modes (page-specific vs all posts)</li>
+                                <li>• Binds event handlers to buttons (create, edit, filter)</li>
+                                <li>• Calls API functions when data needs to be fetched or saved</li>
                             </ul>
                         </div>
 
                         <div class="bg-slate-900/50 border border-green-500/20 rounded-lg p-6">
-                            <h4 class="text-xl font-bold text-green-300 mb-4">Layer 3: Backend/API Layer</h4>
-                            <p class="mb-3">Processes requests and manages data.</p>
+                            <h4 class="text-xl font-bold text-green-300 mb-4">Layer 3: API Management (microblog.js)</h4>
+                            <p class="mb-3">Handles all communication between the frontend and backend server.</p>
                             <ul class="space-y-2 text-sm ml-4">
-                                <li>• Provides RESTful endpoints for microblog operations (GET, POST, UPDATE, DELETE)</li>
-                                <li>• Handles data validation and security</li>
-                                <li>• Connects to databases to store and retrieve posts</li>
-                                <li>• Can be extended or replaced for different deployments</li>
+                                <li>• Provides three core functions: fetchPosts(), createPost(), updatePost()</li>
+                                <li>• Sends HTTP requests to server (GET, POST, PUT methods)</li>
+                                <li>• Formats data as JSON before sending to server</li>
+                                <li>• Receives and parses JSON responses from server</li>
+                                <li>• Handles errors during network communication</li>
+                                <li>• Abstracts server communication so UI layer doesn't need to know details</li>
                             </ul>
                         </div>
 
@@ -256,6 +274,113 @@ date: 2025-10-30
         </div>
 
         <div id="section-3" class="mission-section section-hidden">
+        <div class="space-y-6">
+            <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
+                <h2 class="text-3xl font-bold mb-6">🎨 UI Framework Layer</h2>
+                <div class="space-y-6 text-lg">
+                    <p>The UI Framework (opencs.html) provides the visual structure and basic panel behavior.</p>
+                    
+                    <div class="bg-slate-900/50 border border-blue-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">1. Conditional Loading</h4>
+                        <p class="mb-3">Only loads when <code class="bg-slate-800 px-2 py-1 rounded">microblog: true</code> is set in page frontmatter.</p>
+                        
+                        <div class="code-example">
+                            <pre><code>{%- if page.microblog %}
+    &lt;!-- Microblog loads here --&gt;
+    {%- endif %}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-purple-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">2. External Libraries</h4>
+                        <p class="mb-3">Loads required dependencies:</p>
+                        <ul class="text-sm space-y-1 ml-4">
+                            <li>• <strong>Tailwind CSS</strong> - Styling utilities</li>
+                            <li>• <strong>jQuery</strong> - DOM manipulation</li>
+                            <li>• <strong>DataTables</strong> - Table features (search, sort, pagination)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-green-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-green-300 mb-4">3. Sliding Panel</h4>
+                        <p class="mb-3">A fixed panel that slides in from the right:</p>
+                        
+                        <div class="code-example">
+                            <pre><code>&lt;aside id="microblog-panel" 
+        class="fixed right-0 transform translate-x-full 
+                transition-transform"&gt;
+    &lt;/aside&gt;</code></pre>
+                        </div>
+                        
+                        <p class="text-sm mt-3"><strong>Key classes:</strong></p>
+                        <ul class="text-sm space-y-1 ml-4">
+                            <li>• <code class="bg-slate-800 px-1 rounded">fixed</code> - Stays in place when scrolling</li>
+                            <li>• <code class="bg-slate-800 px-1 rounded">translate-x-full</code> - Hidden off-screen initially</li>
+                            <li>• <code class="bg-slate-800 px-1 rounded">transition-transform</code> - Smooth slide animation</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-orange-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-orange-300 mb-4">4. Toggle Button & JavaScript</h4>
+                        <p class="mb-3">Floating button controls panel visibility:</p>
+                        
+                        <div class="code-example">
+                            <pre><code>function openMicroblog() {
+    overlay.style.transform = 'translateX(0)';
+    toggleBtn.style.display = 'none';
+    }
+
+    function closeMicroblog() {
+    overlay.style.transform = 'translateX(100%)';
+    toggleBtn.style.display = '';
+    }</code></pre>
+                        </div>
+                        
+                        <p class="text-sm mt-3">Open: Panel slides in, button hides. Close: Panel slides out, button reappears.</p>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-cyan-500/20 rounded-lg p-6">
+                        <h4 class="text-xl font-bold text-cyan-300 mb-4">5. Responsive Design</h4>
+                        <p class="mb-3">Adapts to screen size:</p>
+                        
+                        <div class="code-example">
+                            <pre><code>@media (max-width: 600px) {
+    #microblog-panel { width: 100vw; }
+    #microblog-toggle-btn { border-radius: 50%; }
+    }</code></pre>
+                        </div>
+                        
+                        <p class="text-sm mt-3">Mobile: Full-width panel, circular button.</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="goToSection(4)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Continue to UI Functionality</button>
+        </div>
+    </div>
+
+    <style>
+    .code-example {
+        background: #1e293b;
+        border: 1px solid #475569;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+    }
+    .code-example pre {
+        margin: 0;
+        color: #e2e8f0;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+        line-height: 1.5;
+    }
+    .code-example code {
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    </style>
+
+        <div id="section-4" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">💻 JavaScript UI Functionality</h2>
@@ -356,11 +481,133 @@ date: 2025-10-30
                         </div>
                     </div>
                 </div>
-                <button onclick="goToSection(4)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
+                <button onclick="goToSection(5)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
             </div>
         </div>
 
-        <div id="section-4" class="mission-section section-hidden">
+        <div id="section-5" class="mission-section section-hidden">
+            <div class="space-y-6">
+                <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
+                    <h2 class="text-3xl font-bold mb-6">🔌 API Management Layer</h2>
+                    <div class="space-y-6 text-lg">
+                        <p>The API Management layer (microblog.js) handles all communication between your application and the server. Let's explore the three core functions:</p>
+                        
+                        <div class="bg-slate-900/50 border border-green-500/20 rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-green-300 mb-4">1. Fetching Posts (READ)</h4>
+                            <p class="mb-3">Retrieves posts from the server, optionally filtered by page.</p>
+                            
+                            <div class="code-example">
+                                <pre><code>export async function fetchPosts(pagePath) {
+            let apiUrl = pythonURI + '/api/microblog';
+            if (pagePath) {
+                apiUrl += `?pagePath=${encodeURIComponent(pagePath)}`;
+            }
+            
+            const response = await fetch(apiUrl, {
+                method: 'GET'
+            });
+            
+            return await response.json();
+        }</code></pre>
+                            </div>
+                            
+                            <p class="text-sm mt-3"><strong>What this does:</strong></p>
+                            <ul class="text-sm space-y-1 ml-4 mt-2">
+                                <li>• Builds the API URL from base URI</li>
+                                <li>• Adds page filter as query parameter if provided</li>
+                                <li>• Uses GET method to retrieve data (not modifying)</li>
+                                <li>• Waits for server response and parses JSON</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900/50 border border-blue-500/20 rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-blue-300 mb-4">2. Creating Posts (CREATE)</h4>
+                            <p class="mb-3">Sends a new post to the server to be saved.</p>
+                            
+                            <div class="code-example">
+                                <pre><code>export async function createPost(postData) {
+            const apiUrl = pythonURI + '/api/microblog';
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                body: JSON.stringify(postData)
+            });
+            
+            return await response.json();
+        }</code></pre>
+                            </div>
+                            
+                            <p class="text-sm mt-3"><strong>Key differences from fetchPosts:</strong></p>
+                            <ul class="text-sm space-y-1 ml-4 mt-2">
+                                <li>• Uses POST method (creating new data)</li>
+                                <li>• Includes data in request body</li>
+                                <li>• Converts JavaScript object to JSON with <code class="bg-slate-800 px-1 rounded">JSON.stringify()</code></li>
+                                <li>• Server responds with created post including new ID</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900/50 border border-purple-500/20 rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-purple-300 mb-4">3. Updating Posts (UPDATE)</h4>
+                            <p class="mb-3">Sends updated post data to modify an existing post.</p>
+                            
+                            <div class="code-example">
+                                <pre><code>export async function updatePost(postData) {
+            const apiUrl = pythonURI + '/api/microblog';
+            
+            const response = await fetch(apiUrl, {
+                method: 'PUT',
+                body: JSON.stringify(postData)
+            });
+            
+            return await response.json();
+        }</code></pre>
+                            </div>
+                            
+                            <p class="text-sm mt-3"><strong>Key differences from createPost:</strong></p>
+                            <ul class="text-sm space-y-1 ml-4 mt-2">
+                                <li>• Uses PUT method (updating existing data)</li>
+                                <li>• postData must include ID to identify which post to update</li>
+                                <li>• Similar structure but different HTTP method tells server this is an update</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900/50 border border-orange-500/20 rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-orange-300 mb-4">HTTP Methods Explained</h4>
+                            <table class="w-full text-sm mt-3">
+                                <thead>
+                                    <tr class="border-b border-orange-500/30">
+                                        <th class="text-left py-2">Method</th>
+                                        <th class="text-left py-2">Purpose</th>
+                                        <th class="text-left py-2">Has Body?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-orange-500/10">
+                                        <td class="py-2"><code class="bg-slate-800 px-2 rounded">GET</code></td>
+                                        <td class="py-2">Read/retrieve data</td>
+                                        <td class="py-2">No</td>
+                                    </tr>
+                                    <tr class="border-b border-orange-500/10">
+                                        <td class="py-2"><code class="bg-slate-800 px-2 rounded">POST</code></td>
+                                        <td class="py-2">Create new data</td>
+                                        <td class="py-2">Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2"><code class="bg-slate-800 px-2 rounded">PUT</code></td>
+                                        <td class="py-2">Update existing data</td>
+                                        <td class="py-2">Yes</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-sm mt-3"><strong>Key concept:</strong> Different HTTP methods tell the server what operation to perform on the data.</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="goToSection(6)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Try the Demo</button>
+            </div>
+        </div>
+
+        <div id="section-6" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🎮 Interactive Microblog Demo</h2>
@@ -382,11 +629,11 @@ date: 2025-10-30
                         </button>
                     </div>
                 </div>
-                <button onclick="goToSection(5)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
+                <button onclick="goToSection(7)" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-lg font-semibold text-lg">Take the Quiz</button>
             </div>
         </div>
 
-        <div id="section-5" class="mission-section section-hidden">
+        <div id="section-7" class="mission-section section-hidden">
             <div class="space-y-6">
                 <div class="bg-slate-800/70 backdrop-blur border border-green-500/30 rounded-lg p-8">
                     <h2 class="text-3xl font-bold mb-6">🏆 Knowledge Check</h2>
