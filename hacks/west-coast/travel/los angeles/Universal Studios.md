@@ -16,24 +16,24 @@ date: 2025-10-21
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Universal Studios — Roadtrip</title>
 <style>
-/* ===== Truck intro (8s) ===== */
+/* ===== Truck intro (3s) ===== */
 body{background:#009688;font-family:'Open Sans',sans-serif;margin:0;padding:0}
 .loop-wrapper{margin:0 auto;position:relative;display:block;width:600px;height:250px;overflow:hidden;border-bottom:3px solid #fff;color:#fff}
-.mountain{position:absolute;right:-900px;bottom:-20px;width:2px;height:2px;box-shadow:0 0 0 50px #4DB6AC,60px 50px 0 70px #4DB6AC,90px 90px 0 50px #4DB6AC,250px 250px 0 50px #4DB6AC,290px 320px 0 50px #4DB6AC,320px 400px 0 50px #4DB6AC;transform:rotate(130deg);animation:mtn 20s linear infinite}
-.hill{position:absolute;right:-900px;bottom:-50px;width:400px;border-radius:50%;height:20px;box-shadow:0 0 0 50px #4DB6AC,-20px 0 0 20px #4DB6AC,-90px 0 0 50px #4DB6AC,250px 0 0 50px #4DB6AC,290px 0 0 50px #4DB6AC,620px 0 0 50px #4DB6AC;animation:hill 4s 2s linear infinite}
+.mountain{position:absolute;right:-900px;bottom:-20px;width:2px;height:2px;box-shadow:0 0 0 50px #4DB6AC,60px 50px 0 70px #4DB6AC,90px 90px 0 50px #4DB6AC,250px 250px 0 50px #4DB6AC,290px 320px 0 50px #4DB6AC,320px 400px 0 50px #4DB6AC;transform:rotate(130deg);animation:mtn 10s linear infinite}
+.hill{position:absolute;right:-900px;bottom:-50px;width:400px;border-radius:50%;height:20px;box-shadow:0 0 0 50px #4DB6AC,-20px 0 0 20px #4DB6AC,-90px 0 0 50px #4DB6AC,250px 0 0 50px #4DB6AC,290px 0 0 50px #4DB6AC,620px 0 0 50px #4DB6AC;animation:hill 3s linear infinite}
 .tree,.tree:nth-child(2),.tree:nth-child(3){position:absolute;height:100px;width:35px;bottom:0;background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/tree.svg) no-repeat}
 .rock{margin-top:-17%;height:2%;width:2%;bottom:-2px;border-radius:20px;position:absolute;background:#ddd}
 .truck,.wheels{transition:all ease;width:85px;margin-right:-60px;bottom:0px;right:50%;position:absolute;background:#eee}
 .truck{background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/truck.svg) no-repeat;background-size:contain;height:60px}
 .truck:before{content:" ";position:absolute;width:25px;box-shadow:-30px 28px 0 1.5px #fff,-35px 18px 0 1.5px #fff}
 .wheels{background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/wheels.svg) no-repeat;height:15px;margin-bottom:0}
-.tree{animation:tree 3s 0s linear infinite}
-.tree:nth-child(2){animation:tree2 2s .15s linear infinite}
-.tree:nth-child(3){animation:tree3 8s .05s linear infinite}
-.rock{animation:rock 4s -.53s linear infinite}
-.truck{animation:truck 4s .08s ease infinite}
-.wheels{animation:truck 4s .001s ease infinite}
-.truck:before{animation:wind 1.5s 0s ease infinite}
+.tree{animation:tree 1.5s 0s linear infinite}
+.tree:nth-child(2){animation:tree2 1s .15s linear infinite}
+.tree:nth-child(3){animation:tree3 4s .05s linear infinite}
+.rock{animation:rock 2s -.53s linear infinite}
+.truck{animation:truck 3s .08s ease infinite}
+.wheels{animation:truck 3s .001s ease infinite}
+.truck:before{animation:wind 1s 0s ease infinite}
 @keyframes tree{0%{transform:translate(1350px)}100%{transform:translate(-50px)}}
 @keyframes tree2{0%{transform:translate(650px)}100%{transform:translate(-50px)}}
 @keyframes tree3{0%{transform:translate(2750px)}100%{transform:translate(-50px)}}
@@ -45,300 +45,858 @@ body{background:#009688;font-family:'Open Sans',sans-serif;margin:0;padding:0}
 .intro{position:fixed;inset:0;display:grid;place-items:center;background:#009688;z-index:10}
 .intro p{color:#fff;font-weight:800;margin-top:18px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
 /* ===== Scene: Universal Studios ===== */
-.hidden{display:none}
-.scene{position:relative;min-height:100vh;background:linear-gradient(#87CEEB 0%,#98D8C8 60%,#bfe6ff 100%)}
-.ground{position:absolute;inset:auto 0 0 0;height:34%;background:linear-gradient(#a2bf91,#7aa36c);box-shadow:inset 0 10px 20px rgba(0,0,0,.15)}
-.studios{position:absolute;bottom:34%;left:0;right:0;height:26%;background:linear-gradient(#dcd8cf,#c8c3ba);clip-path:polygon(0 100%,0 35%,8% 30%,15% 45%,23% 34%,35% 46%,48% 28%,58% 40%,70% 30%,82% 48%,100% 32%,100% 100%)}
-.plaza{position:absolute;bottom:34%;left:0;right:0;height:30px;background:repeating-linear-gradient(90deg,#e9e1d1 0 40px,#d4c7af 40px 80px)}
-.track-svg{position:absolute;inset:0;pointer-events:none}
-.track-svg path{stroke:#4b4b4b;stroke-width:12;fill:none;filter:drop-shadow(0 6px 8px rgba(0,0,0,.2))}
-.ties path{stroke:#6b5b4b;stroke-width:6;stroke-linecap:round}
-.supports line{stroke:#3e3e3e;stroke-width:6;opacity:.7}
-.coaster-cart{width:60px;height:36px;background:linear-gradient(135deg,#e74c3c,#c0392b);border:3px solid #922b21;border-radius:10px;position:absolute;top:0;left:0;box-shadow:0 8px 16px rgba(0,0,0,.35);offset-path:path("M 80 520 C 200 420, 260 260, 380 220 S 620 210, 700 300 S 820 520, 1020 540");offset-rotate:auto;animation:ride 7.5s cubic-bezier(.37,.01,.27,1) infinite}
-.coaster-cart .rider{position:absolute;width:22px;height:26px;background:#4a90e2;border:2px solid #2e5f8a;border-radius:50% 50% 0 0;top:-22px;left:19px}
-.coaster-cart .rider:before{content:"";position:absolute;width:16px;height:16px;background:#ffe0bd;border:2px solid #cc9966;border-radius:50%;top:-14px;left:50%;transform:translateX(-50%)}
-@keyframes ride{0%{offset-distance:0%}50%{offset-distance:50%}100%{offset-distance:100%}}
-.gate{position:absolute;bottom:34%;left:50%;transform:translateX(-50%);width:260px;height:190px;border:6px solid #ffd700;border-radius:22px;background:linear-gradient(135deg,rgba(255,215,0,.18),rgba(255,165,0,.18))}
-.gate:before{content:"UNIVERSAL";position:absolute;top:22px;left:50%;transform:translateX(-50%);color:#ffd700;font-weight:800;letter-spacing:3px;text-shadow:0 4px 14px rgba(0,0,0,.5)}
-.fw{position:absolute;width:8px;height:8px;background:#ffd700;border-radius:50%;animation:boom 2.2s ease-out infinite}
-.fw.f2{left:64%;top:18%;animation-delay:.5s}.fw.f3{left:42%;top:26%;animation-delay:1.1s}
-@keyframes boom{0%{transform:scale(1);opacity:1;box-shadow:0 0 0 0 #ffd700}45%{transform:scale(4);box-shadow:0 0 34px 16px #ffd700,20px 20px 30px 10px #ff6b6b}100%{transform:scale(1);opacity:0}}
-.caption{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;color:#1a2a2a;font-weight:700;background:rgba(255,255,255,.8);padding:8px 14px;border-radius:10px}
-/* ===== Lesson Content ===== */
-.lesson-content {
-    background: #2874a6;
-    color: #fff;
-    padding: 40px 20px;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Studios Hollywood</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    background: #1a1a2e;
 }
-h1, h2, h3 {
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-}
-p {
-    color: #fff;
-    font-size: 16px;
-    margin: 10px 0;
-}
-pre {
-    background: #1a1a1a;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-    color: #fff;
-    font-size: 14px;
-}
-code {
-    color: #fff;
-    font-size: 14px;
-}
-.example-section {
-    margin: 40px 0;
-    padding: 30px;
-    background: #1a1a1a;
-    border-radius: 10px;
-}
-.demo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
-    background: linear-gradient(to bottom, #2874a6 0%, #5499c7 100%);
-    border-radius: 10px;
+
+/* Sky and Background */
+.scene {
     position: relative;
-    margin-top: 20px;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, 
+        #87ceeb 0%, 
+        #b0d8f0 40%, 
+        #e8b4b8 70%, 
+        #ffcccb 100%);
     overflow: hidden;
 }
-.button-container {
-    margin-bottom: 50px;
-    z-index: 10;
+
+/* Sun */
+.sun {
+    position: absolute;
+    top: 8%;
+    right: 10%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 35% 35%, #fff9e6, #ffeb3b, #ff9800);
+    border-radius: 50%;
+    box-shadow: 0 0 80px rgba(255, 235, 59, 0.8);
+    animation: sunPulse 4s ease-in-out infinite;
 }
-button {
-    background-color: #e74c3c;
-    color: white;
-    padding: 25px 50px;
-    font-size: 24px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    text-transform: uppercase;
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
 }
-button:hover {
-    background-color: #c0392b;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+
+/* Clouds */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+    opacity: 0.9;
 }
-button:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
 }
-#universalContainer {
-    opacity: 0;
-    transform: scale(0.5) translateY(50px);
-    transition: all 1s ease;
-    z-index: 10;
+
+.cloud1 {
+    width: 120px;
+    height: 40px;
+    top: 15%;
+    left: 10%;
+    animation: cloudFloat 40s linear infinite;
 }
-#universalContainer.show {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+
+.cloud1::before {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 20px;
 }
+
+.cloud1::after {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    right: 20px;
+}
+
+.cloud2 {
+    width: 100px;
+    height: 35px;
+    top: 25%;
+    left: 50%;
+    animation: cloudFloat 35s linear infinite;
+    animation-delay: -10s;
+}
+
+.cloud2::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 15px;
+}
+
+.cloud2::after {
+    width: 70px;
+    height: 70px;
+    top: -35px;
+    right: 15px;
+}
+
+.cloud3 {
+    width: 90px;
+    height: 30px;
+    top: 10%;
+    left: 70%;
+    animation: cloudFloat 45s linear infinite;
+    animation-delay: -20s;
+}
+
+.cloud3::before {
+    width: 45px;
+    height: 45px;
+    top: -22px;
+    left: 12px;
+}
+
+.cloud3::after {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    right: 12px;
+}
+
+@keyframes cloudFloat {
+    0% { transform: translateX(-150px); }
+    100% { transform: translateX(calc(100vw + 150px)); }
+}
+
+/* Mountains/Buildings Background */
+.mountains {
+    position: absolute;
+    bottom: 35%;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to bottom, #8b7d6b, #6b5d4f);
+    clip-path: polygon(
+        0 100%, 0 80%, 
+        8% 70%, 15% 85%, 
+        22% 60%, 30% 75%, 
+        40% 55%, 48% 70%, 
+        58% 50%, 65% 65%, 
+        75% 45%, 82% 60%, 
+        90% 55%, 95% 70%, 
+        100% 65%, 100% 100%
+    );
+    box-shadow: inset 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Ground */
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(to bottom, #8fbc8f, #6b8e6b, #556b55);
+    box-shadow: inset 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Path/Plaza */
+.plaza {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: repeating-linear-gradient(
+        90deg,
+        #d4c4b0 0px, #d4c4b0 80px,
+        #c9b89d 80px, #c9b89d 160px
+    );
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+/* Iconic Globe */
 .globe-container {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    animation: float 3s ease-in-out infinite;
+    position: absolute;
+    bottom: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: globeFloat 6s ease-in-out infinite;
 }
+
 .globe {
     position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, #4a90e2 0%, #2563a8 50%, #1a4d8a 100%);
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 35% 35%, #64b5f6, #2196f3, #1565c0);
     border-radius: 50%;
     box-shadow: 
-        inset -20px -20px 40px rgba(0,0,0,0.3),
-        inset 20px 20px 40px rgba(255,255,255,0.1),
-        0 10px 30px rgba(0,0,0,0.4);
-    animation: globeAppear 0.8s ease backwards;
+        inset -25px -25px 50px rgba(0,0,0,0.4),
+        inset 25px 25px 50px rgba(255,255,255,0.15),
+        0 20px 60px rgba(0,0,0,0.5);
 }
+
 .globe::before {
     content: '';
     position: absolute;
-    top: 20px;
-    left: 30px;
-    width: 60px;
-    height: 60px;
-    background: rgba(255,255,255,0.15);
+    top: 25px;
+    left: 35px;
+    width: 70px;
+    height: 70px;
+    background: rgba(255,255,255,0.2);
     border-radius: 50%;
-    filter: blur(10px);
+    filter: blur(15px);
 }
-.latitude-line {
+
+.latitude {
     position: absolute;
     left: 0;
     right: 0;
     height: 2px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.25);
 }
-.lat1 { top: 30%; }
+
+.lat1 { top: 25%; }
 .lat2 { top: 50%; }
-.lat3 { top: 70%; }
-.longitude-line {
+.lat3 { top: 75%; }
+
+.longitude {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(255,255,255,0.2);
-    left: 50%;
-    transform: translateX(-50%);
+    background: rgba(255,255,255,0.25);
 }
+
+.lon1 { left: 25%; }
+.lon2 { left: 50%; }
+.lon3 { left: 75%; }
+
+.globe-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    border: 4px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+}
+
 .universal-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 900;
     color: white;
     text-shadow: 
-        2px 2px 4px rgba(0,0,0,0.5),
-        0 0 10px rgba(255,255,255,0.3);
-    font-family: Arial Black, sans-serif;
-    letter-spacing: 2px;
-    animation: textAppear 0.8s ease backwards;
-    animation-delay: 0.4s;
+        3px 3px 6px rgba(0,0,0,0.6),
+        0 0 20px rgba(255,255,255,0.4);
+    letter-spacing: 3px;
 }
-.ring {
+
+@keyframes globeFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-15px); }
+}
+
+/* Ferris Wheel */
+.ferris-wheel {
     position: absolute;
-    border: 3px solid rgba(255,255,255,0.4);
-    border-radius: 50%;
-    animation: ringAppear 0.8s ease backwards;
+    bottom: 48%;
+    right: 15%;
+    width: 140px;
+    height: 140px;
+    animation: rotate 20s linear infinite;
 }
-.ring1 {
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    animation-delay: 0.2s;
-}
-.ring2 {
-    top: -30px;
-    left: -30px;
-    right: -30px;
-    bottom: -30px;
-    animation-delay: 0.3s;
-}
-@keyframes globeAppear {
-    from {
-        opacity: 0;
-        transform: scale(0.3) rotateY(-90deg);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) rotateY(0deg);
-    }
-}
-@keyframes textAppear {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-@keyframes ringAppear {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-}
-/* ===== Quiz Section Styles ===== */
-.quiz-section {
-    background: #fff;
-    color: #000 !important;
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-.quiz-section h2 {
-    color: #000 !important;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-.quiz-section p {
-    color: #000 !important;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-.quiz-section label {
-    color: #000 !important;
-    font-size: 16px;
-    display: block;
-    margin-bottom: 10px;
-}
-.quiz-section code {
-    background: #f4f4f4;
-    color: #000 !important;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 14px;
-}
-.quiz-section input[type="text"] {
+
+.wheel-structure {
+    position: absolute;
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
+    height: 100%;
+    border: 4px solid #555;
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+.wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.spoke {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 70px;
+    background: #666;
+    transform-origin: bottom center;
+}
+
+.spoke1 { transform: translate(-50%, -100%) rotate(0deg); }
+.spoke2 { transform: translate(-50%, -100%) rotate(45deg); }
+.spoke3 { transform: translate(-50%, -100%) rotate(90deg); }
+.spoke4 { transform: translate(-50%, -100%) rotate(135deg); }
+.spoke5 { transform: translate(-50%, -100%) rotate(180deg); }
+.spoke6 { transform: translate(-50%, -100%) rotate(225deg); }
+.spoke7 { transform: translate(-50%, -100%) rotate(270deg); }
+.spoke8 { transform: translate(-50%, -100%) rotate(315deg); }
+
+.gondola {
+    position: absolute;
+    width: 18px;
+    height: 22px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border-radius: 4px;
+    border: 2px solid #922b21;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+
+.g1 { top: -10px; left: 50%; transform: translateX(-50%); }
+.g2 { top: 20px; right: -10px; }
+.g3 { bottom: -10px; left: 50%; transform: translateX(-50%); }
+.g4 { top: 20px; left: -10px; }
+.g5 { top: 10px; right: 10px; }
+.g6 { bottom: 10px; right: 10px; }
+.g7 { bottom: 10px; left: 10px; }
+.g8 { top: 10px; left: 10px; }
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Roller Coaster */
+.coaster-container {
+    position: absolute;
+    bottom: 42%;
+    left: 10%;
+    width: 250px;
+    height: 120px;
+}
+
+.coaster-track {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+}
+
+.track-support {
+    position: absolute;
+    bottom: 0;
+    width: 3px;
+    background: #666;
+}
+
+.support1 { left: 20%; height: 25px; }
+.support2 { left: 40%; height: 70px; }
+.support3 { left: 60%; height: 40px; }
+.support4 { left: 80%; height: 85px; }
+
+.hill1 {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 80px;
+    height: 70px;
+    border-left: 4px solid #444;
+    border-top: 4px solid #444;
+    border-top-left-radius: 100%;
+}
+
+.hill2 {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    width: 90px;
+    height: 85px;
+    border-left: 4px solid #444;
+    border-top: 4px solid #444;
+    border-top-left-radius: 100%;
+}
+
+.coaster-train {
+    position: absolute;
+    width: 40px;
+    height: 25px;
+    background: linear-gradient(to bottom, #f39c12, #d68910);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    animation: coasterRide 6s ease-in-out infinite;
+}
+
+.coaster-train::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    box-shadow: 20px 0 0 #333;
+}
+
+@keyframes coasterRide {
+    0% { left: 0; bottom: 4px; }
+    20% { left: 18%; bottom: 55px; }
+    35% { left: 40%; bottom: 10px; }
+    60% { left: 60%; bottom: 70px; }
+    80% { left: 85%; bottom: 8px; }
+    100% { left: 0; bottom: 4px; }
+}
+
+/* Spinning Ride */
+.spinner-ride {
+    position: absolute;
+    bottom: 45%;
+    left: 35%;
+    width: 100px;
+    height: 100px;
+}
+
+.spinner-base {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 30px;
+    background: #7f8c8d;
+    border-radius: 4px;
+}
+
+.spinner-platform {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    animation: spin 4s linear infinite;
+}
+
+.spinner-arm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 50px;
+    background: #555;
+    transform-origin: top center;
+}
+
+.arm1 { transform: translate(-50%, -100%) rotate(0deg); }
+.arm2 { transform: translate(-50%, -100%) rotate(90deg); }
+.arm3 { transform: translate(-50%, -100%) rotate(180deg); }
+.arm4 { transform: translate(-50%, -100%) rotate(270deg); }
+
+.spinner-seat {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 18px;
+    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+@keyframes spin {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* People Walking */
+.person {
+    position: absolute;
+    bottom: 30%;
+    width: 16px;
+    height: 40px;
+}
+
+.head {
+    width: 14px;
+    height: 14px;
+    background: #f4d03f;
+    border-radius: 50%;
+    margin: 0 auto 2px;
+}
+
+.body {
+    width: 16px;
+    height: 20px;
+    border-radius: 6px 6px 0 0;
+}
+
+.legs {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.leg {
+    position: absolute;
+    bottom: 0;
+    width: 6px;
+    height: 16px;
+    background: #34495e;
+    border-radius: 3px;
+}
+
+.leg-left {
+    left: 2px;
+    animation: walkLeft 0.6s ease-in-out infinite;
+}
+
+.leg-right {
+    right: 2px;
+    animation: walkRight 0.6s ease-in-out infinite;
+}
+
+@keyframes walkLeft {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes walkRight {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(30deg); }
+}
+
+.person1 {
+    animation: walk1 12s linear infinite;
+}
+.person1 .body { background: #e74c3c; }
+
+.person2 {
+    animation: walk2 14s linear infinite;
+    animation-delay: 3s;
+}
+.person2 .body { background: #3498db; }
+
+.person3 {
+    animation: walk3 13s linear infinite;
+    animation-delay: 6s;
+}
+.person3 .body { background: #2ecc71; }
+
+.person4 {
+    animation: walk4 15s linear infinite;
+    animation-delay: 2s;
+}
+.person4 .body { background: #9b59b6; }
+
+.person5 {
+    animation: walk5 11s linear infinite;
+    animation-delay: 8s;
+}
+.person5 .body { background: #f39c12; }
+
+@keyframes walk1 {
+    0% { left: -50px; }
+    100% { left: calc(100% + 50px); }
+}
+
+@keyframes walk2 {
+    0% { left: calc(100% + 50px); }
+    100% { left: -50px; }
+}
+
+@keyframes walk3 {
+    0% { left: -50px; }
+    100% { left: calc(100% + 50px); }
+}
+
+@keyframes walk4 {
+    0% { left: calc(100% + 50px); }
+    100% { left: -50px; }
+}
+
+@keyframes walk5 {
+    0% { left: -50px; }
+    100% { left: calc(100% + 50px); }
+}
+
+/* Food Stand */
+.food-stand {
+    position: absolute;
+    bottom: 31%;
+    right: 20%;
+    width: 60px;
+    height: 70px;
+}
+
+.stand-umbrella {
+    width: 80px;
+    height: 12px;
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+    border-radius: 50% 50% 0 0;
+    position: relative;
+    left: -10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.stand-umbrella::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 15px;
+    background: #7f8c8d;
+}
+
+.stand-counter {
+    width: 60px;
+    height: 50px;
+    background: linear-gradient(to bottom, #f39c12, #d68910);
+    border-radius: 6px;
+    margin-top: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.stand-counter::before {
+    content: '🍿';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+/* Title */
+.title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 48px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 
+        4px 4px 8px rgba(0,0,0,0.7),
+        0 0 30px rgba(255,255,255,0.5);
+    letter-spacing: 4px;
     margin-bottom: 10px;
-    color: #000;
 }
-.quiz-section button {
-    margin-top: 10px;
+
+.title p {
+    font-size: 20px;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    letter-spacing: 2px;
 }
-#quiz-result {
-    color: #000 !important;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
+
+/* Marquee */
+.marquee {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    padding: 12px 0;
+    overflow: hidden;
 }
-#button-demo {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-}
-#button-demo p {
-    color: #000 !important;
+
+.marquee-content {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marqueeScroll 25s linear infinite;
+    color: #ffd700;
     font-size: 16px;
-    margin-bottom: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 </style>
 </head>
 <body>
+<div class="scene">
+    <!-- Sky Elements -->
+    <div class="sun"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    
+    <!-- Title -->
+    <div class="title">
+        <h1>UNIVERSAL STUDIOS</h1>
+        <p>HOLLYWOOD</p>
+    </div>
+    
+    <!-- Background -->
+    <div class="mountains"></div>
+    <div class="ground"></div>
+    <div class="plaza"></div>
+    
+    <!-- Universal Globe -->
+    <div class="globe-container">
+        <div class="globe">
+            <div class="latitude lat1"></div>
+            <div class="latitude lat2"></div>
+            <div class="latitude lat3"></div>
+            <div class="longitude lon1"></div>
+            <div class="longitude lon2"></div>
+            <div class="longitude lon3"></div>
+            <div class="universal-text">UNIVERSAL</div>
+        </div>
+        <div class="globe-ring"></div>
+    </div>
+    
+    <!-- Ferris Wheel -->
+    <div class="ferris-wheel">
+        <div class="wheel-structure"></div>
+        <div class="wheel-center"></div>
+        <div class="spoke spoke1"></div>
+        <div class="spoke spoke2"></div>
+        <div class="spoke spoke3"></div>
+        <div class="spoke spoke4"></div>
+        <div class="spoke spoke5"></div>
+        <div class="spoke spoke6"></div>
+        <div class="spoke spoke7"></div>
+        <div class="spoke spoke8"></div>
+        <div class="gondola g1"></div>
+        <div class="gondola g2"></div>
+        <div class="gondola g3"></div>
+        <div class="gondola g4"></div>
+        <div class="gondola g5"></div>
+        <div class="gondola g6"></div>
+        <div class="gondola g7"></div>
+        <div class="gondola g8"></div>
+    </div>
+    
+    <!-- Roller Coaster -->
+    <div class="coaster-container">
+        <div class="track-support support1"></div>
+        <div class="track-support support2"></div>
+        <div class="track-support support3"></div>
+        <div class="track-support support4"></div>
+        <div class="hill1"></div>
+        <div class="hill2"></div>
+        <div class="coaster-track"></div>
+        <div class="coaster-train"></div>
+    </div>
+    
+    <!-- Spinning Ride -->
+    <div class="spinner-ride">
+        <div class="spinner-base"></div>
+        <div class="spinner-platform">
+            <div class="spinner-arm arm1">
+                <div class="spinner-seat"></div>
+            </div>
+            <div class="spinner-arm arm2">
+                <div class="spinner-seat"></div>
+            </div>
+            <div class="spinner-arm arm3">
+                <div class="spinner-seat"></div>
+            </div>
+            <div class="spinner-arm arm4">
+                <div class="spinner-seat"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Food Stand -->
+    <div class="food-stand">
+        <div class="stand-umbrella"></div>
+        <div class="stand-counter"></div>
+    </div>
+    
+    <!-- People -->
+    <div class="person person1">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+    </div>
+    
+    <div class="person person2">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+    </div>
+    
+    <div class="person person3">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+    </div>
+    
+    <div class="person person4">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+    </div>
+    
+    <div class="person person5">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs">
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+    </div>
+    
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-content">
+            🎬 WELCOME TO UNIVERSAL STUDIOS HOLLYWOOD • FEATURING: WIZARDING WORLD OF HARRY POTTER • JURASSIC WORLD • TRANSFORMERS • THE MUMMY • SUPER NINTENDO WORLD • AND MORE! 🎬
+        </div>
+    </div>
+</div>
+</body>
 <!-- Truck intro -->
 <div class="intro" id="intro">
 <div class="loop-wrapper" role="img" aria-label="Driving up to Universal Studios">
@@ -353,22 +911,19 @@ button:active {
 </div>
 <!-- Scene -->
 <main class="scene hidden" id="scene">
-<div class="studios"></div><div class="ground"></div><div class="plaza"></div>
-<svg class="track-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-<g class="supports"><line x1="380" y1="235" x2="380" y2="520"/><line x1="700" y1="315" x2="700" y2="555"/><line x1="900" y1="500" x2="900" y2="560"/></g>
-<path d="M80 520 C 200 420, 260 260, 380 220 S 620 210, 700 300 S 820 520, 1020 540"/>
-<path d="M80 535 C 200 435, 260 275, 380 235 S 620 225, 700 315 S 820 535, 1020 555"/>
-<g class="ties">
-<path d="M110 530 L110 545 M170 498 L170 514 M230 458 L230 476 M290 408 L290 428
-               M350 358 L350 378 M410 332 L410 352 M470 318 L470 338 M530 310 L530 330
-               M590 308 L590 328 M650 314 L650 334 M710 332 L710 352 M770 372 L770 392
-               M830 422 L830 442 M890 472 L890 492 M950 512 L950 532 M1010 544 L1010 564"/>
-</g>
-</svg>
-<div class="coaster-cart"><div class="rider"></div></div>
-<div class="gate"></div>
-<div class="fw" style="left:16%;top:12%"></div><div class="fw f2"></div><div class="fw f3"></div>
-<div class="caption">🎬 Universal Studios — coaster & fireworks</div>
+<div class="sun"></div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="studio-buildings"></div>
+<div class="ground"></div>
+<div class="plaza"></div>
+<div class="globe"></div>
+<div class="globe-ring"></div>
+<div class="globe-text">UNIVERSAL</div>
+<div class="neon-sign"></div>
+<div class="neon-text">HOLLYWOOD</div>
+<div class="marquee"><div class="marquee-text">🎬 NOW SHOWING: WIZARDING WORLD • TRANSFORMERS • JURASSIC WORLD • THE MUMMY • ✨</div></div>
+<div class="caption">🎬 Universal Studios Hollywood</div>
 </main>
 <!-- Lesson Content -->
 <div class="lesson-content hidden" id="lessonContent">
@@ -484,7 +1039,7 @@ document.body.style.background='linear-gradient(#87CEEB,#bfe6ff)';
 setTimeout(()=>{
 document.getElementById('lessonContent').classList.remove('hidden');
     }, 2000);
-}, 8000);
+}, 3000);
 function generateUniversal() {
 var universalContainer = document.getElementById('universalContainer');
 universalContainer.classList.remove('show');
