@@ -368,6 +368,55 @@ button:active {
     </div>
 </div>
 
+<section class="quiz-section">
+  <h2>🧠 Quick Quiz: Build Your Own Button!</h2>
+  <p>Fill in the blanks to complete your HTML file. If you get both right, your button will appear!</p>
+
+  <form id="button-quiz">
+    <!-- Question 1 -->
+    <label for="q1">
+      1️⃣ Every HTML file starts with this declaration: <br>
+      <code>&lt;!________ html&gt;</code>
+    </label><br>
+    <input type="text" id="q1" placeholder="Type your answer here"><br><br>
+
+    <!-- Question 2 -->
+    <label for="q2">
+      2️⃣ Add the missing part to make your button show an alert when clicked: <br>
+      <code>&lt;button ________="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code>
+    </label><br>
+    <input type="text" id="q2" placeholder="Type your answer here"><br><br>
+
+    <button type="button" onclick="checkAnswers()">Check Answers</button>
+  </form>
+
+  <div id="quiz-result"></div>
+  <div id="button-demo"></div>
+
+  <script>
+    function checkAnswers() {
+      const a1 = document.getElementById("q1").value.trim().toLowerCase();
+      const a2 = document.getElementById("q2").value.trim().toLowerCase();
+      const result = document.getElementById("quiz-result");
+      const demo = document.getElementById("button-demo");
+      demo.innerHTML = "";
+      let score = 0;
+
+      if (a1 === "doctype") score++;
+      if (a2 === "onclick") score++;
+
+      result.textContent = "✅ You got " + score + "/2 correct!";
+
+      if (score === 2) {
+        demo.innerHTML = `
+          <p>🎉 Great job! Here's your working button:</p>
+          <button onclick="alert('Hello!')">Click Me!</button>
+        `;
+      }
+    }
+  </script>
+</section>
+
 <script>
 setTimeout(()=>{
   document.getElementById('intro').classList.add('hidden');
