@@ -534,8 +534,8 @@ date: 2025-10-30
 
     <!-- Non-module script for UI functions that need to be available immediately -->
     <script>
-        // Define UI functions immediately (before DOM loads)
-        function goToSection(n) {
+        // Define UI functions immediately (before DOM loads) and make globally accessible
+        window.goToSection = function(n) {
             document.querySelectorAll('.mission-section').forEach(s => s.classList.add('section-hidden'));
             document.getElementById('section-' + n).classList.remove('section-hidden');
             document.querySelectorAll('.nav-btn').forEach(b => {
@@ -544,7 +544,7 @@ date: 2025-10-30
             });
             document.querySelector('.nav-btn[data-section="' + n + '"]').classList.add('bg-purple-600');
             window.scrollTo(0, 0);
-        }
+        };
     </script>
 
     <!-- Module script for API functions -->
