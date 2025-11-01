@@ -323,12 +323,27 @@ function clearTerm(id){const e=document.getElementById(id);if(e)e.textContent=''
 /* 🗃️ Archive Dish (soft delete) */
 function runArchive(){
   clearTerm('terminal-archive');
-  const id=document.getElementById('archive-id').value.trim();
+  const id = document.getElementById('archive-id').value.trim();
   if(!id){logTo('terminal-archive','⚠️ Please enter a dish ID.');return;}
-  const dish=SeattleDB.dishes.find(d=>d.id===id);
-  if(!dish){logTo('terminal-archive','❌ Dish not found.');return;}
+  // Normalize both input and stored id to compare as plain numbers/strings
+  const normalize = x => String(x).replace(/^dish_/, '');
+  const dish = SeattleDB.dishes.find(d => normalize(d.id) === normalize(id));
+  if(!dish){
+    // Try again: if input is 'dish_1' and not found, try matching input as is
+    const fallback = SeattleDB.dishes.find(d => d.id === id);
+    if(fallback){
+      if(fallback.deleted_at){logTo('terminal-archive','⚠️ Already archived.');return;}
+      fallback.deleted_at = new Date().toISOString();
+      logTo('terminal-archive',`✅ Archived: ${fallback.name}`);
+      showToast('Dish archived — +5 XP');
+      flash(document.getElementById('terminal-archive'),'rgba(16,185,129,0.15)');
+      completeTask?.('archive');
+      return;
+    }
+    logTo('terminal-archive','❌ Dish not found.');return;
+  }
   if(dish.deleted_at){logTo('terminal-archive','⚠️ Already archived.');return;}
-  dish.deleted_at=new Date().toISOString();
+  dish.deleted_at = new Date().toISOString();
   logTo('terminal-archive',`✅ Archived: ${dish.name}`);
   showToast('Dish archived — +5 XP');
   flash(document.getElementById('terminal-archive'),'rgba(16,185,129,0.15)');
