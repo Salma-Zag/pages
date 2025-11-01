@@ -157,5 +157,6 @@ export function updatePlayerHealthBar(percentage) {
         const clampedPercentage = Math.min(Math.max(percentage, 0), 100);
         // Set the width of the health bar fill element
         fill.style.width = `${clampedPercentage}%`;
+        fill.style.backgroundColor = clampedPercentage > 60 ? '#00FF00' : clampedPercentage > 30 ? '#FFFF00' : '#FF0000';
     }
 }
