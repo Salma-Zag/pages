@@ -22,25 +22,24 @@ date: 2025-10-21
     font-family: system-ui, -apple-system, sans-serif;
     background: linear-gradient(135deg, #2c5f7c, #1a3f56);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    padding: 20px;
+    color: #000;
   }
   
   .container {
-    width: min(1200px, 95vw);
-    height: min(700px, 90vh);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
-    position: relative;
+    color: #000;
   }
   
   .lumen-scene {
     background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     width: 100%;
-    height: 100%;
+    height: 500px;
     position: relative;
   }
   
@@ -230,6 +229,77 @@ date: 2025-10-21
     color: #1a3f56;
     box-shadow: 0 8px 20px rgba(0,0,0,.3);
   }
+  
+  .content {
+    padding: 60px 80px;
+    background: white;
+    color: #000 !important;
+  }
+  
+  .content h1 {
+    font-size: 2.5em;
+    color: #000 !important;
+    margin-bottom: 30px;
+  }
+  
+  .content h2 {
+    font-size: 2em;
+    color: #000 !important;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .content h3 {
+    font-size: 1.5em;
+    color: #000 !important;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  .content p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #000 !important;
+  }
+  
+  .content ul {
+    margin: 20px 0 20px 30px;
+    color: #000 !important;
+  }
+  
+  .content li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #000 !important;
+  }
+  
+  .example-box {
+    background: #f0f8ff;
+    border-left: 4px solid #002244;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 8px;
+    color: #000;
+  }
+  
+  .example-box strong {
+    color: #000;
+  }
+  
+  @media (max-width: 768px) {
+    .content {
+      padding: 40px 30px;
+    }
+    
+    .content h1 {
+      font-size: 2em;
+    }
+    
+    .content h2 {
+      font-size: 1.6em;
+    }
+  }
 </style>
 </head>
 <body>
@@ -279,52 +349,94 @@ date: 2025-10-21
         <div class="laces"></div>
       </div>
     </div>
+    
+    <div class="content">
+      <h1>Progress Bar Lesson: Lumen Field Theme</h1>
+
+      <h2>What is a Progress Bar?</h2>
+      <p>A progress bar shows how much of a task is complete. Think of Lumen Field—fans watching the game clock count down, or the "12th Man" flag raising before kickoff. It shows where you are and how much is left.</p>
+
+      <h2>The 3 Parts of a Progress Bar</h2>
+
+      <h3>The Track (The Field)</h3>
+      <p>The full 100 yards—represents the total task.</p>
+      <ul>
+        <li>Background bar showing the complete distance</li>
+      </ul>
+
+      <h3>The Fill (Yards Gained)</h3>
+      <p>Progress down the field—shows how far you've come.</p>
+      <ul>
+        <li>Colored bar that grows as you complete the task</li>
+      </ul>
+
+      <h3>The Label (Scoreboard)</h3>
+      <p>Game stats and time remaining—tells you exactly where you are.</p>
+      <ul>
+        <li>Text showing percentage or "3 of 10 steps complete"</li>
+      </ul>
+
+      <h2>5 Design Tips</h2>
+
+      <h3>1. Make it Visible</h3>
+      <p>Like the giant scoreboard—easy to see from anywhere.</p>
+      <ul>
+        <li>Use clear colors with good contrast</li>
+        <li>Make it big enough to notice</li>
+      </ul>
+
+      <h3>2. Show Real Progress</h3>
+      <p>Like yard markers on the field—accurate and honest.</p>
+      <ul>
+        <li>Update smoothly as tasks complete</li>
+        <li>Never fake progress or go backwards</li>
+      </ul>
+
+      <h3>3. Use Team Colors</h3>
+      <p>Seahawks blue and green create excitement.</p>
+      <ul>
+        <li>Match your brand colors</li>
+        <li>Use color to show status (green = good, red = error)</li>
+      </ul>
+
+      <h3>4. Add Context</h3>
+      <p>Like the play clock—tell users what's happening.</p>
+      <ul>
+        <li>"Uploading files... 60%"</li>
+        <li>"2 of 5 questions answered"</li>
+      </ul>
+
+      <h3>5. Keep it Simple</h3>
+      <p>Don't overcomplicate like a confusing penalty call.</p>
+      <ul>
+        <li>One bar, clear message</li>
+        <li>Avoid fancy animations that distract</li>
+      </ul>
+
+      <h2>Common Mistakes</h2>
+      <ul>
+        <li>No feedback—users don't know if anything is happening</li>
+        <li>Jumping progress—going from 10% to 90% instantly feels fake</li>
+        <li>Stuck at 99%—like being at the 1-yard line forever</li>
+        <li>Too small—like trying to read the scoreboard from the parking lot</li>
+        <li>No message—progress without context confuses users</li>
+      </ul>
+
+      <h2>Quick Example</h2>
+      <div class="example-box">
+        <p><strong>Good:</strong> "Processing images... [████████░░] 80% - 2 minutes left"</p>
+        <p><strong>Bad:</strong> [░░░░░░░░░░] (no message, unclear progress)</p>
+      </div>
+
+      <h2>Quick Tips</h2>
+      <ul>
+        <li>Always show feedback when users wait</li>
+        <li>Smooth animations feel more professional</li>
+        <li>Add estimated time if possible: "About 2 minutes remaining"</li>
+        <li>Use motion to show it's working, not frozen</li>
+        <li>Celebrate completion—like a touchdown celebration!</li>
+      </ul>
+    </div>
   </div>
 </body>
 </html>
-
-# Progress Bar Lesson: Lumen Field Theme
-
-## What is a Progress Bar?
-A progress bar shows how much of a task is complete. Think of Lumen Field—fans watching the game clock count down, or the "12th Man" flag raising before kickoff. It shows where you are and how much is left.
-
-## The 3 Parts of a Progress Bar
-
-### The Track (The Field)
-The full 100 yards—represents the total task.
-- Background bar showing the complete distance
-
-### The Fill (Yards Gained)
-Progress down the field—shows how far you've come.
-- Colored bar that grows as you complete the task
-
-### The Label (Scoreboard)
-Game stats and time remaining—tells you exactly where you are.
-- Text showing percentage or "3 of 10 steps complete"
-
-## 5 Design Tips
-
-### 1. Make it Visible
-Like the giant scoreboard—easy to see from anywhere.
-- Use clear colors with good contrast
-- Make it big enough to notice
-
-### 2. Show Real Progress
-Like yard markers on the field—accurate and honest.
-- Update smoothly as tasks complete
-- Never fake progress or go backwards
-
-### 3. Use Team Colors
-Seahawks blue and green create excitement.
-- Match your brand colors
-- Use color to show status (green = good, red = error)
-
-### 4. Add Context
-Like the play clock—tell users what's happening.
-- "Uploading files... 60%"
-- "2 of 5 questions answered"
-
-### 5. Keep it Simple
-Don't overcomplicate like a confusing penalty call.
-- One bar, clear message
-- Avoid f
