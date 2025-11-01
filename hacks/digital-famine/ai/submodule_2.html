@@ -532,12 +532,9 @@ date: 2025-10-30
         </div>
     </div>
 
-    <!-- SINGLE SCRIPT SECTION - All functions defined here -->
-    <script type="module">
-        // Import the modular API (same as plagiarism code)
-        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
-
-        // Define all functions immediately when script loads
+    <!-- Non-module script for UI functions that need to be available immediately -->
+    <script>
+        // Define UI functions immediately (before DOM loads)
         function goToSection(n) {
             document.querySelectorAll('.mission-section').forEach(s => s.classList.add('section-hidden'));
             document.getElementById('section-' + n).classList.remove('section-hidden');
@@ -548,9 +545,12 @@ date: 2025-10-30
             document.querySelector('.nav-btn[data-section="' + n + '"]').classList.add('bg-purple-600');
             window.scrollTo(0, 0);
         }
+    </script>
 
-        // Make ALL functions globally accessible for onclick handlers
-        window.goToSection = goToSection;
+    <!-- Module script for API functions -->
+    <script type="module">
+        // Import the modular API (same as plagiarism code)
+        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
 
         // Define global functions immediately
         window.autoFillBad = function() {
