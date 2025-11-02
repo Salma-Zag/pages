@@ -16,8 +16,9 @@ class MansionLevel6 {
         let path = gameEnv.path;
 
     // Level music: play Legend of Zelda theme when entering this level
+    // update: now changed to mario castle theme
     // Will be stopped when transitioning to the battle room below
-    const levelMusic = new Audio(path + "/assets/sounds/mansionGame/legendZelda.mp3");
+    const levelMusic = new Audio(path + "/assets/sounds/mansionGame/marioCastle.mp3");
     levelMusic.loop = true;
     levelMusic.volume = 0.3;
     levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
