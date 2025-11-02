@@ -1,9 +1,10 @@
 import Enemy from '../GameEngine/Enemy.js';
-import Boomerang from '../CustomGameClasses/Boomerang.js';
-import Projectile from '../CustomGameClasses/Projectile.js';
-import Arm from '../CustomGameClasses/Arm.js';
-import showEndScreen from '../CustomGameClasses/EndScreen.js';
+import Boomerang from './Boomerang.js';
+import Projectile from './Projectile.js';
+import Arm from './Arm.js';
+import showEndScreen from './EndScreen.js';
 import Player from '../GameEngine/Player.js';
+import { updateBossHealthBar } from './HealthBars.js';
 
 /*
     Boss class to define the Reaper
@@ -93,7 +94,7 @@ class Boss extends Enemy {
             const full = this.fullHealth || 1;
             const percent = Math.max(0, Math.min(100, (this.healthPoints / full) * 100));
             this._bossHealthFill.style.width = `${percent}%`;
-            this._bossHealthFill.style.backgroundColor = percent < 33 ? '#8B0000' : percent < 66 ? '#FF4500' : '#FF0000';
+            this._bossHealthFill.style.backgroundColor = percent < 33 ? '#A020F0' : percent < 66 ? '#800000' : '#FF0000';
 
             // If boss is dead, remove the health bar from the DOM (cleanup)
             if (this.healthPoints <= 0) {
