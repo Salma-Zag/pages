@@ -789,7 +789,7 @@ audio {
       Listen to authentic game-day sounds from the Padres' home stadium — cheers, announcers, and that unmistakable Petco Park energy.
     </p>
     <audio controls>
-      <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+      <source src="/hacks/west-coast/travel/sandiego/applause-cheer-236786.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <p class="source-text">Source: Baseball crowd cheer sound effect</p>
