@@ -11,12 +11,26 @@ class MansionLevel1 {
     let height = gameEnv.innerHeight;
     let path = gameEnv.path;
 
-    // Level music: play Halloween theme when entering this level
+    // Level music: play shadow theme when entering this level
     // Will be stopped when transitioning to the pantry below
-    const levelMusic = new Audio(path + "/assets/sounds/mansionGame/halloween_level1.mp3");
-    levelMusic.loop = true;
-    levelMusic.volume = 0.3;
-    levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
+    // Ensure a single, persistent level music instance on the game controller
+  if (gameEnv && gameEnv.gameControl) {
+    const gc = gameEnv.gameControl;
+    if (!gc.levelMusic) {
+      gc.levelMusic = new Audio(path + "/assets/sounds/mansionGame/shadow_music_level1.mp3");
+      gc.levelMusic.loop = true;
+      gc.levelMusic.volume = 0.2;
+      // Play and ignore promise rejection (browser may block autoplay until user gesture)
+      gc.levelMusic.play().catch(err => console.warn('Level music play blocked or failed:', err));
+    } else {
+      // if previously created, ensure volume/loop are set
+      gc.levelMusic.loop = true;
+      gc.levelMusic.volume = gc.levelMusic.volume || 0.3;
+      if (gc.levelMusic.paused) {
+        gc.levelMusic.play().catch(err => console.warn('Resuming music failed:', err));
+      }
+    }
+  }
 
     // Background data
     const image_background = path + "/images/mansionGame/kitchen_lvl1.png"; // be sure to include the path
@@ -123,7 +137,6 @@ class MansionLevel1 {
               primary: true,
               action: () => {
                 this.dialogueSystem.closeDialogue();
-                audio.pause();
 
                 // transition to new level — replace THIS_FILE_HERE with your level class
                 if (gameEnv && gameEnv.gameControl) {

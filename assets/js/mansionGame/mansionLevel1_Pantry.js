@@ -10,10 +10,25 @@ class MansionLevel1_Pantry {
     let height = gameEnv.innerHeight;
     let path = gameEnv.path;
 
-    const levelMusic = new Audio(path + "/assets/sounds/mansionGame/shadow_music_level1.mp3");
-    levelMusic.loop = true;
-    levelMusic.volume = 0.3;
-    levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
+    function fadeOutAudioPromise(audio, durationMs = 800) {
+      return new Promise(resolve => {
+        if (!audio) return resolve();
+        const initial = typeof audio.volume === 'number' ? audio.volume : 1;
+        const stepMs = 50;
+        const steps = Math.max(1, Math.floor(durationMs / stepMs));
+        let currentStep = 0;
+        const iv = setInterval(() => {
+          currentStep++;
+          const t = currentStep / steps;
+          audio.volume = Math.max(0, initial * (1 - t));
+          if (currentStep >= steps) {
+            clearInterval(iv);
+            audio.volume = 0;
+            resolve();
+          }
+        }, stepMs);
+      });
+    }
 
     // Background data
     const image_background = path + "/images/mansionGame/kitchen_pantry.png"; // be sure to include the path
@@ -138,6 +153,16 @@ class MansionLevel1_Pantry {
       // final win condition
       if (collectedItems.size >= 4) {
   // small delay so UI updates first, then show a DialogueSystem modal instead of alert
+    const sharedMusic = (gameEnv && gameEnv.gameControl) ? gameEnv.gameControl.levelMusic : null;
+    fadeOutAudioPromise(sharedMusic, 800).then(() => {
+      try {
+        if (sharedMusic) {
+          try { sharedMusic.pause(); } catch(e) {}
+          try { sharedMusic.currentTime = 0; } catch(e) {}
+        }
+      } catch(e) { /* ignore */ }
+    });
+
       setTimeout(() => {
         try {
           const dsFinal = new DialogueSystem({ id: 'collected_all' + Math.random().toString(36).slice(2, 8) });
@@ -148,7 +173,6 @@ class MansionLevel1_Pantry {
               primary: true,
               action: () => {
               dsFinal.closeDialogue();
-              audio.pause();
             // create the skeleton key image element
               const keyImg = document.createElement('img');
               keyImg.src = '/images/mansionGame/skeleton_key.png'; // <-- change this to your actual image path
