@@ -612,7 +612,6 @@ audio {
   <p>Each section should include a heading, a short description, and an audio player.</p>
   <pre><code>&lt;audio controls&gt;
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
-  Your browser does not support the audio element.
 &lt;/audio&gt;</code></pre>
 
   <div class="example-section">
@@ -622,7 +621,6 @@ audio {
     </p>
     <audio controls>
       <source src= "/hacks/west-coast/travel/sandiego/soothing-ocean-waves-372489.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
     </audio>
     <p class="source-text">Source: Ocean waves and beach ambience</p>
   </div>
