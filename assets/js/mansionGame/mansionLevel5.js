@@ -49,7 +49,7 @@ class MansionLevel5 {
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
-    const player = new Player(this.sprite_data_player, this.gameEnv);
+    const player = new Player(sprite_data_player, this.gameEnv);
 
     // add player to game
     this.gameEnv.gameObjects.push(player);
