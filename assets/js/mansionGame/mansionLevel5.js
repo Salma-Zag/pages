@@ -45,9 +45,9 @@ class MansionLevel5 {
 		up: {row: 1, start: 0, columns: 3},
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
 		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/-16},
-        shoot: {row: 2, start: 0, columns: 25},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
-		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32}
+		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32},
+        shoot: {row: 2, start: 0, columns: 25}
 	};
 
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
@@ -104,11 +104,11 @@ class MansionLevel5 {
             this.position.x += Math.cos(angle) * speed;
             this.position.y += Math.sin(angle) * speed;
             
-            // Check for collision with any player
-            for (const player of players) {
+            // Check for collision with player
+            {
                 // Calculate distance for hitbox collision
-                const playerX = player.position.x + player.width / 2;
-                const playerY = player.position.y + player.height / 2;
+                const playerX = nearest.position.x + nearest.width / 2;
+                const playerY = nearest.position.y + plnearestayer.height / 2;
                 const enemyX = this.position.x + this.width / 2;
                 const enemyY = this.position.y + this.height / 2;
                 
@@ -117,7 +117,7 @@ class MansionLevel5 {
                 const distance = Math.sqrt(dx*dx + dy*dy);
                 
                 // Hitbox collision - adjust values as needed
-                const collisionThreshold = (player.width * player.hitbox.widthPercentage + 
+                const collisionThreshold = (nearest.width * nearest.hitbox.widthPercentage + 
                                         this.width * this.hitbox.widthPercentage) / 2;
                 
                 if (distance < collisionThreshold) {
@@ -127,8 +127,8 @@ class MansionLevel5 {
                     // === PLAYER DEATH: ALL FUNCTIONALITY INLINE ===
                     
                     // 1. Play death animation - particle effect
-                    const playerX = player.position.x;
-                    const playerY = player.position.y;
+                    const playerX = nearest.position.x;
+                    const playerY = nearest.position.y;
                     
                     // Create explosion effect
                     for (let i = 0; i < 20; i++) {
@@ -212,8 +212,6 @@ class MansionLevel5 {
                         // Force a complete page reload - most reliable way to reset
                         location.reload();
                     }, 2000); // 2 second delay before reset
-                    
-                    break;
                 }
             }
         }
