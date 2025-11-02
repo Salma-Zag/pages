@@ -372,7 +372,9 @@ date: 2025-10-21
 
 <canvas id="certCanvas"></canvas>
 
-<script>
+<script type="module">
+import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+
 async function getCredentials() {
   try {
     const res = await fetch(`${pythonURI}/api/id`, {
@@ -502,4 +504,7 @@ async function downloadCert(course, org, date) {
   link.href = canvas.toDataURL('image/png');
   link.click();
 }
+
+window.downloadCert = downloadCert;
+
 </script>
