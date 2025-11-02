@@ -5,6 +5,20 @@ export default function showEndScreen(gameEnv) {
     // Prevent adding multiple overlays
     if (document.getElementById('mansion-victory-overlay')) return;
 
+   // pause ALL audio on the page
+    const audioElements = document.querySelectorAll('audio'); // Selects all <audio> elements
+
+    audioElements.forEach(audio => {
+        if (!audio.paused) { // Check if the audio is currently playing
+        audio.pause();
+        }
+    });
+    
+    const endAudio = new Audio(path + "/assets/sounds/mansionGame/zeldaVictory.mp3");
+    endAudio.loop = true;
+    endAudio.volume = 0.4;
+    endAudio.play().catch(error => console.error('Failed to play audio:', error));
+
     const overlay = document.createElement('div');
     overlay.id = 'mansion-victory-overlay';
     overlay.style.position = 'fixed';
