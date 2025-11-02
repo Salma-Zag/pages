@@ -1,6 +1,9 @@
+//Survival Zombie Game Pre Code:
+
 // To build GameLevels, each contains GameObjects from below imports
 import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
+import Npc from './GameEngine/Npc.js';
 import Enemy from './GameEngine/Enemy.js';
 // import GameControl from './GameEngine/GameControl.js'
 
@@ -44,6 +47,24 @@ class MansionLevel5 {
 		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
 		keypress: {up: 87, left: 65, down: 83, right: 68}
+	};
+
+	// starting npc
+	const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
+	const sprite_data_npc = {
+		id: 'Starting Zombie',
+		greeting: "Zombie survival will start.",
+		src: sprite_src_zombie,
+		SCALE_FACTOR: 4,
+		ANIMATION_RATE: 100,
+		pixels: {width: 3600, height: 1200},
+		INIT_POSITION: { x: (width /2), y: (height /2)},
+		orientation: {rows: 1, columns: 3},
+		down: {row: 0, start: 0, columns: 3},
+		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
+        interact: function() {
+           
+        }
 	};
 
 	const sprite_data_enemy = {
@@ -216,7 +237,9 @@ class MansionLevel5 {
 	// List of objects defnitions for this level
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
-	  { class: Player, data: sprite_data_player }
+	  { class: Player, data: sprite_data_player },
+	  { class: Enemy, data: sprite_data_enemy },
+	  { class: Npc, data: sprite_data_npc}
 	];
   }
 
