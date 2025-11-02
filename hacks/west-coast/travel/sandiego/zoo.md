@@ -764,7 +764,7 @@ audio {
   <p>Each section should include a heading, a short description, and an audio player.</p>
   <pre><code>&lt;audio controls&gt;
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
-  Your browser does not support the audio element.
+  
 &lt;/audio&gt;</code></pre>
   
   <div class="example-section">
@@ -773,8 +773,7 @@ audio {
       Listen to the powerful roar of the king of the jungle — one of the most iconic sounds from the San Diego Zoo's African savanna exhibit.
     </p>
     <audio controls>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
+      <source src="/hacks/west-coast/travel/sandiego/tiger-roar-wildlife-sfx-376158.mp3" type="audio/mpeg">
     </audio>
     <p class="source-text">Source: Lion roar and wildlife sounds</p>
   </div>
