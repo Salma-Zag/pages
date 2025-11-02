@@ -166,7 +166,7 @@ class Boss extends Enemy {
 
     // Locate the nearest player
     findNearestPlayer() {
-        const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player');
+        const players = this.gameEnv.gameObjects.filter(obj => obj instanceof Player);
         if (players.length === 0) return null;
 
         let nearest = players[0];
