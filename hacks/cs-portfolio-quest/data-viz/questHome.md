@@ -17,7 +17,7 @@ lxdData:
       Categories: ["Visualization", "ML", "Collation"]
       Video: "/cs-portfolio-quest/data-viz/submodule_1-video"
       Lessons: "/cs-portfolio-quest/data-viz/submodule_1/"
-      Image: "/images/cs-portfolio-quest/data-viz.svg"
+      Image: "/images/cs-portfolio-quest/data-viz/s1.png"
       Alt: "Data Viz Submodule 1"
     - Title: "Submodule 2: Search & Data Filtering with Spring Boot"
       Genre: "Practice"
@@ -26,7 +26,7 @@ lxdData:
       Categories: ["Visualization", "ML", "Collation"]
       Video: "/cs-portfolio-quest/data-viz/submodule_2-video"
       Lessons: "/cs-portfolio-quest/data-viz/submodule_2/"
-      Image: "/images/cs-portfolio-quest/data-viz.svg"
+      Image: "/images/cs-portfolio-quest/data-viz/s2.png"
       Alt: "Data Viz Submodule 2"
 ---
 
