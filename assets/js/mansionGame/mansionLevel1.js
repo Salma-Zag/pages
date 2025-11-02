@@ -151,7 +151,6 @@ class MansionLevel1 {
       { class: Npc, data: sprite_data_pantrydoor }
     ];
   }
-
 }
 
 export default MansionLevel1;
