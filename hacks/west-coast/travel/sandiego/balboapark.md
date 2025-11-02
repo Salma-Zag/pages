@@ -318,7 +318,7 @@ code{color:#fff;font-size:14px;font-family:'Courier New',monospace}
 <p>Each section should include a heading, a short description, and an audio player.</p>
 <pre><code>&lt;audio controls&gt;
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
-  Your browser does not support the audio element.
+ 
 &lt;/audio&gt;</code></pre>
 
 <div class="example-section">
@@ -326,7 +326,7 @@ code{color:#fff;font-size:14px;font-family:'Courier New',monospace}
 <p>Listen to the majestic sounds of the Spreckels Organ — one of the world's largest outdoor pipe organs, filling Balboa Park with rich, powerful tones.</p>
 <audio controls>
 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
+
 </audio>
 <p class="source-text">Source: Organ performance and classical music</p>
 </div>
