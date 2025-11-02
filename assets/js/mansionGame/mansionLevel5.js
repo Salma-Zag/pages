@@ -1,18 +1,18 @@
-//Survival Zombie Game Pre Code:
-
 // To build GameLevels, each contains GameObjects from below imports
 import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
-import Npc from './GameEngine/Npc.js';
 import Enemy from './GameEngine/Enemy.js';
-// import GameControl from './GameEngine/GameControl.js'
+import Projectile from './CustomGameClasses/Projectile.js';
 
 
 class MansionLevel5 {
   constructor(gameEnv) {
+    this.gameEnv = gameEnv; // Store gameEnv reference
 	let width = gameEnv.innerWidth;
 	let height = gameEnv.innerHeight;
 	let path = gameEnv.path;
+    this.width = width;
+    this.height = height;
 
 	// Background data
 	const image_background = path + "/images/mansionGame/background_lvl5.png"; // be sure to include the path
@@ -46,26 +46,80 @@ class MansionLevel5 {
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
 		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
-		keypress: {up: 87, left: 65, down: 83, right: 68}
+		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32} , //wasd + space bar
+
+        update: function() {
+        // space key check
+        if (this.gameEnv.keys && this.gameEnv.keys[this.data.keypress.shoot]) {
+            this.shootRadialProjectiles();
+            // key reset
+            this.gameEnv.keys[this.data.keypress.shoot] = false;
+        }
+        },
+        // radial shooting
+        shootRadialProjectiles: function() {
+        const numProjectiles = 8;
+        const radius = 100; // dist away from player to shoot
+                
+        for (let i = 0; i < numProjectiles; i++)
+        {
+            const angle = (i * 2 * Math.PI) / numProjectiles;
+            const targetX = this.position.x + Math.cos(angle) * radius;
+            const targetY = this.position.y + Math.sin(angle) * radius;
+                    
+            // cxreate new projectile
+            const projectile = new Projectile(
+                this.gameEnv,
+                targetX,
+                targetY,
+                this.position.x + this.width/2,
+                this.position.y + this.height/2,
+                "FIREBALL"
+            );
+                    
+            // change to execDamage method to damage zombies instead of player
+            projectile.execDamage = function() {
+                const zombies = this.gameEnv.gameObjects.filter(obj => 
+                    obj.constructor.name === 'Enemy'
+                );
+                            
+                for (const zombie of zombies) 
+                {
+                    const dx = zombie.position.x - this.position.x;
+                    const dy = zombie.position.y - this.position.y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                                
+                    if (distance <= 50) { // Hit distance for zombies
+                        // Remove the zombie
+                        try { zombie.destroy(); } catch (e) { /* ignore */ }
+
+                        // Increment the level kill counter (stored on the current level)
+                        try {
+                            const lvl = this.gameEnv && this.gameEnv.gameControl && this.gameEnv.gameControl.currentLevel;
+                            if (lvl) {
+                                lvl.zombiesKilled = (lvl.zombiesKilled || 0) + 1;
+                                // Stop the level when 100 kills reached
+                                if (lvl.zombiesKilled >= 100) {
+                                    console.log('Kill target reached:', lvl.zombiesKilled);
+                                    try { lvl.continue = false; } catch (e) { /* ignore */ }
+                                }
+                            }
+                        } catch (e) { /* ignore */ }
+
+                        // Remove the projectile
+                        try { this.destroy(); } catch (e) { /* ignore */ }
+                        break;
+                    }
+                }
+            };
+                    
+            // Add the projectile to the game
+            this.gameEnv.gameObjects.push(projectile);
+        }
+    }
 	};
 
-	// starting npc
-	const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
-	const sprite_data_npc = {
-		id: 'Starting Zombie',
-		greeting: "Zombie survival will start.",
-		src: sprite_src_zombie,
-		SCALE_FACTOR: 4,
-		ANIMATION_RATE: 100,
-		pixels: {width: 3600, height: 1200},
-		INIT_POSITION: { x: (width /2), y: (height /2)},
-		orientation: {rows: 1, columns: 3},
-		down: {row: 0, start: 0, columns: 3},
-		hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
-        interact: function() {
-           
-        }
-	};
+    const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
 
 	const sprite_data_enemy = {
         id: 'ZombieEnemy',
@@ -237,12 +291,65 @@ class MansionLevel5 {
 	// List of objects defnitions for this level
 	this.classes = [
 	  { class: GameEnvBackground, data: image_data_background },
-	  { class: Player, data: sprite_data_player },
-	  { class: Enemy, data: sprite_data_enemy },
-	  { class: Npc, data: sprite_data_npc}
+	  { class: Player, data: sprite_data_player }
 	];
+
+    // Store sprite_data_enemy for later use
+    this.enemyTemplate = sprite_data_enemy;
+
+    // Track kills for this level (only stored on the level instance)
+    this.zombiesKilled = 0;
+
+    // Start the zombie spawning timer
+    this.startZombieSpawner();
   }
 
+  // Method to spawn a batch of zombies
+  spawnZombieBatch() {
+    const numZombies = 3 + Math.floor(Math.random() * 3); // Spawn 3-5 zombies per batch
+    
+    for (let i = 0; i < numZombies; i++) {
+      // Randomly choose a spawn side (0: top, 1: right, 2: bottom, 3: left)
+      const side = Math.floor(Math.random() * 4);
+      let x, y;
+
+      switch(side) {
+        case 0: // top
+          x = Math.random() * this.width;
+          y = -50;
+          break;
+        case 1: // right
+          x = this.width + 50;
+          y = Math.random() * this.height;
+          break;
+        case 2: // bottom
+          x = Math.random() * this.width;
+          y = this.height + 50;
+          break;
+        case 3: // left
+          x = -50;
+          y = Math.random() * this.height;
+          break;
+      }
+
+      // Create new enemy with the spawning position
+      const zombieData = {
+        ...this.enemyTemplate,
+        INIT_POSITION: { x, y }
+      };
+
+      // Add the new zombie to the game
+      this.gameEnv.gameObjects.push(new Enemy(this.gameEnv, zombieData));
+    }
+  }
+
+  // Method to start the zombie spawning timer
+  startZombieSpawner() {
+    // Set up interval to spawn zombies every 5 seconds
+    setInterval(() => {
+      this.spawnZombieBatch();
+    }, 5000);
+  }
 }
 
 export default MansionLevel5;
