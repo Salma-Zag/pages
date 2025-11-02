@@ -406,8 +406,8 @@ author: "Curators Team"
         <span class="metric-title">Modules Completed</span>
         <div class="metric-icon" style="background: rgba(16, 185, 129, 0.2);">✅</div>
       </div>
-      <div class="metric-value">48</div>
-      <div class="metric-subtitle">Out of 96 total</div>
+      <div class="metric-value" id="modules-completed">0</div>
+      <div class="metric-subtitle">Out of 25 total</div>
     </div>
 
     <div class="metric-card">
@@ -424,7 +424,7 @@ author: "Curators Team"
         <span class="metric-title">Progress Rate</span>
         <div class="metric-icon" style="background: rgba(139, 92, 246, 0.2);">📈</div>
       </div>
-      <div class="metric-value">50%</div>
+      <div class="metric-value" id="progress-percentage">50%</div>
       <div class="metric-subtitle">Average completion</div>
     </div>
   </div>
@@ -465,6 +465,10 @@ author: "Curators Team"
             Module 4
             <span class="sort-indicator">▼</span>
           </th>
+          <th class="center" onclick="sortTable('module5')" id="th-module5">
+            Module 5
+            <span class="sort-indicator">▼</span>
+          </th>
           <th class="center">Overall</th>
         </tr>
       </thead>
@@ -500,53 +504,37 @@ author: "Curators Team"
   </div>
 </div>
 
-<!-- Flask data pull -->
-
-<!-- <script type="module">
-  import { javaURI } from '{{ site.baseurl }}/assets/js/api/config.js';
-  import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
-
-  async function fetchPeople() {
-    for (let id = 1; id <= 2; id++) {
-      try {
-        const res = await fetch(`${pythonURI}/api/user`, {
-          ...fetchOptions,
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          },
-        });
-
-        console.log(`Request for ID ${id} → Status: ${res.status}`);
-
-        if (res.status === 404) {
-          console.log(`ID ${id} not found. Terminating loop.`);
-          break; // stop loop if 404
-        }
-
-        if (res.ok) {
-          const data = await res.json();
-          console.log(`Data for ID ${id}:`, data);
-        } else {
-          console.warn(`Request failed for ID ${id} with status ${res.status}`);
-        }
-
-      } catch (err) {
-        console.error(`Error fetching ID ${id}:`, err);
-        break; // optional: stop on network or fetch error
-      }
-    }
-  }
-
-  fetchPeople();
-</script> -->
-
 <script type="module">
   import { javaURI } from '{{ site.baseurl }}/assets/js/api/config.js';
   import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
 
+  async function getLessonData() {
+      try {
+          const res = await fetch(`${javaURI}/api/stats`, {
+              ...fetchOptions,
+              method: "GET",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+          });
+
+          if (!res.ok) {
+              console.log(`Request failed with status ${res.status}`);
+              return;
+          }
+
+          const data = await res.json();
+          return data;
+      } catch (err) {
+          console.log(`Error: ${err}`);
+      }
+  }
+
   async function fetchPeople() {
     const students = [];
+
+    const lessonData = await getLessonData();
+    console.log(lessonData);
 
     for (let id = 1; id <= 200; id++) {
       try {
@@ -565,19 +553,25 @@ author: "Curators Team"
 
         if (res.ok) {
           const data = await res.json();
+          // data.id = username (toby)
+          // data.name = full name (Thomas Edison)
+          const uid = data.id
+          const filtered = lessonData.filter(item => item.uid === uid);
+          console.log(`Data for ${uid}:`, filtered);
 
           // Create random lesson and module data
-          const randomLessons = () =>
-            Array.from({ length: 5 }, () => Math.floor(Math.random() * 21) * 5); // random 0–100 in steps of 5
+          const randomLessons = (numLessons) =>
+            Array.from({ length: numLessons }, () => Math.floor(Math.random() * 21) * 5); // random 0–100 in steps of 5
 
           const randomProgress = () =>
             Math.floor(Math.random() * 5) * 25; // random 0, 25, 50, 75, 100
 
           const modules = {
-            "Module 1": { progress: randomProgress(), lessons: randomLessons() },
-            "Module 2": { progress: randomProgress(), lessons: randomLessons() },
-            "Module 3": { progress: randomProgress(), lessons: randomLessons() },
-            "Module 4": { progress: randomProgress(), lessons: randomLessons() },
+            "Module 1": { progress: randomProgress(), lessons: randomLessons(6) },  // 6 lessons
+            "Module 2": { progress: randomProgress(), lessons: randomLessons(6) },  // 6 lessons
+            "Module 3": { progress: randomProgress(), lessons: randomLessons(3) },  // 3 lessons
+            "Module 4": { progress: randomProgress(), lessons: randomLessons(6) },  // 6 lessons
+            "Module 5": { progress: randomProgress(), lessons: randomLessons(4) },  // 4 lessons
           };
 
           students.push({
@@ -599,12 +593,18 @@ author: "Curators Team"
         }
       }
     }
-    console.log("✅ Final students array:", students);
+    console.log("Final students array:", students);
     return students;
   }
+
   async function main() {
+    console.log("In main function");
     const students = await fetchPeople();
     console.log("Students array:", students);
+
+    // Updating Cards
+    const modulesCompletedEl = document.getElementById("modules-completed");
+    const progressPercentageEl = document.getElementById("progress-percentage");
 
     let currentSort = { key: 'name', direction: 'asc' };
     let expandedRow = null;
@@ -697,7 +697,7 @@ author: "Curators Team"
         if (isExpanded) detailRow.classList.add('active');
         detailRow.id = `detail-${student.id}`;
         detailRow.innerHTML = `
-          <td colspan="6">
+          <td colspan="7">
             <div class="detail-content">
               <div class="detail-header">Grade Details - ${student.name}</div>
               <div class="modules-grid">
@@ -751,7 +751,7 @@ author: "Curators Team"
     }
 
     function downloadReport() {
-      let csv = 'Student Name,Overall Average,Module 1 Progress,Module 1 Average,Module 2 Progress,Module 2 Average,Module 3 Progress,Module 3 Average,Module 4 Progress,Module 4 Average\n';
+      let csv = 'Student Name,Overall Average,Module 1 Progress,Module 1 Average,Module 2 Progress,Module 2 Average,Module 3 Progress,Module 3 Average,Module 4 Progress,Module 4 Average,Module 5 Progress,Module 5 Average\n';
       
       students.forEach(s => {
         const overall = calculateOverallAverage(s.modules);
@@ -765,7 +765,9 @@ author: "Curators Team"
           s.modules['Module 3'].progress + '%',
           calculateModuleAverage(s.modules['Module 3']),
           s.modules['Module 4'].progress + '%',
-          calculateModuleAverage(s.modules['Module 4'])
+          calculateModuleAverage(s.modules['Module 4']),
+          s.modules['Module 5'].progress + '%',
+          calculateModuleAverage(s.modules['Module 5'])
         ].join(',') + '\n';
       });
 
