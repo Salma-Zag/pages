@@ -20,14 +20,11 @@ date: 2025-10-21
     --boat:#efefef; --buoy:#ff5b5b; --light:#fff98a;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{min-height:100%;background:#fff}
+  html,body{min-height:100%;background:#0b1a3a;color:#fff}
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;overflow-y:auto}
 
   /* Scene container - fixed height */
-  .scene{position:relative;width:100%;height:80vh;perspective:1200px;opacity:0;transition:opacity .8s ease;overflow:hidden;} 
-  .scene.reveal{opacity:1;} 
-  .intro{position:fixed;inset:0;background:#009688;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;opacity:1;transition:opacity .8s ease;} 
-  .intro.fade-out{opacity:0;pointer-events:none;}
+  .scene{position:relative;width:100%;height:80vh;perspective:1200px;opacity:1;transition:opacity .8s ease;overflow:hidden;} 
 
   /* Animated sky gradient (day→dusk→night→dawn cycle) */
   .sky{position:absolute;inset:0;z-index:0;}
@@ -113,38 +110,23 @@ date: 2025-10-21
   .overlay{position:absolute;inset:0;z-index:9;}
   .hint{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.85);color:#fff;padding:8px 12px;border-radius:12px;font-size:12px;backdrop-filter:blur(4px)}
 
-  /* Intro truck scene */
-  .intro .loop-wrapper{margin:0 auto;position:relative;display:block;width:600px;height:250px;overflow:hidden;border-bottom:3px solid #fff;color:#fff}
-  .intro .mountain{position:absolute;right:-900px;bottom:-20px;width:2px;height:2px;box-shadow:0 0 0 50px #4DB6AC,60px 50px 0 70px #4DB6AC,90px 90px 0 50px #4DB6AC,250px 250px 0 50px #4DB6AC,290px 320px 0 50px #4DB6AC,320px 400px 0 50px #4DB6AC;transform:rotate(130deg);animation:mtn 20s linear infinite}
-  .intro .hill{position:absolute;right:-900px;bottom:-50px;width:400px;border-radius:50%;height:20px;box-shadow:0 0 0 50px #4DB6AC,-20px 0 0 20px #4DB6AC,-90px 0 0 50px #4DB6AC,250px 0 0 50px #4DB6AC,290px 0 0 50px #4DB6AC,620px 0 0 50px #4DB6AC;animation:hill 4s 2s linear infinite}
-  .intro .tree{position:absolute;height:100px;width:35px;bottom:0;background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/tree.svg) no-repeat;animation:tree 3s 0s linear infinite}
-  .intro .tree:nth-child(2){animation:tree2 2s .15s linear infinite}
-  .intro .tree:nth-child(3){animation:tree3 8s .05s linear infinite}
-  .intro .rock{margin-top:-17%;height:2%;width:2%;bottom:-2px;border-radius:20px;position:absolute;background:#ddd;animation:rock 4s -.53s linear infinite}
-  .intro .truck{transition:all ease;width:85px;margin-right:-60px;bottom:0px;right:50%;position:absolute;background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/truck.svg) no-repeat;background-size:contain;height:60px;animation:truck 4s .08s ease infinite}
-  .intro .truck:before{content:" ";position:absolute;width:25px;box-shadow:-30px 28px 0 1.5px #fff,-35px 18px 0 1.5px #fff;animation:wind 1.5s 0s ease infinite}
-  .intro .wheels{transition:all ease;width:85px;margin-right:-60px;bottom:0px;right:50%;position:absolute;background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/wheels.svg) no-repeat;height:15px;margin-bottom:0;animation:truck 4s .001s ease infinite}
-  .intro p{color:#fff;font-weight:800;margin-top:18px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
-  @keyframes tree{0%{transform:translate(1350px)}100%{transform:translate(-50px)}}
-  @keyframes tree2{0%{transform:translate(650px)}100%{transform:translate(-50px)}}
-  @keyframes tree3{0%{transform:translate(2750px)}100%{transform:translate(-50px)}}
-  @keyframes rock{0%{right:-200px}100%{right:2000px}}
-  @keyframes truck{0%{}6%{transform:translateY(0)}7%{transform:translateY(-6px)}9%{transform:translateY(0)}10%{transform:translateY(-1px)}11%{transform:translateY(0)}100%{}}
-  @keyframes wind{0%{}50%{transform:translateY(3px)}100%{}}
-  @keyframes mtn{100%{transform:translateX(-2000px) rotate(130deg)}}
-  @keyframes hill{100%{transform:translateX(-2000px)}}
-
   /* Lesson content */
-  .lesson{background:#fff;padding:60px 20px;color:#000}
+  .lesson{background:#0b1a3a;padding:60px 20px;color:#fff}
   .lesson .container{max-width:800px;margin:0 auto}
-  .lesson h1{font-size:2.5em;color:#000;margin-bottom:30px}
-  .lesson h2{font-size:2em;color:#000;margin-top:40px;margin-bottom:20px}
-  .lesson h3{font-size:1.5em;color:#000;margin-top:30px;margin-bottom:15px}
-  .lesson p{line-height:1.8;margin-bottom:15px;font-size:1.1em;color:#000}
-  .lesson ul{margin:20px 0 20px 30px;color:#000}
-  .lesson li{margin-bottom:10px;line-height:1.6;color:#000}
-  .example-box{background:#f0f8ff;border-left:4px solid #c03a2b;padding:20px;margin:30px 0;border-radius:8px;color:#000}
-  .example-box strong{color:#000}
+  .lesson h1{font-size:2.5em;color:#fff;margin-bottom:30px}
+  .lesson h2{font-size:2em;color:#fff;margin-top:40px;margin-bottom:20px}
+  .lesson h3{font-size:1.5em;color:#fff;margin-top:30px;margin-bottom:15px}
+  .lesson p{line-height:1.8;margin-bottom:15px;font-size:1.1em;color:#fff}
+  .lesson ul{margin:20px 0 20px 30px;color:#fff}
+  .lesson li{margin-bottom:10px;line-height:1.6;color:#fff}
+  .example-box{background:rgba(255,255,255,.1);border-left:4px solid #c03a2b;padding:20px;margin:30px 0;border-radius:8px;color:#fff}
+  .example-box strong{color:#fff}
+  .example-box label{color:#fff}
+  input{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:#fff;padding:10px;font-size:16px;border-radius:5px}
+  input::placeholder{color:rgba(255,255,255,.6)}
+  button{background:#c03a2b;color:#fff;padding:12px 24px;font-size:16px;border:none;border-radius:5px;cursor:pointer;font-weight:600}
+  button:hover{background:#d04232}
+  #feedback{color:#fff}
   
   @media (prefers-reduced-motion: reduce){
     .sky::before,.orb,.ripples,.fog > span,.car,.boat{animation:none !important}
@@ -152,19 +134,6 @@ date: 2025-10-21
 </style>
 </head>
 <body>
-<div class="intro" id="intro" aria-label="Intro truck">
-  <div class="loop-wrapper">
-    <div class="mountain"></div>
-    <div class="hill"></div>
-    <div class="tree"></div>
-    <div class="tree"></div>
-    <div class="tree"></div>
-    <div class="rock"></div>
-    <div class="truck"></div>
-    <div class="wheels"></div>
-  </div>
-  <p>Driving to the Golden Gate Bridge...</p>
-</div>
 
 <div class="scene" id="scene">
   <div class="sky"></div>
@@ -327,16 +296,16 @@ date: 2025-10-21
     <h2>Test Your Knowledge Quiz!</h2>
     <p>Practice creating a heading hierarchy for a Golden Gate Bridge website. Type your headings below:</p>
     <div class="example-box">
-      <label for="practice1" style="display:block;margin-bottom:10px;font-weight:600;">Main page title (use #):</label>
-      <input type="text" id="practice1" placeholder="# Your title here" style="width:100%;padding:10px;font-size:16px;border:2px solid #ddd;border-radius:5px;margin-bottom:20px;">
+      <label for="practice1" style="display:block;margin-bottom:10px;font-weight:600;color:#fff">Main page title (use #):</label>
+      <input type="text" id="practice1" placeholder="# Your title here" style="width:100%;margin-bottom:20px;">
       
-      <label for="practice2" style="display:block;margin-bottom:10px;font-weight:600;">First major section (use ##):</label>
-      <input type="text" id="practice2" placeholder="## Your section here" style="width:100%;padding:10px;font-size:16px;border:2px solid #ddd;border-radius:5px;margin-bottom:20px;">
+      <label for="practice2" style="display:block;margin-bottom:10px;font-weight:600;color:#fff">First major section (use ##):</label>
+      <input type="text" id="practice2" placeholder="## Your section here" style="width:100%;margin-bottom:20px;">
       
-      <label for="practice3" style="display:block;margin-bottom:10px;font-weight:600;">A subsection (use ###):</label>
-      <input type="text" id="practice3" placeholder="### Your subsection here" style="width:100%;padding:10px;font-size:16px;border:2px solid #ddd;border-radius:5px;margin-bottom:20px;">
+      <label for="practice3" style="display:block;margin-bottom:10px;font-weight:600;color:#fff">A subsection (use ###):</label>
+      <input type="text" id="practice3" placeholder="### Your subsection here" style="width:100%;margin-bottom:20px;">
       
-      <button onclick="checkHierarchy()" style="background:#c03a2b;color:white;padding:12px 24px;font-size:16px;border:none;border-radius:5px;cursor:pointer;font-weight:600;">Check My Hierarchy</button>
+      <button onclick="checkHierarchy()">Check My Hierarchy</button>
       <div id="feedback" style="margin-top:20px;padding:15px;border-radius:5px;display:none;"></div>
     </div>
   </div>
@@ -374,14 +343,14 @@ function checkHierarchy() {
   
   feedback.style.display = 'block';
   if(correct === 3) {
-    feedback.style.background = '#d4edda';
-    feedback.style.border = '2px solid #28a745';
-    feedback.style.color = '#155724';
+    feedback.style.background = 'rgba(76,175,80,.3)';
+    feedback.style.border = '2px solid #4CAF50';
+    feedback.style.color = '#a5d6a7';
     feedback.innerHTML = '<strong>🎉 Perfect hierarchy!</strong><br>' + messages.join('<br>') + '<br><br>You understand heading structure!';
   } else {
-    feedback.style.background = '#fff3cd';
-    feedback.style.border = '2px solid #ffc107';
-    feedback.style.color = '#856404';
+    feedback.style.background = 'rgba(255,193,7,.3)';
+    feedback.style.border = '2px solid #FFC107';
+    feedback.style.color = '#ffd54f';
     feedback.innerHTML = '<strong>Keep trying!</strong><br>' + messages.join('<br>');
   }
 }
@@ -392,14 +361,6 @@ function checkHierarchy() {
   const carsEl = document.getElementById('cars');
   const boatsEl = document.getElementById('boats');
   const scene = document.getElementById('scene');
-  const intro = document.getElementById('intro');
-  if(intro){
-    setTimeout(()=>{
-      intro.classList.add('fade-out');
-      scene.classList.add('reveal');
-      setTimeout(()=>{ if(intro.isConnected) intro.remove(); }, 900);
-    }, 3000);
-  }
 
   const rnd=(a=1,b=0)=>Math.random()*(a-b)+b;
   const pick=a=>a[Math.floor(Math.random()*a.length)];

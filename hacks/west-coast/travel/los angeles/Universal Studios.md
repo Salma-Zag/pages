@@ -374,7 +374,7 @@ body{font-family:'Arial',sans-serif;overflow-x:hidden;background:#1a1a2e}
 
 </main>
 <!-- Lesson Content -->
-<div class="lesson-content hidden" id="lessonContent">
+<div class="lesson-content" id="lessonContent">
 <div class="container">
 <h1>Los Angeles</h1>
 <h2>Universal Studios Button Lesson</h2>
