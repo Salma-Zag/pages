@@ -1,16 +1,8 @@
 ---
 layout: post
 title: "Los Angeles"
-description: "Roadtrip through LA and learn UI while you're there!"
-permalink: /west-coast/analytics/losangeles/
-parent: "Analytics/Admin"
-team: "Cool Collaborators"
-submodule: 1
-author: "Cool Collaborators"
-date: 2025-10-21
-footer: 
-    home: /west-coast/travel/
-    next: /west-coast/analytics/sandiego/
+description: 
+permalink: /west-coast/travel/losangeles/
 ---
 
 
@@ -1810,26 +1802,26 @@ button:active {
 /* ===== Quiz Section Styles ===== */
 .quiz-section {
   background: #fff;
-  color: #000;
+  color: #000 !important;
   padding: 40px 20px;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .quiz-section h2 {
-  color: #000;
+  color: #000 !important;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
 .quiz-section p {
-  color: #000;
+  color: #000 !important;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
 .quiz-section label {
-  color: #000;
+  color: #000 !important;
   font-size: 16px;
   display: block;
   margin-bottom: 10px;
@@ -1837,7 +1829,7 @@ button:active {
 
 .quiz-section code {
   background: #f4f4f4;
-  color: #000;
+  color: #000 !important;
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 14px;
@@ -1850,12 +1842,7 @@ button:active {
   border: 2px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
-  background: #000 !important;       /* black background */
-  color: #fff !important;            /* white text */
-}
-
-.quiz-section input[type="text"]::placeholder {
-  color: #aaa;            /* placeholder gray for contrast */
+  color: #000;
 }
 
 .quiz-section button {
@@ -1863,7 +1850,7 @@ button:active {
 }
 
 .quiz-result {
-  color: #000;
+  color: #000 !important;
   font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
@@ -1877,7 +1864,7 @@ button:active {
 }
 
 .button-demo p {
-  color: #000;
+  color: #000 !important;
   font-size: 16px;
   margin-bottom: 15px;
 }
