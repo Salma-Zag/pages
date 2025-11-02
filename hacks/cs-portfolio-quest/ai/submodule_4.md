@@ -12,6 +12,215 @@ author: "Thinkers Team"
 date: 2025-10-21
 ---
 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #1a1a1a;
+        color: #ccc;
+    }
+
+    #checklist-container {
+        margin: 30px 0;
+    }
+
+    #checklist-container h3 {
+        color: #fff;
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    #checklist-container > div {
+        background: #2C3E50;
+        border: 2px solid #34495e;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        color: #ccc;
+        transition: all 0.3s ease;
+    }
+
+    #checklist-container > div span {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    #checklist-container > div strong {
+        color: #fff;
+        font-size: 18px;
+    }
+
+    #checklist-container > div p {
+        color: #999;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    #progress-container {
+        margin: 20px 0;
+    }
+
+    #overall-progress {
+        background: linear-gradient(90deg, #c24444 0%, #f39c12 50%, #2ea44f 100%);
+        color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        transition: width 0.5s ease;
+        border: 3px solid #34495e;
+    }
+
+    #status-message {
+        border-radius: 8px;
+        padding: 15px;
+        margin: 20px 0;
+        font-weight: bold;
+    }
+
+    #cert-preview {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: 4px solid #4a9eff;
+        border-radius: 15px;
+        padding: 40px;
+        margin: 30px 0;
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #cert-preview h2 {
+        color: #fff;
+        font-size: 36px;
+        margin-bottom: 20px;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    #cert-preview p {
+        color: #fff;
+        font-size: 18px;
+        margin: 15px 0;
+    }
+
+    #cert-preview input {
+        background: #1a1a1a;
+        color: #fff;
+        border: 3px solid #34495e;
+        padding: 12px 20px;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 8px;
+        margin: 20px 0;
+        width: 100%;
+        max-width: 500px;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    #cert-preview input::placeholder {
+        color: #777;
+    }
+
+    #cert-preview div {
+        margin: 20px 0;
+    }
+
+    #cert-preview div p {
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    button {
+        background: linear-gradient(135deg, #34495e 0%, #4a9eff 100%);
+        color: #fff;
+        border: 3px solid #34495e;
+        border-radius: 25px;
+        padding: 15px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 10px 5px;
+        transition: all 0.3s ease;
+        font-family: 'Comic Sans MS', cursive;
+        box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+    }
+
+    button:hover:not(:disabled) {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+    }
+
+    button:active:not(:disabled) {
+        transform: translate(1px, 1px);
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+    }
+
+    button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #555;
+    }
+
+    h1, h2, h3 {
+        color: #fff;
+    }
+
+    p {
+        color: #ccc;
+        line-height: 1.6;
+    }
+
+    strong {
+        color: #fff;
+    }
+
+    hr {
+        border: none;
+        border-top: 2px solid #34495e;
+        margin: 40px 0;
+    }
+
+    .post-content h1,
+    .post-content h2,
+    .post-content h3 {
+        color: #fff !important;
+    }
+
+    .post-content p,
+    .post-content li {
+        color: #ccc !important;
+    }
+
+    .post-content strong {
+        color: #fff !important;
+    }
+
+    .post-content #cert-preview {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: #fff !important;
+    }
+
+    .post-content #cert-preview h2,
+    .post-content #cert-preview p {
+        color: #fff !important;
+    }
+
+    .post-content #cert-preview input {
+        background: #1a1a1a !important;
+        color: #fff !important;
+        border-color: #34495e !important;
+    }
+
+    .post-content button {
+        background: linear-gradient(135deg, #34495e 0%, #4a9eff 100%) !important;
+        color: #fff !important;
+    }
+</style>
+
 # AI Usage Quest Certification
 
 Congratulations on completing the AI Usage Quest! Earn your official certification from **Open Coding Society**.
