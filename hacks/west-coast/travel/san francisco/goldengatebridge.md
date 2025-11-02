@@ -209,8 +209,8 @@ date: 2025-10-21
 
       <!-- Main suspension cables -->
       <!-- Single-sag (catenary-like) cables: one clean arch, not cosine waves -->
-      <path id="cable1" d="M0,220 C 400,80 1200,80 1600,220" stroke="var(--cable)" stroke-width="6" fill="none"/>
-      <path id="cable2" d="M0,245 C 400,105 1200,105 1600,245" stroke="var(--cable)" stroke-width="4" fill="none"/>
+      <path id="cable1" d="M0,320 L300,160 C 500,300 900,300 1100,140 L1600,320" stroke="var(--cable)" stroke-width="6" fill="none"/>
+      <path id="cable2" d="M0,320 L300,160 C 500,315 900,315 1100,140 L1600,320" stroke="var(--cable)" stroke-width="4" fill="none"/>
 
       <!-- Vertical hangers -->
       <g id="hangers" stroke="var(--cable)" stroke-width="2"></g>
@@ -226,23 +226,27 @@ date: 2025-10-21
           <rect x="1090" y="170" width="64" height="10"/>
           <rect x="1090" y="210" width="64" height="10"/>
         </g>
-        <path d="M0,220 C 400,80 1200,80 1600,220" stroke="#000" stroke-width="6" fill="none"/>
-        <path d="M0,245 C 400,105 1200,105 1600,245" stroke="#000" stroke-width="4" fill="none"/>
+        <path d="M0,320 L300,160 C 500,300 900,300 1100,140 L1600,320" stroke="#000" stroke-width="6" fill="none"/>
+        <path d="M0,320 L300,160 C 500,315 900,315 1100,140 L1600,320" stroke="#000" stroke-width="4" fill="none"/>
       </g>
     <script type="application/ecmascript"><![CDATA[
       (function(){
         const svg = document.currentScript.ownerSVGElement;
         const hangers = svg.getElementById('hangers');
-        if(!hangers) return;
-        const W = 1600;
-        const p0={x:0,y:220}, p1={x:400,y:80}, p2={x:1200,y:80}, p3={x:1600,y:220};
-        function cubicY(t,p0,p1,p2,p3){
-          const mt=1-t;
-          return mt*mt*mt*p0.y + 3*mt*mt*t*p1.y + 3*mt*t*t*p2.y + t*t*t*p3.y;
+        const path = svg.getElementById('cable1');
+        if(!hangers || !path || !path.getTotalLength) return;
+        const length = path.getTotalLength();
+        function yAtX(targetX){
+          // Binary search along the path length to find the point with given x
+          let a=0, b=length, pt;
+          for(let i=0;i<18;i++){ // sufficient precision
+            const m=(a+b)/2; pt = path.getPointAtLength(m);
+            if(pt.x < targetX) a = m; else b = m;
+          }
+          return pt.y;
         }
         for(let x=60;x<1540;x+=20){
-          const t = x/W;
-          const y = cubicY(t,p0,p1,p2,p3);
+          const y = yAtX(x);
           const line = document.createElementNS('http://www.w3.org/2000/svg','line');
           line.setAttribute('x1',x); line.setAttribute('x2',x);
           line.setAttribute('y1',y); line.setAttribute('y2',320);
