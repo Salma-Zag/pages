@@ -239,22 +239,6 @@ date: 2025-10-22
       <div class="metric-value" id="modules-complete">0</div>
       <div class="metric-subtitle" id="modules-incomplete">0 in progress</div>
     </div>
-    <div class="metric-card">
-      <div class="metric-header">
-        <span class="metric-title">Accuracy Rate</span>
-        <div class="metric-icon" style="background: rgba(59, 130, 246, 0.2);">🎯</div>
-      </div>
-      <div class="metric-value">87.3%</div>
-      <div class="metric-subtitle">+12% from last month</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-header">
-        <span class="metric-title">Day Streak</span>
-        <div class="metric-icon" style="background: rgba(239, 68, 68, 0.2);">🔥</div>
-      </div>
-      <div class="metric-value">15</div>
-      <div class="metric-subtitle">Keep it up!</div>
-    </div>
   </div>
 
   <!-- AI Insights Card -->
@@ -677,7 +661,7 @@ Keep it conversational, positive, and concise (3-4 sentences total). Be specific
       }
 
       const now = new Date();
-      const timeString = now.toLocaleTimeString('en-US', { 
+      const timeString = now.toLocaleTimeString('en-US', {  
           hour: 'numeric', 
           minute: '2-digit',
           hour12: true 
