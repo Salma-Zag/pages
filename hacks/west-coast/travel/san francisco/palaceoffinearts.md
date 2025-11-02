@@ -5,7 +5,6 @@ description:
 permalink: /west-coast/travel/sf/palaceoffinearts/
 date: 2025-10-21
 ---
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -24,40 +23,13 @@ date: 2025-10-21
     --duck:#f7f7f7; --duckbill:#f4a261; --boat:#d9d9d9;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{min-height:100%;background:#000}
+  html,body{min-height:100%;background:#0b1a3a}
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;overflow-y:auto}
 
-  /* Intro truck (same as before) */
-  .intro{position:fixed;inset:0;background:#009688;display:flex;align-items:center;justify-content:center;z-index:999;opacity:1;transition:opacity .8s ease;}
-  .intro.fade-out{opacity:0;pointer-events:none;}
-  .intro .loop-wrapper{margin:0 auto;position:relative;display:block;width:600px;height:250px;overflow:hidden;border-bottom:3px solid #fff;color:#fff}
-  .intro .mountain{position:absolute;right:-900px;bottom:-20px;width:2px;height:2px;box-shadow:0 0 0 50px #4DB6AC,60px 50px 0 70px #4DB6AC,90px 90px 0 50px #4DB6AC,250px 250px 0 50px #4DB6AC,290px 320px 0 50px #4DB6AC,320px 400px 0 50px #4DB6AC;transform:rotate(130deg);animation:mtn 20s linear infinite}
-  .intro .hill{position:absolute;right:-900px;bottom:-50px;width:400px;border-radius:50%;height:20px;box-shadow:0 0 0 50px #4DB6AC,-20px 0 0 20px #4DB6AC,-90px 0 0 50px #4DB6AC,250px 0 0 50px #4DB6AC,290px 0 0 50px #4DB6AC,620px 0 0 50px #4DB6AC;animation:hill 4s 2s linear infinite}
-  .intro .tree,.intro .tree:nth-child(2),.intro .tree:nth-child(3){position:absolute;height:100px;width:35px;bottom:0;background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/tree.svg) no-repeat}
-  .intro .rock{margin-top:-17%;height:2%;width:2%;bottom:-2px;border-radius:20px;position:absolute;background:#ddd}
-  .intro .truck,.intro .wheels{transition:all ease;width:85px;margin-right:-60px;bottom:0px;right:50%;position:absolute;background:#eee}
-  .intro .truck{background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/truck.svg) no-repeat;background-size:contain;height:60px}
-  .intro .truck:before{content:" ";position:absolute;width:25px;box-shadow:-30px 28px 0 1.5px #fff,-35px 18px 0 1.5px #fff}
-  .intro .wheels{background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/wheels.svg) no-repeat;height:15px;margin-bottom:0}
-  .intro .tree{animation:tree 3s 0s linear infinite}
-  .intro .tree:nth-child(2){animation:tree2 2s .15s linear infinite}
-  .intro .tree:nth-child(3){animation:tree3 8s .05s linear infinite}
-  .intro .rock{animation:rock 4s -.53s linear infinite}
-  .intro .truck{animation:truck 4s .08s ease infinite}
-  .intro .wheels{animation:truck 4s .001s ease infinite}
-  .intro .truck:before{animation:wind 1.5s 0s ease infinite}
-  @keyframes tree{0%{transform:translate(1350px)}100%{transform:translate(-50px)}}
-  @keyframes tree2{0%{transform:translate(650px)}100%{transform:translate(-50px)}}
-  @keyframes tree3{0%{transform:translate(2750px)}100%{transform:translate(-50px)}}
-  @keyframes rock{0%{right:-200px}100%{right:2000px}}
-  @keyframes truck{0%{}6%{transform:translateY(0)}7%{transform:translateY(-6px)}9%{transform:translateY(0)}10%{transform:translateY(-1px)}11%{transform:translateY(0)}100%{}}
-  @keyframes wind{0%{}50%{transform:translateY(3px)}100%{}}
-  @keyframes mtn{100%{transform:translateX(-2000px) rotate(130deg)}}
-  @keyframes hill{100%{transform:translateX(-2000px)}}
-
-  /* Scene container */
-  .scene{position:relative;width:100vw;height:100vh;perspective:1200px;opacity:0;transition:opacity .8s ease;}
-  .scene.reveal{opacity:1;}
+  /* Scene container - centered and fixed aspect */
+  .scene-wrapper{width:100%;display:flex;justify-content:center;align-items:center;padding:40px 0;background:#0b1a3a;}
+  .scene{position:relative;width:90vw;max-width:1400px;height:80vh;perspective:1200px;opacity:1;animation:fadeIn 1.2s ease;margin:0 auto;}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   .overlay{position:absolute;inset:0;z-index:9;}
   .hint{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.45);color:#fff;padding:8px 12px;border-radius:12px;font-size:12px;backdrop-filter:blur(4px);z-index:9}
 
@@ -104,17 +76,16 @@ date: 2025-10-21
       opacity:.35;animation: drift 30s linear infinite;mix-blend-mode:screen}
   @keyframes drift{from{background-position:0 0,0 0,0 0} to{background-position:600px 0, 400px 0, 800px 0}}
 
-  /* GROUND / SHORE (explicit ground strip between palace and water) */
+  /* GROUND / SHORE */
   .bank{position:absolute;left:0;right:0;bottom:38vh;height:10vh;z-index:4;}
   .bank:before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--bank1),var(--bank2));}
-  /* subtle curved top edge to mimic lawn berm */
   .bank:after{content:"";position:absolute;left:-10vw;right:-10vw;top:-3vh;height:6vh;border-radius:0 0 50% 50%/0 0 100% 100%;background:linear-gradient(to bottom, var(--bank1), transparent 80%);} 
 
-  /* promenade walkway above the waterline */
+  /* promenade walkway */
   .prom{position:absolute;left:8vw;right:8vw;bottom:calc(38vh + 6vh);height:20px;background:linear-gradient(var(--walk1),var(--walk2));border-radius:14px;box-shadow:0 6px 10px rgba(0,0,0,.25);z-index:6}
   .curb{position:absolute;left:6vw;right:6vw;bottom:calc(38vh + 6vh - 6px);height:6px;background:var(--curb);border-radius:6px;z-index:5;opacity:.8}
 
-  /* reeds at shoreline for depth */
+  /* reeds at shoreline */
   .reeds{position:absolute;left:0;right:0;bottom:38vh;height:7vh;z-index:6;pointer-events:none}
   .reed{position:absolute;bottom:0;width:2px;height:calc(2vh + 2.5vmin);background:var(--reed);box-shadow:0 0 6px rgba(0,0,0,.25)}
 
@@ -125,10 +96,9 @@ date: 2025-10-21
 
   /* PALACE */
   .palace{position:absolute;left:0;right:0;bottom:36vh;height:44vh;z-index:6;pointer-events:none}
-  /*/* unified ground shadows handled inside SVG now */
   .palace svg{width:100%;height:100%}
 
-  /* SWANS / BOATS (in water below bank) */
+  /* SWANS / BOATS */
   .swans{position:absolute;left:-20vw;right:-20vw;bottom:10vh;height:8vh;z-index:7}
   .swan{position:absolute;bottom:0;width:46px;height:18px}
   .swan .body{position:absolute;left:0;top:6px;width:32px;height:12px;background:var(--duck);border-radius:10px 12px 12px 10px}
@@ -138,8 +108,6 @@ date: 2025-10-21
 
   .sail{position:absolute;bottom:2px;width:90px;height:18px;background:var(--boat);border-radius:0 0 10px 10px;box-shadow:0 8px 10px -8px rgba(0,0,0,.7);}
   .sail:before{content:"";position:absolute;left:20px;bottom:18px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:24px solid #f7f7f7;filter:drop-shadow(0 2px 0 rgba(0,0,0,.25))}
-
-  .glow{filter:drop-shadow(0 0 8px var(--light))}
 
   /* BIRDS */
   .birds{position:absolute;inset:10vh 0 auto 0;height:18vh;z-index:7}
@@ -154,25 +122,11 @@ date: 2025-10-21
   }
 
   /* Scroll area */
-  .page{position:relative;background:linear-gradient(to bottom,#0b1a3a 0%, #114a7a 50%, #0b1a3a 100%);} 
-  .spacer{height:140vh}
+  .page{position:relative;background:#0b1a3a;padding:80px 20px;}
 </style>
 </head>
 <body>
-<!-- Intro truck -->
-<div class="intro" id="intro" aria-label="Intro truck">
-  <div class="loop-wrapper">
-    <div class="mountain"></div>
-    <div class="hill"></div>
-    <div class="tree"></div>
-    <div class="tree"></div>
-    <div class="tree"></div>
-    <div class="rock"></div>
-    <div class="truck"></div>
-    <div class="wheels"></div>
-  </div>
-</div>
-
+<div class="scene-wrapper">
 <!-- Scene -->
 <div class="scene" id="scene" aria-label="Palace of Fine Arts scene">
   <div class="sky"></div>
@@ -202,7 +156,7 @@ date: 2025-10-21
     <div class="tree" style="left:86vw"></div>
   </div>
 
-  <!-- PALACE silhouette with rotunda & colonnade sitting on ground -->
+  <!-- PALACE silhouette with rotunda & colonnade -->
   <div class="palace" aria-label="Palace rotunda and colonnade">
     <svg viewBox="0 0 1600 700" preserveAspectRatio="none" role="img">
       <defs>
@@ -259,14 +213,14 @@ date: 2025-10-21
         </g>
       </g>
 
-      $1  <!-- Ground contact shadows: align exactly under each base -->
+      <!-- Ground contact shadows -->
       <g class="groundShadows" opacity=".5">
         <ellipse cx="800" cy="510" rx="310" ry="10" fill="rgba(0,0,0,.28)" style="filter:blur(1.5px)"/>
         <ellipse cx="250" cy="510" rx="130" ry="9" fill="rgba(0,0,0,.28)" style="filter:blur(1.2px)"/>
         <ellipse cx="1310" cy="510" rx="130" ry="9" fill="rgba(0,0,0,.28)" style="filter:blur(1.2px)"/>
       </g>
 
-      <!-- Reflection of palace --> (masked) -->
+      <!-- Reflection of palace -->
       <g mask="url(#fadeMask)" opacity=".25" transform="scale(1,-1) translate(0,-720)">
         <g transform="translate(140,320)" fill="#000">
           <rect x="0" y="0" width="36" height="170" rx="8"/>
@@ -306,30 +260,91 @@ date: 2025-10-21
 
   <!-- Interaction layer -->
   <div class="overlay" id="overlay" aria-hidden="true"></div>
-  <div class="hint">Move mouse / tap: parallax. Scene loops continuously.</div>
+</div>
 </div>
 
 <!-- Scrollable content below the scene -->
 <main class="page">
-  <section class="spacer"></section>
+  <section class="lesson-content">
+    <h1 style="text-align:center;font-size:3em;color:#fff;margin-bottom:40px;text-shadow:none">🏛️ UI Hierarchy Lesson: Palace of Fine Arts</h1>
+    
+   <div style="padding:50px;max-width:900px;margin:0 auto 60px;">
+      <h2 style="color:#fff;font-size:2.2em;margin-bottom:20px">What is UI Hierarchy?</h2>
+      <p style="color:#fff;font-size:1.2em;line-height:1.8;margin-bottom:30px">
+      UI hierarchy organizes elements by importance. Think of the Palace of Fine Arts—the grand rotunda dominates the landscape, with colonnades and lagoon arranged to guide visitors naturally through the architectural wonder.
+      </p>
+      
+      <h2 style="color:#fff;font-size:2.2em;margin:40px 0 20px">The 3 Levels of Hierarchy</h2>
+      
+  <div style="padding:30px;margin:20px 0;">
+        <h3 style="color:#fff;font-size:1.8em;margin-bottom:15px">🏛️ Primary (The Rotunda)</h3>
+        <p style="color:#fff;font-size:1.15em;line-height:1.7">
+          Most important content—as majestic as the 162-foot central dome.<br>
+          <strong>Examples:</strong> Main headlines, key buttons, hero images
+        </p>
+      </div>
+      
+  <div style="padding:30px;margin:20px 0;">
+        <h3 style="color:#fff;font-size:1.5em;margin-bottom:15px">🏛️ Secondary (The Colonnades)</h3>
+        <p style="color:#fff;font-size:1.1em;line-height:1.7">
+          Supporting information—like the sweeping curved colonnades that frame the space.<br>
+          <strong>Examples:</strong> Subheadings, section titles, secondary buttons
+        </p>
+      </div>
+      
+  <div style="padding:30px;margin:20px 0;">
+        <h3 style="color:#fff;font-size:1.2em;margin-bottom:15px">🏛️ Tertiary (Decorative Details)</h3>
+        <p style="color:#fff;font-size:1em;line-height:1.7">
+          Additional details—ornate sculptures, weeping maidens, and reflecting pool.<br>
+          <strong>Examples:</strong> Body text, captions, metadata
+        </p>
+      </div>
+      
+  <h2 style="color:#fff;font-size:2.2em;margin:50px 0 20px">5 Tools to Create Hierarchy</h2>
+      
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin:30px 0">
+        <div style="padding:25px;">
+          <h4 style="color:#fff;font-size:1.4em;margin-bottom:10px">1️⃣ Size</h4>
+          <p style="color:#fff;line-height:1.6">Like the rotunda rising above the colonnades</p>
+        </div>
+        <div style="padding:25px;">
+          <h4 style="color:#fff;font-size:1.4em;margin-bottom:10px">2️⃣ Weight</h4>
+          <p style="color:#fff;line-height:1.6">Massive Roman columns vs. delicate sculptural details</p>
+        </div>
+        <div style="padding:25px;">
+          <h4 style="color:#fff;font-size:1.4em;margin-bottom:10px">3️⃣ Color</h4>
+          <p style="color:#fff;line-height:1.6">Warm terracotta against lush greenery</p>
+        </div>
+        <div style="padding:25px;">
+          <h4 style="color:#fff;font-size:1.4em;margin-bottom:10px">4️⃣ Spacing</h4>
+          <p style="color:#fff;line-height:1.6">Open lagoon creates breathing room</p>
+        </div>
+        <div style="padding:25px;">
+          <h4 style="color:#fff;font-size:1.4em;margin-bottom:10px">5️⃣ Position</h4>
+          <p style="color:#fff;line-height:1.6">Eyes travel to the rotunda first</p>
+        </div>
+      </div>
+      
+  <div style="padding:30px;margin:50px 0 30px;">
+        <h3 style="color:#fff;font-size:1.8em;margin-bottom:15px">💡 Quick Tips</h3>
+        <ul style="color:#fff;font-size:1.15em;line-height:2;list-style:none;padding-left:0">
+          <li>✓ Limit to 1-2 fonts</li>
+          <li>✓ Create dramatic contrast (terracotta columns against sky)</li>
+          <li>✓ Test by squinting—structure should still be clear</li>
+          <li>✓ Use familiar patterns (entrance → colonnade → rotunda → lagoon)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script>
 (function(){
   const scene = document.getElementById('scene');
-  const intro = document.getElementById('intro');
-
-  if(intro){
-    setTimeout(()=>{
-      intro.classList.add('fade-out');
-      scene.classList.add('reveal');
-      setTimeout(()=>{ if(intro.isConnected) intro.remove(); }, 900);
-    }, 3000);
-  }
 
   const rnd=(a=1,b=0)=>Math.random()*(a-b)+b;
 
-  // Add reeds at shoreline for parallax and depth
+  // Add reeds at shoreline
   const reeds = document.getElementById('reeds');
   for(let i=0;i<40;i++){
     const r=document.createElement('div'); r.className='reed';
@@ -359,7 +374,7 @@ date: 2025-10-21
   setInterval(spawnGull, 5000);
   for(let i=0;i<5;i++) spawnGull();
 
-  // Swans & one sailboat
+  // Swans & sailboat
   const swansEl = document.getElementById('swans');
   function spawnSwan(){
     const s=document.createElement('div'); s.className='swan';
@@ -382,96 +397,12 @@ date: 2025-10-21
     swansEl.appendChild(b);
     setTimeout(()=>{ if(b.isConnected) b.remove(); }, 82000);
   }
-  setInterval(spawnSwan, 9000); for(let i=0;i<3;i++) spawnSwan();
-  setInterval(spawnBoat, 15000); spawnBoat();
-
-  // Parallax tilt
-  let targetRX=0,targetRY=0,rx=0,ry=0;
-  function onMove(x,y){
-    const cx=window.innerWidth/2, cy=window.innerHeight/2;
-    targetRY = (x-cx)/cx * 4;
-    targetRX = -(y-cy)/cy * 3;
-  }
-  window.addEventListener('mousemove', e=> onMove(e.clientX,e.clientY));
-  window.addEventListener('touchmove', e=>{ if(e.touches[0]) onMove(e.touches[0].clientX,e.touches[0].clientY); }, {passive:true});
-  function raf(){
-    rx += (targetRX - rx)*0.05; ry += (targetRY - ry)*0.05;
-    scene.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  setInterval(spawnSwan, 9000); 
+  for(let i=0;i<3;i++) spawnSwan();
+  setInterval(spawnBoat, 12000); 
+  spawnBoat();
 })();
 </script>
-</body>
-</html>
-
-
-# UI Hierarchy Lesson: Palace of Fine Arts Theme
-
-## What is UI Hierarchy?
-UI hierarchy organizes elements by importance. Think of the Palace of Fine Arts—the grand rotunda dominates the landscape, with colonnades and lagoon arranged to guide visitors naturally through the architectural wonder.
-
-## The 3 Levels of Hierarchy
-
-### Primary (The Rotunda)
-Most important content—as majestic as the 162-foot central dome.
-- Main headlines, key buttons, hero images
-
-### Secondary (The Colonnades)
-Supporting information—like the sweeping curved colonnades that frame the space.
-- Subheadings, section titles, secondary buttons
-
-### Tertiary (Decorative Details)
-Additional details—ornate sculptures, weeping maidens, and reflecting pool.
-- Body text, captions, metadata
-
-## 5 Tools to Create Hierarchy
-
-### 1. Size
-Like the rotunda rising above the colonnades and lagoon.
-- Primary: 32-48px
-- Secondary: 24-32px
-- Tertiary: 14-16px
-
-### 2. Weight
-Massive Roman columns vs. delicate sculptural details.
-- Primary: Bold (700)
-- Secondary: Semi-bold (600)
-- Tertiary: Regular (400)
-
-### 3. Color
-Warm terracotta against lush greenery and blue lagoon.
-- High contrast for primary
-- Medium for secondary
-- Low for tertiary
-
-### 4. Spacing
-The open lagoon creates breathing room—use white space the same way.
-
-### 5. Position
-Your eyes travel to the rotunda first—top and center command attention.
-
-## Exercise: Palace of Fine Arts Website
-
-**Primary**: "Discover the Palace of Fine Arts" + "Plan Your Visit" button  
-**Secondary**: "A Beaux-Arts Masterpiece Since 1915" + section titles  
-**Tertiary**: Event information, photography tips, parking details, footer links
-
-## Common Mistakes
-
-1. Making everything important—nothing stands out
-2. Too many font sizes—stick to 3-4 maximum
-3. Ignoring spacing—use space for impact
-4. Inconsistent styling—maintain classical elegance like the Palace does
-5. Poor contrast—you need clarity to showcase architectural beauty
-
-## Quick Tips
-
-- Limit to 1-2 fonts
-- Create dramatic contrast (terracotta columns against sky)
-- Test by squinting—structure should still be clear
-- Use familiar patterns (entrance → colonnade → rotunda → lagoon)
-
 
 <!-- Quiz Section -->
 <div class="quiz-section">
@@ -719,14 +650,14 @@ Your eyes travel to the rotunda first—top and center command attention.
 }
 
 .completion-message h2 {
-  color: #ffffff;
+  color: #000;
   margin-bottom: 35px;
   font-size: 2.3em;
   text-shadow: 0 2px 10px rgba(0,0,0,.2);
 }
 
 .completion-message p {
-  color: #ffffff;
+  color: #000;
   font-size: 1.25em;
 }
 
@@ -742,7 +673,7 @@ Your eyes travel to the rotunda first—top and center command attention.
 .demo-primary {
   font-size: 40px;
   font-weight: 700;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 20px;
   line-height: 1.2;
 }
@@ -750,14 +681,14 @@ Your eyes travel to the rotunda first—top and center command attention.
 .demo-secondary {
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 18px;
 }
 
 .demo-tertiary {
   font-size: 16px;
   font-weight: 400;
-  color: #ffffff;
+  color: #000;
   line-height: 1.6;
   margin: 0;
 }
