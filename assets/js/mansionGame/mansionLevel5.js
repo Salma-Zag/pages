@@ -27,7 +27,7 @@ class MansionLevel5 {
 
 	//data for player
 	const sprite_player = path + "/images/mansionGame/full_anims_spook.png"; // be sure to include the path
-	const player_scale_factor = 20;
+	const player_scale_factor = 5;
 	const sprite_data_player = {
         id: 'Player',
         greeting: "I am the player for level 5",
@@ -51,10 +51,10 @@ class MansionLevel5 {
         shoot: {row: 2, columns: 25}
 	};
 
-    this.player = new Player(sprite_data_player, this.gameEnv);
+    const player = new Player(sprite_data_player, this.gameEnv);
 
     // add player to game
-    this.gameEnv.gameObjects.push(this.player);
+    this.gameEnv.gameObjects.push(player);
 
 
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
@@ -229,6 +229,7 @@ class MansionLevel5 {
 
     // Store sprite_data_enemy for later use
     this.enemyTemplate = sprite_data_enemy;
+    this.playerRef = player;
 
     // Track kills for this level (only stored on the level instance)
     this.zombiesKilled = 0;
@@ -240,9 +241,9 @@ class MansionLevel5 {
 
     bindShootKey() {
         window.addEventListener("keydown", (event) => {
-        if (event.code === "Space") {
-            this.shootLaser()
-        }
+            if (event.code === "Space") {
+                this.shootLaser()
+            }
         })
     }
 
@@ -252,7 +253,7 @@ class MansionLevel5 {
 
         this.lastShotTime = currentTime
 
-        const player = this.player;
+        const player = this.playerRef;
 
         if (!player) {
             console.error("Player not found")
@@ -275,18 +276,18 @@ class MansionLevel5 {
         laser.velocity = { x: 0, y: -10 }
 
         laser.update = function () {
-        this.position.y += this.velocity.y
+            this.position.y += this.velocity.y
 
-        if (this.position.y < -this.height) {
-            const index = this.gameEnv.gameObjects.indexOf(this)
-            if (index !== -1) {
-            this.gameEnv.gameObjects.splice(index, 1)
-            this.destroy()
+            if (this.position.y < -this.height) {
+                const index = this.gameEnv.gameObjects.indexOf(this)
+                if (index !== -1) {
+                this.gameEnv.gameObjects.splice(index, 1)
+                this.destroy()
+                }
+                return
             }
-            return
-        }
 
-        this.draw()
+            this.draw()
         }
 
         this.lasers.push(laser)
