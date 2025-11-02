@@ -397,18 +397,7 @@ date: 2025-10-21
     </div>
   </div>
 
-  <div class="badges-card">
-    <h2 class="section-title">Achievement Badges</h2>
-    <div class="badges-grid">
-      <div class="badge badge-red">Python Master</div>
-      <div class="badge badge-orange">Data Wizard</div>
-      <div class="badge badge-purple">Quick Learner</div>
-      <div class="badge badge-red">Streak Champion</div>
-      <div class="badge badge-teal">Problem Solver</div>
-      <div class="badge badge-yellow">AI Enthusiast</div>
-    </div>
-    <div class="badges-footer">5 badges earned • 4 more to unlock</div>
-  </div>
+  
 </div>
 
 <canvas id="certCanvas"></canvas>
