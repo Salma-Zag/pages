@@ -6,7 +6,6 @@ permalink: /west-coast/travel/sf/golden/
 date: 2025-10-21
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
