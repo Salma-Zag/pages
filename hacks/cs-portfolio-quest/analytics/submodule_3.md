@@ -553,25 +553,68 @@ author: "Curators Team"
 
         if (res.ok) {
           const data = await res.json();
-          // data.id = username (toby)
-          // data.name = full name (Thomas Edison)
-          const uid = data.id
-          const filtered = lessonData.filter(item => item.uid === uid);
-          console.log(`Data for ${uid}:`, filtered);
+          console.log(data);
+          const filtered = lessonData.filter(item => item.username === data.uid);
+          console.log(`Data for ${data.uid}:`, filtered);
+
+          // Define modules and total submodules
+          const lesson_modules = {
+              'AI Usage': 4,
+              'Backend Development': 6,
+              'Data Visualization': 3,
+              'Frontend Development': 6,
+              'Resume Building': 6
+          };
+
+          // Initialize result object
+          const moduleStats = {};
+          Object.keys(lesson_modules).forEach(m => {
+              moduleStats[m] = { time: 0, percentComplete: 0 };
+          });
+
+          // Sum time and count finished submodules per module
+          const finishedCounts = {};
+          Object.keys(lesson_modules).forEach(m => finishedCounts[m] = 0);
+
+          filtered.forEach(item => {
+              const mod = item.module;
+              if (lesson_modules[mod] !== undefined) {
+                  // Sum time
+                  moduleStats[mod].time += item.time || 0;
+
+                  // Count finished submodules
+                  if (item.finished) finishedCounts[mod] += 1;
+              }
+          });
+
+          // Compute percent completion per module
+          Object.keys(lesson_modules).forEach(m => {
+              const totalSubmodules = lesson_modules[m];
+              const finished = finishedCounts[m];
+              moduleStats[m].percentComplete = (finished / totalSubmodules) * 100;
+          });
+
+          const frontendCompletion = moduleStats["Frontend Development"].percentComplete
+          const backendCompletion = moduleStats["Backend Development"].percentComplete
+          const datavizCompletion = moduleStats["Data Visualization"].percentComplete
+          const resumeCompletion = moduleStats["Resume Building"].percentComplete
+          const aiCompletion = moduleStats["AI Usage"].percentComplete
+
+          console.log(moduleStats);
 
           // Create random lesson and module data
           const randomLessons = (numLessons) =>
             Array.from({ length: numLessons }, () => Math.floor(Math.random() * 21) * 5); // random 0–100 in steps of 5
 
-          const randomProgress = () =>
-            Math.floor(Math.random() * 5) * 25; // random 0, 25, 50, 75, 100
+          // const randomProgress = () =>
+          //   Math.floor(Math.random() * 5) * 25; // random 0, 25, 50, 75, 100
 
           const modules = {
-            "Module 1": { progress: randomProgress(), lessons: randomLessons(6) },  // 6 lessons
-            "Module 2": { progress: randomProgress(), lessons: randomLessons(6) },  // 6 lessons
-            "Module 3": { progress: randomProgress(), lessons: randomLessons(3) },  // 3 lessons
-            "Module 4": { progress: randomProgress(), lessons: randomLessons(6) },  // 6 lessons
-            "Module 5": { progress: randomProgress(), lessons: randomLessons(4) },  // 4 lessons
+            "Module 1": { progress: frontendCompletion, lessons: randomLessons(6) },  // 6 lessons
+            "Module 2": { progress: backendCompletion, lessons: randomLessons(6) },  // 6 lessons
+            "Module 3": { progress: datavizCompletion, lessons: randomLessons(3) },  // 3 lessons
+            "Module 4": { progress: resumeCompletion, lessons: randomLessons(6) },  // 6 lessons
+            "Module 5": { progress: aiCompletion, lessons: randomLessons(4) },  // 4 lessons
           };
 
           students.push({
