@@ -7,12 +7,12 @@ import Character from '../GameEngine/Character.js';
 */
 
 class Boomerang extends Character {
-    constructor(gameEnv = null, targetx, targety, sourcex, sourcey) {
+    constructor(gameEnv = null, sourcex, sourcey, targetx, targety) {  // NOTE: Source and target cords are switched here to make the logic work
         // Create placeholder sprite data for the boomerang
         const data = {
             id: 'scythe',
             pixels: { width: 32, height: 32 },
-            SCALE_FACTOR: 1,
+            SCALE_FACTOR: 10,
             ANIMATION_RATE: 1,
             INIT_POSITION: { x: sourcex, y: sourcey },
             fillStyle: 'gray', // simple visual
@@ -45,6 +45,7 @@ class Boomerang extends Character {
 
         if (this.radian_prog >= this.radian_limit) {
             this.revComplete = true;
+            this.destroy();
         } else {
             this.radian_prog += this.projectileSpeed;
 
