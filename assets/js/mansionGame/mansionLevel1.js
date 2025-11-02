@@ -1,6 +1,7 @@
 import GameEnvBackground  from "./GameEngine/GameEnvBackground.js";
 import Player from "./GameEngine/Player.js";
 import Npc from './GameEngine/Npc.js';
+import DialogueSystem from "./GameEngine/DialogueSystem.js";
 import MansionLevel1_Pantry from "./mansionLevel1_Pantry.js";
 
 
@@ -9,6 +10,27 @@ class MansionLevel1 {
     let width = gameEnv.innerWidth;
     let height = gameEnv.innerHeight;
     let path = gameEnv.path;
+
+    // Level music: play shadow theme when entering this level
+    // Will be stopped when transitioning to the pantry below
+    // Ensure a single, persistent level music instance on the game controller
+  if (gameEnv && gameEnv.gameControl) {
+    const gc = gameEnv.gameControl;
+    if (!gc.levelMusic) {
+      gc.levelMusic = new Audio(path + "/assets/sounds/mansionGame/shadow_music_level1.mp3");
+      gc.levelMusic.loop = true;
+      gc.levelMusic.volume = 0.2;
+      // Play and ignore promise rejection (browser may block autoplay until user gesture)
+      gc.levelMusic.play().catch(err => console.warn('Level music play blocked or failed:', err));
+    } else {
+      // if previously created, ensure volume/loop are set
+      gc.levelMusic.loop = true;
+      gc.levelMusic.volume = gc.levelMusic.volume || 0.3;
+      if (gc.levelMusic.paused) {
+        gc.levelMusic.play().catch(err => console.warn('Resuming music failed:', err));
+      }
+    }
+  }
 
     // Background data
     const image_background = path + "/images/mansionGame/kitchen_lvl1.png"; // be sure to include the path
@@ -150,8 +172,36 @@ class MansionLevel1 {
       { class: Player, data: sprite_data_mc },
       { class: Npc, data: sprite_data_pantrydoor }
     ];
-  }
 
+    // Show a simple kitchen intro using the game's DialogueSystem 5s after the MC spawns.
+    // This polls for the player object (id 'Spook') then waits 5s and shows the dialog.
+    (function showKitchenIntro() {
+      const findSpook = () => (gameEnv && gameEnv.gameObjects) ? gameEnv.gameObjects.find(o => o && o.spriteData && o.spriteData.id === 'Spook') : null;
+
+      const startWhenReady = () => {
+        const player = findSpook();
+        if (player) {
+          setTimeout(() => {
+            try {
+              const ds = new DialogueSystem({ id: 'kitchen_intro_' + Date.now() });
+              ds.showDialogue('Go to the pantry and collect the required ingredients to beat this level!', 'Spook', sprite_data_mc.src);
+              ds.addButtons([{ text: 'Got it', primary: true, action: () => ds.closeDialogue() }]);
+            } catch (e) { console.warn('kitchen intro dialog failed', e); }
+          }, 1000);
+        } else {
+          // poll until player exists
+          const poll = setInterval(() => {
+            if (findSpook()) {
+              clearInterval(poll);
+              startWhenReady();
+            }
+          }, 200);
+        }
+      };
+
+      startWhenReady();
+    })();
+  }
 }
 
 export default MansionLevel1;

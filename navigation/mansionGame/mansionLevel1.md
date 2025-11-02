@@ -1,6 +1,6 @@
 ---
 layout: opencs
-title: Adventure Game
+title: Mansion Level 1
 permalink: /gamify/mansion1
 microblog: true
 ---
