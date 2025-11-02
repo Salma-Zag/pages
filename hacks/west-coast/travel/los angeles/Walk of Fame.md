@@ -10,7 +10,6 @@ author: "Cool Collaborators"
 date: 2025-10-21
 ---
 
-<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
