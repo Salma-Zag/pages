@@ -398,12 +398,12 @@ author: "Curators Team"
         <div class="metric-icon" style="background: rgba(234, 140, 51, 0.2);">📊</div>
       </div>
       <div class="metric-value">84.5%</div>
-      <div class="metric-subtitle">6 students enrolled</div>
+      <div class="metric-subtitle" id="students-enrolled">6 students enrolled</div>
     </div>
 
     <div class="metric-card">
       <div class="metric-header">
-        <span class="metric-title">Modules Completed</span>
+        <span class="metric-title">Average Modules Completed</span>
         <div class="metric-icon" style="background: rgba(16, 185, 129, 0.2);">✅</div>
       </div>
       <div class="metric-value" id="modules-completed">0</div>
@@ -424,7 +424,7 @@ author: "Curators Team"
         <span class="metric-title">Progress Rate</span>
         <div class="metric-icon" style="background: rgba(139, 92, 246, 0.2);">📈</div>
       </div>
-      <div class="metric-value" id="progress-percentage">50%</div>
+      <div class="metric-value" id="progress-percentage">0%</div>
       <div class="metric-subtitle">Average completion</div>
     </div>
   </div>
@@ -508,6 +508,63 @@ author: "Curators Team"
   import { javaURI } from '{{ site.baseurl }}/assets/js/api/config.js';
   import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
 
+  async function getCredentials() {
+        try {
+            const res = await fetch(`${pythonURI}/api/id`, {
+                ...fetchOptions,
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                const role = data.role;
+                console.log(role);
+                return role;
+            } else {
+                console.log(`Request failed for with status ${res.status}`);
+            }
+        } catch (err) {
+            console.log(`Error: ${err}`);
+        }
+  }
+
+  async function downloadReport() {
+      let csv = 'Student Name,Overall Average,Module 1 Progress,Module 1 Average,Module 2 Progress,Module 2 Average,Module 3 Progress,Module 3 Average,Module 4 Progress,Module 4 Average,Module 5 Progress,Module 5 Average\n';
+
+      const data = await fetchPeople();
+      const { students, completions } = data;
+      
+      students.forEach(s => {
+        const overall = calculateOverallAverage(s.modules);
+        csv += [
+          s.name,
+          overall,
+          s.modules['Module 1'].progress + '%',
+          calculateModuleAverage(s.modules['Module 1']),
+          s.modules['Module 2'].progress + '%',
+          calculateModuleAverage(s.modules['Module 2']),
+          s.modules['Module 3'].progress + '%',
+          calculateModuleAverage(s.modules['Module 3']),
+          s.modules['Module 4'].progress + '%',
+          calculateModuleAverage(s.modules['Module 4']),
+          s.modules['Module 5'].progress + '%',
+          calculateModuleAverage(s.modules['Module 5'])
+        ].join(',') + '\n';
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'studentvue_analytics_report.csv';
+      a.click();
+  }
+  // expose to global scope so inline `onclick` handlers (in the HTML) can call it
+  window.downloadReport = downloadReport;
+
   async function getLessonData() {
       try {
           const res = await fetch(`${javaURI}/api/stats`, {
@@ -532,6 +589,7 @@ author: "Curators Team"
 
   async function fetchPeople() {
     const students = [];
+    const completions = [];
 
     const lessonData = await getLessonData();
     console.log(lessonData);
@@ -599,6 +657,8 @@ author: "Curators Team"
           const datavizCompletion = moduleStats["Data Visualization"].percentComplete
           const resumeCompletion = moduleStats["Resume Building"].percentComplete
           const aiCompletion = moduleStats["AI Usage"].percentComplete
+          const averageCompletion = (frontendCompletion + backendCompletion + datavizCompletion + resumeCompletion + aiCompletion) / 5
+          completions.push(averageCompletion)
 
           console.log(moduleStats);
 
@@ -633,36 +693,60 @@ author: "Curators Team"
         console.log(err);
       }
     }
-    return students;
+    return {
+      students,
+      completions
+    };
+  }
+
+  // helper functions moved to module scope so other top-level functions (e.g. downloadReport)
+  // can call them without needing to run `main()` first.
+  function calculateModuleAverage(moduleData) {
+    const completed = moduleData.lessons.filter(s => s > 0);
+    if (completed.length === 0) return 0;
+    return Math.round(completed.reduce((a, b) => a + b, 0) / completed.length);
+  }
+
+  function calculateOverallAverage(modules) {
+    let total = 0, count = 0;
+    Object.values(modules).forEach(m => {
+      m.lessons.forEach(s => {
+        if (s > 0) { total += s; count++; }
+      });
+    });
+    return count > 0 ? Math.round(total / count) : 0;
   }
 
   async function main() {
     console.log("In main function");
-    const students = await fetchPeople();
+    const data = await fetchPeople();
+    const { students, completions } = data;
+    const percentageAverage = completions.length > 0 ? completions.reduce((sum, value) => sum + value, 0) / completions.length : 0;
+    const modulesCompletedAverage = 25 * percentageAverage/100;
+    // truncate display values to 2 decimals
+    const displayPercentage = Number(percentageAverage).toFixed(2);
+    const displayModulesCompleted = Number(modulesCompletedAverage).toFixed(2);
     console.log("Students array:", students);
+    console.log("Completions array:", completions);
 
     // Updating Cards
-    const modulesCompletedEl = document.getElementById("modules-completed");
     const progressPercentageEl = document.getElementById("progress-percentage");
+    if (progressPercentageEl) {
+      progressPercentageEl.innerText = `${displayPercentage}%`;
+    }
+      const modulesCompletedEl = document.getElementById("modules-completed");
+    if (modulesCompletedEl) {
+      modulesCompletedEl.innerText = `${displayModulesCompleted}`;
+    }
+      const studentsEnrolledEl = document.getElementById("students-enrolled");
+      if (studentsEnrolledEl) {
+          studentsEnrolledEl.innerText = `${students.length} students enrolled`;
+      }
+
 
     let currentSort = { key: 'name', direction: 'asc' };
     let expandedRow = null;
-
-    function calculateModuleAverage(moduleData) {
-      const completed = moduleData.lessons.filter(s => s > 0);
-      if (completed.length === 0) return 0;
-      return Math.round(completed.reduce((a, b) => a + b, 0) / completed.length);
-    }
-
-    function calculateOverallAverage(modules) {
-      let total = 0, count = 0;
-      Object.values(modules).forEach(m => {
-        m.lessons.forEach(s => {
-          if (s > 0) { total += s; count++; }
-        });
-      });
-      return count > 0 ? Math.round(total / count) : 0;
-    }
+    
 
     function getGradeClass(score) {
       if (score >= 90) return 'grade-a';
@@ -713,9 +797,9 @@ author: "Curators Team"
                 ${avg > 0 ? avg + '%' : '--'}
               </div>
               <div class="progress-bar-container">
-                <div class="progress-bar" style="width: ${data.progress}%"></div>
+                <div class="progress-bar" style="width: ${data.progress.toFixed(2)}%"></div>
               </div>
-              <div class="progress-info">${data.progress}% Complete</div>
+              <div class="progress-info">${data.progress.toFixed(2)}% Complete</div>
             </td>
           `;
         });
@@ -787,35 +871,6 @@ author: "Curators Team"
       document.getElementById('th-' + key).classList.add('active');
       
       renderTable();
-    }
-
-    function downloadReport() {
-      let csv = 'Student Name,Overall Average,Module 1 Progress,Module 1 Average,Module 2 Progress,Module 2 Average,Module 3 Progress,Module 3 Average,Module 4 Progress,Module 4 Average,Module 5 Progress,Module 5 Average\n';
-      
-      students.forEach(s => {
-        const overall = calculateOverallAverage(s.modules);
-        csv += [
-          s.name,
-          overall,
-          s.modules['Module 1'].progress + '%',
-          calculateModuleAverage(s.modules['Module 1']),
-          s.modules['Module 2'].progress + '%',
-          calculateModuleAverage(s.modules['Module 2']),
-          s.modules['Module 3'].progress + '%',
-          calculateModuleAverage(s.modules['Module 3']),
-          s.modules['Module 4'].progress + '%',
-          calculateModuleAverage(s.modules['Module 4']),
-          s.modules['Module 5'].progress + '%',
-          calculateModuleAverage(s.modules['Module 5'])
-        ].join(',') + '\n';
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'studentvue_analytics_report.csv';
-      a.click();
     }
 
     renderTable();
