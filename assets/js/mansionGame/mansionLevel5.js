@@ -235,8 +235,10 @@ class MansionLevel5 {
     this.zombiesKilled = 0;
     this.zombies = 0;
 
-    // Start the zombie spawning timer
+    // zombie spawner
     this.startZombieSpawner();
+    // shoot key
+    this.bindShootKey();
   }
 
     bindShootKey() {
