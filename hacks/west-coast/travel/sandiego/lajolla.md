@@ -621,7 +621,7 @@ audio {
       Listen to the soothing sounds of waves crashing on the shores of La Jolla Beach, accompanied by the calls of seagulls overhead.
     </p>
     <audio controls>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+      <source src= "/hacks/west-coast/travel/sandiego/soothing-ocean-waves-372489.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <p class="source-text">Source: Ocean waves and beach ambience</p>
