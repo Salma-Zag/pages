@@ -2,7 +2,7 @@ import Enemy from '../GameEngine/Enemy.js';
 import Boomerang from '../CustomGameClasses/Boomerang.js';
 import Projectile from '../CustomGameClasses/Projectile.js';
 import Arm from '../CustomGameClasses/Arm.js';
-import showEndScreen from '../MansionGameEndScreen.js';
+import showEndScreen from '../CustomGameClasses/EndScreen.js';
 
 /*
     Boss class to define the Reaper

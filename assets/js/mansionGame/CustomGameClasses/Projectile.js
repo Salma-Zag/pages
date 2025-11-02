@@ -1,7 +1,7 @@
 import Character from '../GameEngine/Character.js';
 import showDeathScreen from './DeathScreen.js';
 import { updatePlayerHealthBar } from './HealthBars.js';
-import showEndScreen from '../MansionGameEndScreen.js';
+import showEndScreen from '../CustomGameClasses/EndScreen.js';
 
 /*
     Projectile class for the Reaper boss fireball & arrow attacks + player attack
