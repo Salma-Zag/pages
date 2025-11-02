@@ -272,7 +272,7 @@ date: 2025-10-21
       <div class="cert-org">Open Coding Society</div>
       <div class="cert-date">September 2024</div>
       <div class="cert-actions">
-        <button class="btn btn-download" onclick="downloadCert('Advanced Python Programming', 'Data Science Academy', 'September 2024')">⬇ Download</button>
+  <button class="btn btn-download" onclick="downloadCert('Advanced Python Programming', 'Open Coding Society', 'September 2024')">⬇ Download</button>
         <button class="btn btn-share">🔗 Share</button>
       </div>
     </div>
@@ -489,21 +489,24 @@ window.downloadCert = async function () {
   // Date — use current date to ensure certificate is issued today
   const issuanceDate = new Date();
   const formattedDate = issuanceDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  ctx.fillStyle = '#ea8c33';
+  // match the Advanced Python Programming accent (red) for the date
+  ctx.fillStyle = '#2c3e50';
   ctx.font = 'bold 24px Arial';
   ctx.fillText('Date: ' + formattedDate, canvas.width / 2, 800);
 
       // Signature line
-      ctx.strokeStyle = '#ea8c33';
+      ctx.strokeStyle = '#2c3e50';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(500, 880);
       ctx.lineTo(900, 880);
       ctx.stroke();
 
-  ctx.fillStyle = '#555';
-  ctx.font = '20px Arial';
-  ctx.fillText('John Mortenson', canvas.width / 2, 920);
+      // signature name: larger and lifted above the line to match 'OF COMPLETION'
+      ctx.fillStyle = '#555';
+      ctx.font = 'bold 48px Georgia';
+      // place slightly above the signature line
+      ctx.fillText('John Mortenson', canvas.width / 2, 860);
 
       // Trigger download
       const link = document.createElement('a');
