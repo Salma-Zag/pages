@@ -791,3 +791,441 @@ setTimeout(function(){
 </script>
 </body>
 </html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Diego Zoo Audio Quiz</title>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #2d5016 0%, #1a3d1b 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.quiz-section {
+  padding: 50px 60px;
+  background: linear-gradient(135deg, #4a7c4e 0%, #3a6b3f 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 30s linear infinite;
+}
+
+@keyframes moveGrid {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(40px, 40px) rotate(360deg); }
+}
+
+.quiz-section h1 {
+  font-size: 2.2em;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,.3);
+}
+
+.subtitle {
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: 1.1em;
+  position: relative;
+  z-index: 1;
+}
+
+.question {
+  background: rgba(255,255,255,.97);
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.question:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(0,0,0,.3);
+}
+
+.question.correct {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border: 3px solid #4caf50;
+}
+
+.question-number {
+  color: #2d5016;
+  font-weight: 800;
+  font-size: 1em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question-text {
+  color: #333;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.code-block {
+  background: #2d2d2d;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-family: 'Courier New', monospace;
+  color: #f8f8f2;
+  font-size: 0.9em;
+  overflow-x: auto;
+}
+
+.code-tag {
+  color: #66d9ef;
+}
+
+.code-attr {
+  color: #a6e22e;
+}
+
+.code-value {
+  color: #e6db74;
+}
+
+.fill-blank {
+  display: block;
+  background: #faf8f5;
+  border: 3px solid #4a7c4e;
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: #333;
+  font-size: 0.95em;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin-top: 12px;
+  box-sizing: border-box;
+}
+
+.fill-blank::placeholder {
+  color: #999;
+}
+
+.fill-blank:focus {
+  border-color: #2d5016;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(74,124,78,.15);
+  transform: scale(1.05);
+}
+
+.fill-blank.correct {
+  border-color: #4caf50;
+  background: #e8f5e9;
+}
+
+.feedback {
+  margin-top: 15px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  display: none;
+  font-size: 0.95em;
+}
+
+.feedback.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(76,175,80,.4);
+}
+
+.feedback.incorrect {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(239,83,80,.4);
+}
+
+.check-button-container {
+  text-align: center;
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.check-answers-btn {
+  padding: 16px 45px;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #1a3d1b;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255,215,0,.4);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.check-answers-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(255,215,0,.5);
+  background: linear-gradient(135deg, #ffed4e, #ffd700);
+}
+
+.check-answers-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.completion-message {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  padding: 40px;
+  border-radius: 18px;
+  text-align: center;
+  display: none;
+  margin-top: 35px;
+  box-shadow: 0 20px 60px rgba(76,175,80,.4);
+  position: relative;
+  z-index: 1;
+}
+
+.completion-message.show {
+  display: block;
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.completion-message h2 {
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-size: 2em;
+  text-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+
+.completion-message p {
+  color: #ffffff;
+  font-size: 1.1em;
+}
+
+.audio-player {
+  background: rgba(255,255,255,.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.audio-player audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.animal-icon {
+  font-size: 3em;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .quiz-section {
+    padding: 35px 20px;
+  }
+  
+  .quiz-section h1 {
+    font-size: 1.8em;
+  }
+  
+  .subtitle {
+    font-size: 1em;
+  }
+  
+  .question {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="quiz-section">
+  <h1>🦁 San Diego Zoo Audio Challenge</h1>
+  <p class="subtitle">Fill in the blanks to create a working audio player with wild animal sounds!</p>
+  
+  <div class="question" id="q1">
+    <div class="question-number">Question 1 - Audio Tag Opening</div>
+    <div class="question-text">
+      What attribute do you add to the &lt;audio&gt; tag to show playback controls?
+      <div class="code-block">
+&lt;<span class="code-tag">audio</span> <input type="text" class="fill-blank" id="answer1" placeholder="Your answer">&gt;
+&lt;/<span class="code-tag">audio</span>&gt;
+      </div>
+    </div>
+    <div class="feedback" id="feedback1"></div>
+  </div>
+  
+  <div class="question" id="q2">
+    <div class="question-number">Question 2 - Source Tag</div>
+    <div class="question-text">
+      What tag do you use inside &lt;audio&gt; to specify the audio file?
+      <div class="code-block">
+&lt;<span class="code-tag">audio</span> <span class="code-attr">controls</span>&gt;
+  &lt;<input type="text" class="fill-blank" id="answer2" placeholder="Your answer"> <span class="code-attr">src</span>=<span class="code-value">"lion-roar.mp3"</span>
+     <span class="code-attr">type</span>=<span class="code-value">"audio/mpeg"</span>&gt;
+&lt;/<span class="code-tag">audio</span>&gt;
+      </div>
+    </div>
+    <div class="feedback" id="feedback2"></div>
+  </div>
+  
+  <div class="question" id="q3">
+    <div class="question-number">Question 3 - File Type</div>
+    <div class="question-text">
+      What type value should you use for .mp3 files?
+      <div class="code-block">
+&lt;<span class="code-tag">source</span> <span class="code-attr">src</span>=<span class="code-value">"zoo-sounds.mp3"</span>
+   <span class="code-attr">type</span>=<span class="code-value">"audio/<input type="text" class="fill-blank" id="answer3" placeholder="Your answer">"</span>&gt;
+      </div>
+    </div>
+    <div class="feedback" id="feedback3"></div>
+  </div>
+  
+  <div class="check-button-container">
+    <button class="check-answers-btn" id="checkBtn">Hear the Roar! 🦁</button>
+  </div>
+  
+  <div class="completion-message" id="completion">
+    <h2>🦁 Wild Success!</h2>
+    <div class="animal-icon">🎉🦁🐼🦒🎊</div>
+    <p style="margin-bottom: 20px;">You've successfully created an audio player for the San Diego Zoo!</p>
+    <p style="font-size: 1.2em; font-weight: 600; margin-bottom: 25px;">Here's your working audio player:</p>
+    <div class="audio-player">
+      <p style="color: #fff; font-weight: 600; margin-bottom: 10px;">🦁 King of the Jungle - Lion Roar</p>
+      <audio controls id="finalAudio">
+        <source src="/hacks/west-coast/travel/sandiego/tiger-roar-wildlife-sfx-376158.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <p style="margin-top: 25px;">The animals are roaring with pride! 🐾</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('checkBtn').addEventListener('click', function() {
+  const input1 = document.getElementById('answer1');
+  const input2 = document.getElementById('answer2');
+  const input3 = document.getElementById('answer3');
+  const feedback1 = document.getElementById('feedback1');
+  const feedback2 = document.getElementById('feedback2');
+  const feedback3 = document.getElementById('feedback3');
+  const question1 = document.getElementById('q1');
+  const question2 = document.getElementById('q2');
+  const question3 = document.getElementById('q3');
+  
+  const answer1 = input1.value.trim().toLowerCase();
+  const answer2 = input2.value.trim().toLowerCase();
+  const answer3 = input3.value.trim().toLowerCase();
+  
+  let allCorrect = true;
+  
+  // Check answer 1 - controls attribute
+  if (answer1 === 'controls') {
+    feedback1.textContent = '🦁 Perfect! The controls attribute shows play, pause, and volume buttons!';
+    feedback1.className = 'feedback correct show';
+    input1.className = 'fill-blank correct';
+    question1.className = 'question correct';
+    input1.disabled = true;
+  } else {
+    feedback1.textContent = '✗ Not quite! You need to add the "controls" attribute to show playback controls.';
+    feedback1.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Check answer 2 - source tag
+  if (answer2 === 'source') {
+    feedback2.textContent = '🦒 Great job! The <source> tag specifies the audio file location!';
+    feedback2.className = 'feedback correct show';
+    input2.className = 'fill-blank correct';
+    question2.className = 'question correct';
+    input2.disabled = true;
+  } else {
+    feedback2.textContent = '✗ Try again! The tag that specifies the audio file is called "source".';
+    feedback2.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Check answer 3 - mpeg type
+  if (answer3 === 'mpeg') {
+    feedback3.textContent = '🐼 Excellent! audio/mpeg is the correct MIME type for MP3 files!';
+    feedback3.className = 'feedback correct show';
+    input3.className = 'fill-blank correct';
+    question3.className = 'question correct';
+    input3.disabled = true;
+  } else {
+    feedback3.textContent = '✗ Not quite! For .mp3 files, use "mpeg" as the type (audio/mpeg).';
+    feedback3.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Show completion if all correct
+  if (allCorrect) {
+    setTimeout(() => {
+      const completion = document.getElementById('completion');
+      completion.className = 'completion-message show';
+      
+      // Disable the button
+      this.disabled = true;
+      this.textContent = '✓ Wild Adventure Complete! 🦁';
+      this.style.background = 'linear-gradient(135deg, #4caf50, #66bb6a)';
+      this.style.color = 'white';
+      
+      // Scroll to completion message
+      completion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 500);
+  }
+});
+</script>
+
+</body>
+</html>
