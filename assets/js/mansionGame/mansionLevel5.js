@@ -41,10 +41,10 @@ class MansionLevel5 {
 		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
 		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
 		left: {row: 0, start: 0, columns: 3},
-		right: {row: 1, start: 0, columns: 3},
+		right: {row: 1, start: 0, columns: 3, mirror: true},
 		up: {row: 1, start: 0, columns: 3},
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
-		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/-16},
+		upRight: {row: 1, start: 0, columns: 3, mirror: true, rotate: Math.PI/-16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
 		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32},
         shoot: {row: 2, start: 0, columns: 25}
@@ -82,17 +82,6 @@ class MansionLevel5 {
             
             // Find nearest player
             let nearest = players[0];
-            let minDist = Infinity;
-
-            for (const player of players) {
-                const dx = player.position.x - this.position.x;
-                const dy = player.position.y - this.position.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < minDist) {
-                    minDist = dist;
-                    nearest = player;
-                }
-            }
 
             // Move towards nearest player
             const speed = 0.8; // Adjust speed as needed
@@ -108,7 +97,7 @@ class MansionLevel5 {
             {
                 // Calculate distance for hitbox collision
                 const playerX = nearest.position.x + nearest.width / 2;
-                const playerY = nearest.position.y + plnearestayer.height / 2;
+                const playerY = nearest.position.y + nearest.height / 2;
                 const enemyX = this.position.x + this.width / 2;
                 const enemyY = this.position.y + this.height / 2;
                 
@@ -137,8 +126,8 @@ class MansionLevel5 {
                         particle.style.width = '5px';
                         particle.style.height = '5px';
                         particle.style.backgroundColor = 'red';
-                        particle.style.left = `${playerX + player.width/2}px`;
-                        particle.style.top = `${playerY + player.height/2}px`;
+                        particle.style.left = `${playerX + nearest.width/2}px`;
+                        particle.style.top = `${playerY + nearest.height/2}px`;
                         particle.style.zIndex = '9999';
                         document.body.appendChild(particle);
                         
