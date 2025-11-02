@@ -373,30 +373,25 @@ date: 2025-10-21
 <canvas id="certCanvas"></canvas>
 
 <script>
-import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+let userData = null;
 
-  async function getCredentials() {
-        try {
-            const res = await fetch(${pythonURI}/api/id, {
-                ...fetchOptions,
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-
-            if (res.ok) {
-                const data = await res.json();
-                const name = data.name;
-                console.log(name);
-                return name;
-            } else {
-                console.log(Request failed for with status ${res.status});
-            }
-        } catch (err) {
-            console.log(Error: ${err});
-        }
+// Fetch user UID once page loads
+async function fetchUserData() {
+  try {
+    const response = await fetch('/api/id', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token') // adjust if you store token elsewhere
+      }
+    });
+    if (!response.ok) throw new Error('Failed to fetch user data');
+    userData = await response.json();
+    console.log('User loaded:', userData);
+  } catch (error) {
+    console.error('Error loading user:', error);
   }
+}
+
+window.onload = fetchUserData;
 function downloadCert(course, org, date) {
   const canvas = document.getElementById('certCanvas');
   const ctx = canvas.getContext('2d');
