@@ -2,6 +2,13 @@ import Character from '../GameEngine/Character.js';
 import showDeathScreen from './DeathScreen.js';
 import { updatePlayerHealthBar } from './HealthBars.js';
 
+/*
+    Projectile class for the Reaper boss fireball & arrow attacks + player attack
+    - Moves towards it's target
+    - Damages target once reached, then self-destroys
+    - Three sub attack types: FIREBALL, ARROW, and PLAYER
+*/
+
 class Projectile extends Character {
     constructor(gameEnv = null, targetx, targety, sourcex, sourcey, type) {
         super({id: type}, gameEnv);

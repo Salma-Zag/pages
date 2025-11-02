@@ -4,6 +4,13 @@ import Projectile from '../CustomGameClasses/Projectile.js';
 import Arm from '../CustomGameClasses/Arm.js';
 import showEndScreen from '../MansionGameEndScreen.js';
 
+/*
+    Boss class to define the Reaper
+    - Uses various attacks at an attack interval to damage the player
+    - Has heath (see HealthBars.js for health bars)
+    - Slowly moves towards the player
+*/
+
 class Boss extends Enemy {
     constructor(data = null, gameEnv = null) {
         super(data, gameEnv);
