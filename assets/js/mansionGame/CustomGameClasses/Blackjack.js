@@ -405,6 +405,10 @@ class BlackjackGameManager {
             }, 800);
         }
         this.gameActive = false;
+        
+        // Reset money to $1000 when exiting
+        this.money = 1000;
+        this.currentBet = 0;
     }
 
     resetLevel() {
