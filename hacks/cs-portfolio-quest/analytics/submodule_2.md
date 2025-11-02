@@ -266,33 +266,57 @@ date: 2025-10-21
 <div class="container">
   <h2 class="section-title">Earned Certificates</h2>
   <div class="certificates-grid">
-    <div class="cert-card cert-red">
-      <span class="cert-badge">Verified</span>
-      <h3 class="cert-title">Advanced Python Programming</h3>
-      <div class="cert-org">Open Coding Society</div>
-      <div class="cert-date">September 2024</div>
-      <div class="cert-actions">
-  <button class="btn btn-download" onclick="downloadCert('Advanced Python Programming', 'Open Coding Society', 'September 2024')">⬇ Download</button>
-        <button class="btn btn-share">🔗 Share</button>
-      </div>
-    </div>
     <div class="cert-card cert-orange">
       <span class="cert-badge">Verified</span>
-      <h3 class="cert-title">Data Analysis with Python</h3>
+      <h3 class="cert-title">Frontend Development</h3>
       <div class="cert-org">Open Coding Society</div>
-      <div class="cert-date">June 2024</div>
+      <div class="cert-date">November 2025</div>
       <div class="cert-actions">
-        <button class="btn btn-download" onclick="downloadCert('Data Analysis with Python', 'Data Science Institute', 'June 2024')">⬇ Download</button>
+        <button class="btn btn-download" onclick="downloadCert('Frontend Development', 'Open Coding Society', 'November 2025')">⬇ Download</button>
         <button class="btn btn-share">🔗 Share</button>
       </div>
     </div>
+
+    <div class="cert-card cert-red">
+      <span class="cert-badge">Verified</span>
+      <h3 class="cert-title">Backend Development</h3>
+      <div class="cert-org">Open Coding Society</div>
+      <div class="cert-date">November 2025</div>
+      <div class="cert-actions">
+        <button class="btn btn-download" onclick="downloadCert('Backend Development', 'Open Coding Society', 'November 2025')">⬇ Download</button>
+        <button class="btn btn-share">🔗 Share</button>
+      </div>
+    </div>
+
     <div class="cert-card cert-purple">
       <span class="cert-badge">Verified</span>
-      <h3 class="cert-title">Machine Learning Fundamentals</h3>
+      <h3 class="cert-title">Data Visualization</h3>
       <div class="cert-org">Open Coding Society</div>
-      <div class="cert-date">July 2024</div>
+      <div class="cert-date">November 2025</div>
       <div class="cert-actions">
-        <button class="btn btn-download" onclick="downloadCert('Machine Learning Fundamentals', 'AI Learning Hub', 'July 2024')">⬇ Download</button>
+        <button class="btn btn-download" onclick="downloadCert('Data Visualization', 'Open Coding Society', 'November 2025')">⬇ Download</button>
+        <button class="btn btn-share">🔗 Share</button>
+      </div>
+    </div>
+
+    <div class="cert-card cert-red">
+      <span class="cert-badge">Verified</span>
+      <h3 class="cert-title">Resume Building</h3>
+      <div class="cert-org">Open Coding Society</div>
+      <div class="cert-date">November 2025</div>
+      <div class="cert-actions">
+        <button class="btn btn-download" onclick="downloadCert('Resume Building', 'Open Coding Society', 'November 2025')">⬇ Download</button>
+        <button class="btn btn-share">🔗 Share</button>
+      </div>
+    </div>
+
+    <div class="cert-card cert-orange">
+      <span class="cert-badge">Verified</span>
+      <h3 class="cert-title">AI Usage</h3>
+      <div class="cert-org">Open Coding Society</div>
+      <div class="cert-date">November 2025</div>
+      <div class="cert-actions">
+        <button class="btn btn-download" onclick="downloadCert('AI Usage', 'Open Coding Society', 'November 2025')">⬇ Download</button>
         <button class="btn btn-share">🔗 Share</button>
       </div>
     </div>
