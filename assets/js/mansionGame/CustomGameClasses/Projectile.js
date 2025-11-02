@@ -1,6 +1,7 @@
 import Character from '../GameEngine/Character.js';
 import showDeathScreen from './DeathScreen.js';
 import { updatePlayerHealthBar } from './HealthBars.js';
+import showEndScreen from '../MansionGameEndScreen.js';
 
 /*
     Projectile class for the Reaper boss fireball & arrow attacks + player attack
@@ -200,7 +201,7 @@ class Projectile extends Character {
                 if (nearestBoss.data.health <= 0) {
                     console.log("Game over -- the player has won!");
                     // Show victory screen
-                    // TBD: ADD VICTORY SCREEN
+                    try { showEndScreen(this.gameEnv); } catch (e) { console.warn('Error showing victory screen:', e); }
                 }
             }
 
