@@ -70,4 +70,4 @@ class FightingPlayer extends Player {
     }
 }
 
-export default SpookFight;
+export default FightingPlayer;
