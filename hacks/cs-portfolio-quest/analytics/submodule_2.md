@@ -76,6 +76,23 @@ date: 2025-10-21
   .cert-purple:hover {
     box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4);
   }
+  .cert-teal {
+    background: linear-gradient(135deg, #16a085 0%, #138d75 100%);
+    box-shadow: 0 4px 12px rgba(22, 160, 133, 0.32);
+  }
+  .cert-teal:hover {
+    box-shadow: 0 10px 26px rgba(22, 160, 133, 0.4);
+    transform: translateY(-4px);
+  }
+  .cert-yellow {
+    background: linear-gradient(135deg, #f1c40f 0%, #d4ac0d 100%);
+    box-shadow: 0 4px 12px rgba(241, 196, 15, 0.28);
+    color: #111;
+  }
+  .cert-yellow:hover {
+    box-shadow: 0 10px 26px rgba(241, 196, 15, 0.36);
+    transform: translateY(-4px);
+  }
   .cert-badge {
     background: rgba(0, 0, 0, 0.2);
     color: #fff;
@@ -299,7 +316,7 @@ date: 2025-10-21
       </div>
     </div>
 
-    <div class="cert-card cert-red">
+    <div class="cert-card cert-teal">
       <span class="cert-badge">Verified</span>
       <h3 class="cert-title">Resume Building</h3>
       <div class="cert-org">Open Coding Society</div>
@@ -310,7 +327,7 @@ date: 2025-10-21
       </div>
     </div>
 
-    <div class="cert-card cert-orange">
+    <div class="cert-card cert-yellow">
       <span class="cert-badge">Verified</span>
       <h3 class="cert-title">AI Usage</h3>
       <div class="cert-org">Open Coding Society</div>
