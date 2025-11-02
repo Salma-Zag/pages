@@ -1810,26 +1810,26 @@ button:active {
 /* ===== Quiz Section Styles ===== */
 .quiz-section {
   background: #fff;
-  color: #000 !important;
+  color: #000;
   padding: 40px 20px;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .quiz-section h2 {
-  color: #000 !important;
+  color: #000;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
 .quiz-section p {
-  color: #000 !important;
+  color: #000;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
 .quiz-section label {
-  color: #000 !important;
+  color: #000;
   font-size: 16px;
   display: block;
   margin-bottom: 10px;
@@ -1837,7 +1837,7 @@ button:active {
 
 .quiz-section code {
   background: #f4f4f4;
-  color: #000 !important;
+  color: #000;
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 14px;
@@ -1850,7 +1850,12 @@ button:active {
   border: 2px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
-  color: #000;
+  background: #000 !important;       /* black background */
+  color: #fff !important;            /* white text */
+}
+
+.quiz-section input[type="text"]::placeholder {
+  color: #aaa;            /* placeholder gray for contrast */
 }
 
 .quiz-section button {
@@ -1858,7 +1863,7 @@ button:active {
 }
 
 .quiz-result {
-  color: #000 !important;
+  color: #000;
   font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
@@ -1872,7 +1877,7 @@ button:active {
 }
 
 .button-demo p {
-  color: #000 !important;
+  color: #000;
   font-size: 16px;
   margin-bottom: 15px;
 }
