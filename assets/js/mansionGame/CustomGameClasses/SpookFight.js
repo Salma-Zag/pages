@@ -23,7 +23,7 @@ class SpookFight extends Player {
 
     // Execute an attack
     attack() {
-        this.projectiles.push(new Projectile(this.gameEnv, target.position.x, target.position.y, this.position.x, this.position.y, "ARROW"));
+        this.projectiles.push(new Projectile(this.gameEnv, target.position.x, target.position.y, this.position.x, this.position.y, "PLAYER"));
     }
 }
 
