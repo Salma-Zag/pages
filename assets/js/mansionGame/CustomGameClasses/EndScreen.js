@@ -27,14 +27,12 @@ export default function showEndScreen(gameEnv) {
     img.style.boxShadow = '0 0 40px rgba(255,255,255,0.2)';
     overlay.appendChild(img);
 
-    // Click to close overlay and stop the level
-    overlay.addEventListener('click', () => {
-        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-        try {
-            if (gameEnv && gameEnv.gameControl && gameEnv.gameControl.currentLevel) {
-                gameEnv.gameControl.currentLevel.continue = false;
-            }
-        } catch (e) { /* ignore */ }
+    // Disable click-to-close: keep overlay visible until game control/timeout handles the transition.
+    // This prevents accidental dismissal when the player clicks the screen.
+    overlay.addEventListener('click', (e) => {
+        // swallow clicks so they don't remove the overlay or interact with underlying elements
+        e.stopPropagation();
+        e.preventDefault();
     });
 
     // Append to body
