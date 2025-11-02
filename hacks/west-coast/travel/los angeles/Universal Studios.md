@@ -263,6 +263,47 @@ body{font-family:'Arial',sans-serif;overflow-x:hidden;background:#1a1a2e}
 .marquee{position:absolute;bottom:8px;left:0;width:100%;background:rgba(0,0,0,.85);padding:14px 0;overflow:hidden;z-index:100}
 .marquee-text{display:inline-block;white-space:nowrap;animation:scroll 30s linear infinite;color:#ffd700;font-size:17px;font-weight:bold;letter-spacing:2px}
 @keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+#universalContainer.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.demo-container {
+  background: #f5f5f5;
+  padding: 30px;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+.button-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(33,150,243,.3);
+  transition: all 0.3s ease;
+}
+
+.button-container button:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33,150,243,.4);
+}
+
+#universalContainer {
+  background: transparent;
+  padding: 20px;
+  text-align: center;
+}
 </style>
 </head>
 <body>
@@ -371,92 +412,327 @@ body{font-family:'Arial',sans-serif;overflow-x:hidden;background:#1a1a2e}
 </div>
 <p>Heading to Universal Studios Hollywood…</p>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Universal Studios Button Lesson</title>
+<style>
+body {
+  background: linear-gradient(to bottom, #1a1a2e, #16213e);
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 40px 20px;
+}
 
-</main>
-<!-- Lesson Content -->
-<div class="lesson-content" id="lessonContent">
+.lesson-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #00d4ff, #7b2ff7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 32px;
+  color: #00d4ff;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 24px;
+  color: #ffd700;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  background: rgba(255, 215, 0, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.tip-box {
+  background: rgba(33, 150, 243, 0.1);
+  border-left: 4px solid #2196f3;
+  padding: 20px;
+  margin: 25px 0;
+  border-radius: 8px;
+}
+
+.tip-box strong {
+  color: #2196f3;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+/* Demo Section */
+.example-section {
+  margin: 50px 0;
+  text-align: center;
+}
+
+.demo-container {
+  background: #f5f5f5;
+  padding: 50px 30px;
+  border-radius: 16px;
+  margin: 30px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.button-container button {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.button-container button:hover {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.6);
+}
+
+.button-container button:active {
+  transform: translateY(-1px);
+}
+
+#universalContainer {
+  background: transparent;
+  padding: 20px;
+  text-align: center;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#universalContainer.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Universal Globe */
+.globe-container {
+  position: relative;
+  display: inline-block;
+  animation: globeFloat 3s ease-in-out infinite;
+}
+
+.globe {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #64b5f6, #2196f3, #1565c0);
+  box-shadow: inset -25px -25px 50px rgba(0, 0, 0, 0.4),
+              inset 25px 25px 50px rgba(255, 255, 255, 0.15),
+              0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globe::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.universal-text {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  letter-spacing: 2px;
+  z-index: 10;
+}
+
+@keyframes globeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.states-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.state-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.state-card:hover {
+  transform: translateY(-5px);
+  border-color: #ffd700;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.2);
+}
+
+.state-card h4 {
+  color: #ffd700;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.emoji {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<div class="lesson-content">
 <div class="container">
 <h1>Los Angeles</h1>
-<h2>Universal Studios Button Lesson</h2>
-<h3>Step 1: Set Up Your HTML File</h3>
-<p>First, create a new file and save it as button.html. Every HTML file needs this basic structure:</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;My Button&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>What this means:</p>
-<p>&lt;!DOCTYPE html&gt; tells the browser this is an HTML file</p>
-<p>&lt;html&gt; wraps everything</p>
-<p>&lt;head&gt; contains information about the page</p>
-<p>&lt;body&gt; is where your visible content goes</p>
-<h3>Step 2: Create Your First Button</h3>
-<p>Inside the &lt;body&gt; tags, add a button:</p>
-<pre><code>&lt;body&gt;
-&lt;button&gt;Click Me!&lt;/button&gt;
-&lt;/body&gt;</code></pre>
-<h3>Step 3: Make the Button Do Something</h3>
-<p>Add an onclick attribute to make something happen when clicked:</p>
-<pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me!&lt;/button&gt;</code></pre>
+<h2>Learn Buttons at Universal Studios!</h2>
+
+<p>Welcome to LA! Today we're learning about buttons—the clickable elements that make websites interactive. And what better way to learn than with the iconic <span class="highlight">Universal Studios globe</span>?</p>
+
 <div class="example-section">
-<h3>Here's an example button!</h3>
+<h3>Try It Out!</h3>
+<p>Click the button below to see the Universal globe appear:</p>
+
 <div class="demo-container">
 <div class="button-container">
 <button onclick="generateUniversal()">Click for Universal Studios</button>
 </div>
-<div id="universalContainer">
+
+<div id="universalContainer" style="opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease;">
 <div class="globe-container">
-<div class="ring ring2"></div>
-<div class="ring ring1"></div>
 <div class="globe">
-<div class="latitude-line lat1"></div>
-<div class="latitude-line lat2"></div>
-<div class="latitude-line lat3"></div>
-<div class="longitude-line"></div>
-</div>
 <div class="universal-text">UNIVERSAL</div>
 </div>
 </div>
 </div>
 </div>
-<h2>Button Design Tips</h2>
-<h3>What is a Button?</h3>
-<p>A button triggers an action when clicked. Think of Universal Studios' iconic globe—bold, recognizable, and inviting. Good buttons work the same way.</p>
-<h3>The 3 Button States</h3>
-<p><strong>Default (Globe at Rest)</strong> - How it looks normally—waiting to be clicked.</p>
-<p><strong>Hover (Globe Spinning)</strong> - When you move your mouse over it—shows it's interactive.</p>
-<p><strong>Clicked (Lights Activate)</strong> - The moment you click—confirms the action.</p>
-<h3>5 Design Tips</h3>
-<p><strong>1. Make it Bold</strong></p>
-<p>Like the Universal globe—easy to see from everywhere. Use size and contrast.</p>
-<p><strong>2. Use Clear Labels</strong></p>
-<p>"UNIVERSAL" is obvious—your button should be too. "Buy Tickets" not "Click Here". "Enter Park" not "Submit".</p>
-<p><strong>3. Show it's Clickable</strong></p>
-<p>The globe looks interactive and inviting. Add rounded corners or shadows. Use hover effects.</p>
-<p><strong>4. Create Contrast</strong></p>
-<p>Blue globe against bright sky—maximum visibility. Button color should pop from the background.</p>
-<p><strong>5. Size Matters</strong></p>
-<p>Big enough to see and click easily. At least 44x44px on mobile.</p>
-<h3>Button Types</h3>
-<p><strong>Primary:</strong> Most important action (the main entrance)</p>
-<p><strong>Secondary:</strong> Supporting actions (ride queues)</p>
-<p><strong>Tertiary:</strong> Minor actions (information kiosks)</p>
-<h3>Common Mistakes</h3>
-<p>1. Vague labels like "Click" or "Submit"</p>
-<p>2. No hover effect</p>
-<p>3. Too many bold buttons</p>
-<p>4. Too small to tap</p>
-<p>5. Unclear what happens when clicked</p>
-<h3>Quick Tips</h3>
-<p>- Use action verbs: "Explore," "Buy," "Enter"</p>
-<p>- One primary button per section</p>
-<p>- Make it look clickable</p>
-<p>- Test on mobile</p>
+</div>
+
+<h2>What Makes a Great Button?</h2>
+
+<p>Think of the Universal globe—it's <span class="highlight">bold</span>, <span class="highlight">recognizable</span>, and <span class="highlight">inviting</span>. Great buttons work the same way!</p>
+
+<div class="states-grid">
+<div class="state-card">
+<h4>Default State</h4>
+<p>Clear and ready to click</p>
+</div>
+
+<div class="state-card">
+<h4>Hover State</h4>
+<p>Shows it's interactive</p>
+</div>
+
+<div class="state-card">
+<h4>Clicked State</h4>
+<p>Confirms your action</p>
 </div>
 </div>
+
+<h2>Quick Design Tips</h2>
+
+<div class="tip-box">
+<strong>1. Make it Bold</strong>
+<p>Like the Universal globe—easy to spot from anywhere. Use size and contrast to make your button stand out.</p>
+</div>
+
+<div class="tip-box">
+<strong>2. Use Clear Labels</strong>
+<p>Say "Buy Tickets" not "Click Here". Say "Enter Park" not "Submit". Be specific about what happens when clicked!</p>
+</div>
+
+<div class="tip-box">
+<strong>3. Show It's Clickable</strong>
+<p>Add rounded corners, shadows, and hover effects. Your button should look inviting and interactive.</p>
+</div>
+
+<div class="tip-box">
+<strong>4. Create Contrast</strong>
+<p>Blue globe against bright sky = maximum visibility. Make your button color pop from the background.</p>
+</div>
+
+<div class="tip-box">
+<strong>5. Size Matters</strong>
+<p>Big enough to tap easily on mobile. Aim for at least 44×44 pixels.</p>
+</div>
+
+<h2>Common Mistakes to Avoid</h2>
+<p>Vague labels like "Click" or "Submit"<br>
+No hover effect<br>
+Too many bold buttons competing<br>
+Too small to tap on mobile<br>
+Unclear what happens when clicked</p>
+
+<h2>Ready to Code?</h2>
+<p>Use action verbs like <span class="highlight">"Explore"</span>, <span class="highlight">"Buy"</span>, or <span class="highlight">"Enter"</span>. Keep one primary button per section. And most importantly—make it look clickable!</p>
+
+<p style="margin-top: 40px; text-align: center; font-size: 24px;">Now you're ready to design amazing buttons!</p>
+</div>
+</div>
+
+<script>
+function generateUniversal() {
+  var universalContainer = document.getElementById('universalContainer');
+  universalContainer.classList.remove('show');
+  setTimeout(function() {
+    universalContainer.classList.add('show');
+  }, 50);
+}
+</script>
+</body>
+</html>
 <section class="quiz-section">
 <h2>🧠 Quick Quiz: Build Your Own Button!</h2>
 <p>Fill in the blanks to complete your HTML file. If you get both right, your button will appear!</p>
