@@ -372,27 +372,37 @@ date: 2025-10-21
 
 <canvas id="certCanvas"></canvas>
 
-<script>
-let userData = null;
+<script type="module">
+import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
 
-// Fetch user UID once page loads
-async function fetchUserData() {
+async function getCredentials() {
   try {
-    const response = await fetch('/api/id', {
+    const res = await fetch(`${pythonURI}/api/id`, {
+      ...fetchOptions,
+      method: "GET",
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token') // adjust if you store token elsewhere
-      }
+        "Content-Type": "application/json"
+      },
     });
-    if (!response.ok) throw new Error('Failed to fetch user data');
-    userData = await response.json();
-    console.log('User loaded:', userData);
-  } catch (error) {
-    console.error('Error loading user:', error);
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log("Fetched user name:", data.name);
+      return data.name || "Student Name";
+    } else {
+      console.error(`Request failed with status ${res.status}`);
+      return "Student Name";
+    }
+  } catch (err) {
+    console.error(`Error: ${err}`);
+    return "Student Name";
   }
 }
 
-window.onload = fetchUserData;
-function downloadCert(course, org, date) {
+export async function downloadCert(course, org, date) {
+  // ✅ Fetch the name dynamically
+  const studentName = await getCredentials();
+
   const canvas = document.getElementById('certCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = 1400;
@@ -443,13 +453,12 @@ function downloadCert(course, org, date) {
   ctx.font = '28px Arial';
   ctx.fillText('This is to certify that', canvas.width / 2, 380);
 
-  // Student name (from userData)
-  const studentName = userData?.name || 'Student Name';
+  // Student name (from API)
   ctx.fillStyle = '#ea8c33';
   ctx.font = 'italic bold 52px Georgia';
   ctx.fillText(studentName, canvas.width / 2, 470);
 
-  // Underline
+  // Underline under name
   ctx.strokeStyle = '#ea8c33';
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -477,14 +486,6 @@ function downloadCert(course, org, date) {
   ctx.font = 'bold 24px Arial';
   ctx.fillText('Date: ' + date, canvas.width / 2, 800);
 
-  // UID (bottom right corner)
-  if (userData?.uid) {
-    ctx.fillStyle = '#999';
-    ctx.font = '18px Arial';
-    ctx.textAlign = 'right';
-    ctx.fillText('UID: ' + userData.uid, canvas.width - 120, canvas.height - 60);
-  }
-
   // Signature line
   ctx.strokeStyle = '#ea8c33';
   ctx.lineWidth = 2;
@@ -498,7 +499,7 @@ function downloadCert(course, org, date) {
   ctx.textAlign = 'center';
   ctx.fillText('Authorized Signature', canvas.width / 2, 920);
 
-  // Download
+  // Download file
   const link = document.createElement('a');
   const safeName = studentName.replace(/\s+/g, '_');
   link.download = `${safeName}_${course.replace(/\s+/g, '_')}_Certificate.png`;
