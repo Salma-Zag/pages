@@ -156,54 +156,92 @@ class Projectile extends Character {
             return;
         }
 
-        const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player');
-        if (players.length === 0) return null;
-
-        let nearest = players[0];
-        let minDist = Infinity;
-
-        for (const player of players) {
-            const dx = player.position.x - this.position.x;
-            const dy = player.position.y - this.position.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < minDist) {
-                minDist = dist;
-                nearest = player;
-            }
-        }
-
-        // Do distance formula calculation and return
-        const xDiff = nearest.position.x - this.position.x;
-        const yDiff = nearest.position.y - this.position.y;
-        const distanceFromPlayer = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
-
         // If the player is too close...
         const PLAYER_HIT_DISTANCE = 50;
+        const REAPER_HIT_DISTANCE = 50;
         const ARROW_DAMAGE = 10;
         const PLAYER_DAMAGE = 300;  // This is a test value
         const FIREBALL_DAMAGE = 15;
         const DAMAGE_DEALT = this.type == "FIREBALL" ? FIREBALL_DAMAGE : this.type == "ARROW" ? ARROW_DAMAGE : PLAYER_DAMAGE;
-        if (distanceFromPlayer <= PLAYER_HIT_DISTANCE) {
-            this.revComplete = true;
-            this.destroy();
-            if (!nearest.data) nearest.data = { health: 100 }; // Initialize health if not exists
-            nearest.data.health -= DAMAGE_DEALT;
-            console.log("Player Health:", nearest.data.health);
-            if (nearest.data.health <= 0) {
-                console.log("Game over -- the player has been defeated!");
-                // Show death screen
-                showDeathScreen(nearest);
-            }
-        }
+        if (this.type === 'PLAYER') {
+            const reapers = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Boss');
+            if (reapers.length === 0) return null;
+            let nearestBoss = reapers[0];
+            let minDist = Infinity;
 
-        // Update the player health bar to accurately show the new health (if available)
-        try {
-            if (nearest && nearest.data && typeof updatePlayerHealthBar === 'function') {
-                const pct = Math.max(0, Math.min(100, nearest.data.health || 0));
-                updatePlayerHealthBar(pct);
+            // Find the closest boss
+            for (const reaper of reapers) {
+                const dx = reaper.position.x - this.position.x;
+                const dy = reaper.position.y - this.position.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearestBoss = reaper;
+                }
             }
-        } catch (e) {
-            console.warn('Failed to update player health bar:', e);
+
+            // Do distance formula calculation and return
+            const xDiff = nearestBoss.position.x - this.position.x;
+            const yDiff = nearestBoss.position.y - this.position.y;
+            const distanceFromReaper = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+            if (distanceFromReaper <= REAPER_HIT_DISTANCE) {
+                this.revComplete = true;
+                this.destroy();
+                nearestBoss.healthPoints -= DAMAGE_DEALT;
+                console.log("Reaper Health:", nearestBoss.healthPoints);
+                if (nearestBoss.data.health <= 0) {
+                    console.log("Game over -- the player has won!");
+                    // Show victory screen
+                    // TBD: ADD VICTORY SCREEN
+                }
+            }
+
+        } else {
+            const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player');
+            if (players.length === 0) return null;
+
+            let nearest = players[0];
+            let minDist = Infinity;
+
+            // Find the closest player
+            for (const player of players) {
+                const dx = player.position.x - this.position.x;
+                const dy = player.position.y - this.position.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = player;
+                }
+            }
+
+            // Do distance formula calculation
+            const xDiff = nearest.position.x - this.position.x;
+            const yDiff = nearest.position.y - this.position.y;
+            const distanceFromPlayer = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+            if (distanceFromPlayer <= PLAYER_HIT_DISTANCE) {
+                this.revComplete = true;
+                this.destroy();
+                if (!nearest.data) nearest.data = { health: 100 }; // Initialize health if not exists
+                nearest.data.health -= DAMAGE_DEALT;
+                console.log("Player Health:", nearest.data.health);
+                if (nearest.data.health <= 0) {
+                    console.log("Game over -- the player has been defeated!");
+                    // Show death screen
+                    showDeathScreen(nearest);
+                }
+            }
+
+            // Update the player health bar to accurately show the new health (if available)
+            try {
+                if (nearest && nearest.data && typeof updatePlayerHealthBar === 'function') {
+                    const pct = Math.max(0, Math.min(100, nearest.data.health || 0));
+                    updatePlayerHealthBar(pct);
+                }
+            } catch (e) {
+                console.warn('Failed to update player health bar:', e);
+            }
         }
     }
 
