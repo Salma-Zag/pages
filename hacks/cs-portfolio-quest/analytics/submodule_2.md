@@ -373,27 +373,50 @@ date: 2025-10-21
 <canvas id="certCanvas"></canvas>
 
 <script>
+import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+
+  async function getCredentials() {
+        try {
+            const res = await fetch(${pythonURI}/api/id, {
+                ...fetchOptions,
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                const name = data.name;
+                console.log(name);
+                return name;
+            } else {
+                console.log(Request failed for with status ${res.status});
+            }
+        } catch (err) {
+            console.log(Error: ${err});
+        }
+  }
 function downloadCert(course, org, date) {
   const canvas = document.getElementById('certCanvas');
   const ctx = canvas.getContext('2d');
-  
   canvas.width = 1400;
   canvas.height = 1000;
-  
-// Background - elegant cream
+
+  // Background - elegant cream
   ctx.fillStyle = '#f8f6f0';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
+
   // Outer border - navy
   ctx.strokeStyle = '#2c3e50';
   ctx.lineWidth = 25;
   ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
-  
+
   // Inner border - gold accent
   ctx.strokeStyle = '#c9b037';
   ctx.lineWidth = 3;
   ctx.strokeRect(80, 80, canvas.width - 160, canvas.height - 160);
-  
+
   // Decorative corners
   ctx.fillStyle = '#c9b037';
   ctx.beginPath();
@@ -402,16 +425,16 @@ function downloadCert(course, org, date) {
   ctx.arc(80, canvas.height - 80, 15, 0, Math.PI * 2);
   ctx.arc(canvas.width - 80, canvas.height - 80, 15, 0, Math.PI * 2);
   ctx.fill();
-  
+
   // Title
   ctx.fillStyle = '#2c3e50';
   ctx.font = 'bold 60px Georgia';
   ctx.textAlign = 'center';
   ctx.fillText('CERTIFICATE', canvas.width / 2, 200);
-  
+
   ctx.font = 'bold 48px Georgia';
   ctx.fillText('OF COMPLETION', canvas.width / 2, 260);
-  
+
   // Decorative line under title
   ctx.strokeStyle = '#c9b037';
   ctx.lineWidth = 4;
@@ -419,16 +442,18 @@ function downloadCert(course, org, date) {
   ctx.moveTo(400, 290);
   ctx.lineTo(1000, 290);
   ctx.stroke();
+
   // "This is to certify that"
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = '#2c3e50';
   ctx.font = '28px Arial';
   ctx.fillText('This is to certify that', canvas.width / 2, 380);
-  
-  // Student name
+
+  // Student name (from userData)
+  const studentName = userData?.name || 'Student Name';
   ctx.fillStyle = '#ea8c33';
   ctx.font = 'italic bold 52px Georgia';
-  ctx.fillText('Student Name', canvas.width / 2, 470);
-  
+  ctx.fillText(studentName, canvas.width / 2, 470);
+
   // Underline
   ctx.strokeStyle = '#ea8c33';
   ctx.lineWidth = 2;
@@ -436,27 +461,35 @@ function downloadCert(course, org, date) {
   ctx.moveTo(400, 490);
   ctx.lineTo(1000, 490);
   ctx.stroke();
-  
+
   // "has successfully completed"
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = '#2c3e50';
   ctx.font = '28px Arial';
   ctx.fillText('has successfully completed the course', canvas.width / 2, 560);
-  
+
   // Course name
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = '#2c3e50';
   ctx.font = 'bold 44px Arial';
   ctx.fillText(course, canvas.width / 2, 650);
-  
+
   // Organization
-  ctx.fillStyle = '#b0b0b0';
+  ctx.fillStyle = '#555';
   ctx.font = '26px Arial';
   ctx.fillText('Issued by ' + org, canvas.width / 2, 710);
-  
+
   // Date
   ctx.fillStyle = '#ea8c33';
   ctx.font = 'bold 24px Arial';
   ctx.fillText('Date: ' + date, canvas.width / 2, 800);
-  
+
+  // UID (bottom right corner)
+  if (userData?.uid) {
+    ctx.fillStyle = '#999';
+    ctx.font = '18px Arial';
+    ctx.textAlign = 'right';
+    ctx.fillText('UID: ' + userData.uid, canvas.width - 120, canvas.height - 60);
+  }
+
   // Signature line
   ctx.strokeStyle = '#ea8c33';
   ctx.lineWidth = 2;
@@ -464,14 +497,16 @@ function downloadCert(course, org, date) {
   ctx.moveTo(500, 880);
   ctx.lineTo(900, 880);
   ctx.stroke();
-  
-  ctx.fillStyle = '#b0b0b0';
+
+  ctx.fillStyle = '#555';
   ctx.font = '20px Arial';
+  ctx.textAlign = 'center';
   ctx.fillText('Authorized Signature', canvas.width / 2, 920);
-  
+
   // Download
   const link = document.createElement('a');
-  link.download = course.replace(/\s+/g, '_') + '_Certificate.png';
+  const safeName = studentName.replace(/\s+/g, '_');
+  link.download = `${safeName}_${course.replace(/\s+/g, '_')}_Certificate.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
 }
