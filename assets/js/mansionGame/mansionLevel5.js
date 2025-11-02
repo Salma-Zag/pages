@@ -262,38 +262,44 @@ class MansionLevel5 {
             return
         }
 
-        console.log("Shooting laser")
+        console.log("Shooting lasers")
 
-        const laserData = {
-            ...this.laserData,
-            id: `Laser-${Math.random().toString(36).substring(2, 9)}`,
-            INIT_POSITION: {
-                x: player.position.x + player.width / 2 - 10,
-                y: player.position.y - 20,
-            },
-        }
+        const laserNum = 8;
 
-        const laser = new Character(laserData, this.gameEnv)
-
-        laser.velocity = { x: 0, y: -10 }
-
-        laser.update = function () {
-            this.position.y += this.velocity.y
-
-            if (this.position.y < -this.height) {
-                const index = this.gameEnv.gameObjects.indexOf(this)
-                if (index !== -1) {
-                this.gameEnv.gameObjects.splice(index, 1)
-                this.destroy()
-                }
-                return
+        for (i = 0; i < laserNum; i++)
+        {
+            const laserData = {
+                ...this.laserData,
+                id: `Laser-${Math.random().toString(36).substring(2, 9)}`,
+                INIT_POSITION: {
+                    x: player.position.x + player.width / 2 - 10,
+                    y: player.position.y - 20,
+                },
             }
-
-            this.draw()
+    
+            const laser = new Character(laserData, this.gameEnv)
+    
+            // generate lasers in circle
+            laser.velocity = { x: Math.sin((i * Math.PI * 2)/laserNum+1), y: Math.cos((i * Math.PI * 2)/laserNum+1) }
+    
+            laser.update = function () {
+                this.position.y += this.velocity.y
+    
+                if (this.position.y < -this.height) {
+                    const index = this.gameEnv.gameObjects.indexOf(this)
+                    if (index !== -1) {
+                    this.gameEnv.gameObjects.splice(index, 1)
+                    this.destroy()
+                    }
+                    return
+                }
+    
+                this.draw()
+            }
+    
+            this.lasers.push(laser)
+            this.gameEnv.gameObjects.push(laser)
         }
-
-        this.lasers.push(laser)
-        this.gameEnv.gameObjects.push(laser)
     }
 
     // Method to spawn a batch of zombies
