@@ -77,15 +77,13 @@ class MansionLevel6 {
                 "I heard the boss is waiting for you...",
                 "Enter if you dare... he's waiting for you...",
                 "I heard the Reaper himself was in there.",
-                "The Reaper'll get you good.",
-                "You have no chance... his power is unstopable...",
+                "You have no chance... his power is unstoppable...",
                 "No one has survived a battle against the Reaper.",
-                "Haha? You want to battle my boss? You'll die within the first minute...",
-                "Go ahead. I aint stoppin' you, the Reaper'll finish you clean.",
+                "Haha! You want to battle my boss? You'll die within the first minute...",
+                "Go ahead. I aint stoppin' you. The Reaper'll finish you clean.",
                 "You are a fool to challenge the Reaper.",
                 "You will end up like me once you face the Reaper.",
                 "Are you the next opponent for my master? That's unfortunate for you.",
-                "Why I won't attack you? Well, my master will finish you off soon enough."
             ],
             reaction: function() {
                 // Don't do anything on touch
