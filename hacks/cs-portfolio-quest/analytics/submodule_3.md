@@ -398,12 +398,12 @@ author: "Curators Team"
         <div class="metric-icon" style="background: rgba(234, 140, 51, 0.2);">📊</div>
       </div>
       <div class="metric-value">84.5%</div>
-      <div class="metric-subtitle">6 students enrolled</div>
+      <div class="metric-subtitle" id="students-enrolled">6 students enrolled</div>
     </div>
 
     <div class="metric-card">
       <div class="metric-header">
-        <span class="metric-title">Modules Completed</span>
+        <span class="metric-title">Average Modules Completed</span>
         <div class="metric-icon" style="background: rgba(16, 185, 129, 0.2);">✅</div>
       </div>
       <div class="metric-value" id="modules-completed">0</div>
@@ -532,6 +532,7 @@ author: "Curators Team"
 
   async function fetchPeople() {
     const students = [];
+    const completions = [];
 
     const lessonData = await getLessonData();
     console.log(lessonData);
@@ -599,6 +600,8 @@ author: "Curators Team"
           const datavizCompletion = moduleStats["Data Visualization"].percentComplete
           const resumeCompletion = moduleStats["Resume Building"].percentComplete
           const aiCompletion = moduleStats["AI Usage"].percentComplete
+          const averageCompletion = (frontendCompletion + backendCompletion + datavizCompletion + resumeCompletion + aiCompletion) / 5
+          completions.push(averageCompletion)
 
           console.log(moduleStats);
 
@@ -633,17 +636,38 @@ author: "Curators Team"
         console.log(err);
       }
     }
-    return students;
+    return {
+      students,
+      completions
+    };
   }
 
   async function main() {
     console.log("In main function");
-    const students = await fetchPeople();
+    const data = await fetchPeople();
+    const { students, completions } = data;
+    const percentageAverage = completions.length > 0 ? completions.reduce((sum, value) => sum + value, 0) / completions.length : 0;
+    const modulesCompletedAverage = 25 * percentageAverage/100;
+    // truncate display values to 2 decimals
+    const displayPercentage = Number(percentageAverage).toFixed(2);
+    const displayModulesCompleted = Number(modulesCompletedAverage).toFixed(2);
     console.log("Students array:", students);
+    console.log("Completions array:", completions);
 
     // Updating Cards
-    const modulesCompletedEl = document.getElementById("modules-completed");
     const progressPercentageEl = document.getElementById("progress-percentage");
+  if (progressPercentageEl) {
+    progressPercentageEl.innerText = `${displayPercentage}%`;
+  }
+    const modulesCompletedEl = document.getElementById("modules-completed");
+  if (modulesCompletedEl) {
+    modulesCompletedEl.innerText = `${displayModulesCompleted}`;
+  }
+    const studentsEnrolledEl = document.getElementById("students-enrolled");
+    if (studentsEnrolledEl) {
+        studentsEnrolledEl.innerText = `${students.length} students enrolled`;
+    }
+
 
     let currentSort = { key: 'name', direction: 'asc' };
     let expandedRow = null;
@@ -713,9 +737,9 @@ author: "Curators Team"
                 ${avg > 0 ? avg + '%' : '--'}
               </div>
               <div class="progress-bar-container">
-                <div class="progress-bar" style="width: ${data.progress}%"></div>
+                <div class="progress-bar" style="width: ${data.progress.toFixed(2)}%"></div>
               </div>
-              <div class="progress-info">${data.progress}% Complete</div>
+              <div class="progress-info">${data.progress.toFixed(2)}% Complete</div>
             </td>
           `;
         });
