@@ -239,33 +239,32 @@ class MansionLevel5 {
     const numZombies = 3 + Math.floor(Math.random() * 3); // Spawn 3-5 zombies per batch
     
     for (let i = 0; i < numZombies; i++) {
-      // Randomly choose a spawn side (0: top, 1: right, 2: bottom, 3: left)
-      const side = Math.floor(Math.random() * 4);
-      let x, y;
+    //   const side = Math.floor(Math.random() * 4);
+    //   let x, y;
 
-      switch(side) {
-        case 0: // top
-          x = Math.random() * this.width;
-          y = -50;
-          break;
-        case 1: // right
-          x = this.width + 50;
-          y = Math.random() * this.height;
-          break;
-        case 2: // bottom
-          x = Math.random() * this.width;
-          y = this.height + 50;
-          break;
-        case 3: // left
-          x = -50;
-          y = Math.random() * this.height;
-          break;
-      }
+    //   switch(side) {
+    //     case 0: // top
+    //       x = Math.random() * this.width;
+    //       y = -50;
+    //       break;
+    //     case 1: // right
+    //       x = this.width + 50;
+    //       y = Math.random() * this.height;
+    //       break;
+    //     case 2: // bottom
+    //       x = Math.random() * this.width;
+    //       y = this.height + 50;
+    //       break;
+    //     case 3: // left
+    //       x = -50;
+    //       y = Math.random() * this.height;
+    //       break;
+    //   }
 
       // Create new enemy with the spawning position
       const zombieData = {
         ...this.enemyTemplate,
-        INIT_POSITION: { x, y }
+        INIT_POSITION: { x: 50, y: 50 }
       };
 
       // Add the new zombie to the game
