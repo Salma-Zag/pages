@@ -38,13 +38,13 @@ class MansionLevel5 {
         pixels: {width: 300, height: 360},
         orientation: {rows: 2, columns: 25},
 		down: {row: 1, start: 0, columns: 3},
-		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
+		downRight: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
 		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
 		left: {row: 0, start: 0, columns: 3},
-		right: {row: 1, start: 0, columns: 3, mirror: true},
-		up: {row: 1, start: 0, columns: 3},
+		right: {row: 0, start: 0, columns: 3},
+		up: {row: 0, start: 0, columns: 3},
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
-		upRight: {row: 1, start: 0, columns: 3, mirror: true, rotate: Math.PI/-16},
+		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/-16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
@@ -267,8 +267,7 @@ class MansionLevel5 {
 
 	// List of objects defnitions for this level
 	this.classes = [
-	  { class: GameEnvBackground, data: image_data_background },
-      { class: Player, data: sprite_data_player}
+	  { class: GameEnvBackground, data: image_data_background }
 	];
 
     // Store sprite_data_enemy for later use
