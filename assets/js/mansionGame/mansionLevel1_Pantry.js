@@ -125,7 +125,7 @@ class MansionLevel1_Pantry {
       if (!collectedItems.has(itemId)) {
         collectedItems.add(itemId);
         // cross off the next slot (order determined by itemsOrder)
-        const itemsOrder = ['candycorn', 'candy_apple', 'pepper', 'pumpkin_seed'];
+        const itemsOrder = ['pumpkin_seed', 'candy_apple', 'pepper', 'candycorn'];
         const idx = itemsOrder.indexOf(itemId.toLowerCase()) >= 0 ? itemsOrder.indexOf(itemId.toLowerCase()) : collectedItems.size-1;
         crossOffObjective(idx);
       }
@@ -249,18 +249,18 @@ class MansionLevel1_Pantry {
     // Specific pepper reaction with two CS questions before collecting
   // You can tweak these per-item scale factors (numbers are suggested defaults)
   const candycornScale = 20;
-  const candyAppleScale = 1;
-  const pepperScale = 1;
-  const pumpkinSeedScale = 1;
+  const candyAppleScale = 20;
+  const pepperScale = 20;
+  const pumpkinSeedScale = 20;
 
   // Ensure pepper is within x:0.3-0.7 range and y:0.1-0.9
-  const pepperData = makeItemData('pepper', 'pepper.png', (width * 0.60), (height * 0.45), pepperScale);
+  const pepperData = makeItemData('pepper', 'pepper.png', (width * 0.63), (height * 0.45), pepperScale);
 
     // Other items
   // Place all items within x:0.3-0.7 and y:0.1-0.9 (scale adjustable above)
-  const candycornData = makeItemData('candycorn', 'candycorn.png', (width * 0.42), (height * 0.2), candycornScale);
-  const candyAppleData = makeItemData('candy_apple', 'candy_apple.png', (width * 0.6), (height * 0.15), candyAppleScale);
-  const pumpkinSeedData = makeItemData('pumpkin_seed', 'pumpkin_seed.png', (width * 0.70), (height * 0.80), pumpkinSeedScale);
+  const candycornData = makeItemData('candycorn', 'candycorn.png', (width * 0.4), (height * 0.19), candycornScale);
+  const candyAppleData = makeItemData('candy_apple', 'candy_apple.png', (width * 0.6), (height * 0.18), candyAppleScale);
+  const pumpkinSeedData = makeItemData('pumpkin_seed', 'pumpkin_seed.png', (width * 0.63), (height * 0.77), pumpkinSeedScale);
 
   // Wire reactions so that when the engine triggers the spriteData.reaction, it will open the
   // per-item DialogueSystem confirmation and then call collectItem on Close.
