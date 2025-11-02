@@ -373,138 +373,151 @@ date: 2025-10-21
 <canvas id="certCanvas"></canvas>
 
 <script type="module">
-import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+// Provide a safe global stub immediately so inline onclick handlers won't fail
+window.downloadCert = async function () {
+  // temporary stub while module initializes
+  alert('Preparing certificate... If this message persists, the certificate system failed to initialize.');
+};
 
-async function getCredentials() {
+(async () => {
   try {
-    const res = await fetch(`${pythonURI}/api/id`, {
-      ...fetchOptions,
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-    });
+    const cfg = await import('{{ site.baseurl }}/assets/js/api/config.js');
+    const { pythonURI, fetchOptions } = cfg;
 
-    if (res.ok) {
-      const data = await res.json();
-      const name = data.name;
-      console.log("Fetched name:", name);
-      return name;
-    } else {
-      console.log(`Request failed with status ${res.status}`);
+    async function getCredentials() {
+      try {
+        const res = await fetch(`${pythonURI}/api/id`, {
+          ...fetchOptions,
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          return data.name || 'Student Name';
+        } else {
+          console.log(`Request failed with status ${res.status}`);
+        }
+      } catch (err) {
+        console.log(`Error fetching credentials: ${err}`);
+      }
+      return 'Student Name';
     }
-  } catch (err) {
-    console.log(`Error: ${err}`);
-  }
-  return "Student Name"; // fallback
-}
 
-async function downloadCert(course, org, date) {
-  const name = await getCredentials(); // get name from API first
+    async function downloadCert(course, org, date) {
+      const name = await getCredentials();
 
-  const canvas = document.getElementById('certCanvas');
-  const ctx = canvas.getContext('2d');
+      const canvas = document.getElementById('certCanvas');
+      const ctx = canvas.getContext('2d');
 
-  canvas.width = 1400;
-  canvas.height = 1000;
+      canvas.width = 1400;
+      canvas.height = 1000;
 
-  // Background - elegant cream
-  ctx.fillStyle = '#f8f6f0';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Background - elegant cream
+      ctx.fillStyle = '#f8f6f0';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Outer border - navy
-  ctx.strokeStyle = '#2c3e50';
-  ctx.lineWidth = 25;
-  ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
+      // Outer border - navy
+      ctx.strokeStyle = '#2c3e50';
+      ctx.lineWidth = 25;
+      ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
 
-  // Inner border - gold accent
-  ctx.strokeStyle = '#c9b037';
-  ctx.lineWidth = 3;
-  ctx.strokeRect(80, 80, canvas.width - 160, canvas.height - 160);
+      // Inner border - gold accent
+      ctx.strokeStyle = '#c9b037';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(80, 80, canvas.width - 160, canvas.height - 160);
 
-  // Decorative corners
-  ctx.fillStyle = '#c9b037';
-  ctx.beginPath();
-  ctx.arc(80, 80, 15, 0, Math.PI * 2);
-  ctx.arc(canvas.width - 80, 80, 15, 0, Math.PI * 2);
-  ctx.arc(80, canvas.height - 80, 15, 0, Math.PI * 2);
-  ctx.arc(canvas.width - 80, canvas.height - 80, 15, 0, Math.PI * 2);
-  ctx.fill();
+      // Decorative corners
+      ctx.fillStyle = '#c9b037';
+      ctx.beginPath();
+      ctx.arc(80, 80, 15, 0, Math.PI * 2);
+      ctx.arc(canvas.width - 80, 80, 15, 0, Math.PI * 2);
+      ctx.arc(80, canvas.height - 80, 15, 0, Math.PI * 2);
+      ctx.arc(canvas.width - 80, canvas.height - 80, 15, 0, Math.PI * 2);
+      ctx.fill();
 
-  // Title
-  ctx.fillStyle = '#2c3e50';
-  ctx.font = 'bold 60px Georgia';
-  ctx.textAlign = 'center';
-  ctx.fillText('CERTIFICATE', canvas.width / 2, 200);
+      // Title
+      ctx.fillStyle = '#2c3e50';
+      ctx.font = 'bold 60px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('CERTIFICATE', canvas.width / 2, 200);
 
-  ctx.font = 'bold 48px Georgia';
-  ctx.fillText('OF COMPLETION', canvas.width / 2, 260);
+      ctx.font = 'bold 48px Georgia';
+      ctx.fillText('OF COMPLETION', canvas.width / 2, 260);
 
-  // Decorative line under title
-  ctx.strokeStyle = '#c9b037';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(400, 290);
-  ctx.lineTo(1000, 290);
-  ctx.stroke();
+      // Decorative line under title
+      ctx.strokeStyle = '#c9b037';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(400, 290);
+      ctx.lineTo(1000, 290);
+      ctx.stroke();
 
-  // "This is to certify that"
-  ctx.fillStyle = '#2c3e50';
-  ctx.font = '28px Arial';
-  ctx.fillText('This is to certify that', canvas.width / 2, 380);
+      // "This is to certify that"
+      ctx.fillStyle = '#2c3e50';
+      ctx.font = '28px Arial';
+      ctx.fillText('This is to certify that', canvas.width / 2, 380);
 
-  // Student name (from API)
-  ctx.fillStyle = '#ea8c33';
-  ctx.font = 'italic bold 52px Georgia';
-  ctx.fillText(name, canvas.width / 2, 470);
+      // Student name (from API)
+      ctx.fillStyle = '#ea8c33';
+      ctx.font = 'italic bold 52px Georgia';
+      ctx.fillText(name, canvas.width / 2, 470);
 
-  // Underline
-  ctx.strokeStyle = '#ea8c33';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(400, 490);
-  ctx.lineTo(1000, 490);
-  ctx.stroke();
+      // Underline
+      ctx.strokeStyle = '#ea8c33';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(400, 490);
+      ctx.lineTo(1000, 490);
+      ctx.stroke();
 
-  // "has successfully completed"
-  ctx.fillStyle = '#2c3e50';
-  ctx.font = '28px Arial';
-  ctx.fillText('has successfully completed the course', canvas.width / 2, 560);
+      // "has successfully completed"
+      ctx.fillStyle = '#2c3e50';
+      ctx.font = '28px Arial';
+      ctx.fillText('has successfully completed the course', canvas.width / 2, 560);
 
-  // Course name
-  ctx.fillStyle = '#2c3e50';
-  ctx.font = 'bold 44px Arial';
-  ctx.fillText(course, canvas.width / 2, 650);
+      // Course name
+      ctx.fillStyle = '#2c3e50';
+      ctx.font = 'bold 44px Arial';
+      ctx.fillText(course, canvas.width / 2, 650);
 
-  // Organization
-  ctx.fillStyle = '#555';
-  ctx.font = '26px Arial';
-  ctx.fillText('Issued by ' + org, canvas.width / 2, 710);
+      // Organization
+      ctx.fillStyle = '#555';
+      ctx.font = '26px Arial';
+      ctx.fillText('Issued by ' + org, canvas.width / 2, 710);
 
-  // Date
+  // Date — use current date to ensure certificate is issued today
+  const issuanceDate = new Date();
+  const formattedDate = issuanceDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   ctx.fillStyle = '#ea8c33';
   ctx.font = 'bold 24px Arial';
-  ctx.fillText('Date: ' + date, canvas.width / 2, 800);
+  ctx.fillText('Date: ' + formattedDate, canvas.width / 2, 800);
 
-  // Signature line
-  ctx.strokeStyle = '#ea8c33';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(500, 880);
-  ctx.lineTo(900, 880);
-  ctx.stroke();
+      // Signature line
+      ctx.strokeStyle = '#ea8c33';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(500, 880);
+      ctx.lineTo(900, 880);
+      ctx.stroke();
 
   ctx.fillStyle = '#555';
   ctx.font = '20px Arial';
-  ctx.fillText('Authorized Signature', canvas.width / 2, 920);
+  ctx.fillText('John Mortenson', canvas.width / 2, 920);
 
-  // Trigger download
-  const link = document.createElement('a');
-  link.download = `${course.replace(/\s+/g, '_')}_Certificate.png`;
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-}
+      // Trigger download
+      const link = document.createElement('a');
+      link.download = `${course.replace(/\s+/g, '_')}_Certificate.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
 
-window.downloadCert = downloadCert;
+    // replace the stub with the real implementation
+    window.downloadCert = downloadCert;
+  } catch (err) {
+    console.error('Failed to initialize certificate downloader:', err);
+    // keep the user-friendly stub already assigned above
+  }
+})();
 
 </script>
