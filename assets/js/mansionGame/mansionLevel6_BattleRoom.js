@@ -1,5 +1,5 @@
 import GameEnvBackground from "./GameEngine/GameEnvBackground.js";
-import Player from "./GameEngine/Player.js";
+import FightingPlayer from "./CustomGameClasses/FightingPlayer.js";
 import Boss from './CustomGameClasses/Boss.js';
 import showDeathScreen from './CustomGameClasses/DeathScreen.js';
 import { createBossHealthBar, createPlayerHealthBar, updatePlayerHealthBar } from './CustomGameClasses/HealthBars.js';
@@ -264,7 +264,7 @@ class MansionLevel6_BattleRoom {
 
         this.classes = [
             {class: GameEnvBackground, data: image_data_floor},
-            {class: Player, data: sprite_data_mc},
+            {class: FightingPlayer, data: sprite_data_mc},
             // {class: Boss, data: sprite_boss_data},
             // {class: Arm, data: leftArmData},
             // {class: Arm, data: rightArmData},

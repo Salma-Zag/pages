@@ -1,7 +1,7 @@
 import Player from '../GameEngine/Player.js';
 import Projectile from './Projectile.js';
 
-class SpookFight extends Player {
+class FightingPlayer extends Player {
     // Construct the class, with a list of stored projectiles
     constructor(data = null, gameEnv = null) {
         super(data, gameEnv);
