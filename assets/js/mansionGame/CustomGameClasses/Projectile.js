@@ -26,7 +26,7 @@ class Projectile extends Character {
         this.revComplete = false;
 
         // Load sprite/image based on type
-        if (type === "ARROW") {
+        if (type === "ARROW" || type === "PLAYER") {
             this.spriteSheet = new Image();
             this.frameIndex = 0;
             this.frameCount = 1; // single frame
@@ -34,7 +34,6 @@ class Projectile extends Character {
             this.height = 25;
             this.spriteSheet.onload = () => this.imageLoaded = true;
             this.spriteSheet.src = path + "/images/mansionGame/arrow.png";
-            this.isAnimated = false;
         } else if (type === "FIREBALL") {
             // Fireball is a single-frame static image (178x123 source). Use a scaled size preserving aspect ratio.
             this.spriteSheet = new Image();
@@ -45,8 +44,8 @@ class Projectile extends Character {
             this.height = 44; // keep aspect roughly (64 * 123 / 178 ≈ 44)
             this.spriteSheet.onload = () => this.imageLoaded = true;
             this.spriteSheet.src = path + "/images/mansionGame/staticfireball.png";
-            this.isAnimated = false;
         }
+        this.isAnimated = false;
 
         // Start at source position
         this.position = { x: sourcex, y: sourcey };
@@ -87,7 +86,7 @@ class Projectile extends Character {
         // Base angle depends on how the sprite image faces by default
         // Arrow image faces left -> baseAngle = PI
         // Fireball image faces right -> baseAngle = 0
-        const baseAngle = (this.type === 'ARROW') ? Math.PI : 0;
+        const baseAngle = (this.type === 'ARROW' || this.type === 'PLAYER') ? Math.PI : 0;
 
         // Angle to rotate the sprite so it faces travel direction
         const drawAngle = travelAngle - baseAngle;
@@ -181,8 +180,9 @@ class Projectile extends Character {
         // If the player is too close...
         const PLAYER_HIT_DISTANCE = 50;
         const ARROW_DAMAGE = 10;
+        const PLAYER_DAMAGE = 300;  // This is a test value
         const FIREBALL_DAMAGE = 15;
-        const DAMAGE_DEALT = this.type == "FIREBALL" ? FIREBALL_DAMAGE : ARROW_DAMAGE;
+        const DAMAGE_DEALT = this.type == "FIREBALL" ? FIREBALL_DAMAGE : this.type == "ARROW" ? ARROW_DAMAGE : PLAYER_DAMAGE;
         if (distanceFromPlayer <= PLAYER_HIT_DISTANCE) {
             this.revComplete = true;
             this.destroy();
