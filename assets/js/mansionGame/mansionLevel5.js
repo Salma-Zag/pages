@@ -49,6 +49,12 @@ class MansionLevel5 {
 		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
+    const player = new Player(sprite_data_player, this.gameEnv);
+
+    // add player to game
+    this.gameEnv.gameObjects.push(player);
+
+
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
 
 	const sprite_data_enemy = {
@@ -72,15 +78,8 @@ class MansionLevel5 {
                 return;
             }
             
-            // Find all player objects
-            const players = this.gameEnv.gameObjects.filter(obj => 
-                obj.constructor.name === 'Player'
-            );
-            
-            if (players.length === 0) return;
-            
-            // Find nearest player
-            let nearest = players[0];
+            // player
+            let nearest = player;
 
             // Move towards nearest player
             const speed = 0.8; // Adjust speed as needed
@@ -268,8 +267,7 @@ class MansionLevel5 {
 
 	// List of objects defnitions for this level
 	this.classes = [
-	  { class: GameEnvBackground, data: image_data_background },
-	  { class: Player, data: sprite_data_player }
+	  { class: GameEnvBackground, data: image_data_background }
 	];
 
     // Store sprite_data_enemy for later use
