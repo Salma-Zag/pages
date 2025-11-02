@@ -257,7 +257,7 @@ class MansionLevel5 {
                 pos_y = this.height + 50;
             break;
             case 3: // left
-            pos_x = -50;
+                pos_x = -50;
                 pos_y = Math.random() * this.height;
             break;
         }
@@ -267,7 +267,7 @@ class MansionLevel5 {
         const zombieData = {
             ...this.enemyTemplate,
             id: `Zombie${this.zombies}`,
-            INIT_POSITION: { x: x, y: y }
+            INIT_POSITION: { x: pos_x, y: pos_y }
         };
 
         const zombie = new Enemy(zombieData, this.gameEnv);
