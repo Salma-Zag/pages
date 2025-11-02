@@ -548,7 +548,7 @@ author: "Curators Team"
   async function fetchPeople() {
     const students = [];
 
-    for (let id = 1; id <= 200; id++) {
+    for (let id = 1; id <= 75; id++) {
       try {
         const res = await fetch(`${javaURI}/api/person/${id}`, {
           ...fetchOptions,
@@ -587,19 +587,14 @@ author: "Curators Team"
           });
 
         } else {
-          // log non-404 failures for visibility
-          console.warn(`Request failed for ID ${id} with status ${res.status}`);
+          // silently ignore non-OK responses
+          continue;
         }
 
       } catch (err) {
-        // suppress 404-like errors; log others
-        const errText = String(err || '');
-        if (!/404/.test(errText)) {
-          console.error(`Error fetching ID ${id}:`, err);
-        }
+        // suppress all errors silently
       }
     }
-    console.log("✅ Final students array:", students);
     return students;
   }
   async function main() {
