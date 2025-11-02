@@ -8,7 +8,7 @@ authors: Anish G, Samarth H, James B, Pranay K, Vihaan B, Krish K
 
 # Level 6 Game Blog
 
-This is the final level of our class game, level 6. 
+This is the final level of our class game, level 6. Created by the Tinkerers (CSSE Period 1, Tri 1 of 2025).
 
 ## Game Overview
 
@@ -71,7 +71,7 @@ The boss of this level is the skeleton reaper.
 
 As you can see in the image, the boss is a hooded skeleton with 4 floating arms around him. In the game, he chases you around and if he collides with you, you will die. 
 
-#### Attacks
+#### Attacks ⚔️
 
 The boss uses 2 long range weapons in this fight- arrows and fireballs. We were planning to implement a scythe, but were unable to do so within the time alloted for this project. 
 
@@ -83,19 +83,19 @@ The arrow and fireball just move straight towards where the player was when it w
 
 </details>
 
-## Our team's challenges 👊
+## Our team's challenges 💀
 
 The OpenCS Game Engine is an amazing game engine, but it's not designed for a fast-paced combat level like this. It is designed for adventure-like games, so creating a boss fight with it was a unique challenge.
 <!-- ADD ONTO CHALLENGES -->
 
-## Organization/Planning
+## Organization/Planning 📓
 We did the preliminary ideaton for our level on [this Google Doc](https://docs.google.com/document/d/1Mc77JEsYcTKB2S5DKD96scVaUmgesCg-mYmKgBUQ8_U/edit?usp=sharing). Then, we took our ideas and put them onto a kanban board on GitHub which you can view [here](https://github.com/orgs/CompSciTeam/projects/17).
 
 We assigned team members to each task to keep ourselves organized, and we marked things as completed/in progress/scrapped to know what we had to do next. We also kept track of our problems and objectives each time we encountered issues. Below is an example of issues we identified and debugged on 11/2/2025:
 
 ![]({{site.baseurl}}/images/MansionGameBlog/ExampleGitHubIssue.png)
 
-## Key Files
+## Key Files 🔑
 All of the code for all of the levels were in /assets/js/mansionGame.
 
 - `/assets/js/mansionGame/mansionLevel6.js` and `/assets/js/mansionGame/mansionLevel6_BattleRoom.js` were where we wrote the logic for each room, and defined the background and objects for each.
