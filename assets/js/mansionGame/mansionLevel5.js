@@ -3,6 +3,7 @@ import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
 import Enemy from './GameEngine/Enemy.js';
 import Projectile from './CustomGameClasses/Projectile.js';
+import Character from './GameEngine/Character.js';
 
 
 class MansionLevel5 {
@@ -26,7 +27,7 @@ class MansionLevel5 {
 
 	//data for player
 	const sprite_player = path + "/images/mansionGame/full_anims_spook.png"; // be sure to include the path
-	const player_scale_factor = 10;
+	const player_scale_factor = 20;
 	const sprite_data_player = {
         id: 'Player',
         greeting: "I am the player for level 5",
@@ -50,10 +51,10 @@ class MansionLevel5 {
         shoot: {row: 2, columns: 25}
 	};
 
-    const player = new Player(sprite_data_player, this.gameEnv);
+    this.player = new Player(sprite_data_player, this.gameEnv);
 
     // add player to game
-    this.gameEnv.gameObjects.push(player);
+    this.gameEnv.gameObjects.push(this.player);
 
 
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
@@ -205,66 +206,21 @@ class MansionLevel5 {
         }
     };
 
-    // const laser_image = path + "/images/gamify/laser_bolt.png";
-    // this.laserData = {
-    //     id: "Laser",
-    //     src: laser_image,
-    //     SCALE_FACTOR: 20,
-    //     ANIMATION_RATE: 50,
-    //     pixels: { height: 500, width: 500 },
-    //     orientation: { rows: 1, columns: 1 },
-    //     down: { row: 0, start: 0, columns: 1 }
-    // }
+    const laser_image = path + "/images/gamify/laser_bolt.png"  // be sure to include the path
+    this.laserData = {
+      id: "Laser",
+      src: laser_image,
+      SCALE_FACTOR: 20,
+      ANIMATION_RATE: 50,
+      pixels: { height: 500, width: 500 },
+      orientation: { rows: 1, columns: 1 },
+      down: { row: 0, start: 0, columns: 1 },
+    }
 
-    // shootLaser() 
-    // {
-    //     if (this.isPaused || this.gameOver) return
     
-    //     const currentTime = Date.now()
-    //     if (currentTime - this.lastShotTime < this.shootCooldown) return
-    
-    //     this.lastShotTime = currentTime
-    
-    //     const player = this.gameEnv.gameObjects.find((obj) => obj.spriteData && obj.spriteData.id === "Ufo")
-    
-    //     if (!player) {
-    //       console.error("Player not found")
-    //       return
-    //     }
-    
-    //     console.log("Shooting laser")
-    
-    //     const laserData = {
-    //       ...this.laserData,
-    //       id: `Laser-${Math.random().toString(36).substring(2, 9)}`,
-    //       INIT_POSITION: {
-    //         x: player.position.x + player.width / 2 - 10,
-    //         y: player.position.y - 20,
-    //       },
-    //     }
-    
-    //     const laser = new Character(laserData, this.gameEnv)
-    
-    //     laser.velocity = { x: 0, y: -10 }
-    
-    //     laser.update = function () {
-    //       this.position.y += this.velocity.y
-    
-    //       if (this.position.y < -this.height) {
-    //         const index = this.gameEnv.gameObjects.indexOf(this)
-    //         if (index !== -1) {
-    //           this.gameEnv.gameObjects.splice(index, 1)
-    //           this.destroy()
-    //         }
-    //         return
-    //       }
-    
-    //       this.draw()
-    //     }
-    
-    //     this.lasers.push(laser)
-    //     this.gameEnv.gameObjects.push(laser)
-    // }
+    this.lasers = [];
+    this.lastShotTime = 0;
+    this.shootCooldown = 500;
 
 	// List of objects defnitions for this level
 	this.classes = [
@@ -282,55 +238,110 @@ class MansionLevel5 {
     this.startZombieSpawner();
   }
 
-  // Method to spawn a batch of zombies
-  spawnZombieBatch() {
-    const numZombies = 3; // spawn 2 zombies per batch
-    
-    for (let i = 0; i < numZombies; i++) {
-        const side = Math.floor(Math.random() * 4);
-        let pos_x, pos_y;
-
-        switch(side) {
-            case 0: // top
-                pos_x = Math.random() * this.width;
-                pos_y = -50;
-            break;
-            case 1: // right
-                pos_x = this.width + 50;
-                pos_y = Math.random() * this.height;
-            break;
-            case 2: // bottom
-                pos_x = Math.random() * this.width;
-                pos_y = this.height + 50;
-            break;
-            case 3: // left
-                pos_x = -50;
-                pos_y = Math.random() * this.height;
-            break;
+    bindShootKey() {
+        window.addEventListener("keydown", (event) => {
+        if (event.code === "Space") {
+            this.shootLaser()
         }
-        
-        this.zombies += 1;
-        // Create new enemy with the spawning position
-        const zombieData = {
-            ...this.enemyTemplate,
-            id: `Zombie${this.zombies}`,
-            INIT_POSITION: { x: pos_x, y: pos_y }
-        };
-
-        const zombie = new Enemy(zombieData, this.gameEnv);
-
-        // Add the new zombie to the game
-        this.gameEnv.gameObjects.push(zombie);
+        })
     }
-  }
 
-  // Method to start the zombie spawning timer
-  startZombieSpawner() {
-    // Set up interval to spawn zombies every 5 seconds
-    setInterval(() => {
-      this.spawnZombieBatch();
-    }, 5000);
-  }
+    shootLaser() {
+        const currentTime = Date.now()
+        if (currentTime - this.lastShotTime < this.shootCooldown) return
+
+        this.lastShotTime = currentTime
+
+        const player = this.player;
+
+        if (!player) {
+            console.error("Player not found")
+            return
+        }
+
+        console.log("Shooting laser")
+
+        const laserData = {
+            ...this.laserData,
+            id: `Laser-${Math.random().toString(36).substring(2, 9)}`,
+            INIT_POSITION: {
+                x: player.position.x + player.width / 2 - 10,
+                y: player.position.y - 20,
+            },
+        }
+
+        const laser = new Character(laserData, this.gameEnv)
+
+        laser.velocity = { x: 0, y: -10 }
+
+        laser.update = function () {
+        this.position.y += this.velocity.y
+
+        if (this.position.y < -this.height) {
+            const index = this.gameEnv.gameObjects.indexOf(this)
+            if (index !== -1) {
+            this.gameEnv.gameObjects.splice(index, 1)
+            this.destroy()
+            }
+            return
+        }
+
+        this.draw()
+        }
+
+        this.lasers.push(laser)
+        this.gameEnv.gameObjects.push(laser)
+    }
+
+    // Method to spawn a batch of zombies
+    spawnZombieBatch() {
+        const numZombies = 3; // spawn 2 zombies per batch
+        
+        for (let i = 0; i < numZombies; i++) {
+            const side = Math.floor(Math.random() * 4);
+            let pos_x, pos_y;
+
+            switch(side) {
+                case 0: // top
+                    pos_x = Math.random() * this.width;
+                    pos_y = -50;
+                break;
+                case 1: // right
+                    pos_x = this.width + 50;
+                    pos_y = Math.random() * this.height;
+                break;
+                case 2: // bottom
+                    pos_x = Math.random() * this.width;
+                    pos_y = this.height + 50;
+                break;
+                case 3: // left
+                    pos_x = -50;
+                    pos_y = Math.random() * this.height;
+                break;
+            }
+            
+            this.zombies += 1;
+            // Create new enemy with the spawning position
+            const zombieData = {
+                ...this.enemyTemplate,
+                id: `Zombie${this.zombies}`,
+                INIT_POSITION: { x: pos_x, y: pos_y }
+            };
+
+            const zombie = new Enemy(zombieData, this.gameEnv);
+
+            // Add the new zombie to the game
+            this.gameEnv.gameObjects.push(zombie);
+        }
+    }
+
+    // Method to start the zombie spawning timer
+    startZombieSpawner() {
+        // Set up interval to spawn zombies every 5 seconds
+        setInterval(() => {
+        this.spawnZombieBatch();
+        }, 5000);
+    }
 }
 
 export default MansionLevel5;
