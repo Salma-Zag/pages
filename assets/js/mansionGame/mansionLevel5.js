@@ -244,7 +244,7 @@ class MansionLevel5 {
     bindShootKey() {
         window.addEventListener("keydown", (event) => {
             if (event.code === "Space") {
-                this.shootLaser()
+                this.shootLaser();
             }
         })
     }
@@ -264,9 +264,9 @@ class MansionLevel5 {
 
         console.log("Shooting lasers")
 
-        const laserNum = 8;
+        let laserNum = 8;
 
-        for (i = 0; i < laserNum; i++)
+        for (let i = 0; i < laserNum; i++)
         {
             const laserData = {
                 ...this.laserData,
@@ -288,8 +288,8 @@ class MansionLevel5 {
                 if (this.position.y < -this.height) {
                     const index = this.gameEnv.gameObjects.indexOf(this)
                     if (index !== -1) {
-                    this.gameEnv.gameObjects.splice(index, 1)
-                    this.destroy()
+                        this.gameEnv.gameObjects.splice(index, 1)
+                        this.destroy()
                     }
                     return
                 }
