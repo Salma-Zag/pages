@@ -22,6 +22,8 @@ class MansionLevel6 {
     levelMusic.loop = true;
     levelMusic.volume = 0.3;
     levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
+    // Expose the level music so other modules (end screen, etc.) can stop it
+    try { if (typeof window !== 'undefined') window._levelMusic = levelMusic; } catch (e) {}
 
         // This is the background image data
         const image_src_chamber = path + "/images/mansionGame/bgBossIntroChamber.png"
@@ -216,6 +218,8 @@ class MansionLevel6 {
                                 const audio = new Audio(path + "/assets/sounds/mansionGame/SkeletonLord.mp3");
                                 audio.loop = true;
                                 audio.volume = 0.4;
+                                // Expose battle music so end screen can stop it later
+                                try { if (typeof window !== 'undefined') window._battleMusic = audio; } catch (e) {}
                                 audio.play().catch(error => console.error('Failed to play audio:', error));
 
                                 console.log("Starting battle level transition...");

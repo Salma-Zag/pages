@@ -4,20 +4,39 @@ export default function showEndScreen(gameEnv) {
 
     // Prevent adding multiple overlays
     if (document.getElementById('mansion-victory-overlay')) return;
+    // Determine resource path
+    const path = (gameEnv && gameEnv.path) ? gameEnv.path : '';
 
-   // pause ALL audio on the page
-    const audioElements = document.querySelectorAll('audio'); // Selects all <audio> elements
+    // Pause DOM audio elements
+    try {
+        const audioElements = document.querySelectorAll('audio'); // Selects all <audio> elements
+        audioElements.forEach(audio => {
+            try { if (!audio.paused) audio.pause(); } catch (e) {}
+        });
+    } catch (e) { /* ignore */ }
 
-    audioElements.forEach(audio => {
-        if (!audio.paused) { // Check if the audio is currently playing
-        audio.pause();
+    // Pause any globally exposed audio (battle / level music)
+    try {
+        if (typeof window !== 'undefined') {
+            if (window._battleMusic && typeof window._battleMusic.pause === 'function') {
+                try { window._battleMusic.pause(); window._battleMusic.currentTime = 0; } catch (e) {}
+            }
+            if (window._levelMusic && typeof window._levelMusic.pause === 'function') {
+                try { window._levelMusic.pause(); window._levelMusic.currentTime = 0; } catch (e) {}
+            }
+            // Also stop any previously-started end music
+            if (window._endMusic && typeof window._endMusic.pause === 'function') {
+                try { window._endMusic.pause(); window._endMusic.currentTime = 0; } catch (e) {}
+            }
         }
-    });
-    
+    } catch (e) {}
+
+    // Play the victory theme and loop it
     const endAudio = new Audio(path + "/assets/sounds/mansionGame/zeldaVictory.mp3");
     endAudio.loop = true;
     endAudio.volume = 0.4;
     endAudio.play().catch(error => console.error('Failed to play audio:', error));
+    try { if (typeof window !== 'undefined') window._endMusic = endAudio; } catch (e) {}
 
     const overlay = document.createElement('div');
     overlay.id = 'mansion-victory-overlay';
@@ -33,7 +52,7 @@ export default function showEndScreen(gameEnv) {
     overlay.style.zIndex = '10000';
 
     const img = document.createElement('img');
-    const path = (gameEnv && gameEnv.path) ? gameEnv.path : '';
+    // use previously computed `path` variable
     img.src = path + '/images/mansionGame/MansionGameEndScreen.png';
     img.alt = 'Victory';
     img.style.maxWidth = '95%';
