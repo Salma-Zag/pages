@@ -48,7 +48,6 @@ lxdData:
       Level: 4
       Description: "Enter the vault code with numbers gathered through the mission to get your Media Literacy certificate"
       Categories: ["Certificate", "Integration", "Achievement"]
-      Video: "/digital-famine/media-lit/submodule_5-video"
       Lessons: "/digital-famine/media-lit/submodule_5/"
       Image: "/images/digital-famine/congratulations.png"
       Alt: "Analytics Submodule 5"
