@@ -17,7 +17,6 @@ date: 2025-10-21
 <div class="max-w-3xl mx-auto p-4">
   <h1 class="text-2xl font-bold mb-2">Resume Builder</h1>
   <p class="text-gray-600 mb-4">Fill this out step by step. It autosaves locally on your device.</p>
-
   <!-- Progress -->
   <div class="border rounded p-3 mb-4">
     <div class="flex justify-between text-sm">
@@ -157,6 +156,20 @@ date: 2025-10-21
       disabled
     >Next Module →</button>
   </div>
+
+  <!-- ✅ Floating Selected Sprite -->
+<video id="floating-sprite" width="120" height="200" loop muted playsinline style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+">
+  <source id="floating-source" src="" type="video/mp4">
+</video>
+
 </div>
 
 <script>
@@ -498,4 +511,30 @@ document.addEventListener('DOMContentLoaded', () => {
   restore();
   showStep(0);
 });
+
+// ✅ Floating MP4 sprite logic
+const floatingSprite = document.getElementById("floating-sprite");
+const floatingSource = document.getElementById("floating-source");
+
+// On page load, check if a character was selected in Submodule 1
+const savedCharacter = localStorage.getItem("selectedCharacter");
+if (savedCharacter) {
+  showFloatingSprite(savedCharacter);
+}
+
+function showFloatingSprite(charId) {
+  const spriteMap = {
+    "char1": "{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/elephant_2.mp4",
+    "char2": "{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/hamster_2.mp4",
+    "char3": "{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/monkey_2.mp4"
+  };
+
+  const src = spriteMap[charId];
+  if (src) {
+    floatingSource.src = src;
+    floatingSprite.load();
+    floatingSprite.style.display = "block";
+    floatingSprite.play();
+  }
+}
 </script>
