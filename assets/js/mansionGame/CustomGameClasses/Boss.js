@@ -2,7 +2,7 @@ import Enemy from '../GameEngine/Enemy.js';
 import Boomerang from '../CustomGameClasses/Boomerang.js';
 import Projectile from '../CustomGameClasses/Projectile.js';
 import Arm from '../CustomGameClasses/Arm.js';
-import showEndScreen from '../EndScreen.js';
+import showEndScreen from '../MansionGameEndScreen.js';
 
 class Boss extends Enemy {
     constructor(data = null, gameEnv = null) {
@@ -30,6 +30,8 @@ class Boss extends Enemy {
                 if (event.key === 'p' || event.key === 'P') {
                     console.log("[Boss] Kill key pressed: forcing boss death.");
                     this.healthPoints = 0;
+                    // Show victory screen immediately
+                    try { showEndScreen(this.gameEnv); } catch (e) { console.warn('Error showing victory screen:', e); }
                     // Remove the boss graphic and objects from the game
                     try { this.destroy(); } catch (e) { console.warn('Error destroying boss:', e); }
                     // End the current level so game control can transition
