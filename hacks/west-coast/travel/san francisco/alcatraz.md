@@ -2,7 +2,7 @@
 layout: post
 title: "Alcatraz"
 description: 
-permalink: /west-coast/travel/sf/alca/
+permalink: /west-coast/travel/sf/alca
 date: 2025-10-21
 ---
 <html lang="en">
