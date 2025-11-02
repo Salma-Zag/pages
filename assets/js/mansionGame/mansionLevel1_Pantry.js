@@ -10,6 +10,11 @@ class MansionLevel1_Pantry {
     let height = gameEnv.innerHeight;
     let path = gameEnv.path;
 
+    const levelMusic = new Audio(path + "/assets/sounds/mansionGame/shadow_music_level1.mp3");
+    levelMusic.loop = true;
+    levelMusic.volume = 0.3;
+    levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
+
     // Background data
     const image_background = path + "/images/mansionGame/kitchen_pantry.png"; // be sure to include the path
     const image_data_background = {
@@ -143,6 +148,7 @@ class MansionLevel1_Pantry {
               primary: true,
               action: () => {
               dsFinal.closeDialogue();
+              audio.pause();
             // create the skeleton key image element
               const keyImg = document.createElement('img');
               keyImg.src = '/images/mansionGame/skeleton_key.png'; // <-- change this to your actual image path
