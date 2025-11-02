@@ -372,9 +372,7 @@ date: 2025-10-21
 
 <canvas id="certCanvas"></canvas>
 
-<script type="module">
-import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
-
+<script>
 async function getCredentials() {
   try {
     const res = await fetch(`${pythonURI}/api/id`, {
@@ -387,24 +385,24 @@ async function getCredentials() {
 
     if (res.ok) {
       const data = await res.json();
-      console.log("Fetched user name:", data.name);
-      return data.name || "Student Name";
+      const name = data.name;
+      console.log("Fetched name:", name);
+      return name;
     } else {
-      console.error(`Request failed with status ${res.status}`);
-      return "Student Name";
+      console.log(`Request failed with status ${res.status}`);
     }
   } catch (err) {
-    console.error(`Error: ${err}`);
-    return "Student Name";
+    console.log(`Error: ${err}`);
   }
+  return "Student Name"; // fallback
 }
 
-export async function downloadCert(course, org, date) {
-  // ✅ Fetch the name dynamically
-  const studentName = await getCredentials();
+async function downloadCert(course, org, date) {
+  const name = await getCredentials(); // get name from API first
 
   const canvas = document.getElementById('certCanvas');
   const ctx = canvas.getContext('2d');
+
   canvas.width = 1400;
   canvas.height = 1000;
 
@@ -456,9 +454,9 @@ export async function downloadCert(course, org, date) {
   // Student name (from API)
   ctx.fillStyle = '#ea8c33';
   ctx.font = 'italic bold 52px Georgia';
-  ctx.fillText(studentName, canvas.width / 2, 470);
+  ctx.fillText(name, canvas.width / 2, 470);
 
-  // Underline under name
+  // Underline
   ctx.strokeStyle = '#ea8c33';
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -496,13 +494,11 @@ export async function downloadCert(course, org, date) {
 
   ctx.fillStyle = '#555';
   ctx.font = '20px Arial';
-  ctx.textAlign = 'center';
   ctx.fillText('Authorized Signature', canvas.width / 2, 920);
 
-  // Download file
+  // Trigger download
   const link = document.createElement('a');
-  const safeName = studentName.replace(/\s+/g, '_');
-  link.download = `${safeName}_${course.replace(/\s+/g, '_')}_Certificate.png`;
+  link.download = `${course.replace(/\s+/g, '_')}_Certificate.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
 }
