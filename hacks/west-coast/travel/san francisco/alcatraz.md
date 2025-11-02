@@ -520,3 +520,390 @@ Visitors look up at the main building first—top and center draw attention.
 
 ## Code Example
 ```html
+
+<!-- Quiz Section -->
+<div class="quiz-section">
+  <h1>🏛️ Build Your Own Hierarchy</h1>
+  <p class="subtitle">Answer the questions to create a custom design component!</p>
+  
+  <div class="question" id="q1">
+    <div class="question-number">Question 1 - Choose Your Primary Size</div>
+    <div class="question-text">
+      What font size (in pixels) do you want for your PRIMARY heading? Choose a size that will dominate the design.
+      <input type="text" class="fill-blank" id="answer1" placeholder="e.g., 40">
+    </div>
+    <div class="feedback" id="feedback1"></div>
+  </div>
+  
+  <div class="question" id="q2">
+    <div class="question-number">Question 2 - Choose Your Secondary Size</div>
+    <div class="question-text">
+      What font size (in pixels) do you want for your SECONDARY subheading? It should be smaller than primary but still noticeable.
+      <input type="text" class="fill-blank" id="answer2" placeholder="e.g., 24">
+    </div>
+    <div class="feedback" id="feedback2"></div>
+  </div>
+  
+  <div class="check-button-container">
+    <button class="check-answers-btn" id="checkBtn">Build My Component</button>
+  </div>
+  
+  <div class="completion-message" id="completion">
+    <h2>🏆 Component Built Successfully!</h2>
+    <div class="hierarchy-demo">
+      <h2 class="demo-secondary" id="demoSecondary">Primary Level</h2>
+      <p class="demo-tertiary" id="demoTertiary">Secondary Level</p>
+    </div>
+    <p style="margin-top: 25px;">You've created a custom design with proper visual hierarchy!</p>
+    <p style="margin-top: 10px; font-size: 1.1em;">Your sizes work together to guide users naturally! 🎯</p>
+  </div>
+</div>
+
+<style>
+.quiz-section {
+  padding: 60px 80px;
+  background: linear-gradient(135deg, #8b5e3c 0%, #6b4423 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 30s linear infinite;
+}
+
+@keyframes moveGrid {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(40px, 40px) rotate(360deg); }
+}
+
+.quiz-section h1 {
+  font-size: 2.8em;
+  background: linear-gradient(135deg, #f4e4d7, #c17767);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,.3);
+}
+
+.subtitle {
+  color: #f4e4d7;
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 1.3em;
+  position: relative;
+  z-index: 1;
+}
+
+.question {
+  background: rgba(255,255,255,.97);
+  padding: 35px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.question:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(0,0,0,.3);
+}
+
+.question.correct {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border: 3px solid #4caf50;
+}
+
+.question-number {
+  color: #8b5e3c;
+  font-weight: 800;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question-text {
+  color: #333;
+  font-size: 1.15em;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.fill-blank {
+  display: inline-block;
+  background: #faf8f5;
+  border: 3px solid #c17767;
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #333;
+  font-size: 1em;
+  min-width: 140px;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.fill-blank::placeholder {
+  color: #999;
+}
+
+.fill-blank:focus {
+  border-color: #8b5e3c;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(193,119,103,.15);
+  transform: scale(1.05);
+}
+
+.fill-blank.correct {
+  border-color: #4caf50;
+  background: #e8f5e9;
+}
+
+.feedback {
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  display: none;
+  font-size: 1.05em;
+}
+
+.feedback.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(76,175,80,.4);
+}
+
+.feedback.incorrect {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(239,83,80,.4);
+}
+
+.check-button-container {
+  text-align: center;
+  margin-top: 35px;
+  position: relative;
+  z-index: 1;
+}
+
+.check-answers-btn {
+  padding: 18px 50px;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #c17767, #8b5e3c);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(139,94,60,.4);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.check-answers-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(193,119,103,.5);
+  background: linear-gradient(135deg, #d4917f, #9d6b49);
+}
+
+.check-answers-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.completion-message {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  padding: 50px;
+  border-radius: 18px;
+  text-align: center;
+  display: none;
+  margin-top: 40px;
+  box-shadow: 0 20px 60px rgba(76,175,80,.4);
+  position: relative;
+  z-index: 1;
+}
+
+.completion-message.show {
+  display: block;
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.completion-message h2 {
+  color: #ffffff;
+  margin-bottom: 35px;
+  font-size: 2.3em;
+  text-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+
+.completion-message p {
+  color: #ffffff;
+  font-size: 1.25em;
+}
+
+.hierarchy-demo {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  padding: 45px 35px;
+  border-radius: 15px;
+  margin: 30px auto;
+  max-width: 600px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+.demo-primary {
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.demo-secondary {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.demo-tertiary {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.hint {
+  color: #c17767;
+  font-size: 0.95em;
+  font-style: italic;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .quiz-section {
+    padding: 40px 20px;
+  }
+  
+  .quiz-section h1 {
+    font-size: 2.2em;
+  }
+  
+  .demo-primary {
+    font-size: 32px !important;
+  }
+  
+  .demo-secondary {
+    font-size: 20px !important;
+  }
+}
+</style>
+
+<script>
+document.getElementById('checkBtn').addEventListener('click', function() {
+  const input1 = document.getElementById('answer1');
+  const input2 = document.getElementById('answer2');
+  const feedback1 = document.getElementById('feedback1');
+  const feedback2 = document.getElementById('feedback2');
+  const question1 = document.getElementById('q1');
+  const question2 = document.getElementById('q2');
+  
+  const answer1 = input1.value.trim();
+  const answer2 = input2.value.trim();
+  
+  // Extract numbers from inputs
+  const primarySize = parseInt(answer1);
+  const secondarySize = parseInt(answer2);
+  
+  let allCorrect = true;
+  
+  // Check answer 1 - Primary size (32-48px)
+  if (primarySize >= 32 && primarySize <= 48) {
+    feedback1.textContent = `✓ Great choice! ${primarySize}px is a strong primary size!`;
+    feedback1.className = 'feedback correct show';
+    input1.className = 'fill-blank correct';
+    question1.className = 'question correct';
+    input1.disabled = true;
+  } else {
+    feedback1.textContent = '✗ Primary size should be between 32-48px for best hierarchy!';
+    feedback1.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Check answer 2 - Secondary size (24-32px and must be smaller than primary)
+  if (secondarySize >= 24 && secondarySize <= 32 && secondarySize < primarySize) {
+    feedback2.textContent = `✓ Perfect! ${secondarySize}px creates great contrast with your primary!`;
+    feedback2.className = 'feedback correct show';
+    input2.className = 'fill-blank correct';
+    question2.className = 'question correct';
+    input2.disabled = true;
+  } else if (secondarySize >= primarySize) {
+    feedback2.textContent = '✗ Secondary must be smaller than your primary size to create hierarchy!';
+    feedback2.className = 'feedback incorrect show';
+    allCorrect = false;
+  } else {
+    feedback2.textContent = '✗ Secondary size should be between 24-32px for best results!';
+    feedback2.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Show reward if both correct
+  if (allCorrect) {
+    setTimeout(() => {
+      // Show completion with user's chosen sizes
+      const completion = document.getElementById('completion');
+      completion.className = 'completion-message show';
+      
+      // Apply user's chosen sizes to the demo
+      document.getElementById('demoSecondary').style.fontSize = primarySize + 'px';
+      document.getElementById('demoSecondary').textContent = `Primary Level (${primarySize}px)`;
+      
+      document.getElementById('demoTertiary').style.fontSize = secondarySize + 'px';
+      document.getElementById('demoTertiary').textContent = `Secondary Level (${secondarySize}px)`;
+      
+      // Disable the button
+      this.disabled = true;
+      this.textContent = '✓ Component Built!';
+      this.style.background = 'linear-gradient(135deg, #4caf50, #66bb6a)';
+    }, 500);
+  }
+});
+</script>
