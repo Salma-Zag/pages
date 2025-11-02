@@ -25,18 +25,18 @@ class MansionLevel5 {
 	};
 
 	//data for player
-	const sprite_player = path + "/images/mansionGame/spookMcWalk.png"; // be sure to include the path
-	const player_scale_factor = 5;
+	const sprite_player = path + "/images/mansionGame/full_anims_spook.png"; // be sure to include the path
+	const player_scale_factor = 10;
 	const sprite_data_player = {
         id: 'Player',
         greeting: "I am the player for level 5",
         src: sprite_player,
         SCALE_FACTOR: player_scale_factor,
-        STEP_FACTOR: 1500,
+        STEP_FACTOR: 2000,
         ANIMATION_RATE: 10,
         INIT_POSITION: { x: 0, y: 0 }, 
-        pixels: {height: 2400, width: 3600},
-        orientation: {rows: 2, columns: 3},
+        pixels: {width: 300, height: 360},
+        orientation: {rows: 2, columns: 25},
 		down: {row: 1, start: 0, columns: 3},
 		downRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
 		downLeft: {row: 0, start: 0, columns: 3, rotate: -Math.PI/16},
@@ -44,9 +44,10 @@ class MansionLevel5 {
 		right: {row: 1, start: 0, columns: 3},
 		up: {row: 1, start: 0, columns: 3},
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
-		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
+		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/-16},
+        shoot: {row: 2, start: 0, columns: 25},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
-		keypress: {up: 87, left: 65, down: 83, right: 68}
+		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32}
 	};
 
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
@@ -217,6 +218,67 @@ class MansionLevel5 {
             }
         }
     };
+
+    const laser_image = path + "/images/gamify/laser_bolt.png";
+    this.laserData = {
+        id: "Laser",
+        src: laser_image,
+        SCALE_FACTOR: 20,
+        ANIMATION_RATE: 50,
+        pixels: { height: 500, width: 500 },
+        orientation: { rows: 1, columns: 1 },
+        down: { row: 0, start: 0, columns: 1 }
+    }
+
+    // shootLaser() 
+    // {
+    //     if (this.isPaused || this.gameOver) return
+    
+    //     const currentTime = Date.now()
+    //     if (currentTime - this.lastShotTime < this.shootCooldown) return
+    
+    //     this.lastShotTime = currentTime
+    
+    //     const player = this.gameEnv.gameObjects.find((obj) => obj.spriteData && obj.spriteData.id === "Ufo")
+    
+    //     if (!player) {
+    //       console.error("Player not found")
+    //       return
+    //     }
+    
+    //     console.log("Shooting laser")
+    
+    //     const laserData = {
+    //       ...this.laserData,
+    //       id: `Laser-${Math.random().toString(36).substring(2, 9)}`,
+    //       INIT_POSITION: {
+    //         x: player.position.x + player.width / 2 - 10,
+    //         y: player.position.y - 20,
+    //       },
+    //     }
+    
+    //     const laser = new Character(laserData, this.gameEnv)
+    
+    //     laser.velocity = { x: 0, y: -10 }
+    
+    //     laser.update = function () {
+    //       this.position.y += this.velocity.y
+    
+    //       if (this.position.y < -this.height) {
+    //         const index = this.gameEnv.gameObjects.indexOf(this)
+    //         if (index !== -1) {
+    //           this.gameEnv.gameObjects.splice(index, 1)
+    //           this.destroy()
+    //         }
+    //         return
+    //       }
+    
+    //       this.draw()
+    //     }
+    
+    //     this.lasers.push(laser)
+    //     this.gameEnv.gameObjects.push(laser)
+    // }
 
 	// List of objects defnitions for this level
 	this.classes = [
