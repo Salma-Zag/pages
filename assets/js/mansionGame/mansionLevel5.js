@@ -229,6 +229,7 @@ class MansionLevel5 {
 
     // Track kills for this level (only stored on the level instance)
     this.zombiesKilled = 0;
+    this.zombies = 0;
 
     // Start the zombie spawning timer
     this.startZombieSpawner();
@@ -260,15 +261,20 @@ class MansionLevel5 {
     //       y = Math.random() * this.height;
     //       break;
     //   }
+        
+        
+        this.zombies += 1;
+        // Create new enemy with the spawning position
+        const zombieData = {
+            ...this.enemyTemplate,
+            id: `Zombie${this.zombies}`,
+            INIT_POSITION: { x: 50, y: 50 }
+        };
 
-      // Create new enemy with the spawning position
-      const zombieData = {
-        ...this.enemyTemplate,
-        INIT_POSITION: { x: 50, y: 50 }
-      };
+        const zombie = new Enemy(zombieData, this.gameEnv);
 
-      // Add the new zombie to the game
-      this.gameEnv.gameObjects.push(new Enemy(this.gameEnv, zombieData));
+        // Add the new zombie to the game
+        this.gameEnv.gameObjects.push(zombie);
     }
   }
 
