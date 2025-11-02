@@ -531,6 +531,19 @@ author: "Curators Team"
         }
   }
 
+  // after page load, check credentials and redirect non-Admin users to the main quest page
+  // Tested with admin (toby) and default user (hop), and hop is redirected while toby is not
+  window.addEventListener('load', async () => {
+    try {
+      const role = await getCredentials();
+      if (role !== 'Admin') {
+        window.location.href = '{{ site.baseurl }}/cs-portfolio-quest';
+      }
+    } catch (err) {
+      console.error('Error checking credentials:', err);
+    }
+  });
+
   async function downloadReport() {
       let csv = 'Student Name,Overall Average,Module 1 Progress,Module 1 Average,Module 2 Progress,Module 2 Average,Module 3 Progress,Module 3 Average,Module 4 Progress,Module 4 Average,Module 5 Progress,Module 5 Average\n';
 
