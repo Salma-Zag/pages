@@ -94,7 +94,7 @@ class MansionLevel5 {
             }
 
             // Move towards nearest player
-            const speed = 1.5; // Adjust speed as needed
+            const speed = 0.8; // Adjust speed as needed
             const dx = nearest.position.x - this.position.x;
             const dy = nearest.position.y - this.position.y;
             const angle = Math.atan2(dy, dx);
@@ -237,7 +237,7 @@ class MansionLevel5 {
 
   // Method to spawn a batch of zombies
   spawnZombieBatch() {
-    const numZombies = 3 + Math.floor(Math.random() * 3); // Spawn 3-5 zombies per batch
+    const numZombies = 3; // spawn 2 zombies per batch
     
     for (let i = 0; i < numZombies; i++) {
         const side = Math.floor(Math.random() * 4);
