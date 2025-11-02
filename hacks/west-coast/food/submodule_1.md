@@ -563,6 +563,17 @@ completeTask('fishtaco');
       <button class="sq-btn" onclick="copyEditor('code-fishtaco')">Copy</button>
     </div>
     <pre id="terminal-fishtaco" class="sq-terminal"></pre>
+    <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
+  <strong>Checkpoint 🧩 — What you just did:</strong>
+  <ul>
+    <li>Created a <code>FishTaco</code> class (simulates a database "record").</li>
+    <li>Added fields: <em>id, fishType, toppings, sauce, price, spiceLevel</em>.</li>
+    <li>Implemented <code>calculateTotalPrice()</code> → simulates derived data.</li>
+    <li>Learned that <strong>CREATE = instantiating and saving new records</strong>.</li>
+  </ul>
+  <small>Tip: think of each taco object as a row in your dishes table!</small>
+</div>
+
   </div>
 </details>
 
@@ -605,6 +616,16 @@ completeTask('burritocart');
       <button class="sq-btn" onclick="copyEditor('code-burritocart')">Copy</button>
     </div>
     <pre id="terminal-burritocart" class="sq-terminal"></pre>
+    <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
+  <strong>Checkpoint 🧩 — Key Learnings:</strong>
+  <ul>
+    <li>Created a container (cart) to hold multiple “records” (burritos).</li>
+    <li>Methods to <strong>add/remove/retrieve</strong> items simulate CRUD operations.</li>
+    <li>Running code here simulates <strong>client-side creation</strong> of multiple records before sending to DB.</li>
+  </ul>
+  <small>Question: If you wanted to add a new topping to all burritos, which CRUD operation would that be?</small>
+</div>
+
   </div>
 </details>
 
@@ -643,6 +664,17 @@ completeTask('burritocart');
 
       <div style="margin-top:0.5rem">
         <div id="terminal-create" class="sq-terminal"></div>
+        <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
+  <strong>Checkpoint 🧩 — What just happened:</strong>
+  <ul>
+    <li>Collected user input from form → simulates a POST request.</li>
+    <li>Validated required fields: <strong>name, category, calories, ingredients</strong>.</li>
+    <li>Called <code>MockAPIInstance.postDish()</code> → “created” a new dish in the mock DB.</li>
+    <li>Displayed feedback in the terminal and XP toast → confirms creation success.</li>
+  </ul>
+  <small>Quiz: What would happen if you submitted without ingredients? Which part of the code prevents it?</small>
+</div>
+
       </div>
     </div>
   </div>
@@ -745,6 +777,16 @@ completeTask('burritocart');
       <button class="sq-btn" onclick="copyEditor('code-post')">Copy</button>
     </div>
     <pre id="terminal-post" class="sq-terminal"></pre>
+    <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
+  <strong>Checkpoint 🧩 — Key Takeaways:</strong>
+  <ul>
+    <li>You manually sent a POST request to the mock backend.</li>
+    <li>Checked the response status <code>201 Created</code> → confirms creation.</li>
+    <li>Unit test simulates automated verification of CREATE operation.</li>
+    <li>Understand: creation = server-side addition of new resource.</li>
+  </ul>
+</div>
+
     <div style="margin-top:0.75rem;">
       <button class="sq-btn sq-run" onclick="runUnitTest()">Run Unit Test: POST returns 201 & created resource</button>
       <div id="terminal-test" class="sq-terminal" style="margin-top:0.5rem"></div>
@@ -782,6 +824,16 @@ window.runUnitTest = async function() {
       <button class="sq-btn" onclick="clearTerm('terminal-seed')">Clear</button>
     </div>
     <pre id="terminal-seed" class="sq-terminal" style="margin-top:0.5rem"></pre>
+    <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
+  <strong>Checkpoint 🧩 — Bulk Creation:</strong>
+  <ul>
+    <li>Inserted multiple dishes at once using <code>postBulk()</code>.</li>
+    <li>Shows how batch creation works in databases/APIs.</li>
+    <li>Completion of this task triggers module progress update.</li>
+  </ul>
+  <small>Think: why might bulk creation fail if one record is invalid?</small>
+</div>
+
   </div>
 </details>
 
@@ -814,6 +866,16 @@ window.seedPantry = async function() {
       <button class="sq-btn" onclick="clearTerm('terminal-pantry')">Clear</button>
     </div>
     <pre id="terminal-pantry" class="sq-terminal" style="margin-top:0.5rem"></pre>
+    <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
+  <strong>Checkpoint 🧩 — Viewing Data:</strong>
+  <ul>
+    <li>GET request retrieves all dishes for San Diego.</li>
+    <li>Observe the dishes you created — creation verified!</li>
+    
+  </ul>
+  <small>Mini Quiz: Which task showed CREATE, and which one shows READ?</small>
+</div>
+
   </div>
 </details>
 
