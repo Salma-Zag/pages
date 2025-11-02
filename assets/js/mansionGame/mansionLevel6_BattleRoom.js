@@ -1,6 +1,5 @@
 import GameEnvBackground from "./GameEngine/GameEnvBackground.js";
 import FightingPlayer from "./CustomGameClasses/FightingPlayer.js";
-import Player from "./GameEngine/Player.js";
 import Boss from './CustomGameClasses/Boss.js';
 import showDeathScreen from './CustomGameClasses/DeathScreen.js';
 import { createBossHealthBar, createPlayerHealthBar, updatePlayerHealthBar } from './CustomGameClasses/HealthBars.js';
