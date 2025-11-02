@@ -46,77 +46,7 @@ class MansionLevel5 {
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
 		upRight: {row: 1, start: 0, columns: 3, rotate: Math.PI/16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
-		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32} , //wasd + space bar
-
-        update: function() {
-        // space key check
-        if (this.gameEnv.keys && this.gameEnv.keys[this.data.keypress.shoot]) {
-            this.shootRadialProjectiles();
-            // key reset
-            this.gameEnv.keys[this.data.keypress.shoot] = false;
-        }
-        },
-        // radial shooting
-        shootRadialProjectiles: function() {
-        const numProjectiles = 8;
-        const radius = 100; // dist away from player to shoot
-                
-        for (let i = 0; i < numProjectiles; i++)
-        {
-            const angle = (i * 2 * Math.PI) / numProjectiles;
-            const targetX = this.position.x + Math.cos(angle) * radius;
-            const targetY = this.position.y + Math.sin(angle) * radius;
-                    
-            // cxreate new projectile
-            const projectile = new Projectile(
-                this.gameEnv,
-                targetX,
-                targetY,
-                this.position.x + this.width/2,
-                this.position.y + this.height/2,
-                "FIREBALL"
-            );
-                    
-            // change to execDamage method to damage zombies instead of player
-            projectile.execDamage = function() {
-                const zombies = this.gameEnv.gameObjects.filter(obj => 
-                    obj.constructor.name === 'Enemy'
-                );
-                            
-                for (const zombie of zombies) 
-                {
-                    const dx = zombie.position.x - this.position.x;
-                    const dy = zombie.position.y - this.position.y;
-                    const distance = Math.sqrt(dx*dx + dy*dy);
-                                
-                    if (distance <= 50) { // Hit distance for zombies
-                        // Remove the zombie
-                        try { zombie.destroy(); } catch (e) { /* ignore */ }
-
-                        // Increment the level kill counter (stored on the current level)
-                        try {
-                            const lvl = this.gameEnv && this.gameEnv.gameControl && this.gameEnv.gameControl.currentLevel;
-                            if (lvl) {
-                                lvl.zombiesKilled = (lvl.zombiesKilled || 0) + 1;
-                                // Stop the level when 100 kills reached
-                                if (lvl.zombiesKilled >= 100) {
-                                    console.log('Kill target reached:', lvl.zombiesKilled);
-                                    try { lvl.continue = false; } catch (e) { /* ignore */ }
-                                }
-                            }
-                        } catch (e) { /* ignore */ }
-
-                        // Remove the projectile
-                        try { this.destroy(); } catch (e) { /* ignore */ }
-                        break;
-                    }
-                }
-            };
-                    
-            // Add the projectile to the game
-            this.gameEnv.gameObjects.push(projectile);
-        }
-    }
+		keypress: {up: 87, left: 65, down: 83, right: 68}
 	};
 
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
