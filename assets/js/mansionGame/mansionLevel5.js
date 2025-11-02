@@ -267,7 +267,8 @@ class MansionLevel5 {
 
 	// List of objects defnitions for this level
 	this.classes = [
-	  { class: GameEnvBackground, data: image_data_background }
+	  { class: GameEnvBackground, data: image_data_background },
+      { class: Player, data: sprite_data_player}
 	];
 
     // Store sprite_data_enemy for later use
