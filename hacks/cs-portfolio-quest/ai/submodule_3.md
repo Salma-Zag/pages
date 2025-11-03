@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: cs-portfolio-lesson
 title: "Professional Applications"
 description: "Use AI for resumes, interviews, and knowing when NOT to use AI"
 permalink: /cs-portfolio-quest/ai/submodule_3/
