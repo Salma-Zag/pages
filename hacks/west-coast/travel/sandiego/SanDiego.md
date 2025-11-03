@@ -1037,12 +1037,12 @@ body {
       <button class="check-answers-btn" id="balboa-check">Build My Audio Player</button>
     </div>
     
-    <div class="completion-message" id="balboa-complete">
+   <div class="completion-message" id="balboa-complete">
       <h3>🏆 Audio Player Built Successfully!</h3>
       <div class="audio-player">
         <p>🎵 Your Working Audio Player:</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+          <source src="/hacks/west-coast/travel/sandiego/funny-organ-intro-outro-5008.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>You've successfully created an audio player!</p>
@@ -1091,11 +1091,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>🌊 Beach Sounds Example</h3>
       <p>Listen to the soothing sounds of waves crashing on the shores of La Jolla Beach:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+        <source src="/hacks/west-coast/travel/sandiego/gentle-ocean-waves-3-300839.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Sample ocean waves audio</p>
     </div>
@@ -1147,12 +1147,12 @@ body {
       <button class="check-answers-btn" id="lajolla-check">Build My Audio Player</button>
     </div>
     
-    <div class="completion-message" id="lajolla-complete">
+  <div class="completion-message" id="lajolla-complete">
       <h3>🏆 Audio Player Built Successfully!</h3>
       <div class="audio-player">
         <p>🌊 La Jolla Beach Ocean Waves</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+          <source src= "/hacks/west-coast/travel/sandiego/gentle-ocean-waves-3-300839.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>You've successfully created an audio player using HTML!</p>
