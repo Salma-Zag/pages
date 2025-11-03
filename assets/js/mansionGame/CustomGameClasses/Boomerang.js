@@ -140,9 +140,25 @@ class Boomerang extends Character {
             return;
         }
 
+        // Find all enemies
+        const enemies = this.gameEnv.gameObjects.filter(obj => 
+            obj.constructor.name === 'Boss' || obj.constructor.name === 'Enemy'
+        );
+        let ATTACK_MODIFIER;
+        if (enemies.length === 0) {
+            ATTACK_MODIFIER = 1;
+        } else {
+            const enemy = enemies[0];
+            if (enemy.stage >= 3) {
+                ATTACK_MODIFIER = 1.2;
+            } else {
+                ATTACK_MODIFIER = 1;
+            }
+        }
+
         // If the player is too close...
         const HIT_DISTANCE = 50;
-        const SCYTHE_DAMAGE = 15;
+        const SCYTHE_DAMAGE = Math.round(15 * ATTACK_MODIFIER);
         
         const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer');
         if (players.length === 0) return null;

@@ -194,7 +194,7 @@ class Boss extends Enemy {
     // Randomize attack chances
     performAttack(target) {
         const rand = Math.random();
-        const attackProbModifier = attackProbShift * (this.stage - 1);
+        const attackProbModifier = this.attackProbShift * (this.stage - 1);
         
         if (this.stage >= 2 && rand < 0.3 + attackProbModifier) {
             this.scytheAttack(target);
