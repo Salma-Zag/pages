@@ -207,7 +207,7 @@ class MansionLevel5 {
     };
 
     // Level 6 door
-    const sprite_src_level6door = path + "/images/gamify/lineDoorCollisionSprite.png";
+    const sprite_src_level6door = path + "/images/mansionGame/door_lvl5.png";
     const sprite_greet_level6door = "You beat level 5! Would you like to enter level 6? Press E";
     const sprite_data_level6door = {
         id: 'Level6Door',
@@ -516,6 +516,7 @@ class MansionLevel5 {
             'W','A','S','D' to move around <br>
             'C' to shoot <br>
             Kill 80 zombies to progress <br>
+            Press 'E' to enter the door at the end
             </div>
         `
         
@@ -529,7 +530,7 @@ class MansionLevel5 {
                 <div style="font-size: 14px;">${this.zombiesKilled} zombie kills</div>
             `;
 
-            if (this.zombiesKilled >= 80) 
+            if (this.zombiesKilled >= 80 && this.spawnZombies) 
             {
                 console.log("Level completed")
                 this.spawnZombies = false;
