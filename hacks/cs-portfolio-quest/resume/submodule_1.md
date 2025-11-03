@@ -29,22 +29,32 @@ date: 2025-10-21
   </div>
 
   <!-- STEP 1: Character selection -->
-  <section data-step="0" class="space-y-3">
-    <h2 class="text-xl font-semibold">Choose Your Character</h2>
-    <p class="text-gray-700 text-sm">Pick a guide to accompany you through the mini-quest.</p>
-    <div class="flex justify-center gap-4">
-      <video id="char1" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer" loop muted playsinline>
-        <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant.mp4" type="video/mp4"/>
-      </video>
-      <video id="char2" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer" loop muted playsinline>
-        <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster.mp4" type="video/mp4"/>
-      </video>
-      <video id="char3" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer" loop muted playsinline>
-        <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <p id="charNote" class="text-xs text-gray-600 text-center">Click a character to enable “Next”.</p>
-  </section>
+<section data-step="0" class="space-y-3">
+  <h2 class="text-xl font-semibold">Choose Your Character</h2>
+  <p class="text-gray-700 text-sm">Pick a guide to accompany you through the mini-quest.</p>
+
+  <div class="flex justify-center gap-4">
+    <video id="char1" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer"
+      autoplay loop muted playsinline preload="auto">
+      <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant.mp4" type="video/mp4"/>
+      Your browser does not support the video tag.
+    </video>
+
+  <video id="char2" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer"
+      autoplay loop muted playsinline preload="auto">
+      <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster.mp4" type="video/mp4"/>
+      Your browser does not support the video tag.
+    </video>
+
+  <video id="char3" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer"
+      autoplay loop muted playsinline preload="auto">
+      <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey.mp4" type="video/mp4"/>
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <p id="charNote" class="text-xs text-gray-600 text-center">Click a character to enable “Next”.</p>
+</section>
 
   <!-- STEP 2: Recruiter stats -->
   <section data-step="1" class="space-y-3 hidden">
@@ -307,24 +317,30 @@ date: 2025-10-21
     else nextModuleBtn.scrollIntoView({ behavior: 'smooth' });
   });
 
-  // Character selection: blue border only
-  const videos = document.querySelectorAll('.character');
-  const charNote = document.getElementById('charNote');
-  videos.forEach(v=>{
-    v.play().catch(()=>{});
-    v.addEventListener('click', ()=>{
-      videos.forEach(x=>{
-        x.classList.remove('border-blue-600');
-        x.classList.add('border-gray-300');
-      });
-      v.classList.remove('border-gray-300');
-      v.classList.add('border-blue-600');  // same blue as progress bar
-      localStorage.setItem('selectedCharacter', v.id);
-      charSelected = true;
-      if (charNote) charNote.textContent = `Selected: ${v.id}`;
-      v.play().catch(()=>{});
+  // Character selection: blue border + ensure videos play correctly
+const videos = document.querySelectorAll('.character');
+const charNote = document.getElementById('charNote');
+
+videos.forEach(v => {
+  // Ensure autoplay works even if browser blocks it initially
+  const tryPlay = () => v.play().catch(() => {});
+  v.addEventListener('loadeddata', tryPlay);
+  tryPlay();
+
+  v.addEventListener('click', () => {
+    videos.forEach(x => {
+      x.classList.remove('border-blue-600');
+      x.classList.add('border-gray-300');
     });
+
+    v.classList.remove('border-gray-300');
+    v.classList.add('border-blue-600'); // same blue as progress bar
+    localStorage.setItem('selectedCharacter', v.id);
+    charSelected = true;
+    if (charNote) charNote.textContent = `Selected: ${v.id}`;
+    tryPlay();
   });
+});
 
   // Boot
   showStep(0);
