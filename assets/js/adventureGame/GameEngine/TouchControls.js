@@ -267,6 +267,10 @@ class TouchControls {
             case 85: key = 'u'; break;
             default: key = undefined;
         }
+        // Special handling: if this is the interact button, set key to match interactLabel if possible
+        if (this.buttonMap && this.buttonMap.interact === keyCode && this.interactLabel) {
+            key = this.interactLabel;
+        }
         const event = new KeyboardEvent(type, {
             keyCode: keyCode,
             which: keyCode,
