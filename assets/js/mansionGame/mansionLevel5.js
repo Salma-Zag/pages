@@ -268,7 +268,7 @@ class MansionLevel5 {
 
         console.log("Shooting lasers")
 
-        const laserNum = 8;
+        const laserNum = 10;
 
         for (let i = 0; i < laserNum; i++)
         {
@@ -285,22 +285,25 @@ class MansionLevel5 {
     
             // generate lasers in circle
             laser.velocity = { x: Math.cos((i * Math.PI * 2)/laserNum)*15, y: Math.sin((i * Math.PI * 2)/laserNum)*15 }
+
+            const outerInstance = this;
     
             laser.update = function () {
                 this.position.y += this.velocity.y
                 this.position.x += this.velocity.x
-    
+
                 setTimeout(() => {
                     const index = this.gameEnv.gameObjects.indexOf(this)
                     if (index !== -1) {
                         this.gameEnv.gameObjects.splice(index, 1)
                     }
 
-                    const index2 = this.lasers.indexOf(this)
+                    const index2 = outerInstance.lasers.indexOf(this)
                     if (index2 !== -1)
                     {
-                        this.lasers.splice(index2, 1)
+                        outerInstance.lasers.splice(index2, 1)
                     }
+                    
 
                     this.collisionWidth = 0;
                     this.collisionHeight = 0;
@@ -308,7 +311,6 @@ class MansionLevel5 {
                 }, 1000);
     
                 this.draw()
-                this.coll
             }
     
             this.lasers.push(laser)
@@ -377,7 +379,7 @@ class MansionLevel5 {
 
     // Method to spawn a batch of zombies
     spawnZombieBatch() {
-        const numZombies = 8; // spawn 10 zombies per batch
+        const numZombies = 4; // spawn zombies per batch
         
         for (let i = 0; i < numZombies; i++) {
             const side = Math.floor(Math.random() * 4);
@@ -432,8 +434,8 @@ class MansionLevel5 {
         // create kills text
         const kills = document.createElement('div');
         kills.style.position = 'fixed';
-        kills.style.top = '80%';
-        kills.style.left = '30%';
+        kills.style.top = '90%';
+        kills.style.left = '10%';
         kills.style.transform = 'translate(-50%, -50%)';
         kills.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
         kills.style.color = '#00ff0dff';
