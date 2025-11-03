@@ -288,6 +288,7 @@ class MansionLevel5 {
     
             laser.update = function () {
                 this.position.y += this.velocity.y
+                this.position.x += this.velocity.x
     
                 setTimeout(() => {
                     this.destroy()
