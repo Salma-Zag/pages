@@ -1207,11 +1207,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>⚾ Petco Park Atmosphere</h3>
       <p>Listen to authentic game-day sounds from the Padres' home stadium:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" type="audio/mpeg">
+        <source src="/hacks/west-coast/travel/sandiego/applause-cheer-236786.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Baseball crowd cheer sound effect</p>
     </div>
@@ -1263,12 +1263,12 @@ body {
       <button class="check-answers-btn" id="petco-check">Play Ball! 🏟️</button>
     </div>
     
-    <div class="completion-message" id="petco-complete">
+   <div class="completion-message" id="petco-complete">
       <h3>⚾ Home Run!</h3>
       <div class="audio-player">
         <p>⚾ Petco Park Game Day Atmosphere</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" type="audio/mpeg">
+          <source src="/hacks/west-coast/travel/sandiego/applause-cheer-236786.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>The Padres faithful are cheering you on! 🎊</p>
