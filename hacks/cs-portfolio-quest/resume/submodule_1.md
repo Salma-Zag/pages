@@ -36,19 +36,19 @@ date: 2025-10-21
   <div class="flex justify-center gap-4">
     <video id="char1" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer"
       autoplay loop muted playsinline preload="auto">
-      <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant.mp4" type="video/mp4"/>
+      <source src="{{site.baseurl}}hacks/cs-portfolio-quest/resume/sprites/elephant.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
 
   <video id="char2" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer"
       autoplay loop muted playsinline preload="auto">
-      <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster.mp4" type="video/mp4"/>
+      <source src="{{site.baseurl}}hacks/cs-portfolio-quest/resume/sprites/hamster.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
 
   <video id="char3" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer"
       autoplay loop muted playsinline preload="auto">
-      <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey.mp4" type="video/mp4"/>
+      <source src="{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/monkey.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
   </div>
