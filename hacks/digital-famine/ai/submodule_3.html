@@ -851,164 +851,120 @@ return await response.<input type="text" id="input3" class="inline-input" placeh
 
 
     <script>
-    // ---- Persistent flag for perfect quiz ----
-    const MODULE3_KEY = 'aiQuest_m3_passed'; // 'true' when user aces the quiz
+        let score = 0;
+        let questionsAnswered = 0;
+        const totalQuestions = 3;
 
-    // ---- Basic nav between sections ----
-    function goToSection(n) {
+        function goToSection(n) {
         document.querySelectorAll('.mission-section').forEach(s => s.classList.add('section-hidden'));
         document.getElementById('section-' + n).classList.remove('section-hidden');
         document.querySelectorAll('.nav-btn').forEach(b => {
-        b.classList.remove('bg-green-600');
-        b.classList.add('bg-slate-700/50');
+            b.classList.remove('bg-green-600');
+            b.classList.add('bg-slate-700/50');
         });
         const active = document.querySelector('.nav-btn[data-section="' + n + '"]');
         if (active) active.classList.add('bg-green-600');
         window.scrollTo(0, 0);
-    }
+        }
 
-    // ---- Challenge checks (unchanged) ----
-    function checkChallenge1() {
+        // --- Challenge checks (keep same behavior) ---
+        function checkChallenge1() {
         const input1 = document.getElementById('input1').value;
         const input2 = document.getElementById('input2').value.trim().toLowerCase();
         const input3 = document.getElementById('input3').value.trim().toLowerCase();
+        const feedback = document.getElementById('feedback1');
+        feedback.classList.remove('hidden');
 
-        let correct = 0;
-        if (input1 === 'POST') correct++;
-        if (input2 === 'postdata') correct++;
-        if (input3 === 'json') correct++;
-
-        const feedbackDiv = document.getElementById('feedback1');
-        feedbackDiv.classList.remove('hidden');
-
-        if (correct === 3) {
-        feedbackDiv.innerHTML =
-            '<div class="bg-green-900/30 border-2 border-green-500 rounded-lg p-4"><p class="text-lg font-bold text-green-400">✅ Correct! You understand API requests!</p></div>';
+        if (input1 === 'POST' && input2 === 'postdata' && input3 === 'json') {
+            feedback.innerHTML =
+            '<div class="bg-green-900/30 border-2 border-green-500 rounded-lg p-4 text-green-400 font-bold">✅ Correct! You understand API requests!</div>';
         } else {
-        feedbackDiv.innerHTML =
-            '<div class="bg-red-900/30 border-2 border-red-500 rounded-lg p-4"><p class="text-lg font-bold text-red-400">❌ Try again! Method: POST, Variable: postData, Method: json</p></div>';
+            feedback.innerHTML =
+            '<div class="bg-red-900/30 border-2 border-red-500 rounded-lg p-4 text-red-400 font-bold">❌ Try again! Method: POST, Variable: postData, Method: json</div>';
         }
-    }
+        }
 
-    function checkChallenge2() {
+        function checkChallenge2() {
         const input4 = document.getElementById('input4').value.trim().toLowerCase();
         const input5 = document.getElementById('input5').value.trim().toLowerCase();
+        const feedback = document.getElementById('feedback2');
+        feedback.classList.remove('hidden');
 
-        let correct = 0;
-        if (input4 === 'submit') correct++;
-        if (input5 === 'preventdefault') correct++;
-
-        const feedbackDiv = document.getElementById('feedback2');
-        feedbackDiv.classList.remove('hidden');
-
-        if (correct === 2) {
-        feedbackDiv.innerHTML =
-            '<div class="bg-green-900/30 border-2 border-green-500 rounded-lg p-4"><p class="text-lg font-bold text-green-400">✅ Perfect! You understand form handling!</p></div>';
+        if (input4 === 'submit' && input5 === 'preventdefault') {
+            feedback.innerHTML =
+            '<div class="bg-green-900/30 border-2 border-green-500 rounded-lg p-4 text-green-400 font-bold">✅ Perfect! You understand form handling!</div>';
         } else {
-        feedbackDiv.innerHTML =
-            '<div class="bg-red-900/30 border-2 border-red-500 rounded-lg p-4"><p class="text-lg font-bold text-red-400">❌ Try again! Event property: submit, Method: preventDefault</p></div>';
+            feedback.innerHTML =
+            '<div class="bg-red-900/30 border-2 border-red-500 rounded-lg p-4 text-red-400 font-bold">❌ Try again! Event property: submit, Method: preventDefault</div>';
         }
-    }
+        }
 
-    // ---- QUIZ ----
-    let quizScore = 0;
-    let quizAnswered = 0;
-    const quizTotal = 3;
-    const quizKey = { 1: 'C', 2: 'B', 3: 'B' };
-
-    function quizAnswer(n, choice, isCorrect) {
-        const block = document.getElementById('q' + n);
-        const feedback = document.getElementById('f' + n);
+        // --- Quiz logic identical to Module 1 ---
+        function quizAnswer(num, choice, correct) {
+        const block = document.getElementById('q' + num);
+        const feedback = document.getElementById('f' + num);
         const buttons = block.querySelectorAll('.option-btn');
+        buttons.forEach(b => (b.disabled = true));
 
-        // lock buttons
-        buttons.forEach(btn => btn.disabled = true);
+        event.target.classList.add(correct ? 'bg-green-600' : 'bg-red-600');
 
-        // color click
-        event.target.classList.add(isCorrect ? 'bg-green-600' : 'bg-red-600');
-
-        // show correct if missed
-        if (!isCorrect) {
-        buttons.forEach(btn => {
-            if (btn.textContent.trim().startsWith(quizKey[n] + ')')) {
-            btn.classList.add('bg-green-600');
-            }
-        });
-        feedback.textContent = '❌ Incorrect. The correct answer is highlighted in green.';
-        feedback.className = 'feedback mt-3 p-3 rounded-lg bg-red-900/30 border border-red-500/50 text-red-300';
+        if (correct) {
+            feedback.textContent = '✅ Correct! Great job!';
+            feedback.className =
+            'feedback mt-3 p-3 rounded-lg bg-green-900/30 border border-green-500/50 text-green-300';
+            score++;
         } else {
-        feedback.textContent = '✅ Correct!';
-        feedback.className = 'feedback mt-3 p-3 rounded-lg bg-green-900/30 border border-green-500/50 text-green-300';
-        quizScore++;
-        }
-
-        // end of quiz?
-        quizAnswered++;
-        if (quizAnswered === quizTotal) {
-        setTimeout(() => {
-            // hide questions
-            document.querySelectorAll('#section-6 .question-block').forEach(q => q.style.display = 'none');
-
-            // show result
-            const res = document.getElementById('quiz-result');
-            res.classList.remove('section-hidden');
-            document.getElementById('quiz-score').textContent = `You scored ${quizScore} out of ${quizTotal}!`;
-
-            if (quizScore === quizTotal) {
-            // set flag + refresh to mimic module-1 pattern
-            document.getElementById('quiz-pass').classList.remove('section-hidden');
-            localStorage.setItem(MODULE3_KEY, 'true');
-            location.reload();
-            } else {
-            document.getElementById('quiz-fail').classList.remove('section-hidden');
+            const quizKey = { 1: 'C', 2: 'B', 3: 'B' };
+            buttons.forEach(btn => {
+            if (btn.textContent.trim().startsWith(quizKey[num] + ')')) {
+                btn.classList.add('bg-green-600');
             }
-        }, 600);
+            });
+            feedback.textContent = '❌ Incorrect. The correct answer is highlighted in green.';
+            feedback.className =
+            'feedback mt-3 p-3 rounded-lg bg-red-900/30 border border-red-500/50 text-red-300';
         }
-    }
 
-    function quizRetry() {
-        quizScore = 0;
-        quizAnswered = 0;
+        questionsAnswered++;
+        if (questionsAnswered === totalQuestions) {
+            setTimeout(() => {
+            document.querySelectorAll('#section-6 .question-block').forEach(q => (q.style.display = 'none'));
+            document.getElementById('quiz-result').classList.remove('section-hidden');
+            document.getElementById('quiz-score').textContent = `You scored ${score} out of ${totalQuestions}!`;
+
+            if (score === totalQuestions) {
+                document.getElementById('quiz-pass').classList.remove('section-hidden');
+                document.getElementById('quiz-code-wrapper').classList.remove('section-hidden');
+            } else {
+                document.getElementById('quiz-fail').classList.remove('section-hidden');
+            }
+            }, 1000);
+        }
+        }
+
+        function quizRetry() {
+        score = 0;
+        questionsAnswered = 0;
 
         [1, 2, 3].forEach(n => {
-        const block = document.getElementById('q' + n);
-        const feedback = document.getElementById('f' + n);
-        block.style.display = 'block';
-        feedback.textContent = '';
-        feedback.className = 'feedback mt-3 p-3 rounded-lg';
-        block.querySelectorAll('.option-btn').forEach(btn => {
+            const block = document.getElementById('q' + n);
+            const feedback = document.getElementById('f' + n);
+            block.style.display = 'block';
+            feedback.textContent = '';
+            feedback.className = 'feedback mt-3 p-3 rounded-lg';
+            block.querySelectorAll('.option-btn').forEach(btn => {
             btn.disabled = false;
             btn.classList.remove('bg-green-600', 'bg-red-600');
-        });
+            });
         });
 
         document.getElementById('quiz-result').classList.add('section-hidden');
         document.getElementById('quiz-pass').classList.add('section-hidden');
         document.getElementById('quiz-fail').classList.add('section-hidden');
-    }
-
-    // ---- On load: if passed already, show the code INSIDE the quiz tab ----
-    function showQuizCodeIfPassed() {
-        const passed = localStorage.getItem(MODULE3_KEY) === 'true';
-        if (!passed) return;
-
-        // Ensure we are on the quiz section
-        goToSection(6);
-
-        // Hide any questions/results and show the code wrapper
-        document.querySelectorAll('#section-6 .question-block').forEach(q => q.style.display = 'none');
-        const result = document.getElementById('quiz-result');
-        if (result) result.classList.add('section-hidden');
-
-        const codeWrap = document.getElementById('quiz-code-wrapper');
-        if (codeWrap) codeWrap.classList.remove('section-hidden');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // If user already aced the quiz before, reveal their code in the quiz tab
-        showQuizCodeIfPassed();
-    });
+        document.getElementById('quiz-code-wrapper').classList.add('section-hidden');
+        }
     </script>
+
 
 
 
