@@ -206,7 +206,7 @@ class Projectile extends Character {
             }
 
         } else {
-            const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player');
+            const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer');
             if (players.length === 0) return null;
 
             let nearest = players[0];
