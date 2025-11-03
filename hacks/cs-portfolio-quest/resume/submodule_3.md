@@ -179,6 +179,20 @@ date: 2025-10-21
       disabled
     >Next Module →</button>
   </div>
+
+  <!-- ✅ Floating Selected Sprite -->
+<video id="floating-sprite" width="120" height="200" loop muted playsinline style="
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+">
+  <source id="floating-source" src="" type="video/mp4">
+</video>
+
 </div>
 
 <script>
@@ -598,4 +612,31 @@ document.addEventListener('DOMContentLoaded', () => {
   restore();
   showStep(0);
 });
+
+// ✅ Floating MP4 sprite logic
+const floatingSprite = document.getElementById("floating-sprite");
+const floatingSource = document.getElementById("floating-source");
+
+// On page load, check if a character was selected in Submodule 1
+const savedCharacter = localStorage.getItem("selectedCharacter");
+if (savedCharacter) {
+  showFloatingSprite(savedCharacter);
+}
+
+function showFloatingSprite(charId) {
+  const spriteMap = {
+    "char1": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant_3.mp4",
+    "char2": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster_3.mp4",
+    "char3": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey_3.mp4"
+  };
+
+  const src = spriteMap[charId];
+  if (src) {
+    floatingSource.src = src;
+    floatingSprite.load();
+    floatingSprite.style.display = "block";
+    floatingSprite.play();
+  }
+}
+
 </script>

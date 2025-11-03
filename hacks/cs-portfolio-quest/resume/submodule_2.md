@@ -161,7 +161,7 @@ date: 2025-10-21
 <video id="floating-sprite" width="120" height="200" loop muted playsinline style="
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 40px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   display: none;
@@ -524,9 +524,9 @@ if (savedCharacter) {
 
 function showFloatingSprite(charId) {
   const spriteMap = {
-    "char1": "{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/elephant_2.mp4",
-    "char2": "{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/hamster_2.mp4",
-    "char3": "{{sitebaseurl}}/cs-portfolio-quest/resume/sprites/monkey_2.mp4"
+    "char1": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant_2.mp4",
+    "char2": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster_2.mp4",
+    "char3": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey_2.mp4"
   };
 
   const src = spriteMap[charId];
