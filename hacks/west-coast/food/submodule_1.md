@@ -268,8 +268,9 @@ details[open] > summary {
     <div id="task-fishtaco" class="task-item">Task 1: Fish Taco Class - <span class="status">Incomplete</span></div>
     <div id="task-burritocart" class="task-item">Task 2: Burrito Cart - <span class="status">Incomplete</span></div>
     <div id="task-bajabowl" class="task-item">Task 3: Build Baja Bowl - <span class="status">Incomplete</span></div>
-    <div id="task-seed" class="task-item">Task 4: Seed Pantry - <span class="status">Incomplete</span></div>
-    <div id="task-view" class="task-item">Task 5: View Pantry - <span class="status">Incomplete</span></div>
+    <div id="task-post" class="task-item">Task 4: Programmatic POST and Unit Test - <span class="status">Incomplete</span></div>
+    <div id="task-seed" class="task-item">Task 5: Seed Pantry - <span class="status">Incomplete</span></div>
+    <div id="task-view" class="task-item">Task 6: View Pantry - <span class="status">Incomplete</span></div>
   </div>
   <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.01); border-radius: 0.5rem;">
     <strong>Completion: <span id="completion-percentage">0%</span></strong>
@@ -323,6 +324,7 @@ details[open] > summary {
     fishtaco: false,
     burritocart: false,
     bajabowl: false,
+    post: false,
     seed: false,
     view: false
   };
@@ -361,7 +363,7 @@ details[open] > summary {
 
   // Update progress display
   function updateProgressDisplay() {
-    const tasks = ['fishtaco', 'burritocart', 'bajabowl', 'seed', 'view'];
+    const tasks = ['fishtaco', 'burritocart', 'bajabowl', 'post', 'seed', 'view'];
     let completedCount = 0;
 
     tasks.forEach(task => {
@@ -574,6 +576,26 @@ completeTask('fishtaco');
   <small>Tip: think of each taco object as a row in your dishes table!</small>
 </div>
 
+<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+  <strong>🧩 Quick Quiz:</strong>
+
+  <div class="quiz-question" data-answer="b">
+    <p>1️⃣ Why should the constructor throw an error when <code>fishType</code> is missing?</p>
+    <label><input type="radio" name="q1-fish" value="a"> It improves performance</label><br>
+    <label><input type="radio" name="q1-fish" value="b"> It enforces data integrity</label><br>
+    <label><input type="radio" name="q1-fish" value="c"> It adds extra toppings automatically</label>
+  </div>
+
+  <div class="quiz-question" data-answer="price">
+    <p>2️⃣ What field does <code>calculateTotalPrice()</code> derive from?</p>
+    <input type="text" class="sq-field" placeholder="Type your answer..." />
+  </div>
+
+  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+</div>
+
+
   </div>
 </details>
 
@@ -623,8 +645,27 @@ completeTask('burritocart');
     <li>Methods to <strong>add/remove/retrieve</strong> items simulate CRUD operations.</li>
     <li>Running code here simulates <strong>client-side creation</strong> of multiple records before sending to DB.</li>
   </ul>
-  <small>Question: If you wanted to add a new topping to all burritos, which CRUD operation would that be?</small>
+ 
 </div>
+<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+  <strong>🧩 Quick Quiz:</strong>
+
+  <div class="quiz-question" data-answer="update">
+    <p>1️⃣ Which CRUD operation would an <code>updateBurrito()</code> method represent?</p>
+    <input type="text" class="sq-field" placeholder="Type your answer..." />
+  </div>
+
+  <div class="quiz-question" data-answer="b">
+    <p>2️⃣ Why is filtering burritos by filling useful before sending them to a backend?</p>
+    <label><input type="radio" name="q2-burrito" value="a"> It reduces calories</label><br>
+    <label><input type="radio" name="q2-burrito" value="b"> It minimizes unnecessary data transfer</label><br>
+    <label><input type="radio" name="q2-burrito" value="c"> It automatically creates new records</label>
+  </div>
+
+  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+</div>
+
 
   </div>
 </details>
@@ -673,6 +714,26 @@ completeTask('burritocart');
     <li>Displayed feedback in the terminal and XP toast → confirms creation success.</li>
   </ul>
   <small>Quiz: What would happen if you submitted without ingredients? Which part of the code prevents it?</small>
+</div>
+
+<!-- PASTE THIS QUIZ BLOCK FOR TASK 3 -->
+<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+  <strong>🧩 Quick Quiz:</strong>
+
+  <div class="quiz-question" data-answer="post">
+    <p>1️⃣ What HTTP method is simulated when you click the "Create Dish" button?</p>
+    <input type="text" class="sq-field" placeholder="Type your answer (e.g., GET, POST)..." />
+  </div>
+
+  <div class="quiz-question" data-answer="c">
+    <p>2️⃣ Why does the form have client-side validation before sending the data?</p>
+    <label><input type="radio" name="q3-baja" value="a"> To make the form look better</label><br>
+    <label><input type="radio" name="q3-baja" value="b"> To add extra ingredients automatically</label><br>
+    <label><input type="radio" name="q3-baja" value="c"> To prevent sending incomplete or invalid data to the server</label>
+  </div>
+
+  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
 </div>
 
       </div>
@@ -753,6 +814,7 @@ completeTask('burritocart');
     <div class="sq-label">Simulate a POST /api/dishes call programmatically (JS). There is also a simple unit test runner below to assert 201 and returned resource.</div>
     <textarea id="code-post" class="code-editor">
 // Example programmatic POST using MockAPIInstance
+// Example programmatic POST using MockAPIInstance
 (async function(){
   const payload = {
     name: "Carne Asada Fries",
@@ -767,9 +829,19 @@ completeTask('burritocart');
     city: "sd"
   };
 
+  // 1. Log the action from the client's perspective
+  console.log('[Client] Sending POST /api/dishes', payload);
+
+  // 2. Call the mock API to create the dish
   const res = await MockAPIInstance.postDish(payload);
-  console.log("Status:", res.status);
-  console.log("Body:", res.body);
+
+  // 3. Check the response and log the result from the server's perspective
+  if (res.status === 201) {
+    console.log('[Server] 201 Created', res.body);
+    completeTask('post'); // This now runs only on success
+  } else {
+    console.log('[Server] Error', res);
+  }
 })();
     </textarea>
     <div style="margin-top:0.5rem" class="editor-actions">
@@ -785,6 +857,26 @@ completeTask('burritocart');
     <li>Unit test simulates automated verification of CREATE operation.</li>
     <li>Understand: creation = server-side addition of new resource.</li>
   </ul>
+</div>
+
+<!-- PASTE THIS QUIZ BLOCK FOR TASK 4 -->
+<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+  <strong>🧩 Quick Quiz:</strong>
+
+  <div class="quiz-question" data-answer="b">
+    <p>1️⃣ What does the HTTP status code <code>201 Created</code> signify?</p>
+    <label><input type="radio" name="q4-post" value="a"> The server found the resource</label><br>
+    <label><input type="radio" name="q4-post" value="b"> The server successfully created a new resource</label><br>
+    <label><input type="radio" name="q4-post" value="c"> The server reported an error</label>
+  </div>
+
+  <div class="quiz-question" data-answer="automation">
+    <p>2️⃣ What is a major benefit of programmatic POST calls (like this one) over manual form submissions?</p>
+    <input type="text" class="sq-field" placeholder="Think about testing or scripting..." />
+  </div>
+
+  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
 </div>
 
     <div style="margin-top:0.75rem;">
@@ -834,6 +926,26 @@ window.runUnitTest = async function() {
   <small>Think: why might bulk creation fail if one record is invalid?</small>
 </div>
 
+<!-- PASTE THIS QUIZ BLOCK FOR TASK 5 -->
+<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+  <strong>🧩 Quick Quiz:</strong>
+
+  <div class="quiz-question" data-answer="c">
+    <p>1️⃣ What is the primary benefit of a "bulk" create operation over sending one request per dish?</p>
+    <label><input type="radio" name="q5-seed" value="a"> It uses more server memory</label><br>
+    <label><input type="radio" name="q5-seed" value="b"> It guarantees every dish is created correctly</label><br>
+    <label><input type="radio" name="q5-seed" value="c"> It reduces the number of network requests</label>
+  </div>
+
+  <div class="quiz-question" data-answer="transaction">
+    <p>2️⃣ A good API should wrap a bulk operation in a single ________, so that all records are created or none are.</p>
+    <input type="text" class="sq-field" placeholder="Database term..." />
+  </div>
+
+  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+</div>
+
   </div>
 </details>
 
@@ -874,6 +986,26 @@ window.seedPantry = async function() {
     
   </ul>
   <small>Mini Quiz: Which task showed CREATE, and which one shows READ?</small>
+</div>
+
+<!-- PASTE THIS QUIZ BLOCK FOR TASK 6 -->
+<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+  <strong>🧩 Quick Quiz:</strong>
+
+  <div class="quiz-question" data-answer="read">
+    <p>1️⃣ Viewing the pantry is an example of which CRUD operation?</p>
+    <input type="text" class="sq-field" placeholder="Create, Read, Update, or Delete?" />
+  </div>
+
+  <div class="quiz-question" data-answer="b">
+    <p>2️⃣ What HTTP method is typically used to fetch or read data from an API?</p>
+    <label><input type="radio" name="q6-view" value="a"> POST</label><br>
+    <label><input type="radio" name="q6-view" value="b"> GET</label><br>
+    <label><input type="radio" name="q6-view" value="c"> DELETE</label>
+  </div>
+
+  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
 </div>
 
   </div>
@@ -965,4 +1097,57 @@ function clearTerm(id) { const el = document.getElementById(id); if (el) el.text
     }
   }
 })();
-</script>f
+
+</script>
+
+
+
+<script>
+
+function submitQuiz(btn) {
+  const block = btn.closest('.quiz-block');
+  const questions = block.querySelectorAll('.quiz-question');
+  let correct = 0;
+  const total = questions.length;
+
+  questions.forEach(q => {
+    const expected = q.dataset.answer.trim().toLowerCase();
+    let userAnswer = '';
+
+    const radios = q.querySelectorAll('input[type="radio"]');
+    const text = q.querySelector('input[type="text"]');
+
+    // Find the user's choice
+    if (radios.length) {
+      const selected = [...radios].find(r => r.checked);
+      if (selected) userAnswer = selected.value.trim().toLowerCase();
+    } else if (text) {
+      userAnswer = text.value.trim().toLowerCase();
+    }
+
+    // Remove old highlights
+    q.style.borderLeft = '';
+    q.style.paddingLeft = '';
+
+    // Compare answers
+    if (userAnswer === expected) {
+      correct++;
+      q.style.borderLeft = '4px solid #10b981'; // green
+      q.style.paddingLeft = '0.5rem';
+    } else {
+      q.style.borderLeft = '4px solid #ef4444'; // red
+      q.style.paddingLeft = '0.5rem';
+    }
+  });
+
+  // Show overall feedback
+  const feedback = block.querySelector('.quiz-feedback');
+  if (correct === total) {
+    feedback.innerHTML = `✅ Perfect! ${correct}/${total} correct.`;
+    feedback.style.color = '#10b981';
+  } else {
+    feedback.innerHTML = `❌ ${correct}/${total} correct — check the red ones and try again.`;
+    feedback.style.color = '#ef4444';
+  }
+}
+</script>
