@@ -8,6 +8,7 @@ team: "Cool Collaborators"
 submodule: 3
 author: "Cool Collaborators"
 date: 2025-10-21
+microblog: true 
 footer: 
     previous: /west-coast/analytics/losangeles/
     home: /west-coast/travel/
@@ -1485,6 +1486,6 @@ setupQuiz('lajolla');
 setupQuiz('petco');
 setupQuiz('zoo');
 </script>
-
+ Share your experiences on the microblog!
 </body>
 </html>
