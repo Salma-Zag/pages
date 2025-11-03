@@ -131,6 +131,21 @@ const x = 5;
 x = 6; // WILL NOT WORK
 ```
 
+<div class="exercise-section">
+  <h4>Checkpoint: Practice Variables</h4>
+  <p>
+    Define at least three variables using either let or const and initialize each variable with a different data type.
+  </p>
+
+  <textarea id="codeInput" class="code-input" placeholder="// Write your JavaScript code here..."></textarea>
+
+  <div class="button-row">
+    <button onclick="saveCode()">Save Code</button>
+    <button onclick="loadCode()">Load Saved</button>
+    <button onclick="clearCode()">Clear</button>
+  </div>
+</div>
+
 ## Operators
 
 Mathematical operators are often used in JavaScript and other programming languages. Below is a handful of operators:
@@ -250,6 +265,21 @@ These are each of the individual components of a function:
     <br>
 </ol>
 
+<div class="exercise-section">
+  <h4>Checkpoint: Practice Functions</h4>
+  <p>
+    Make a function that takes two parameters, n1 & n2, and returns the multiplied value of those parameters.
+  </p>
+
+  <textarea id="codeInput" class="code-input" placeholder="// Write your JavaScript code here..."></textarea>
+
+  <div class="button-row">
+    <button onclick="saveCode()">Save Code</button>
+    <button onclick="loadCode()">Load Saved</button>
+    <button onclick="clearCode()">Clear</button>
+  </div>
+</div>
+
 ## DOM Basics
 JavaScript can be used to edit dynamically edit HTML content as well!
 
@@ -296,6 +326,21 @@ It should output Hello World.
 <br>
 
 console.log() is used in many applications beyond this, and is helpful for debugging certain parts of your code. So, when trying to identify why certain parts of the codes are acting in an unintended manner, consider using console.log() to help out.
+
+<div class="exercise-section">
+  <h4>Checkpoint: Practice console.log()</h4>
+  <p>
+    Define two variables and add their values to together. Use console.log() to output the value of the variables individually as well as their combined value.
+  </p>
+
+  <textarea id="codeInput" class="code-input" placeholder="// Write your JavaScript code here..."></textarea>
+
+  <div class="button-row">
+    <button onclick="saveCode()">Save Code</button>
+    <button onclick="loadCode()">Load Saved</button>
+    <button onclick="clearCode()">Clear</button>
+  </div>
+</div>
     
 <script>
     function showAnswer() {
