@@ -192,7 +192,7 @@ class Boss extends Enemy {
     performAttack(target) {
         const rand = Math.random();
 
-        if (this.stage >= 3 && rand < 0.3) {
+        if (this.stage >= 2 && rand < 0.3) {
             this.scytheAttack(target);
         } else if (rand < 0.6) {
             this.fireballAttack(target);
