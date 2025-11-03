@@ -89,8 +89,9 @@ class TouchControls {
                 }
                 .interact-button {
                     position: absolute;
-                    top: 52px;
-                    left: 52px;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                     width: 45px;
                     height: 45px;
                     background: rgba(100, 255, 100, 0.8);
