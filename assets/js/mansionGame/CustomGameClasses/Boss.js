@@ -61,7 +61,7 @@ class Boss extends Enemy {
         this.projectileTypes = data?.projectileTypes || ['FIREBALL', 'ARROW'];
 
         // Initialize arms
-        /*
+        
         this.leftArm = new Arm({
             xOffset: -60,
             yOffset: 20,
@@ -77,7 +77,7 @@ class Boss extends Enemy {
             emptySrc: "../../images/mansionGame/ReaperRightHandEmpty.png",
             hasWeapon: true
         }, gameEnv);
-        */
+        
 
         //this.arms = [this.leftArm, this.rightArm];
 
