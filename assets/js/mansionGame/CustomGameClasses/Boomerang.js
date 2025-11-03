@@ -22,7 +22,7 @@ class Boomerang extends Character {
 
         this.radian_prog = 0;
         this.radian_limit = 2 * Math.PI;
-        this.projectileSpeed = 0.015;  // radians per update
+        this.projectileSpeed = 0.025;  // radians per update
 
         this.revComplete = false;
 
@@ -142,7 +142,7 @@ class Boomerang extends Character {
 
         // If the player is too close...
         const HIT_DISTANCE = 50;
-        const SCYTHE_DAMAGE = 10;
+        const SCYTHE_DAMAGE = 15;
         
         const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer');
         if (players.length === 0) return null;
