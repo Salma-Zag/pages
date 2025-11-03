@@ -596,7 +596,7 @@ audio {
 <div class="audio-container">
   <h1>La Jolla Beach Audio Lesson</h1>
   <h2>Adding Audio to a Webpage</h2>
-  <p>Learn how to add and control audio using HTML with sounds from La Jolla's beautiful coastline</p>
+  <p>Learn how to add and control audio using sounds from La Jolla's beautiful coastline</p>
 
   <h3>1. What It Does</h3>
   <p>Use the &lt;audio&gt; tag to play clips (ocean waves, seagulls, narration) directly in the browser.</p>
@@ -638,3 +638,429 @@ setTimeout(function(){
 </script>
 </body>
 </html>
+
+<!-- Quiz Section -->
+<div class="quiz-section">
+  <h1>🌊 Build Your Audio Player</h1>
+  <p class="subtitle">Fill in the blanks to create a working audio player with La Jolla Beach sounds!</p>
+  
+  <div class="question" id="q1">
+    <div class="question-number">Question 1 - Audio Tag Opening</div>
+    <div class="question-text">
+      What attribute do you add to the &lt;audio&gt; tag to show playback controls?
+      <div class="code-line">
+        <span class="code-tag">&lt;audio</span> 
+        <input type="text" class="fill-blank" id="answer1" placeholder="____">
+        <span class="code-tag">&gt;</span>
+      </div>
+    </div>
+    <div class="feedback" id="feedback1"></div>
+  </div>
+  
+  <div class="question" id="q2">
+    <div class="question-number">Question 2 - Source Tag</div>
+    <div class="question-text">
+      What tag do you use inside &lt;audio&gt; to specify the audio file?
+      <div class="code-line">
+        <span class="indent">&lt;</span>
+        <input type="text" class="fill-blank" id="answer2" placeholder="____">
+        <span class="code-tag"> src="audio.mp3" type="audio/mpeg"&gt;</span>
+      </div>
+    </div>
+    <div class="feedback" id="feedback2"></div>
+  </div>
+  
+  <div class="question" id="q3">
+    <div class="question-number">Question 3 - File Type</div>
+    <div class="question-text">
+      What type value should you use for .mp3 files?
+      <div class="code-line">
+        <span class="indent code-tag">&lt;source src="audio.mp3" type="audio/</span>
+        <input type="text" class="fill-blank" id="answer3" placeholder="____">
+        <span class="code-tag">"&gt;</span>
+      </div>
+    </div>
+    <div class="feedback" id="feedback3"></div>
+  </div>
+  
+  <div class="check-button-container">
+    <button class="check-answers-btn" id="checkBtn">Build My Audio Player</button>
+  </div>
+  
+  <div class="completion-message" id="completion">
+    <h2>🏆 Audio Player Built Successfully!</h2>
+    <div class="audio-demo">
+      <h3>Your Working Audio Player:</h3>
+      <audio controls id="resultAudio">
+        <source src="/hacks/west-coast/travel/sandiego/gentle-ocean-waves-3-300839.mp3" type="audio/mpeg">
+      </audio>
+      <p style="color: #1e3a5f; margin-top: 20px; font-size: 1.1em;">🌊 La Jolla Beach Ocean Waves</p>
+    </div>
+    <p style="margin-top: 25px;">You've successfully created an audio player using HTML!</p>
+    <p style="margin-top: 10px; font-size: 1.1em;">Now you can add audio to any webpage! 🎯</p>
+  </div>
+</div>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.quiz-section {
+  padding: 60px 80px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #0d1b2a 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.quiz-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 30s linear infinite;
+}
+
+@keyframes moveGrid {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(40px, 40px) rotate(360deg); }
+}
+
+.quiz-section h1 {
+  font-size: 2.8em;
+  background: linear-gradient(135deg, #4a9eff, #7ec8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.subtitle {
+  color: #a8c5e6;
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 1.3em;
+  position: relative;
+  z-index: 1;
+}
+
+.question {
+  background: rgba(255,255,255,.97);
+  padding: 35px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.question:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(0,0,0,.3);
+}
+
+.question.correct {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border: 3px solid #4caf50;
+}
+
+.question-number {
+  color: #1e3a5f;
+  font-weight: 800;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question-text {
+  color: #333;
+  font-size: 1.15em;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.code-line {
+  background: #2d3436;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 15px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.code-tag {
+  color: #7ec8ff;
+}
+
+.indent {
+  color: #7ec8ff;
+  padding-left: 20px;
+}
+
+.fill-blank {
+  display: inline-block;
+  background: #fff;
+  border: 3px solid #4a9eff;
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #333;
+  font-size: 1em;
+  min-width: 140px;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.fill-blank::placeholder {
+  color: #999;
+}
+
+.fill-blank:focus {
+  border-color: #7ec8ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(74,158,255,.15);
+  transform: scale(1.05);
+}
+
+.fill-blank.correct {
+  border-color: #4caf50;
+  background: #e8f5e9;
+}
+
+.feedback {
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  display: none;
+  font-size: 1.05em;
+}
+
+.feedback.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(76,175,80,.4);
+}
+
+.feedback.incorrect {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(239,83,80,.4);
+}
+
+.check-button-container {
+  text-align: center;
+  margin-top: 35px;
+  position: relative;
+  z-index: 1;
+}
+
+.check-answers-btn {
+  padding: 18px 50px;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #4a9eff, #1e3a5f);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(74,158,255,.4);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.check-answers-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(74,158,255,.5);
+  background: linear-gradient(135deg, #7ec8ff, #4a9eff);
+}
+
+.check-answers-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.completion-message {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  padding: 50px;
+  border-radius: 18px;
+  text-align: center;
+  display: none;
+  margin-top: 40px;
+  box-shadow: 0 20px 60px rgba(76,175,80,.4);
+  position: relative;
+  z-index: 1;
+}
+
+.completion-message.show {
+  display: block;
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.completion-message h2 {
+  color: #ffffff;
+  margin-bottom: 35px;
+  font-size: 2.3em;
+  text-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+
+.completion-message p {
+  color: #ffffff;
+  font-size: 1.25em;
+}
+
+.audio-demo {
+  background: rgba(255,255,255,0.95);
+  padding: 45px 35px;
+  border-radius: 15px;
+  margin: 30px auto;
+  max-width: 600px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+.audio-demo h3 {
+  color: #1e3a5f;
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.audio-demo audio {
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .quiz-section {
+    padding: 40px 20px;
+  }
+  
+  .quiz-section h1 {
+    font-size: 2.2em;
+  }
+  
+  .code-line {
+    font-size: 0.9em;
+  }
+  
+  .fill-blank {
+    min-width: 100px;
+  }
+}
+</style>
+
+<script>
+document.getElementById('checkBtn').addEventListener('click', function() {
+  const input1 = document.getElementById('answer1');
+  const input2 = document.getElementById('answer2');
+  const input3 = document.getElementById('answer3');
+  const feedback1 = document.getElementById('feedback1');
+  const feedback2 = document.getElementById('feedback2');
+  const feedback3 = document.getElementById('feedback3');
+  const question1 = document.getElementById('q1');
+  const question2 = document.getElementById('q2');
+  const question3 = document.getElementById('q3');
+  
+  const answer1 = input1.value.trim().toLowerCase();
+  const answer2 = input2.value.trim().toLowerCase();
+  const answer3 = input3.value.trim().toLowerCase();
+  
+  let allCorrect = true;
+  
+  // Check answer 1 - controls
+  if (answer1 === 'controls') {
+    feedback1.textContent = '✓ Correct! "controls" shows the audio controls!';
+    feedback1.className = 'feedback correct show';
+    input1.className = 'fill-blank correct';
+    question1.className = 'question correct';
+    input1.disabled = true;
+  } else {
+    feedback1.textContent = '✗ Try again! Think about what shows play/pause buttons.';
+    feedback1.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Check answer 2 - source
+  if (answer2 === 'source') {
+    feedback2.textContent = '✓ Perfect! The <source> tag specifies the audio file!';
+    feedback2.className = 'feedback correct show';
+    input2.className = 'fill-blank correct';
+    question2.className = 'question correct';
+    input2.disabled = true;
+  } else {
+    feedback2.textContent = '✗ Not quite! What tag links to the audio file?';
+    feedback2.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Check answer 3 - mpeg
+  if (answer3 === 'mpeg') {
+    feedback3.textContent = '✓ Excellent! MP3 files use "mpeg" as their type!';
+    feedback3.className = 'feedback correct show';
+    input3.className = 'fill-blank correct';
+    question3.className = 'question correct';
+    input3.disabled = true;
+  } else {
+    feedback3.textContent = '✗ Try again! What format type is used for .mp3 files?';
+    feedback3.className = 'feedback incorrect show';
+    allCorrect = false;
+  }
+  
+  // Show completion if all correct
+  if (allCorrect) {
+    setTimeout(() => {
+      const completion = document.getElementById('completion');
+      completion.className = 'completion-message show';
+      
+      // Disable the button
+      this.disabled = true;
+      this.textContent = '✓ Audio Player Built!';
+      this.style.background = 'linear-gradient(135deg, #4caf50, #66bb6a)';
+      
+      // Scroll to result
+      setTimeout(() => {
+        completion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }, 500);
+  }
+});
+</script>

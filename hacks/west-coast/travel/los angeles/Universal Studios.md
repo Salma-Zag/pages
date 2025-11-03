@@ -9,7 +9,6 @@ submodule: 1
 author: "Cool Collaborators"
 date: 2025-10-21
 ---
-<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -45,7 +44,6 @@ body{background:#009688;font-family:'Open Sans',sans-serif;margin:0;padding:0}
 .intro{position:fixed;inset:0;display:grid;place-items:center;background:#009688;z-index:10}
 .intro p{color:#fff;font-weight:800;margin-top:18px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
 /* ===== Scene: Universal Studios ===== */
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
