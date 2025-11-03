@@ -3344,6 +3344,6 @@ function loadDestination() {
   showAIStatus(`📂 Loaded saved destination (Saved: ${saveDate})`, "success");
 }
 </script>
-
+Share your experiences on the microblog!
 </body>
 </html>
