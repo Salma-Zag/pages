@@ -40,10 +40,30 @@ class Boomerang extends Character {
     update() {
         if (this.revComplete) return;
 
+        // Check for colision
+        const BOOMERANG_KILL_DISTANCE = 40;
+        const players = this.gameEnv.gameObjects.filter(obj =>  // Find all player objects
+            obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer'
+        );
+        if (players.length === 0) return;  // If there are no players, then the boomerang has no purpose
+        for (const player of players) {
+            const dx = player.position.x - this.position.x;
+            const dy = player.position.y - this.position.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist <= BOOMERANG_KILL_DISTANCE) {
+                this.revComplete = true;
+                this.destroy();
+                player.data.health -= 
+                break;
+            }
+        }
+
         if (this.radian_prog >= this.radian_limit) {
+            // The Boomerang has done it's job, it can now be destroyed
             this.revComplete = true;
             this.destroy();
         } else {
+            // Update boomerang position
             this.radian_prog += this.projectileSpeed;
 
             const cosProg = Math.cos(this.radian_prog);
