@@ -166,7 +166,9 @@ class Projectile extends Character {
 
         // If the player is too close...
         const PLAYER_HIT_DISTANCE = 50;
-        const REAPER_HIT_DISTANCE = 50;
+        const REAPER_HORIZONTAL_HIT_DISTANCE = 75;
+        const REAPER_VERTICAL_HIT_DISTANCE = 100;
+
         const ARROW_DAMAGE = 10;
         const PLAYER_DAMAGE = 75;  // Control how much damage per hit the player does
         const FIREBALL_DAMAGE = 15;
@@ -189,11 +191,11 @@ class Projectile extends Character {
             }
 
             // Do distance formula calculation and return
-            const xDiff = nearestBoss.position.x - this.position.x;
-            const yDiff = nearestBoss.position.y - this.position.y;
+            const xDiff = Math.abs(nearestBoss.position.x - this.position.x);
+            const yDiff = Math.abs(nearestBoss.position.y - this.position.y) - 20; // -20 accounts for the center of the boss being offset
             const distanceFromReaper = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 
-            if (distanceFromReaper <= REAPER_HIT_DISTANCE) {
+            if (xDiff <= REAPER_HORIZONTAL_HIT_DISTANCE && yDiff <= REAPER_VERTICAL_HIT_DISTANCE) {
                 this.revComplete = true;
                 this.destroy();
                 nearestBoss.healthPoints -= DAMAGE_DEALT;
