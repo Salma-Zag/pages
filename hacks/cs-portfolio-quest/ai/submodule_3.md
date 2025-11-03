@@ -416,31 +416,25 @@ date: 2025-10-21
         align-items: center;
         margin-top: 40px;
         padding: 20px;
+        gap: 12px;
     }
 
     .nav-button {
-        background: linear-gradient(135deg, #34495e 0%, #4a9eff 100%);
+        background: #374151;
         color: #fff;
-        border: 4px solid #34495e;
-        border-radius: 50px;
-        padding: 15px 40px;
-        font-size: 20px;
-        font-weight: bold;
+        border: 1px solid #4b5563;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
         cursor: pointer;
-        box-shadow: 5px 5px 0px rgba(108, 52, 131, 0.5);
-        transition: all 0.3s ease;
-        font-family: 'Comic Sans MS', cursive;
-        text-transform: uppercase;
+        transition: all 0.2s ease;
+        font-family: inherit;
     }
 
     .nav-button:hover:not(:disabled) {
-        transform: translate(-2px, -2px);
-        box-shadow: 7px 7px 0px rgba(108, 52, 131, 0.5);
-    }
-
-    .nav-button:active:not(:disabled) {
-        transform: translate(2px, 2px);
-        box-shadow: 2px 2px 0px rgba(108, 52, 131, 0.5);
+        background: #1f2937;
+        transform: translateY(-1px);
     }
 
     .nav-button:disabled {
@@ -449,15 +443,13 @@ date: 2025-10-21
     }
 
     .page-indicator {
-        background: #34495e;
+        background: #1f2937;
         color: #fff;
-        border: 3px solid #34495e;
-        border-radius: 30px;
-        padding: 10px 25px;
-        font-size: 18px;
-        font-weight: bold;
-        box-shadow: 3px 3px 0px rgba(108, 52, 131, 0.5);
-        font-family: 'Comic Sans MS', cursive;
+        border: 1px solid #374151;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
     }
 
     .submit-area {
@@ -902,14 +894,19 @@ Why not: [explanation]" style="min-height: 200px;"></textarea>
         </div>
     </div>
 
-    <!-- Navigation -->
     <div class="navigation">
-        <button class="nav-button" id="prevBtn" onclick="changePage(-1)">◄ PREV</button>
+        <button class="nav-button" id="prevBtn" onclick="changePage(-1)">← Previous</button>
         <div class="page-indicator">
-            <span id="currentPage">1</span> / <span id="totalPages">3</span>
+            Page <span id="currentPage">1</span> of <span id="totalPages">3</span>
         </div>
-        <button class="nav-button" id="nextBtn" onclick="changePage(1)">NEXT ►</button>
+        <button class="nav-button" id="nextBtn" onclick="changePage(1)">Next →</button>
     </div>
+
+    <!-- Back to Module button (only shows on last page) -->
+    <div class="navigation" id="moduleNav" style="display: none;">
+        <a href="{{site.baseurl}}/cs-portfolio-quest/ai/" class="nav-button" style="text-decoration: none; display: inline-block;">← Back to AI Module</a>
+    </div>
+
 </div>
 
 <script>
@@ -943,9 +940,17 @@ Why not: [explanation]" style="min-height: 200px;"></textarea>
 
         document.getElementById('prevBtn').disabled = pageNum === 1;
         document.getElementById('nextBtn').disabled = pageNum === totalPages;
-
-        if (pageNum === 3 && gamesPlayed === 0) {
-            initializeGame();
+        
+        // Show/hide module navigation on last page
+        const pageNav = document.querySelector('.navigation:not(#moduleNav)');
+        const moduleNav = document.getElementById('moduleNav');
+        
+        if (pageNum === totalPages) {
+            pageNav.style.display = 'none';
+            moduleNav.style.display = 'flex';
+        } else {
+            pageNav.style.display = 'flex';
+            moduleNav.style.display = 'none';
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
