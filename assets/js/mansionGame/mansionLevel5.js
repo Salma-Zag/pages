@@ -291,13 +291,20 @@ class MansionLevel5 {
                 this.position.x += this.velocity.x
     
                 setTimeout(() => {
-                    this.destroy()
-                    this.collisionWidth = 0;
-                    this.collisionHeight = 0;
                     const index = this.gameEnv.gameObjects.indexOf(this)
                     if (index !== -1) {
                         this.gameEnv.gameObjects.splice(index, 1)
                     }
+
+                    const index2 = this.lasers.indexOf(this)
+                    if (index2 !== -1)
+                    {
+                        this.lasers.splice(index2, 1)
+                    }
+
+                    this.collisionWidth = 0;
+                    this.collisionHeight = 0;
+                    this.destroy()
                 }, 1000);
     
                 this.draw()
@@ -319,7 +326,7 @@ class MansionLevel5 {
     }
 
     checkCollisions() {
-        // Check for laser-meteor collisions
+        // Check for laser-zombie collisions
         for (let i = this.lasers.length - 1; i >= 0; i--) {
             const laser = this.lasers[i]
 
@@ -327,14 +334,39 @@ class MansionLevel5 {
             const zombie = this.zombieList[j]
 
             if (this.isColliding(laser, zombie)) {
-                laser.destroy();
-                zombie.destroy();
+                // delete zombie from lists
+                const z_index = this.gameEnv.gameObjects.indexOf(zombie)
+                if (z_index !== -1) {
+                    this.gameEnv.gameObjects.splice(z_index, 1)
+                }
+
+                const z_index2 = this.zombieList.indexOf(zombie)
+                if (z_index2 !== -1)
+                {
+                    this.zombieList.splice(z_index2, 1)
+                }
+
+                // delete laser from lists
+                const l_index = this.gameEnv.gameObjects.indexOf(laser)
+                if (l_index !== -1) {
+                    this.gameEnv.gameObjects.splice(l_index, 1)
+                }
+
+                const l_index2 = this.lasers.indexOf(laser)
+                if (l_index2 !== -1)
+                {
+                    this.lasers.splice(l_index2, 1)
+                }
 
                 // kinda funny solution to disable colliders
                 laser.collisionHeight = 0;
                 laser.collisionWidth = 0;
                 zombie.collisionHeight = 0;
                 zombie.collisionWidth = 0;
+                
+                laser.destroy();
+                zombie.destroy();
+
 
                 this.zombiesKilled += 1;
                 break;
