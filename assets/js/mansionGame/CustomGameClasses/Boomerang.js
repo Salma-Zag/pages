@@ -42,6 +42,7 @@ class Boomerang extends Character {
         if (this.revComplete) return;
 
         // Check for colision
+        /*
         const BOOMERANG_KILL_DISTANCE = 40;
         const SCYTHE_DAMAGE = 20;
         const players = this.gameEnv.gameObjects.filter(obj =>  // Find all player objects
@@ -62,6 +63,7 @@ class Boomerang extends Character {
                 break;
             }
         }
+        */
 
         if (this.radian_prog >= this.radian_limit) {
             // The Boomerang has done it's job, it can now be destroyed
