@@ -10,6 +10,11 @@ microblog: true
     <canvas id='gameCanvas'></canvas>
 </div>
 
+<div>
+'W','A','S','D' to move around
+'C' to shoot
+</div>
+
 <script type="module">
     // Adnventure Game assets locations
     import Game from "{{site.baseurl}}/assets/js/mansionGame/GameEngine/Game.js";

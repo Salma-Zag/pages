@@ -2,8 +2,9 @@
 import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
 import Enemy from './GameEngine/Enemy.js';
-import Projectile from './CustomGameClasses/Projectile.js';
+import GameControl from './GameEngine/GameControl.js';
 import Character from './GameEngine/Character.js';
+import Npc from './GameEngine/Npc.js';
 
 
 class MansionLevel5 {
@@ -205,6 +206,45 @@ class MansionLevel5 {
         }
     };
 
+    // Level 6 door
+    const sprite_src_level6door = path + "/images/gamify/lineDoorCollisionSprite.png";
+    const sprite_greet_level6door = "You beat level 5! Would you like to enter level 6? Press E";
+    const sprite_data_level6door = {
+        id: 'Level6Door',
+        greeting: sprite_greet_level6door,
+        src: sprite_src_level6door,
+        SCALE_FACTOR: 6,
+        ANIMATION_RATE: 100,
+        pixels: {width: 256, height: 256},
+        INIT_POSITION: { x: (width / 2), y: (height / 2) },
+        orientation: {rows: 1, columns: 1},
+        down: {row: 0, start: 0, columns: 1, rotate: Math.PI / 2},
+        hitbox: {widthPercentage: 0.2, heightPercentage: 0.3},
+        dialogues: ["Level 6 awaits. Do you wish to enter?"],
+        reaction: function() {},
+        interact: function() {
+            if (this.dialogueSystem && this.dialogueSystem.isDialogueOpen()) this.dialogueSystem.closeDialogue();
+            if (!this.dialogueSystem) this.dialogueSystem = new DialogueSystem();
+            this.dialogueSystem.showDialogue("Would you like to enter Level 6?", "Level 6", this.spriteData.src);
+            this.dialogueSystem.addButtons([
+            { text: "Enter", primary: true, action: () => {
+                this.dialogueSystem.closeDialogue();
+                if (gameEnv && gameEnv.gameControl) {
+                    const gameControl = gameEnv.gameControl;
+                    gameControl._originalLevelClasses = gameControl.levelClasses;
+                    gameControl.levelClasses = [GameLevel6];
+                    gameControl.currentLevelIndex = 0;
+                    gameControl.isPaused = false;
+                    gameControl.transitionToLevel();
+                }
+            } },
+            { text: "Not Now", action: () => { this.dialogueSystem.closeDialogue(); } }
+            ]);
+        }
+    };
+
+    this.finishDoorData = sprite_data_level6door;
+
     const laser_image = path + "/images/gamify/laser_bolt.png"  // be sure to include the path
     this.laserData = {
       id: "Laser",
@@ -233,6 +273,7 @@ class MansionLevel5 {
     // Track kills for this level (only stored on the level instance)
     this.zombiesKilled = 0;
     this.zombies = 0;
+    this.spawnZombies = true;
 
     this.zombieList = [];
 
@@ -379,7 +420,7 @@ class MansionLevel5 {
 
     // Method to spawn a batch of zombies
     spawnZombieBatch() {
-        const numZombies = 4; // spawn zombies per batch
+        const numZombies = 6; // spawn zombies per batch
         
         for (let i = 0; i < numZombies; i++) {
             const side = Math.floor(Math.random() * 4);
@@ -423,10 +464,13 @@ class MansionLevel5 {
 
     // Method to start the zombie spawning timer
     startZombieSpawner() {
-        // Szombies spawn every 2 seconds
-        setInterval(() => {
-        this.spawnZombieBatch();
-        }, 5000);
+        if(this.spawnZombies)
+        {
+            // Szombies spawn every 2 seconds
+            setInterval(() => {
+                this.spawnZombieBatch();
+            }, 5000);
+        }
     }
 
     start()
@@ -460,6 +504,13 @@ class MansionLevel5 {
             kills.innerHTML = `
                 <div style="font-size: 14px;">${this.zombiesKilled} zombie kills</div>
             `;
+
+            if (this.zombiesKilled >= 80) 
+            {
+                this.spawnZombies = false;
+                const finishDoor = new Npc(this.finishDoorData, this.gameEnv);
+                this.gameEnv.gameObjects.push(finishDoor);
+            }
         }, 10);
     }
 }
