@@ -93,6 +93,14 @@ date: 2025-10-21
     box-shadow: 0 10px 26px rgba(241, 196, 15, 0.36);
     transform: translateY(-4px);
   }
+  .cert-green {
+    background: linear-gradient(135deg, #1a7336ff 0%, #348340ff 100%);
+    box-shadow: 0 4px 12px rgba(75, 173, 68, 0.3);
+  }
+  .cert-yellow:hover {
+    box-shadow: 0 10px 26px rgba(15, 241, 102, 0.36);
+    transform: translateY(-4px);
+  }
   .cert-badge {
     background: rgba(0, 0, 0, 0.2);
     color: #fff;
