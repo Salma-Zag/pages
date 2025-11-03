@@ -77,7 +77,7 @@ class MansionLevel6_BattleRoom {
 
                 // Find all player objects
                 const players = this.gameEnv.gameObjects.filter(obj => 
-                    obj.constructor.name === 'Player'
+                    obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer'
                 );
                 
                 if (players.length === 0) return;
