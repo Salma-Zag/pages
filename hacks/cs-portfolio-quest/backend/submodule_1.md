@@ -150,3 +150,125 @@ const javaURI = "https://api.mywebsite.com";
 
 ## Up Next
 In the next submodule, you'll learn about APIs and Databases. Keep progressing in order to receive a certificate for completing this module.
+
+## 8. Quick Quiz — Module 1 (Interactive)
+
+
+Answer the five questions below. Pick the best choice (A–D) and click Submit to see your score.
+
+
+<div id="mc-quiz" style="border:1px solid #574e4eff;padding:12px;border-radius:6px;max-width:900px;">
+ <form id="quiz-form">
+   <ol>
+     <li>
+       <div style="margin-bottom:6px">You see this frontend call:
+       <pre style="display:inline-block;margin:6px 0;padding:6px;border-radius:4px;background:#574e4eff">fetch(`${javaURI}/api/responses`, {
+ method: "POST",
+ headers: { "Content-Type": "application/json" },
+ body: JSON.stringify({ name: "Ana", response: "Here is my answer" })
+});
+</pre>
+     <li>
+       What is the backend expected to do first when this request arrives?</div>
+       <div><label><input type="radio" name="q0" value="A"> A. Write the body to the database without checks</label></div>
+       <div><label><input type="radio" name="q0" value="B"> B. Return status 200 immediately to acknowledge receipt</label></div>
+       <div><label><input type="radio" name="q0" value="C"> C. Validate the request format and required fields, then authenticate the user if needed</label></div>
+       <div><label><input type="radio" name="q0" value="D"> D. Close the connection</label></div>
+       <div class="feedback" aria-live="polite" style="margin-top:6px"></div>
+     </li>
+
+
+     <li>
+       <div style="margin-bottom:6px">A request arrives without an Authorization header but the endpoint requires authentication. Which status code should the backend most appropriately return?</div>
+       <div><label><input type="radio" name="q1" value="A"> A. 200 OK</label></div>
+       <div><label><input type="radio" name="q1" value="B"> B. 400 Bad Request</label></div>
+       <div><label><input type="radio" name="q1" value="C"> C. 401 Unauthorized</label></div>
+       <div><label><input type="radio" name="q1" value="D"> D. 500 Internal Server Error</label></div>
+       <div class="feedback" aria-live="polite" style="margin-top:6px"></div>
+     </li>
+
+
+     <li>
+       <div style="margin-bottom:6px">Which Content-Type header should the client set when sending JSON in the request body?</div>
+       <div><label><input type="radio" name="q2" value="A"> A. text/plain</label></div>
+       <div><label><input type="radio" name="q2" value="B"> B. application/json</label></div>
+       <div><label><input type="radio" name="q2" value="C"> C. multipart/form-data</label></div>
+       <div><label><input type="radio" name="q2" value="D"> D. application/x-www-form-urlencoded</label></div>
+       <div class="feedback" aria-live="polite" style="margin-top:6px"></div>
+     </li>
+
+
+     <li>
+       <div style="margin-bottom:6px">Your responses table declares `id` as a primary key. Two incoming inserts accidentally use the same id value. What is the typical outcome?</div>
+       <div><label><input type="radio" name="q3" value="A"> A. The database accepts both rows and duplicates the id</label></div>
+       <div><label><input type="radio" name="q3" value="B"> B. The database rejects the second insert or raises a constraint error</label></div>
+       <div><label><input type="radio" name="q3" value="C"> C. The database silently renames the second id to keep it unique</label></div>
+       <div><label><input type="radio" name="q3" value="D"> D. The backend will always overwrite the first row automatically</label></div>
+       <div class="feedback" aria-live="polite" style="margin-top:6px"></div>
+     </li>
+
+
+     <li>
+       <div style="margin-bottom:6px">During development you switch `javaURI` from `http://localhost:8085` to your production API by mistake and run tests. What's the primary risk?</div>
+       <div><label><input type="radio" name="q4" value="A"> A. Tests will run faster and use fewer resources</label></div>
+       <div><label><input type="radio" name="q4" value="B"> B. You might modify or overwrite real production data and leak test input</label></div>
+       <div><label><input type="radio" name="q4" value="C"> C. Local files will be deleted on your machine</label></div>
+       <div><label><input type="radio" name="q4" value="D"> D. The browser will block all requests automatically</label></div>
+       <div class="feedback" aria-live="polite" style="margin-top:6px"></div>
+     </li>
+   </ol>
+
+
+   <div style="margin-top:12px;">
+     <button type="submit" id="quiz-submit">Submit</button>
+     <button type="button" id="quiz-reset" style="margin-left:8px">Reset</button>
+     <span id="quiz-result" style="margin-left:12px;font-weight:600"></span>
+   </div>
+ </form>
+</div>
+
+
+<script>
+(() => {
+ const form = document.getElementById('quiz-form');
+ const resultSpan = document.getElementById('quiz-result');
+ const resetBtn = document.getElementById('quiz-reset');
+
+
+ const answers = ['C','C','B','B','B'];
+
+
+ function clearFeedback() {
+   // clear any inline per-question messages (if present)
+   document.querySelectorAll('#mc-quiz .feedback').forEach(el => el.textContent = '');
+   resultSpan.textContent = '';
+ }
+
+
+ function setDisabled(disabled) {
+   document.querySelectorAll('#mc-quiz input').forEach(i => i.disabled = disabled);
+   document.getElementById('quiz-submit').disabled = disabled;
+ }
+
+
+ form.addEventListener('submit', (e) => {
+   e.preventDefault();
+   // compute score only; do not show per-question feedback or highlight
+   let score = 0;
+   for (let i = 0; i < answers.length; i++) {
+     const qName = 'q' + i;
+     const selected = form[qName] ? form[qName].value : null;
+     if (selected === answers[i]) score += 1;
+   }
+   resultSpan.textContent = `You scored ${score} / ${answers.length}`;
+   setDisabled(true);
+ });
+
+
+ resetBtn.addEventListener('click', () => {
+   form.reset();
+   clearFeedback();
+   setDisabled(false);
+ });
+})();
+</script>

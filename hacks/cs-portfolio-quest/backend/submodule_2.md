@@ -583,5 +583,72 @@ The standard format for API data exchange.
 - Postman helps test APIs without building a frontend  
 
 
+## Vocab Short Answers — Module 2
+
+Fill the short vocabulary words that match the clues below. Type your answer (letters only) and click Submit. Only your total score will be shown.
+
+<div id="vocab-crossword" style="border:1px solid #e0e0e0;padding:12px;border-radius:6px;max-width:760px;">
+  <ol>
+    <li>
+      <div style="margin-bottom:6px"><strong>1.</strong> A structured collection of rows and columns in a relational database. (5 letters)</div>
+      <input name="w0" maxlength="5" style="width:120px;text-transform:uppercase" />
+    </li>
+
+    <li>
+      <div style="margin-bottom:6px"><strong>2.</strong> One record in a table. (3 letters)</div>
+      <input name="w1" maxlength="3" style="width:80px;text-transform:uppercase" />
+    </li>
+
+    <li>
+      <div style="margin-bottom:6px"><strong>3.</strong> Common format for API request and response bodies. (4 letters)</div>
+      <input name="w2" maxlength="4" style="width:100px;text-transform:uppercase" />
+    </li>
+
+    <li>
+      <div style="margin-bottom:6px"><strong>4.</strong> HTTP method used to create new resources via an API. (4 letters)</div>
+      <input name="w3" maxlength="4" style="width:100px;text-transform:uppercase" />
+    </li>
+
+    <li>
+      <div style="margin-bottom:6px"><strong>5.</strong> SQL operation that combines rows from two tables based on a related column. (4 letters)</div>
+      <input name="w4" maxlength="4" style="width:100px;text-transform:uppercase" />
+    </li>
+  </ol>
+
+  <div style="margin-top:12px;">
+    <button id="vocab-submit">Submit</button>
+    <button id="vocab-reset" type="button" style="margin-left:8px">Reset</button>
+    <span id="vocab-result" style="margin-left:12px;font-weight:600"></span>
+  </div>
+</div>
+
+<script>
+(() => {
+  const answers = ['TABLE','ROW','JSON','POST','JOIN'];
+  const submitBtn = document.getElementById('vocab-submit');
+  const resetBtn = document.getElementById('vocab-reset');
+  const resultSpan = document.getElementById('vocab-result');
+  const container = document.getElementById('vocab-crossword');
+
+  function getInputs() { return Array.from(container.querySelectorAll('input')).map(i => i.value.trim().toUpperCase()); }
+
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const vals = getInputs();
+    let score = 0;
+    for (let i = 0; i < answers.length; i++) if (vals[i] === answers[i]) score += 1;
+    resultSpan.textContent = `You scored ${score} / ${answers.length}`;
+    container.querySelectorAll('input').forEach(i => i.disabled = true);
+    submitBtn.disabled = true;
+  });
+
+  resetBtn.addEventListener('click', () => {
+    container.querySelectorAll('input').forEach(i => { i.value = ''; i.disabled = false; });
+    resultSpan.textContent = '';
+    submitBtn.disabled = false;
+  });
+})();
+</script>
+
 ## Up Next
 In the next submodule, you'll learn about different backend frameworks. Keep progressing in order to receive a certificate for completing this module.
