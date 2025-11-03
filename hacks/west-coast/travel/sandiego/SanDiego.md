@@ -8,6 +8,7 @@ team: "Cool Collaborators"
 submodule: 3
 author: "Cool Collaborators"
 date: 2025-10-21
+microblog: true 
 footer: 
     previous: /west-coast/analytics/losangeles/
     home: /west-coast/travel/
@@ -981,11 +982,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>🎵 Example Audio Player</h3>
       <p>This is a sample audio player showing the controls attribute in action:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src= "/hacks/west-coast/travel/sandiego/funny-organ-intro-outro-5008.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Sample audio for demonstration</p>
     </div>
@@ -1037,12 +1038,12 @@ body {
       <button class="check-answers-btn" id="balboa-check">Build My Audio Player</button>
     </div>
     
-    <div class="completion-message" id="balboa-complete">
+   <div class="completion-message" id="balboa-complete">
       <h3>🏆 Audio Player Built Successfully!</h3>
       <div class="audio-player">
         <p>🎵 Your Working Audio Player:</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+          <source src="/hacks/west-coast/travel/sandiego/funny-organ-intro-outro-5008.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>You've successfully created an audio player!</p>
@@ -1091,11 +1092,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>🌊 Beach Sounds Example</h3>
       <p>Listen to the soothing sounds of waves crashing on the shores of La Jolla Beach:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+        <source src="/hacks/west-coast/travel/sandiego/gentle-ocean-waves-3-300839.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Sample ocean waves audio</p>
     </div>
@@ -1147,12 +1148,12 @@ body {
       <button class="check-answers-btn" id="lajolla-check">Build My Audio Player</button>
     </div>
     
-    <div class="completion-message" id="lajolla-complete">
+  <div class="completion-message" id="lajolla-complete">
       <h3>🏆 Audio Player Built Successfully!</h3>
       <div class="audio-player">
         <p>🌊 La Jolla Beach Ocean Waves</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+          <source src= "/hacks/west-coast/travel/sandiego/gentle-ocean-waves-3-300839.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>You've successfully created an audio player using HTML!</p>
@@ -1207,11 +1208,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>⚾ Petco Park Atmosphere</h3>
       <p>Listen to authentic game-day sounds from the Padres' home stadium:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" type="audio/mpeg">
+        <source src="/hacks/west-coast/travel/sandiego/applause-cheer-236786.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Baseball crowd cheer sound effect</p>
     </div>
@@ -1263,12 +1264,12 @@ body {
       <button class="check-answers-btn" id="petco-check">Play Ball! 🏟️</button>
     </div>
     
-    <div class="completion-message" id="petco-complete">
+   <div class="completion-message" id="petco-complete">
       <h3>⚾ Home Run!</h3>
       <div class="audio-player">
         <p>⚾ Petco Park Game Day Atmosphere</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" type="audio/mpeg">
+          <source src="/hacks/west-coast/travel/sandiego/applause-cheer-236786.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>The Padres faithful are cheering you on! 🎊</p>
@@ -1325,11 +1326,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>🦁 San Diego Zoo Lion Roar</h3>
       <p>Listen to the powerful roar of the king of the jungle:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" type="audio/mpeg">
+        <source src="/hacks/west-coast/travel/sandiego/tiger-roar-wildlife-sfx-376158.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Lion roar and wildlife sounds</p>
     </div>
@@ -1381,12 +1382,12 @@ body {
       <button class="check-answers-btn" id="zoo-check">Hear the Roar! 🦁</button>
     </div>
     
-    <div class="completion-message" id="zoo-complete">
+   <div class="completion-message" id="zoo-complete">
       <h3>🦁 Wild Success!</h3>
       <div class="audio-player">
         <p>🦁 King of the Jungle - Lion Roar</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+          <source src= "/hacks/west-coast/travel/sandiego/tiger-roar-wildlife-sfx-376158.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>The animals are roaring with pride! 🐾</p>
@@ -1485,6 +1486,6 @@ setupQuiz('lajolla');
 setupQuiz('petco');
 setupQuiz('zoo');
 </script>
-
+ Share your experiences on the microblog!
 </body>
 </html>
