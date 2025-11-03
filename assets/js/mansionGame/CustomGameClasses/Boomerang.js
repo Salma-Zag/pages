@@ -1,4 +1,5 @@
 import Character from '../GameEngine/Character.js';
+import { updatePlayerHealthBar } from "./HealthBars.js";
 
 class Boomerang extends Character {
     constructor(gameEnv = null, sourcex, sourcey, targetx, targety) {
