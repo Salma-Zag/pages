@@ -586,9 +586,11 @@ completeTask('fishtaco');
     <label><input type="radio" name="q1-fish" value="c"> It adds extra toppings automatically</label>
   </div>
 
-  <div class="quiz-question" data-answer="price">
+  <div class="quiz-question" data-answer="a">
     <p>2️⃣ What field does <code>calculateTotalPrice()</code> derive from?</p>
-    <input type="text" class="sq-field" placeholder="Type your answer..." />
+    <label><input type="radio" name="q1-price" value="a"> price</label><br>
+    <label><input type="radio" name="q1-price" value="b"> spiceLevel</label><br>
+    <label><input type="radio" name="q1-price" value="c"> id</label>
   </div>
 
   <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
@@ -650,9 +652,12 @@ completeTask('burritocart');
 <div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
   <strong>🧩 Quick Quiz:</strong>
 
-  <div class="quiz-question" data-answer="update">
+  <div class="quiz-question" data-answer="c">
     <p>1️⃣ Which CRUD operation would an <code>updateBurrito()</code> method represent?</p>
-    <input type="text" class="sq-field" placeholder="Type your answer..." />
+    <label><input type="radio" name="q2-crud" value="a"> Create</label><br>
+    <label><input type="radio" name="q2-crud" value="b"> Read</label><br>
+    <label><input type="radio" name="q2-crud" value="c"> Update</label><br>
+    <label><input type="radio" name="q2-crud" value="d"> Delete</label>
   </div>
 
   <div class="quiz-question" data-answer="b">
@@ -706,36 +711,36 @@ completeTask('burritocart');
       <div style="margin-top:0.5rem">
         <div id="terminal-create" class="sq-terminal"></div>
         <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
-  <strong>Checkpoint 🧩 — What just happened:</strong>
-  <ul>
-    <li>Collected user input from form → simulates a POST request.</li>
-    <li>Validated required fields: <strong>name, category, calories, ingredients</strong>.</li>
-    <li>Called <code>MockAPIInstance.postDish()</code> → “created” a new dish in the mock DB.</li>
-    <li>Displayed feedback in the terminal and XP toast → confirms creation success.</li>
-  </ul>
-  <small>Quiz: What would happen if you submitted without ingredients? Which part of the code prevents it?</small>
-</div>
+          <strong>Checkpoint 🧩 — What just happened:</strong>
+          <ul>
+            <li>Collected user input from form → simulates a POST request.</li>
+            <li>Validated required fields: <strong>name, category, calories, ingredients</strong>.</li>
+            <li>Called <code>MockAPIInstance.postDish()</code> → “created” a new dish in the mock DB.</li>
+            <li>Displayed feedback in the terminal and XP toast → confirms creation success.</li>
+          </ul>
+          <small>Quiz: What would happen if you submitted without ingredients? Which part of the code prevents it?</small>
+        </div>
 
-<!-- PASTE THIS QUIZ BLOCK FOR TASK 3 -->
-<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
-  <strong>🧩 Quick Quiz:</strong>
+        <div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+          <strong>🧩 Quick Quiz:</strong>
 
-  <div class="quiz-question" data-answer="post">
-    <p>1️⃣ What HTTP method is simulated when you click the "Create Dish" button?</p>
-    <input type="text" class="sq-field" placeholder="Type your answer (e.g., GET, POST)..." />
-  </div>
+          <div class="quiz-question" data-answer="b">
+            <p>1️⃣ What HTTP method is simulated when you click the "Create Dish" button?</p>
+            <label><input type="radio" name="q3-post" value="a"> GET</label><br>
+            <label><input type="radio" name="q3-post" value="b"> POST</label><br>
+            <label><input type="radio" name="q3-post" value="c"> PATCH</label>
+          </div>
 
-  <div class="quiz-question" data-answer="c">
-    <p>2️⃣ Why does the form have client-side validation before sending the data?</p>
-    <label><input type="radio" name="q3-baja" value="a"> To make the form look better</label><br>
-    <label><input type="radio" name="q3-baja" value="b"> To add extra ingredients automatically</label><br>
-    <label><input type="radio" name="q3-baja" value="c"> To prevent sending incomplete or invalid data to the server</label>
-  </div>
+          <div class="quiz-question" data-answer="c">
+            <p>2️⃣ Why does the form have client-side validation before sending the data?</p>
+            <label><input type="radio" name="q3-baja" value="a"> To make the form look better</label><br>
+            <label><input type="radio" name="q3-baja" value="b"> To add extra ingredients automatically</label><br>
+            <label><input type="radio" name="q3-baja" value="c"> To prevent sending incomplete or invalid data to the server</label>
+          </div>
 
-  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
-  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
-</div>
-
+          <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+          <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -814,7 +819,6 @@ completeTask('burritocart');
     <div class="sq-label">Simulate a POST /api/dishes call programmatically (JS). There is also a simple unit test runner below to assert 201 and returned resource.</div>
     <textarea id="code-post" class="code-editor">
 // Example programmatic POST using MockAPIInstance
-// Example programmatic POST using MockAPIInstance
 (async function(){
   const payload = {
     name: "Carne Asada Fries",
@@ -850,34 +854,35 @@ completeTask('burritocart');
     </div>
     <pre id="terminal-post" class="sq-terminal"></pre>
     <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
-  <strong>Checkpoint 🧩 — Key Takeaways:</strong>
-  <ul>
-    <li>You manually sent a POST request to the mock backend.</li>
-    <li>Checked the response status <code>201 Created</code> → confirms creation.</li>
-    <li>Unit test simulates automated verification of CREATE operation.</li>
-    <li>Understand: creation = server-side addition of new resource.</li>
-  </ul>
-</div>
+      <strong>Checkpoint 🧩 — Key Takeaways:</strong>
+      <ul>
+        <li>You manually sent a POST request to the mock backend.</li>
+        <li>Checked the response status <code>201 Created</code> → confirms creation.</li>
+        <li>Unit test simulates automated verification of CREATE operation.</li>
+        <li>Understand: creation = server-side addition of new resource.</li>
+      </ul>
+    </div>
 
-<!-- PASTE THIS QUIZ BLOCK FOR TASK 4 -->
-<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
-  <strong>🧩 Quick Quiz:</strong>
+    <div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+      <strong>🧩 Quick Quiz:</strong>
 
-  <div class="quiz-question" data-answer="b">
-    <p>1️⃣ What does the HTTP status code <code>201 Created</code> signify?</p>
-    <label><input type="radio" name="q4-post" value="a"> The server found the resource</label><br>
-    <label><input type="radio" name="q4-post" value="b"> The server successfully created a new resource</label><br>
-    <label><input type="radio" name="q4-post" value="c"> The server reported an error</label>
-  </div>
+      <div class="quiz-question" data-answer="b">
+        <p>1️⃣ What does the HTTP status code <code>201 Created</code> signify?</p>
+        <label><input type="radio" name="q4-post" value="a"> The server found the resource</label><br>
+        <label><input type="radio" name="q4-post" value="b"> The server successfully created a new resource</label><br>
+        <label><input type="radio" name="q4-post" value="c"> The server reported an error</label>
+      </div>
 
-  <div class="quiz-question" data-answer="automation">
-    <p>2️⃣ What is a major benefit of programmatic POST calls (like this one) over manual form submissions?</p>
-    <input type="text" class="sq-field" placeholder="Think about testing or scripting..." />
-  </div>
+      <div class="quiz-question" data-answer="b">
+        <p>2️⃣ What is a major benefit of programmatic POST calls?</p>
+        <label><input type="radio" name="q4-benefit" value="a"> They are always more secure than forms</label><br>
+        <label><input type="radio" name="q4-benefit" value="b"> They allow for automation and scripting</label><br>
+        <label><input type="radio" name="q4-benefit" value="c"> They use less client-side memory</label>
+      </div>
 
-  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
-  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
-</div>
+      <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+      <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+    </div>
 
     <div style="margin-top:0.75rem;">
       <button class="sq-btn sq-run" onclick="runUnitTest()">Run Unit Test: POST returns 201 & created resource</button>
@@ -917,35 +922,35 @@ window.runUnitTest = async function() {
     </div>
     <pre id="terminal-seed" class="sq-terminal" style="margin-top:0.5rem"></pre>
     <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
-  <strong>Checkpoint 🧩 — Bulk Creation:</strong>
-  <ul>
-    <li>Inserted multiple dishes at once using <code>postBulk()</code>.</li>
-    <li>Shows how batch creation works in databases/APIs.</li>
-    <li>Completion of this task triggers module progress update.</li>
-  </ul>
-  <small>Think: why might bulk creation fail if one record is invalid?</small>
-</div>
+      <strong>Checkpoint 🧩 — Bulk Creation:</strong>
+      <ul>
+        <li>Inserted multiple dishes at once using <code>postBulk()</code>.</li>
+        <li>Shows how batch creation works in databases/APIs.</li>
+        <li>Completion of this task triggers module progress update.</li>
+      </ul>
+      <small>Think: why might bulk creation fail if one record is invalid?</small>
+    </div>
 
-<!-- PASTE THIS QUIZ BLOCK FOR TASK 5 -->
-<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
-  <strong>🧩 Quick Quiz:</strong>
+    <div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+      <strong>🧩 Quick Quiz:</strong>
 
-  <div class="quiz-question" data-answer="c">
-    <p>1️⃣ What is the primary benefit of a "bulk" create operation over sending one request per dish?</p>
-    <label><input type="radio" name="q5-seed" value="a"> It uses more server memory</label><br>
-    <label><input type="radio" name="q5-seed" value="b"> It guarantees every dish is created correctly</label><br>
-    <label><input type="radio" name="q5-seed" value="c"> It reduces the number of network requests</label>
-  </div>
+      <div class="quiz-question" data-answer="c">
+        <p>1️⃣ What is the primary benefit of a "bulk" create operation?</p>
+        <label><input type="radio" name="q5-seed" value="a"> It uses more server memory</label><br>
+        <label><input type="radio" name="q5-seed" value="b"> It guarantees every dish is created correctly</label><br>
+        <label><input type="radio" name="q5-seed" value="c"> It reduces the number of network requests</label>
+      </div>
 
-  <div class="quiz-question" data-answer="transaction">
-    <p>2️⃣ A good API should wrap a bulk operation in a single ________, so that all records are created or none are.</p>
-    <input type="text" class="sq-field" placeholder="Database term..." />
-  </div>
+      <div class="quiz-question" data-answer="c">
+        <p>2️⃣ A good API wraps a bulk operation in a single ____ to ensure all-or-nothing success.</p>
+        <label><input type="radio" name="q5-bulk" value="a"> Promise</label><br>
+        <label><input type="radio" name="q5-bulk" value="b"> Function</label><br>
+        <label><input type="radio" name="q5-bulk" value="c"> Transaction</label>
+      </div>
 
-  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
-  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
-</div>
-
+      <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+      <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+    </div>
   </div>
 </details>
 
@@ -979,34 +984,34 @@ window.seedPantry = async function() {
     </div>
     <pre id="terminal-pantry" class="sq-terminal" style="margin-top:0.5rem"></pre>
     <div class="sq-card" style="background: rgba(59,130,246,0.05); margin-top:0.5rem;">
-  <strong>Checkpoint 🧩 — Viewing Data:</strong>
-  <ul>
-    <li>GET request retrieves all dishes for San Diego.</li>
-    <li>Observe the dishes you created — creation verified!</li>
-    
-  </ul>
-  <small>Mini Quiz: Which task showed CREATE, and which one shows READ?</small>
-</div>
+      <strong>Checkpoint 🧩 — Viewing Data:</strong>
+      <ul>
+        <li>GET request retrieves all dishes for San Diego.</li>
+        <li>Observe the dishes you created — creation verified!</li>
+      </ul>
+      <small>Mini Quiz: Which task showed CREATE, and which one shows READ?</small>
+    </div>
 
-<!-- PASTE THIS QUIZ BLOCK FOR TASK 6 -->
-<div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
-  <strong>🧩 Quick Quiz:</strong>
+    <div class="sq-card quiz-block" style="background: rgba(99,102,241,0.06); margin-top:0.5rem;">
+      <strong>🧩 Quick Quiz:</strong>
 
-  <div class="quiz-question" data-answer="read">
-    <p>1️⃣ Viewing the pantry is an example of which CRUD operation?</p>
-    <input type="text" class="sq-field" placeholder="Create, Read, Update, or Delete?" />
-  </div>
+      <div class="quiz-question" data-answer="b">
+        <p>1️⃣ Viewing the pantry is an example of which CRUD operation?</p>
+        <label><input type="radio" name="q6-crud" value="a"> Create</label><br>
+        <label><input type="radio" name="q6-crud" value="b"> Read</label><br>
+        <label><input type="radio" name="q6-crud" value="c"> Update</label>
+      </div>
 
-  <div class="quiz-question" data-answer="b">
-    <p>2️⃣ What HTTP method is typically used to fetch or read data from an API?</p>
-    <label><input type="radio" name="q6-view" value="a"> POST</label><br>
-    <label><input type="radio" name="q6-view" value="b"> GET</label><br>
-    <label><input type="radio" name="q6-view" value="c"> DELETE</label>
-  </div>
+      <div class="quiz-question" data-answer="b">
+        <p>2️⃣ What HTTP method is typically used to fetch or read data from an API?</p>
+        <label><input type="radio" name="q6-view" value="a"> POST</label><br>
+        <label><input type="radio" name="q6-view" value="b"> GET</label><br>
+        <label><input type="radio" name="q6-view" value="c"> DELETE</label>
+      </div>
 
-  <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
-  <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
-</div>
+      <button class="sq-btn sq-run" onclick="submitQuiz(this)">Submit Answers</button>
+      <div class="quiz-feedback small" style="margin-top:0.5rem;"></div>
+    </div>
 
   </div>
 </details>
