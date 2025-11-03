@@ -346,6 +346,8 @@ date: 2025-10-21
         <button class="btn btn-share">🔗 Share</button>
       </div>
     </div>
+    <h2 class="section-title">Overall Certificate</h2>
+    
     <div class="cert-card cert-green" >
       <span class="cert-badge">Verified</span>
       <h3 class="cert-title">Overall CS Portfolio Certificate</h3>
@@ -353,7 +355,7 @@ date: 2025-10-21
       <div class="cert-date">November 2025</div>
       <div class="cert-actions">
         <button class="btn btn-download" onclick="downloadCert('Computer Science Portfolio - Full Stack Development', 'Open Coding Society', 'November 2025')">⬇ Download</button>
-        <button class="btn btn-share" onclick="addToLinkedIn('Computer Science Portfolio - Full Stack Development')">Add to LinkedIn</button>
+        <button class="btn btn-share" onclick="addToLinkedIn('Computer Science Portfolio - Full Stack Development Java Usage')">Add to LinkedIn</button>
       </div>
     </div>
   </div>
