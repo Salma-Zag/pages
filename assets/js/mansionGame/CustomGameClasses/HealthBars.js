@@ -62,9 +62,9 @@ export function createBossHealthBar() {
 
 // Remove the boss health bar
 export function removeBossHealthBar() {
-    const bar = document.getElementById('boss-health-bar');
-    if (bar && bar.parentNode) {
-        bar.parentNode.removeChild(bar);
+    const container = document.getElementById('boss-health-container');
+    if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
     }
 }
 
@@ -144,9 +144,9 @@ export function createPlayerHealthBar() {
 
 // Remove the player health bar
 export function removePlayerHealthBar() {
-    const bar = document.getElementById('player-health-bar');
-    if (bar && bar.parentNode) {
-        bar.parentNode.removeChild(bar);
+    const container = document.getElementById('player-health-container');
+    if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
     }
 }
 
