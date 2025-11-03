@@ -1,5 +1,5 @@
 ---
-layout: cs-portfolio-lesson
+layout: chatbot
 title: "Submodule 1: Overall Analytics & Grades"
 description: "Submodule 1 of Analytics/Admin Mini-Quest"
 permalink: /cs-portfolio-quest/analytics/submodule_1/
@@ -239,22 +239,6 @@ date: 2025-10-22
       <div class="metric-value" id="modules-complete">0</div>
       <div class="metric-subtitle" id="modules-incomplete">0 in progress</div>
     </div>
-    <div class="metric-card">
-      <div class="metric-header">
-        <span class="metric-title">Accuracy Rate</span>
-        <div class="metric-icon" style="background: rgba(59, 130, 246, 0.2);">🎯</div>
-      </div>
-      <div class="metric-value">87.3%</div>
-      <div class="metric-subtitle">+12% from last month</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-header">
-        <span class="metric-title">Day Streak</span>
-        <div class="metric-icon" style="background: rgba(239, 68, 68, 0.2);">🔥</div>
-      </div>
-      <div class="metric-value">15</div>
-      <div class="metric-subtitle">Keep it up!</div>
-    </div>
   </div>
 
   <!-- AI Insights Card -->
@@ -268,15 +252,15 @@ date: 2025-10-22
     </div>
     <div class="insights-content">
       <div class="insights-text">
-        You improved your accuracy by <strong>12% this week</strong>. Great job staying consistent with your <strong>15-day streak!</strong> Your performance in Python and Data Analysis modules has been exceptional, with an average accuracy of <strong>88.5%</strong>.
+        Loading your personalized insights...
       </div>
-      <div class="recommendation">
+      <div class="recommendation" style="display: none;">
         <span>💡</span>
-        <div><strong>Recommendation:</strong> Consider focusing more time on Machine Learning fundamentals to boost your overall performance. You're only 3% away from reaching the 80% milestone!</div>
+        <div></div>
       </div>
     </div>
     <div class="insights-footer">
-      <span>Last updated: Today at 9:42 AM</span>
+      <span>Last updated: Loading...</span>
       <div class="live-indicator">
         <div class="live-dot"></div>
         <span>Live</span>
@@ -324,6 +308,8 @@ date: 2025-10-22
 <script type="module">
   import { javaURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
   import { pythonURI } from '{{ site.baseurl }}/assets/js/api/config.js';
+
+  const API_KEY = 'AIzaSyAwUorzifmPEIX6M74Kd_as-C-7Ih6UyLs';
 
   async function getCredentials() {
         try {
@@ -417,6 +403,7 @@ date: 2025-10-22
           console.log(`Module stats for ${username}:`, moduleStats);
 
           return {
+            username,
             totalTime,
             modulesComplete,
             modulesIncomplete,
@@ -546,7 +533,6 @@ date: 2025-10-22
     }
   });
 
-  // getLessonData();
   async function updateAnalytics() {
     const lessonData = await getLessonData();
     if (!lessonData) return;
@@ -554,7 +540,7 @@ date: 2025-10-22
     // Update total study time
     const totalTimeEl = document.getElementById("total-studytime");
     if (totalTimeEl) {
-        totalTimeEl.innerText = `${lessonData.totalTime.toFixed(1)}h`; // rounds to 1 decimal place
+        totalTimeEl.innerText = `${(lessonData.totalTime / 60).toFixed(1)}h`;
     }
 
     // Update modules complete
@@ -581,9 +567,111 @@ date: 2025-10-22
     console.log("Time data", timeData)
     console.log("Completion Data", completionData)
     createCharts(timeData, completionData);
+
+    return lessonData;
   }
 
+  // AI INSIGHTS GENERATION
+  async function generateAIInsights(analyticsData) {
+      if (!analyticsData) return null;
+
+      const { username, totalTime, modulesComplete, modulesIncomplete, moduleStats } = analyticsData;
+      
+      let analyticsContext = `Current User: ${username}\n\n`;
+      analyticsContext += `Overall Statistics:\n`;
+      analyticsContext += `- Total Study Time: ${totalTime.toFixed(1)} minutes (${(totalTime / 60).toFixed(1)} hours)\n`;
+      analyticsContext += `- Modules Completed: ${modulesComplete} out of 25\n`;
+      analyticsContext += `- Modules In Progress: ${modulesIncomplete}\n\n`;
+      
+      analyticsContext += `Module-Specific Breakdown:\n`;
+      Object.entries(moduleStats).forEach(([moduleName, stats]) => {
+          analyticsContext += `${moduleName}: ${stats.time.toFixed(1)} minutes spent, ${stats.percentComplete.toFixed(1)}% complete\n`;
+      });
+
+      const prompt = `You are an AI learning analytics assistant. Based on the following student data, generate a personalized performance insight.
+
+${analyticsContext}
+
+Generate a brief, encouraging performance insight that:
+1. Highlights their key achievements (be specific with numbers from their actual data)
+2. Identifies their strongest area based on completion percentage or time spent
+3. Provides ONE actionable recommendation for improvement
+
+Keep it conversational, positive, and concise (3-4 sentences total). Be specific about their numbers. Format with natural paragraph breaks.`;
+
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+
+      try {
+          const response = await fetch(apiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                  contents: [{ parts: [{ text: prompt }] }]
+              })
+          });
+
+          if (!response.ok) {
+              console.error('API Error:', response.status);
+              return null;
+          }
+
+          const data = await response.json();
+          return data.candidates?.[0]?.content?.parts?.[0]?.text || null;
+      } catch (error) {
+          console.error('Error generating insights:', error);
+          return null;
+      }
+  }
+
+  async function updateInsightsCard() {
+      const lessonData = await getLessonData();
+      if (!lessonData) {
+          console.log("No lesson data available for insights");
+          return;
+      }
+
+      const insightsText = document.querySelector('.insights-text');
+      const recommendationDiv = document.querySelector('.recommendation');
+      
+      insightsText.innerHTML = '<span style="opacity: 0.7;">🤖 Generating personalized insights...</span>';
+      recommendationDiv.style.display = 'none';
+
+      const insight = await generateAIInsights(lessonData);
+      
+      if (insight) {
+          const lines = insight.split('\n').filter(l => l.trim());
+          const recIndex = lines.findIndex(l => 
+              l.toLowerCase().includes('recommend') || 
+              l.toLowerCase().includes('consider') ||
+              l.toLowerCase().includes('focus on') ||
+              l.toLowerCase().includes('try')
+          );
+          
+          if (recIndex !== -1) {
+              insightsText.innerHTML = lines.slice(0, recIndex).join(' ');
+              recommendationDiv.innerHTML = `<span>💡</span><div>${lines.slice(recIndex).join(' ')}</div>`;
+              recommendationDiv.style.display = 'flex';
+          } else {
+              insightsText.innerHTML = insight.replace(/\n/g, '<br>');
+              recommendationDiv.style.display = 'none';
+          }
+      } else {
+          insightsText.innerHTML = `You've completed ${lessonData.modulesComplete} modules and spent ${(lessonData.totalTime / 60).toFixed(1)} hours learning. Great job staying consistent! Keep up the momentum to reach your learning goals.`;
+          recommendationDiv.style.display = 'none';
+      }
+
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', {  
+          hour: 'numeric', 
+          minute: '2-digit',
+          hour12: true 
+      });
+      document.querySelector('.insights-footer span').textContent = `Last updated: Today at ${timeString}`;
+  }
+
+  // Run both functions
   updateAnalytics();
+  updateInsightsCard();
 
   // PDF Download functionality
   const downloadBtn = document.getElementById('downloadBtn');
