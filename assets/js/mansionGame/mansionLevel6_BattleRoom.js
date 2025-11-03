@@ -59,7 +59,7 @@ class MansionLevel6_BattleRoom {
             INIT_POSITION: {x: width / 2, y: height / 2},
             orientation: {rows: 1, columns: 1},
             down: {row: 0, start: 0, columns: 1},
-            hitbox: {widthPercentage: 0.4, heightPercentage: 0.6},
+            hitbox: {widthPercentage: 0.4, heightPercentage: 0},
             zIndex: 10,
             isKilling: false, // Flag to prevent multiple kills
             
