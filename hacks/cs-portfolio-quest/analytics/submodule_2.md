@@ -95,7 +95,7 @@ date: 2025-10-21
   }
   .cert-green {
     background: linear-gradient(135deg, #1a7336ff 0%, #348340ff 100%);
-    box-shadow: 0 4px 12px rgba(75, 173, 68, 0.3);
+    box-shadow: 0 4px 12px rgba(75, 173, 68, 0.3); grid-column: 1 / -1;
   }
   .cert-yellow:hover {
     box-shadow: 0 10px 26px rgba(15, 241, 102, 0.36);
@@ -346,8 +346,9 @@ date: 2025-10-21
         <button class="btn btn-share">🔗 Share</button>
       </div>
     </div>
-    <h2 class="section-title">Overall Certificate</h2>
-    
+  </div>
+  <h2 class="section-title">Overall Certificate</h2>
+  <div class="certificates-grid">
     <div class="cert-card cert-green" >
       <span class="cert-badge">Verified</span>
       <h3 class="cert-title">Overall CS Portfolio Certificate</h3>
