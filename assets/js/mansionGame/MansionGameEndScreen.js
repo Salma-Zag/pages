@@ -1,3 +1,5 @@
+import { removePlayerHealthBar, removeBossHealthBar } from './HealthBars.js';
+
 // Show a full-screen victory/end overlay for the MansionGame
 export default function showEndScreen(gameEnv) {
     if (typeof document === 'undefined') return;
@@ -5,11 +7,9 @@ export default function showEndScreen(gameEnv) {
     // Prevent adding multiple overlays
     if (document.getElementById('mansion-victory-overlay')) return;
 
-    const playerBar = document.getElementById('player-health-bar');  // player health bar
-    const bossBar = document.getElementById('boss-health-bar');      // boss health bar
 
-    if (playerBar) playerBar.style.display = 'none';  
-    if (bossBar) bossBar.style.display = 'none';   
+    removePlayerHealthBar();
+    removeBossHealthBar();
 
     const overlay = document.createElement('div');
     overlay.id = 'mansion-victory-overlay';
