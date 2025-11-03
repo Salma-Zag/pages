@@ -15,32 +15,41 @@ date: 2025-10-21
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="max-w-3xl mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-2 text-black">Introduction: Why Resumes Matter in Tech</h1>
-  <p class="text-gray-700 mb-6">Recruiters often spend <b>6–8 seconds</b> scanning. This section sets up the series and helps you focus on what matters.</p>
+  <h1 class="text-2xl font-bold mb-2">Introduction</h1>
+  <p class="text-gray-600 mb-4">A strong resume can dramatically increase your chances of landing your dream tech job. Recruiters often spend <b>6–8 seconds</b> scanning — make yours count.</p>
 
-  <!-- Character Selection -->
-  <section class="space-y-3 mb-8">
-    <h2 class="text-xl font-semibold text-black">Choose Your Character</h2>
+  <!-- Progress -->
+  <div class="border rounded p-3 mb-4">
+    <div class="flex justify-between text-sm">
+      <span>Progress</span><span id="progressLabel">Step 1 / 3</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded h-2 mt-2">
+      <div id="progressBar" class="bg-blue-600 h-2 rounded" style="width:33.3%"></div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Character selection -->
+  <section data-step="0" class="space-y-3">
+    <h2 class="text-xl font-semibold">Choose Your Character</h2>
     <p class="text-gray-700 text-sm">Pick a guide to accompany you through the mini-quest.</p>
     <div class="flex justify-center gap-4">
-      <video id="char1" class="character border rounded p-0 w-28 h-44 cursor-pointer" loop muted playsinline>
+      <video id="char1" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer" loop muted playsinline>
         <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant.mp4" type="video/mp4"/>
       </video>
-      <video id="char2" class="character border rounded p-0 w-28 h-44 cursor-pointer" loop muted playsinline>
+      <video id="char2" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer" loop muted playsinline>
         <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster.mp4" type="video/mp4"/>
       </video>
-      <video id="char3" class="character border rounded p-0 w-28 h-44 cursor-pointer" loop muted playsinline>
+      <video id="char3" class="character w-28 h-44 border-2 border-gray-300 rounded cursor-pointer" loop muted playsinline>
         <source src="{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey.mp4" type="video/mp4"/>
       </video>
     </div>
-    <div class="flex justify-center">
-      <button id="confirm-btn" disabled class="px-3 py-2 border rounded mt-3 disabled:opacity-60">Confirm Selection</button>
-    </div>
+    <p id="charNote" class="text-xs text-gray-600 text-center">Click a character to enable “Next”.</p>
   </section>
 
-  <!-- Stats (simple cards) -->
-  <section class="mb-8">
-    <h2 class="text-xl font-semibold text-black mb-2">What Recruiters Prioritize</h2>
+  <!-- STEP 2: Recruiter stats -->
+  <section data-step="1" class="space-y-3 hidden">
+    <h2 class="text-xl font-semibold">What recruiters prioritize</h2>
+    <p class="text-gray-700 text-sm">These signals help your resume stand out.</p>
     <div class="grid gap-3 md:grid-cols-2">
       <div class="border rounded p-3">
         <div class="font-medium">Skills Section</div>
@@ -65,22 +74,21 @@ date: 2025-10-21
       <div class="border rounded p-3 md:col-span-2">
         <div class="font-medium">ATS Optimization</div>
         <div class="text-2xl font-bold">60%</div>
-        <p class="text-gray-700 text-sm">A large share of resumes fail automated screens.</p>
+        <p class="text-gray-700 text-sm">Many resumes fail automated screens — formatting and keywords matter.</p>
       </div>
     </div>
   </section>
 
-  <!-- Careers (accordion) -->
-  <section class="mb-8">
-    <h2 class="text-xl font-semibold text-black mb-2">Explore Tech Career Paths</h2>
-    <p class="text-gray-700 text-sm mb-3">Click to expand a role’s responsibilities, skills, and resume focus.</p>
-    <!-- Reusable accordion item -->
+  <!-- STEP 3: Tech Career Paths -->
+  <section data-step="2" class="space-y-3 hidden">
+    <h2 class="text-xl font-semibold">Explore Tech Career Paths</h2>
+    <p class="text-gray-700 text-sm">Click a role to expand its responsibilities, skills, and resume focus.</p>
     <div class="space-y-3">
       <details class="border rounded">
         <summary class="px-3 py-2 cursor-pointer font-medium">Software Engineer</summary>
         <div class="border-t p-3 grid gap-3 md:grid-cols-3 text-sm text-gray-800">
           <div>
-            <div class="font-semibold mb-1">Responsibilities</div>
+            <div class="font-semibold mb-1 text-blue-700">Responsibilities</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Write, test, and maintain code</li>
               <li>Design and implement solutions</li>
@@ -89,7 +97,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Key Skills</div>
+            <div class="font-semibold mb-1 text-blue-700">Key Skills</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Java, C++, Python, JS</li>
               <li>React/Angular, Django</li>
@@ -97,11 +105,11 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Resume Focus</div>
+            <div class="font-semibold mb-1 text-blue-700">Resume Focus</div>
             <ul class="list-disc ml-5 space-y-1">
-              <li>List concrete stacks/tools</li>
-              <li>Show personal/academic projects</li>
-              <li>Use metrics (%, time, users)</li>
+              <li>Concrete stacks/tools</li>
+              <li>Personal/academic projects</li>
+              <li>Metrics (%, time, users)</li>
             </ul>
           </div>
         </div>
@@ -110,7 +118,7 @@ date: 2025-10-21
         <summary class="px-3 py-2 cursor-pointer font-medium">Data Scientist</summary>
         <div class="border-t p-3 grid gap-3 md:grid-cols-3 text-sm text-gray-800">
           <div>
-            <div class="font-semibold mb-1">Responsibilities</div>
+            <div class="font-semibold mb-1 text-blue-700">Responsibilities</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Analyze datasets & trends</li>
               <li>Build predictive models</li>
@@ -118,7 +126,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Key Skills</div>
+            <div class="font-semibold mb-1 text-blue-700">Key Skills</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Python, R, SQL</li>
               <li>ML, data viz</li>
@@ -126,9 +134,9 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Resume Focus</div>
+            <div class="font-semibold mb-1 text-blue-700">Resume Focus</div>
             <ul class="list-disc ml-5 space-y-1">
-              <li>Library experience (scikit, XGBoost)</li>
+              <li>Library experience</li>
               <li>Kaggle/personal projects</li>
               <li>Quantify accuracy/lift</li>
             </ul>
@@ -139,7 +147,7 @@ date: 2025-10-21
         <summary class="px-3 py-2 cursor-pointer font-medium">DevOps Engineer</summary>
         <div class="border-t p-3 grid gap-3 md:grid-cols-3 text-sm text-gray-800">
           <div>
-            <div class="font-semibold mb-1">Responsibilities</div>
+            <div class="font-semibold mb-1 text-blue-700">Responsibilities</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Automate deployments</li>
               <li>Manage cloud infra</li>
@@ -147,7 +155,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Key Skills</div>
+            <div class="font-semibold mb-1 text-blue-700">Key Skills</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>CI/CD (Jenkins, GitLab CI)</li>
               <li>AWS/Azure/GCP</li>
@@ -155,7 +163,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Resume Focus</div>
+            <div class="font-semibold mb-1 text-blue-700">Resume Focus</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Cloud certs</li>
               <li>Automation & IaC</li>
@@ -168,7 +176,7 @@ date: 2025-10-21
         <summary class="px-3 py-2 cursor-pointer font-medium">Cybersecurity Analyst</summary>
         <div class="border-t p-3 grid gap-3 md:grid-cols-3 text-sm text-gray-800">
           <div>
-            <div class="font-semibold mb-1">Responsibilities</div>
+            <div class="font-semibold mb-1 text-blue-700">Responsibilities</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Protect infrastructure</li>
               <li>Monitor for vulnerabilities</li>
@@ -176,7 +184,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Key Skills</div>
+            <div class="font-semibold mb-1 text-blue-700">Key Skills</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Firewalls, VPN, IDS</li>
               <li>Encryption, forensics</li>
@@ -184,7 +192,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Resume Focus</div>
+            <div class="font-semibold mb-1 text-blue-700">Resume Focus</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Certifications</li>
               <li>Incident response</li>
@@ -197,23 +205,23 @@ date: 2025-10-21
         <summary class="px-3 py-2 cursor-pointer font-medium">Product Manager (Tech)</summary>
         <div class="border-t p-3 grid gap-3 md:grid-cols-3 text-sm text-gray-800">
           <div>
-            <div class="font-semibold mb-1">Responsibilities</div>
+            <div class="font-semibold mb-1 text-blue-700">Responsibilities</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Guide product lifecycle</li>
               <li>Define vision/strategy</li>
-              <li>Coordinate x-functional teams</li>
+              <li>Coordinate cross-functional teams</li>
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Key Skills</div>
+            <div class="font-semibold mb-1 text-blue-700">Key Skills</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Agile/Scrum</li>
-              <li>Leadership, comms</li>
+              <li>Leadership, communication</li>
               <li>Roadmapping</li>
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Resume Focus</div>
+            <div class="font-semibold mb-1 text-blue-700">Resume Focus</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Tools (Jira/Asana)</li>
               <li>Stakeholder alignment</li>
@@ -226,7 +234,7 @@ date: 2025-10-21
         <summary class="px-3 py-2 cursor-pointer font-medium">UX/UI Designer</summary>
         <div class="border-t p-3 grid gap-3 md:grid-cols-3 text-sm text-gray-800">
           <div>
-            <div class="font-semibold mb-1">Responsibilities</div>
+            <div class="font-semibold mb-1 text-blue-700">Responsibilities</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Design web/app UIs</li>
               <li>Wireframe & prototype</li>
@@ -234,7 +242,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Key Skills</div>
+            <div class="font-semibold mb-1 text-blue-700">Key Skills</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Figma/Sketch/XD</li>
               <li>Research, prototyping</li>
@@ -242,7 +250,7 @@ date: 2025-10-21
             </ul>
           </div>
           <div>
-            <div class="font-semibold mb-1">Resume Focus</div>
+            <div class="font-semibold mb-1 text-blue-700">Resume Focus</div>
             <ul class="list-disc ml-5 space-y-1">
               <li>Portfolio link</li>
               <li>A/B testing</li>
@@ -254,47 +262,71 @@ date: 2025-10-21
     </div>
   </section>
 
-  <!-- Insights -->
-  <section class="mb-8">
-    <h2 class="text-xl font-semibold text-black mb-2">2024 Tech Hiring Insights</h2>
-    <ul class="list-disc ml-5 space-y-1 text-gray-800 text-sm">
-      <li><b>Cloud:</b> ~50% of roles touch cloud skills.</li>
-      <li><b>ML:</b> Demand continues to rise year-over-year.</li>
-      <li><b>Security:</b> Persistent global talent gaps.</li>
-    </ul>
-  </section>
+  <!-- Bottom Navigation -->
+  <div class="flex justify-between mt-4">
+    <button id="prevBtn" class="px-3 py-2 border rounded" disabled>Previous</button>
+    <button id="nextBtn" class="px-3 py-2 border rounded">Next →</button>
+  </div>
 
-  <blockquote class="italic text-gray-600 mb-6">“Your resume is your first interview — make it unforgettable.”</blockquote>
-
-  <!-- Bottom Navigation (match others) -->
-  <div class="flex justify-between mt-4 border-t pt-4">
-    <span></span>
-    <a href="{{site.baseurl}}/cs-portfolio-quest/resume/submodule_2/" class="px-3 py-2 border rounded">Next Module →</a>
+  <!-- Only visible on last step -->
+  <div class="flex justify-end mt-3">
+    <a id="nextModuleBtn" href="{{site.baseurl}}/cs-portfolio-quest/resume/submodule_2/" class="px-3 py-2 border rounded hidden">Next Module →</a>
   </div>
 </div>
 
 <script>
-  // Accordion: <details> is native; no JS needed for open/close.
+(function(){
+  const steps = Array.from(document.querySelectorAll('section[data-step]'));
+  const progressBar = document.getElementById('progressBar');
+  const progressLabel = document.getElementById('progressLabel');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const nextModuleBtn = document.getElementById('nextModuleBtn');
 
-  // Character selection
-  const characters = document.querySelectorAll('.character');
-  const confirmBtn = document.getElementById('confirm-btn');
-  let selectedCharacter = null;
+  let step = 0;
+  let charSelected = false;
 
-  characters.forEach(v => {
-    v.play().catch(()=>{}); // autoplay muted
-    v.addEventListener('click', () => {
-      characters.forEach(x => x.classList.remove('ring','ring-2','ring-black'));
-      v.classList.add('ring','ring-2','ring-black');
+  function showStep(i){
+    step = Math.max(0, Math.min(steps.length-1, i));
+    steps.forEach((el, idx) => el.classList.toggle('hidden', idx !== step));
+    const pct = ((step+1)/steps.length)*100;
+    progressBar.style.width = pct + '%';
+    progressLabel.textContent = `Step ${step+1} / ${steps.length}`;
+    prevBtn.disabled = step === 0;
+    nextBtn.textContent = (step === steps.length-1) ? 'Done' : 'Next →';
+    nextModuleBtn.classList.toggle('hidden', step !== steps.length-1);
+  }
+
+  prevBtn.addEventListener('click', ()=> showStep(step-1));
+  nextBtn.addEventListener('click', ()=>{
+    if (step === 0 && !charSelected){
+      alert('Please select a character first.');
+      return;
+    }
+    if (step < steps.length-1) showStep(step+1);
+    else nextModuleBtn.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Character selection: blue border only
+  const videos = document.querySelectorAll('.character');
+  const charNote = document.getElementById('charNote');
+  videos.forEach(v=>{
+    v.play().catch(()=>{});
+    v.addEventListener('click', ()=>{
+      videos.forEach(x=>{
+        x.classList.remove('border-blue-600');
+        x.classList.add('border-gray-300');
+      });
+      v.classList.remove('border-gray-300');
+      v.classList.add('border-blue-600');  // same blue as progress bar
+      localStorage.setItem('selectedCharacter', v.id);
+      charSelected = true;
+      if (charNote) charNote.textContent = `Selected: ${v.id}`;
       v.play().catch(()=>{});
-      selectedCharacter = v.id;
-      confirmBtn.disabled = false;
     });
   });
 
-  confirmBtn.addEventListener('click', () => {
-    if (!selectedCharacter) return;
-    localStorage.setItem('selectedCharacter', selectedCharacter);
-    alert(`You selected ${selectedCharacter}!`);
-  });
+  // Boot
+  showStep(0);
+})();
 </script>
