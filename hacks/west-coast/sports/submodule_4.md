@@ -33,35 +33,36 @@ footer:
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
             min-height: 100vh;
-            background: #f0f4f8;
+       
         }
 
 
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            padding: 30px;
+           
             background: white;
             border-radius: 20px;
-            margin-bottom: 30px;
+         
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
 
+        .header {
+            background: linear-gradient(135deg, #002244 0%, #69BE28 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
 
-
-        h1 {
-            font-size: 2.5em;
-            color: #002244;
+        .header h1 {
+            font-size: 2.2em;
             margin-bottom: 10px;
         }
 
-        .subtitle {
-            color: #495057;
+        .header p {
+            opacity: 0.9;
             font-size: 1.1em;
         }
 
@@ -229,22 +230,22 @@ footer:
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .team-btn.seahawks:hover {
+        .team-btn.football:hover {
             background: linear-gradient(135deg, #002244 0%, #69BE28 100%);
             color: white;
         }
 
-        .team-btn.mariners:hover {
+        .team-btn.baseball:hover {
             background: linear-gradient(135deg, #0C2C56 0%, #005C5C 100%);
             color: white;
         }
 
-        .team-btn.kraken:hover {
+        .team-btn.hockey:hover {
             background: linear-gradient(135deg, #001628 0%, #96D8D8 100%);
             color: white;
         }
 
-        .team-btn.huskies:hover {
+        .team-btn.college:hover {
             background: linear-gradient(135deg, #4B2E83 0%, #B7A57A 100%);
             color: white;
         }
@@ -377,15 +378,35 @@ footer:
         .code-number {
             color: #e74c3c;
         }
+
+        .no-sports-message {
+            background: #fff3cd;
+            color: #856404;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ffc107;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .debug-info {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
     </style>
 </head>
 <body>
-    
+   
     <div class="container">
-        <header>
+        <div class="header">
             <h1>Stop 4: Seattle — "Parsing and Utilizing the Data"</h1>
-            <p class="subtitle">Transform JSON into Actionable Insights</p>
-        </header>
+            <p>Transform JSON into Actionable Insights</p>
+        </div>
 
         <div class="concept-box">
             <h2>Coding Concept: JSON Parsing & Data Utilization</h2>
@@ -437,19 +458,11 @@ footer:
             <h2>Interactive JSON Parsing Demo</h2>
             <p class="section-description">Select a Seattle sports team to see raw JSON and how it's parsed</p>
             
-            <div class="team-buttons" id="teamButtonsContainer">
-                <button class="team-btn seahawks" onclick="window.loadTeamData('seahawks')">
-                    🏈 Seattle Seahawks<br><small>NFL Football</small>
-                </button>
-                <button class="team-btn mariners" onclick="window.loadTeamData('mariners')">
-                    ⚾ Seattle Mariners<br><small>MLB Baseball</small>
-                </button>
-                <button class="team-btn kraken" onclick="window.loadTeamData('kraken')">
-                    🏒 Seattle Kraken<br><small>NHL Hockey</small>
-                </button>
-                <button class="team-btn huskies" onclick="window.loadTeamData('huskies')">
-                    🏈 Washington Huskies<br><small>College Football</small>
-                </button>
+            <!-- Debug info -->
+            <div class="debug-info" id="debugInfo" style="display: none;"></div>
+            
+            <div class="team-buttons" id="teamButtons">
+                <!-- Team buttons will be dynamically inserted here -->
             </div>
 
             <div id="rawJsonSection" style="display: none;">
@@ -458,7 +471,7 @@ footer:
             </div>
 
             <div id="parseSection" style="display: none;">
-                <button class="action-btn" onclick="window.parseData()">📊 Parse JSON into Usable Data</button>
+                <button class="action-btn" onclick="parseData()">📊 Parse JSON into Usable Data</button>
                 <div class="code-example" id="codeExample"></div>
             </div>
 
@@ -471,9 +484,9 @@ footer:
 
             <div id="utilizationSection" style="display: none;">
                 <h3 style="color: #002244; margin: 20px 0;">Step 3: Utilizing the Data</h3>
-                <button class="action-btn" onclick="window.calculateWinPercentage()">Calculate Win %</button>
-                <button class="action-btn" onclick="window.calculateAveragePoints()">Calculate Avg Points</button>
-                <button class="action-btn" onclick="window.getTotalAttendance()">Get Total Attendance</button>
+                <button class="action-btn" onclick="calculateWinPercentage()">Calculate Win %</button>
+                <button class="action-btn" onclick="calculateAveragePoints()">Calculate Avg Points</button>
+                <button class="action-btn" onclick="getTotalAttendance()">Get Total Attendance</button>
                 
                 <div class="calculation-box" id="calculationResult" style="display: none;"></div>
             </div>
@@ -520,7 +533,8 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
 
     <script>
         const teamDatabase = {
-            seahawks: {
+            football: {
+                sportName: 'Football - Seahawks',
                 team: {
                     name: "Seattle Seahawks",
                     sport: "Football",
@@ -542,7 +556,8 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
                     { week: 5, opponent: "Giants", points: 29, opponentPoints: 20, result: "Win", attendance: 68122 }
                 ]
             },
-            mariners: {
+            baseball: {
+                sportName: 'Baseball - Mariners',
                 team: {
                     name: "Seattle Mariners",
                     sport: "Baseball",
@@ -564,7 +579,8 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
                     { game: 5, opponent: "Astros", runs: 6, opponentRuns: 4, result: "Win", attendance: 47929 }
                 ]
             },
-            kraken: {
+            hockey: {
+                sportName: 'Ice Hockey - Kraken',
                 team: {
                     name: "Seattle Kraken",
                     sport: "Hockey",
@@ -586,7 +602,8 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
                     { game: 5, opponent: "Islanders", goals: 3, opponentGoals: 2, result: "Win", attendance: 16987 }
                 ]
             },
-            huskies: {
+            college: {
+                sportName: 'College Football - Huskies',
                 team: {
                     name: "Washington Huskies",
                     sport: "Football",
@@ -607,13 +624,14 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
                     { week: 4, opponent: "Northwestern", points: 24, opponentPoints: 5, result: "Win", attendance: 52341 },
                     { week: 5, opponent: "Rutgers", points: 21, opponentPoints: 18, result: "Win", attendance: 61287 }
                 ]
-            }
+            },
+
         };
 
         let currentTeam = null;
         let parsedDataGlobal = null;
 
-        // Load user's selected sports from itinerary
+        // Load user's selected sports from itinerary - EXACT COPY from first file
         function loadUserSports() {
             try {
                 const itinerary = JSON.parse(localStorage.getItem('westCoastItinerary'));
@@ -627,42 +645,66 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
             return null;
         }
 
-        // Map sport names to team keys
-        function mapSportToTeam(sportName) {
+        // Map sport names to team keys - EXACT COPY from first file
+        function mapSportToKey(sportName) {
             const sportMap = {
-                'Football - Seahawks': 'seahawks',
-                'Baseball - Mariners': 'mariners',
-                'Ice Hockey - Kraken': 'kraken',
-                'College Football - Huskies': 'huskies',
-                'Cricket - Orcas': 'orcas'
+                'Football - Seahawks': 'football',
+                'Baseball - Mariners': 'baseball',
+                'Ice Hockey - Kraken': 'hockey',
+                'College Football - Huskies': 'college'
             };
             return sportMap[sportName];
         }
 
-        // Filter team buttons based on user's itinerary
+        // Initialize team buttons - EXACT LOGIC from first file
         function initializeTeamButtons() {
+            const teamButtonsContainer = document.getElementById('teamButtons');
             const userSports = loadUserSports();
             
+            // Debug info
+            const debugDiv = document.getElementById('debugInfo');
+            let debugText = `localStorage data: ${localStorage.getItem('westCoastItinerary')}\n\n`;
+            debugText += `User sports found: ${userSports ? userSports.join(', ') : 'None'}\n`;
+            debugDiv.textContent = debugText;
+            debugDiv.style.display = 'block';
+            
             if (userSports && userSports.length > 0) {
-                // Hide all team buttons first
-                const allButtons = document.querySelectorAll('.team-btn');
-                allButtons.forEach(btn => btn.style.display = 'none');
-                
-                // Show only user's selected teams
+                // Show only user's selected sports
                 userSports.forEach(sportName => {
-                    const teamKey = mapSportToTeam(sportName);
-                    if (teamKey) {
-                        const button = document.querySelector(`.team-btn.${teamKey}`);
-                        if (button) {
-                            button.style.display = 'block';
-                        }
+                    const sportKey = mapSportToKey(sportName);
+                    if (sportKey && teamDatabase[sportKey]) {
+                        const sport = teamDatabase[sportKey];
+                        const button = document.createElement('button');
+                        button.className = `team-btn ${sportKey}`;
+                        button.onclick = () => loadTeamData(sportKey);
+                        
+                        let emoji = '🏈';
+                        if (sportKey === 'baseball') emoji = '⚾';
+                        else if (sportKey === 'hockey') emoji = '🏒';
+                        
+                        button.innerHTML = `${emoji} ${sport.team.name}<br><small>${sportName}</small>`;
+                        teamButtonsContainer.appendChild(button);
                     }
                 });
+            } else {
+                // Fallback: show all teams if no itinerary found
+                Object.keys(teamDatabase).forEach(key => {
+                    const sport = teamDatabase[key];
+                    const button = document.createElement('button');
+                    button.className = `team-btn ${key}`;
+                    button.onclick = () => loadTeamData(key);
+                    
+                    let emoji = '🏈';
+                    if (key === 'baseball') emoji = '⚾';
+                    else if (key === 'hockey') emoji = '🏒';
+                    
+                    button.innerHTML = `${emoji} ${sport.team.name}<br><small>${sport.sportName}</small>`;
+                    teamButtonsContainer.appendChild(button);
+                });
             }
-            // If no itinerary, show all buttons (default behavior)
         }
 
-        window.loadTeamData = function(team) {
+        function loadTeamData(team) {
             currentTeam = team;
             const data = teamDatabase[team];
             
@@ -683,9 +725,9 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
             document.getElementById('parsedSection').style.display = 'none';
             document.getElementById('utilizationSection').style.display = 'none';
             document.getElementById('calculationResult').style.display = 'none';
-        };
+        }
 
-        window.parseData = function() {
+        function parseData() {
             if (!currentTeam) return;
             
             parsedDataGlobal = teamDatabase[currentTeam];
@@ -718,9 +760,9 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
             
             document.getElementById('parsedData').innerHTML = parsedHTML;
             document.getElementById('utilizationSection').style.display = 'block';
-        };
+        }
 
-        window.calculateWinPercentage = function() {
+        function calculateWinPercentage() {
             if (!parsedDataGlobal) return;
             
             const wins = parsedDataGlobal.season.wins;
@@ -739,9 +781,9 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
                     ${parsedDataGlobal.team.name} Win Percentage: ${percentage}%
                 </div>
             `;
-        };
+        }
 
-        window.calculateAveragePoints = function() {
+        function calculateAveragePoints() {
             if (!parsedDataGlobal) return;
             
             const pointsKey = parsedDataGlobal.team.sport === 'Baseball' ? 'runs' : 
@@ -756,7 +798,7 @@ parsedData.<span class="code-string">games</span>.<span class="code-keyword">for
             const resultBox = document.getElementById('calculationResult');
             resultBox.style.display = 'block';
             resultBox.innerHTML = `
-                <h4>Average Points/Runs/Goals Calculation</h4>
+                <h4>Average ${pointsKey.charAt(0).toUpperCase() + pointsKey.slice(1)} Calculation</h4>
                 <div class="code-example"><span class="code-comment">// Loop through games array:</span>
 <span class="code-keyword">let</span> total = <span class="code-number">0</span>;
 parsedData.games.<span class="code-keyword">forEach</span>(game => {
@@ -767,6 +809,34 @@ parsedData.games.<span class="code-keyword">forEach</span>(game => {
                     Average ${pointsKey.charAt(0).toUpperCase() + pointsKey.slice(1)} per Game: ${average}
                 </div>
             `;
-        };
+        }
 
-        window.getTotal
+        function getTotalAttendance() {
+            if (!parsedDataGlobal) return;
+            
+            let total = 0;
+            parsedDataGlobal.games.forEach(game => {
+                total += game.attendance;
+            });
+            
+            const resultBox = document.getElementById('calculationResult');
+            resultBox.style.display = 'block';
+            resultBox.innerHTML = `
+                <h4>Total Attendance Calculation</h4>
+                <div class="code-example"><span class="code-comment">// Sum attendance from all games:</span>
+<span class="code-keyword">let</span> totalAttendance = <span class="code-number">0</span>;
+parsedData.games.<span class="code-keyword">forEach</span>(game => {
+    totalAttendance += game.attendance;
+});
+<span class="code-comment">// Result: ${total.toLocaleString()}</span></div>
+                <div class="calculation-result">
+                    Total Attendance (${parsedDataGlobal.games.length} games): ${total.toLocaleString()} fans
+                </div>
+            `;
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initializeTeamButtons);
+    </script>
+</body>
+</html>
