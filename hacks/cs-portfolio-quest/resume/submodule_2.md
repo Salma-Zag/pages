@@ -116,52 +116,55 @@ date: 2025-10-21
   </section>
 
   <!-- STEP 5: SKILLS -->
-  <section data-step="4" class="space-y-4 hidden">
-    <h2 class="text-xl font-semibold">Skills</h2>
-    <!-- Teaching block: Hard vs Soft skills -->
-    <div class="border rounded p-3 space-y-3">
-      <div class="font-medium">Hard vs Soft Skills</div>
-      <p class="text-sm text-gray-700">
-        <b>Hard skills</b> are teachable, measurable abilities (e.g., Python, SQL, CAD, statistics). 
-        <b>Soft skills</b> are interpersonal or cognitive strengths (e.g., communication, leadership, problem-solving).
-      </p>
-      <!-- Embedded video -->
-      <div class="relative" style="padding-top: 56.25%;">
-        <iframe
-          class="absolute inset-0 w-full h-full rounded"
-          src="https://www.youtube.com/embed/0FFLFcB9xfQ"
-          title="Hard vs Soft Skills"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <!-- Quick guidance -->
-      <div class="text-sm bg-gray-50 border rounded p-3">
-        <b>How many of each?</b> Aim for <b>~8–12 total skills</b> tailored to the job:
-        <ul class="list-disc ml-5 mt-1">
-          <li><b>~60–80%</b> hard skills that match the posting (tools, languages, methods).</li>
-          <li><b>~20–40%</b> soft skills to show you can collaborate and deliver.</li>
-        </ul>
-        Keep only skills you can <i>explain and demonstrate</i>.
-      </div>
+<section data-step="4" class="space-y-4 hidden">
+  <h2 class="text-xl font-semibold">Skills</h2>
+
+  <!-- Teaching block: Hard vs Soft skills (styled like the rest) -->
+  <div class="border rounded p-3 space-y-3">
+    <div class="font-medium">
+      Watch this video to learn about the different types of skills employers are looking for in a candidate
     </div>
-    <!-- Selection UI split into Hard / Soft -->
-    <div class="grid md:grid-cols-2 gap-4">
-      <!-- HARD -->
-      <div class="border rounded p-3">
-        <div class="font-medium mb-2">Hard Skills</div>
-        <div id="hardSkillsGrid" class="grid grid-cols-2 gap-2 text-sm mb-2"></div>
+    <!-- Embedded video -->
+    <div class="relative rounded overflow-hidden" style="padding-top: 56.25%;">
+      <iframe
+        class="absolute inset-0 w-full h-full"
+        src="https://www.youtube.com/embed/0FFLFcB9xfQ"
+        title="Hard vs Soft Skills"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <!-- Quick guidance (kept neutral) -->
+    <div class="text-sm bg-gray-700 border rounded p-3">
+      <b>How many of each?</b> Aim for <b>~8–12 total skills</b> tailored to the job:
+      <ul class="list-disc ml-5 mt-1">
+        <li><b>~60–80%</b> hard skills that match the posting (tools, languages, methods).</li>
+        <li><b>~20–40%</b> soft skills to show you can collaborate and deliver.</li>
+      </ul>
+      Keep only skills you can <i>explain and demonstrate</i>.
+    </div>
+  </div>
+
+  <!-- Selection UI split into Hard / Soft (equal size) -->
+  <div class="grid md:grid-cols-2 gap-4 items-stretch">
+    <!-- HARD -->
+    <div class="border rounded p-3 flex flex-col h-full">
+      <div class="font-medium mb-2">Hard Skills</div>
+      <div id="hardSkillsGrid" class="grid grid-cols-2 gap-2 text-sm mb-3"></div>
+      <div class="mt-auto">
         <div class="flex gap-2">
           <input id="customHardSkill" class="flex-1 border rounded px-3 py-2" placeholder="Add hard skill (e.g., Python)">
           <button id="addHardSkillBtn" class="px-3 py-2 border rounded">Add</button>
         </div>
         <div id="hardSkillTags" class="flex flex-wrap gap-2 mt-2"></div>
       </div>
-      <!-- SOFT -->
-      <div class="border rounded p-3">
-        <div class="font-medium mb-2">Soft Skills</div>
-        <div id="softSkillsGrid" class="grid grid-cols-2 gap-2 text-sm mb-2"></div>
+    </div>
+    <!-- SOFT -->
+    <div class="border rounded p-3 flex flex-col h-full">
+      <div class="font-medium mb-2">Soft Skills</div>
+      <div id="softSkillsGrid" class="grid grid-cols-2 gap-2 text-sm mb-3"></div>
+      <div class="mt-auto">
         <div class="flex gap-2">
           <input id="customSoftSkill" class="flex-1 border rounded px-3 py-2" placeholder="Add soft skill (e.g., Communication)">
           <button id="addSoftSkillBtn" class="px-3 py-2 border rounded">Add</button>
@@ -169,7 +172,9 @@ date: 2025-10-21
         <div id="softSkillTags" class="flex flex-wrap gap-2 mt-2"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- STEP 6: REVIEW & SAVE -->
   <section data-step="5" class="space-y-3 hidden">
@@ -252,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const addressQuiz = $("#addressQuiz");
   const addressQuizResult = $("#addressQuizResult");
 
-  // Skills (split)
-  const hardCurated = ["JavaScript","Python","Java","HTML","CSS","React","Node.js","SQL","Git","Linux","Docker","AWS"];
-  const softCurated = ["Communication","Teamwork","Leadership","Problem-Solving","Adaptability","Time Management","Attention to Detail","Collaboration","Critical Thinking","Creativity","Empathy","Ownership"];
+  // Skills (split) — equal count for even columns
+  const hardCurated = ["JavaScript","Python","Java","Flask","SQL","Git","Linux","Html"];
+  const softCurated = ["Communication","Teamwork","Leadership","Problem-Solving","Adaptability","Time Management"];
 
   const hardSkillsGrid = $("#hardSkillsGrid");
   const softSkillsGrid = $("#softSkillsGrid");
