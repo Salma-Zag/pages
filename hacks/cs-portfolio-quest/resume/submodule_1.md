@@ -34,19 +34,19 @@ date: 2025-10-21
   <p class="text-gray-700 text-sm">Pick a guide to accompany you through the mini-quest.</p>
 
   <div class="flex justify-center gap-4">
-    <video id="char1" class="character w-32 h-34 border-2 border-gray-300 rounded cursor-pointer"
+    <video id="char1" class="character w-52 h-54 border-2 border-gray-300 rounded cursor-pointer"
       autoplay loop muted playsinline preload="auto">
       <source src="{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/elephant.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
 
-  <video id="char2" class="character w-32 h-34 border-2 border-gray-300 rounded cursor-pointer"
+  <video id="char2" class="character w-52 h-54 border-2 border-gray-300 rounded cursor-pointer"
       autoplay loop muted playsinline preload="auto">
       <source src="{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/hamster.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
 
-  <video id="char3" class="character w-32 h-34 border-2 border-gray-300 rounded cursor-pointer"
+  <video id="char3" class="character w-52 h-54 border-2 border-gray-300 rounded cursor-pointer"
       autoplay loop muted playsinline preload="auto">
       <source src="{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/monkey.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
