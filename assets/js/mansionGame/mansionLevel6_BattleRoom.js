@@ -295,7 +295,7 @@ class MansionLevel6_BattleRoom {
             zIndex: '100'  // Lower z-index to keep it in the battle room
         });
         container.textContent = "WASD to move, SPACE to shoot";
-        container.style.color = 'blue';
+        container.style.color = '#00ffffff';
         container.style.fontFamily = "'Press Start 2P', sans-serif";
         container.style.fontSize = '16px';
         container.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
