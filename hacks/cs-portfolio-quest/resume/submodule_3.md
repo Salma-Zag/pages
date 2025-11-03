@@ -180,11 +180,11 @@ date: 2025-10-21
     >Next Module →</button>
   </div>
 
-  <!-- ✅ Floating Selected Sprite -->
+  <!-- Floating Selected Sprite -->
 <video id="floating-sprite" width="150" height="160" loop muted playsinline style="
   position: fixed;
   bottom: 20px;
-  right: 40px;
+  right: -200px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   display: none;
