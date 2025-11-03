@@ -39,6 +39,7 @@ class Boss extends Enemy {
                 if (event.key === 'p' || event.key === 'P') {
                     console.log("[Boss] Kill key pressed: forcing boss death.");
                     this.healthPoints = 0;
+                     window.__mansionLevelEnded = true;
                     // Show victory screen immediately
                     try { showEndScreen(this.gameEnv); } catch (e) { console.warn('Error showing victory screen:', e); }
                     // Remove the boss graphic and objects from the game
