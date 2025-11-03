@@ -12,6 +12,7 @@ permalink: /gamify/mansion3
 <script type="module">
     // Adventure Game assets locations
     import Game from "{{site.baseurl}}/assets/js/mansionGame/GameEngine/Game.js";
+    import { initCheats } from "{{site.baseurl}}/assets/js/mansionGame/GameEngine/cheats.js";
     import GameLevel3 from "{{site.baseurl}}/assets/js/mansionGame/mansionLevel3.js";
     import { pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
@@ -28,5 +29,8 @@ permalink: /gamify/mansion3
 
     }
     // Launch Adventure Game
-    Game.main(environment);
+    const game = Game.main(environment);
+    
+    // Initialize cheats/navigation buttons
+    initCheats(game);
 </script>
