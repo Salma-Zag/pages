@@ -214,7 +214,7 @@ class MansionLevel5 {
         id: 'Level6Door',
         greeting: sprite_greet_level6door,
         src: sprite_src_level6door,
-        SCALE_FACTOR: 6,
+        SCALE_FACTOR: 2,
         ANIMATION_RATE: 100,
         pixels: {width: 256, height: 256},
         INIT_POSITION: { x: (width / 2), y: (height / 2) },
