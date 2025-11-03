@@ -284,7 +284,7 @@ class MansionLevel5 {
             const laser = new Character(laserData, this.gameEnv)
     
             // generate lasers in circle
-            laser.velocity = { x: Math.cos((i * Math.PI * 2)/(laserNum+1))*10, y: Math.sin((i * Math.PI * 2)/(laserNum+1))*10 }
+            laser.velocity = { x: Math.cos((i * Math.PI * 2)/laserNum)*25, y: Math.sin((i * Math.PI * 2)/laserNum)*25 }
     
             laser.update = function () {
                 this.position.y += this.velocity.y
