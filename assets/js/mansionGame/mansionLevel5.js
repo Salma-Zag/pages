@@ -284,17 +284,17 @@ class MansionLevel5 {
             const laser = new Character(laserData, this.gameEnv)
     
             // generate lasers in circle
-            laser.velocity = { x: Math.sin((i * Math.PI * 2)/laserNum+1)*5, y: Math.cos((i * Math.PI * 2)/laserNum+1)*5 }
+            laser.velocity = { x: Math.cos((i * Math.PI * 2)/(laserNum+1))*10, y: Math.sin((i * Math.PI * 2)/(laserNum+1))*10 }
     
             laser.update = function () {
                 this.position.y += this.velocity.y
     
                 setTimeout(() => {
+                    this.destroy()
                     const index = this.gameEnv.gameObjects.indexOf(this)
                     if (index !== -1) {
                         this.gameEnv.gameObjects.splice(index, 1)
                     }
-                    this.destroy()
                 }, 1000);
     
                 this.draw()
@@ -335,7 +335,7 @@ class MansionLevel5 {
 
     // Method to spawn a batch of zombies
     spawnZombieBatch() {
-        const numZombies = 3; // spawn 2 zombies per batch
+        const numZombies = 5; // spawn 2 zombies per batch
         
         for (let i = 0; i < numZombies; i++) {
             const side = Math.floor(Math.random() * 4);
