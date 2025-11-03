@@ -22,7 +22,7 @@ This final submodule requires you to demonstrate your skills by building a **fun
 
 ---
 
-## 1. ⚙️ Capstone Implementation Steps
+## 1. Capstone Implementation Steps
 
 Follow these steps to build the **Blog Platform API**, focusing on the simplified requirements.
 
@@ -92,6 +92,9 @@ Create a complete Postman Collection that serves as the official test suite for 
     * **Delete Post** (using the token).
 
 ---
+
+### **Postman Simulator**
+Take a look at what your Postman could potentially look like with various endpoints.
 
 <head>
     <meta charset="UTF-8">
@@ -432,7 +435,4 @@ Create a complete Postman Collection that serves as the official test suite for 
         }
     </script>
 </body>
-</html>
 
-
-Add submission box here Aranya
