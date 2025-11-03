@@ -554,7 +554,21 @@ window.downloadCert = async function () {
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
-
+    
+    function addToLinkedIn(courseName) {
+      const certId = 'CSPORTFOLIO-' + Date.now() + '-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      
+      const url = new URL('https://www.linkedin.com/profile/add');
+      url.searchParams.append('startTask', 'CERTIFICATION_NAME');
+      url.searchParams.append('name', courseName);
+      url.searchParams.append('organizationName', 'Open Coding Society');
+      url.searchParams.append('issueYear', new Date().getFullYear());
+      url.searchParams.append('issueMonth', new Date().getMonth() + 1);
+      url.searchParams.append('certId', certId);
+      url.searchParams.append('certUrl', window.location.origin + '/cs-portfolio-verify/' + certId);
+      
+      window.open(url.toString(), '_blank');
+    }
 
 
     // replace the stub with the real implementation
