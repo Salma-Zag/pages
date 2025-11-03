@@ -19,46 +19,77 @@ This level will provide the player with the final key that they need to escape t
 <details>
     <summary><strong>Rooms</strong></summary>
     This level has 2 rooms: an intro chamber and the boss room.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Chamber</title>
+</head>
+<body>
 
-##### Intro Chamber
+<h5>Intro Chamber</h5>
 
-This intro chamber is mostly empty, on having torches and chairs in the background. However, it does have a zombie that will speak if "e" is clicked. 
+<p>
+    This intro chamber is mostly empty, only having torches and chairs in the background. However, it does have a zombie that will speak if "e" is clicked.
+</p>
 
+<p>
+    <img src="{{site.baseurl}}/images/MansionGameBlog/IntroChamberWithStuff.png" alt="Intro Chamber with Items">
+</p>
 
-![]({{site.baseurl}}/images/MansionGameBlog/IntroChamberWithStuff.png)
+<p>
+    As you can see in the image, the room is mostly barren, as that is a trend we noticed right before a boss fight. There is also an arrow pointing towards the door in case the player missed that somehow. This room has no fights, as it would be unfair to hurt the player before the big boss fight.
+</p>
 
-As you can see in the image, the room is mostly barren, as that is a trend we noticed right before a boss fight. There is also an arrow pointing towards the door in case the player missed that somehow. this room has no fights, as it would be unfair to hurt the player before the big boss fight. 
+<h4>Zombie NPC</h4>
 
-#### Zombie NPC
+<p>
+    In the image, you can see a zombie NPC in the room. This NPC doesn't attack. However, when you go up to him and click "e", he gives dialogues trying to demotivate you.
+</p>
 
-In the image, you can see a zombie NPC in the room. This NPC doesn't attack. However, when you go up to him and click "e", he gives dialogues trying to demotivize you. 
+<p>
+    <img src="{{site.baseurl}}/images/MansionGameBlog/ZombieDialogueBlog.png" alt="Zombie Dialogue">
+</p>
 
-![]({{site.baseurl}}/images/MansionGameBlog/ZombieDialogueBlog.png)
+<p>The zombie has a selection of dialogue to say:</p>
 
-The zombie has a selection of dialogue to say:
+<ul>
+    <li>"I heard the boss is waiting for you..."</li>
+    <li>"Enter if you dare... he's waiting for you..."</li>
+    <li>"I heard the Reaper himself was in there."</li>
+    <li>"The Reaper'll get you good."</li>
+    <li>"You have no chance... his power is unstoppable..."</li>
+    <li>"No one has survived a battle against the Reaper."</li>
+    <li>"Haha! You want to battle my boss? You'll die within the first minute..."</li>
+    <li>etc.</li>
+</ul>
 
-- "I heard the boss is waiting for you...",  
-- "Enter if you dare... he's waiting for you...",  
-- "I heard the Reaper himself was in there.",  
-- "The Reaper'll get you good.",  
-- "You have no chance... his power is unstopable...",  
-- "No one has survived a battle against the Reaper.",  
-- "Haha! You want to battle my boss? You'll die within the first minute...",  
-- etc.
+<h4>Cutscene into Boss Room</h4>
 
-#### Cutscene into boss room
+<p>
+    When the player walks up to the door and clicks "e", a prompt shows up asking the player if they are sure that they want to go through. If they click "Not ready", the prompt closes. However, if they click "Enter the doors", a small cutscene shows up, in which the words "YOUR FATE HAS BEEN SEALED" get written on the screen and then are deleted.
+</p>
 
-When the player walks up to the door and clicks "e", a prompt show up asking the player if they are sure that they want to go through. If they click "Not ready", the prompt closes. However, if they click "Enter the doors", a small cutscene shows up, in which the words "YOUR FATE HAS BEEN SEALED" get written on the screen and then are deleted.
+<p>
+    <img src="{{site.baseurl}}/images/MansionGameBlog/CutsceneToBoss.png" alt="Cutscene to Boss">
+</p>
 
-![]({{site.baseurl}}/images/MansionGameBlog/CutsceneToBoss.png)
+<p>
+    After the words disappear, you are transported into the second room. This is the boss room.
+</p>
 
-After the words disappear, you are transported into the second room. This is the boss room.
+<h4>Boss Room</h4>
 
-#### Boss Room
+<p>
+    In this room, there is the actual boss fight. This boss fight is designed to be hard to the point that the player takes multiple attempts to beat it.
+</p>
 
-In this room, there is the actual boss fight. This boss fight is designed to be hard to the point that the player takes multiple attempts to beat it. 
+<p>ADD BOSS ROOM IMAGE HERE WHEN FINISHED</p>
 
-ADD BOSS ROOM IMAGE HERE WHEN FINISHED
+</body>
+</html>
+
 
 </details>
 
