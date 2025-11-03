@@ -10,7 +10,6 @@ categories: [CSP, Submodule, AIUsage]
 tags: [ai, submodule, thinkers]
 author: "Thinkers Team"
 date: 2025-10-21
-show_next: false
 breadcrumb: true
 microblog: true
 ---
