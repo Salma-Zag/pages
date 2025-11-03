@@ -22,7 +22,7 @@ class Boomerang extends Character {
 
         this.radian_prog = 0;
         this.radian_limit = 2 * Math.PI;
-        this.projectileSpeed = 0.05;
+        this.projectileSpeed = 0.015;  // radians per update
 
         this.revComplete = false;
 
@@ -92,6 +92,9 @@ class Boomerang extends Character {
         }
 
         this.draw();
+
+        // Check if we are close enouph to the player
+        this.execDamage();
     }
 
     draw() {
