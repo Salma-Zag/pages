@@ -337,6 +337,7 @@ date: 2025-10-21
         <button class="btn btn-download" onclick="downloadCert('AI Usage', 'Open Coding Society', 'November 2025')">⬇ Download</button>
         <button class="btn btn-share">🔗 Share</button>
       </div>
+    </div>
     <div class="cert-card cert-purple" >
       <span class="cert-badge">Verified</span>
       <h3 class="cert-title">Overall CS Portfolio Certificate</h3>
@@ -554,7 +555,7 @@ window.downloadCert = async function () {
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
-    
+
     function addToLinkedIn(courseName) {
       const certId = 'CSPORTFOLIO-' + Date.now() + '-' + Math.random().toString(36).substring(2, 8).toUpperCase();
       
