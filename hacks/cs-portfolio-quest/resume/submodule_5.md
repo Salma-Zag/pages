@@ -14,104 +14,19 @@ date: 2025-10-21
 
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<style>
-  /* ======= Very Dark Mode (Monochrome) ======= */
-  :root{
-    --bg:#0b0b0b;
-    --panel:#111;
-    --panel-2:#161616;
-    --text:#e6e6e6;
-    --muted:#bdbdbd;
-    --border:#1f1f1f;
-    --accent:#e6e6e6;
-  }
-  html,body{background:var(--bg); color:var(--text);}
-  a{color:var(--text); text-decoration: underline; text-underline-offset:2px;}
-  .max-w-3xl{color:var(--text);}
-  .border{border-color:var(--border)!important;}
-  .rounded{border-radius:8px;}
-  .p-3,.p-4{background:var(--panel);}
-  .bg-white,.bg-blue-100,.bg-green-50,.bg-yellow-50{background:var(--panel)!important; color:var(--text)!important;}
-  .text-gray-900,.text-gray-800,.text-gray-700,.text-gray-600,.text-xs,.text-sm{color:var(--muted)!important;}
-  .text-lg,.text-xl,.text-2xl,.font-bold,.font-medium{color:var(--text)!important;}
-
-  /* Inputs */
-  input, textarea{
-    background:var(--panel-2)!important; 
-    color:var(--text)!important; 
-    border:1px solid var(--border)!important;
-  }
-  input::placeholder, textarea::placeholder{color:#7a7a7a;}
-
-  /* Progress */
-  .progress-wrap{background:#121212; border:1px solid var(--border);}
-  #progressBar{background:var(--accent)!important;}
-
-  /* Buttons */
-  .btn{
-    background:#1c1c1c; 
-    color:var(--text);
-    border:1px solid var(--border);
-    padding:0.6rem 1rem;
-    border-radius:8px;
-    font-weight:600;
-  }
-  .btn:hover{background:#262626;}
-  .btn:disabled{opacity:0.4; cursor:not-allowed;}
-  .btn-secondary{background:#131313;}
-  .btn-ghost{background:transparent; border:1px solid var(--border);}
-  .btn-affirm{background:#202020;}
-  .btn-affirm:hover{background:#2a2a2a;}
-
-  /* Override bright utilities */
-  .bg-blue-600,.bg-purple-600{background:#1c1c1c!important;}
-  .hover\:bg-blue-700:hover,.hover\:bg-purple-700:hover{background:#262626!important;}
-  .text-white{color:var(--text)!important;}
-
-  /* LinkedIn preview */
-  .linkedin-header { background:#141414; height:60px; position:relative; }
-  .linkedin-profile-photo {
-    width:60px; height:60px; border-radius:50%;
-    background:#1d1d1d; border:2px solid #2a2a2a;
-    position:absolute; bottom:-30px; left:12px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:1.25em; font-weight:bold; color:#d6d6d6;
-  }
-  .skill-badge{
-    display:inline-block; background:#1a1a1a; padding:2px 6px;
-    border-radius:4px; font-size:0.75rem; border:1px solid var(--border); color:#cfcfcf;
-  }
-
-  /* Loading spinner */
-  .loading { display:inline-block; width:14px; height:14px; border:2px solid #3a3a3a; border-top-color:#d9d9d9; border-radius:50%; animation:spin .6s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg);} }
-
-  /* Panels */
-  .panel{background:var(--panel); border:1px solid var(--border);}
-
-  /* Footer nav */
-  .nav-footer{ background:#0f0f0f; border-top:2px solid var(--border); }
-
-  details summary{cursor:pointer; color:var(--text);}
-  details{background:var(--panel);}
-
-  .video-wrap{position:relative; padding-bottom:56.25%; height:0; background:#000;}
-  .video-wrap iframe{position:absolute; top:0; left:0; width:100%; height:100%;}
-</style>
-
 <div class="max-w-3xl mx-auto p-4">
   <div class="mb-4">
     <h1 class="text-2xl font-bold mb-2">LinkedIn Profile Builder</h1>
-    <p class="text-sm">Create a professional LinkedIn profile with AI assistance. Follow the steps to build your complete profile.</p>
+    <p class="text-gray-600 text-sm">Create a professional LinkedIn profile with AI assistance. Follow the steps to build your complete profile.</p>
   </div>
 
   <!-- Progress -->
-  <div class="panel rounded p-3 mb-4">
+  <div class="border rounded p-3 mb-4">
     <div class="flex justify-between text-sm">
       <span>Progress</span><span id="progressLabel">Step 1 / 6</span>
     </div>
-    <div class="w-full rounded h-2 mt-2 progress-wrap">
-      <div id="progressBar" class="h-2 rounded" style="width:16.7%"></div>
+    <div class="w-full bg-gray-200 rounded h-2 mt-2">
+      <div id="progressBar" class="bg-blue-600 h-2 rounded" style="width:16.7%"></div>
     </div>
   </div>
 
@@ -131,46 +46,46 @@ date: 2025-10-21
         </iframe>
       </div>
     </div>
-    <div class="panel p-4">
-      <p class="text-sm font-bold">✓ Auto-filled from Resume Builder</p>
-      <p class="text-xs mt-1">Your name, location, and education were imported. Add a professional headline.</p>
+    <div class="border rounded p-3">
+      <p class="text-sm font-semibold text-green-700">✓ Auto-filled from Resume Builder</p>
+      <p class="text-xs mt-1 text-gray-600">Your name, location, and education were imported. Add a professional headline.</p>
     </div>
     <div>
       <label class="block text-sm font-medium">Full Name *</label>
-      <input id="fullName" class="w-full rounded px-3 py-2" placeholder="john doe..">
+      <input id="fullName" class="w-full border rounded px-3 py-2" placeholder="John Doe">
     </div>
     <div>
       <label class="block text-sm font-medium">Professional Headline *</label>
-      <input id="headline" class="w-full rounded px-3 py-2" placeholder="ex: studying computer science at _ college...">
-      <p class="text-xs mt-1">Tip: Include your role, key skills, and what you're seeking</p>
+      <input id="headline" class="w-full border rounded px-3 py-2" placeholder="e.g., CS student at ___ | Aspiring SWE">
+      <p class="text-xs mt-1 text-gray-600">Tip: Include your role, key skills, and what you're seeking</p>
     </div>
     <div>
       <label class="block text-sm font-medium">Location</label>
-      <input id="location" class="w-full rounded px-3 py-2" placeholder="ex: San Diego, CA...">
+      <input id="location" class="w-full border rounded px-3 py-2" placeholder="San Diego, CA">
     </div>
     <div>
       <label class="block text-sm font-medium">Skills (comma-separated)</label>
-      <input id="skills" class="w-full rounded px-3 py-2" placeholder="ex: coding languages, working in teams...">
+      <input id="skills" class="w-full border rounded px-3 py-2" placeholder="Python, React, SQL, Git">
     </div>
     <div>
       <label class="block text-sm font-medium">Education</label>
-      <textarea id="education" rows="2" class="w-full rounded px-3 py-2" placeholder="ex: B.S. in computer science at _ college..."></textarea>
+      <textarea id="education" rows="2" class="w-full border rounded px-3 py-2" placeholder="B.S. in Computer Science, UC San Diego..."></textarea>
     </div>
     <!-- Buttons row: Demo + Previously Collected -->
     <div class="pt-2 flex gap-2 flex-wrap items-center">
-      <button onclick="fillDummyData()" class="btn">Fill with Demo Data</button>
-      <button onclick="fillFromSaved()" class="btn btn-secondary">Fill with Previously Collected Data</button>
-      <span class="fillSavedNote text-xs" style="opacity:.75;"></span>
+      <button onclick="fillDummyData()" class="px-3 py-2 border rounded">Fill with Demo Data</button>
+      <button onclick="fillFromSaved()" class="px-3 py-2 border rounded">Fill with Previously Collected Data</button>
+      <span class="fillSavedNote text-xs text-gray-600"></span>
     </div>
   </section>
 
   <!-- Step 2: Profile Photo & Header -->
   <section id="step2" data-step="1" class="space-y-4 hidden">
-    <h2 class="text-xl font-bold">Step 2: Profile Photo & Header Image</h2>
-    <p class="text-sm">Your photo is the first thing people see. Make it count.</p>
-    <details class="panel rounded p-3">
-      <summary class="font-medium">Profile Photo Guidelines</summary>
-      <div class="text-sm mt-2 space-y-2">
+    <h2 class="text-xl font-semibold">Step 2: Profile Photo & Header Image</h2>
+    <p class="text-gray-700 text-sm">Your photo is the first thing people see. Make it count.</p>
+    <details class="border rounded p-3">
+      <summary class="font-medium cursor-pointer">Profile Photo Guidelines</summary>
+      <div class="text-sm mt-2 space-y-2 text-gray-700">
         <ul class="list-disc ml-5">
           <li>High-quality, recent (≥400×400)</li>
           <li>Professional attire, neutral background</li>
@@ -178,35 +93,35 @@ date: 2025-10-21
         </ul>
       </div>
     </details>
-    <details class="panel rounded p-3">
-      <summary class="font-medium">LinkedIn Header (Banner) Tips</summary>
-      <div class="text-sm mt-2 space-y-2">
+    <details class="border rounded p-3">
+      <summary class="font-medium cursor-pointer">LinkedIn Header (Banner) Tips</summary>
+      <div class="text-sm mt-2 space-y-2 text-gray-700">
         <p>Recommended size: 1584×396px. Ideas: simple gradient, campus photo, clean tech motif.</p>
       </div>
     </details>
-    <div class="panel rounded p-3 mt-2">
-      <h3 class="font-medium mb-2">Create Your LinkedIn Header Image</h3>
-      <p class="text-sm mb-2">We'll generate ideas for your header banner based on your profile.</p>
-      <button onclick="generateHeaderIdeas()" id="headerBtn" class="btn">
+    <div class="border rounded p-3">
+      <div class="font-medium mb-2">Create Your LinkedIn Header Image</div>
+      <p class="text-sm mb-2 text-gray-700">We'll generate ideas for your header banner based on your profile.</p>
+      <button onclick="generateHeaderIdeas()" id="headerBtn" class="px-3 py-2 border rounded">
         <span id="headerIcon">Generate Header Ideas</span>
       </button>
-      <div id="headerIdeas" class="mt-3 p-3 panel rounded hidden">
+      <div id="headerIdeas" class="mt-3 border rounded p-3 hidden">
         <div class="flex justify-between items-start mb-2">
           <span class="font-medium text-sm">Your Header Image Ideas</span>
-          <button onclick="copyHeaderIdeas()" class="btn btn-ghost text-xs">Copy</button>
+          <button onclick="copyHeaderIdeas()" class="px-3 py-2 border rounded text-xs">Copy</button>
         </div>
-        <div id="headerContent" class="text-sm whitespace-pre-wrap"></div>
+        <div id="headerContent" class="text-sm whitespace-pre-wrap text-gray-800"></div>
       </div>
     </div>
   </section>
 
   <!-- Step 3: About Section -->
   <section id="step3" data-step="2" class="space-y-4 hidden">
-    <h2 class="text-xl font-bold">Step 3: About Section</h2>
-    <p class="text-sm">Your About section is your story. Make it engaging and authentic.</p>
-    <details class="panel rounded p-3">
-      <summary class="font-medium">How to write a great About section</summary>
-      <div class="text-sm mt-2 space-y-2">
+    <h2 class="text-xl font-semibold">Step 3: About Section</h2>
+    <p class="text-sm text-gray-700">Your About section is your story. Make it engaging and authentic.</p>
+    <details class="border rounded p-3">
+      <summary class="font-medium cursor-pointer">How to write a great About section</summary>
+      <div class="text-sm mt-2 space-y-2 text-gray-700">
         <ol class="list-decimal ml-5">
           <li>Hook: who you are, what you do</li>
           <li>Journey: background & passion</li>
@@ -218,61 +133,51 @@ date: 2025-10-21
     </details>
     <div>
       <label class="block text-sm font-medium">About You *</label>
-      <textarea id="aboutPrompt" rows="5" class="w-full rounded px-3 py-2" placeholder="I'm a junior CS student at UC San Diego passionate about full-stack development..."></textarea>
-      <p class="text-xs mt-1">Our AI will polish this into a professional About section</p>
+      <textarea id="aboutPrompt" rows="5" class="w-full border rounded px-3 py-2" placeholder="I'm a junior CS student at UC San Diego passionate about full-stack development..."></textarea>
+      <p class="text-xs mt-1 text-gray-600">Our AI will polish this into a professional About section</p>
     </div>
-
-    <!-- Buttons row here too -->
     <div class="pt-2 flex gap-2 flex-wrap items-center">
-      <button onclick="fillDummyData()" class="btn">Fill with Demo Data</button>
-      <button onclick="fillFromSaved()" class="btn btn-secondary">Fill with Previously Collected Data</button>
-      <span class="fillSavedNote text-xs" style="opacity:.75;"></span>
+      <button onclick="fillDummyData()" class="px-3 py-2 border rounded">Fill with Demo Data</button>
+      <button onclick="fillFromSaved()" class="px-3 py-2 border rounded">Fill with Previously Collected Data</button>
+      <span class="fillSavedNote text-xs text-gray-600"></span>
     </div>
   </section>
 
   <!-- Step 4: Experience -->
   <section id="step4" data-step="3" class="space-y-4 hidden">
-    <h2 class="text-xl font-bold">Step 4: Experience</h2>
-    <p class="text-sm">Show what you've accomplished. Data from your resume is pre-filled.</p>
-    <div class="panel p-4">
-      <p class="text-sm font-bold">✓ Auto-filled from Experience Builder</p>
-      <p class="text-xs mt-1">Review and add any additional experiences for LinkedIn.</p>
+    <h2 class="text-xl font-semibold">Step 4: Experience</h2>
+    <p class="text-sm text-gray-700">Show what you've accomplished. Data from your resume is pre-filled.</p>
+    <div class="border rounded p-3">
+      <p class="text-sm font-semibold text-green-700">✓ Auto-filled from Experience Builder</p>
+      <p class="text-xs mt-1 text-gray-600">Review and add any additional experiences for LinkedIn.</p>
     </div>
     <div>
       <label class="block text-sm font-medium">Experience & Projects *</label>
-      <textarea id="experiencePrompt" rows="6" class="w-full rounded px-3 py-2" placeholder="Software Intern at TechCorp (Jun-Aug 2024): Built React dashboard..."></textarea>
-      <p class="text-xs mt-1">Include internships, jobs, projects, and volunteer work</p>
+      <textarea id="experiencePrompt" rows="6" class="w-full border rounded px-3 py-2" placeholder="Software Engineering Intern | TechStart Inc | Jun–Aug 2024
+• Built a React dashboard...
+• Collaborated with a team of 5...
+• Improved load times by 40%"></textarea>
+      <p class="text-xs mt-1 text-gray-600">Include internships, jobs, projects, and volunteer work</p>
     </div>
-    <!-- Buttons row here too -->
-    <div class="pt-2 flex gap-2 flex-wrap items-center">
-      <button onclick="fillDummyData()" class="btn">Fill with Demo Data</button>
-      <button onclick="fillFromSaved()" class="btn btn-secondary">Fill with Previously Collected Data</button>
-      <span class="fillSavedNote text-xs" style="opacity:.75;"></span>
-    </div>
-    <button onclick="generateProfile()" id="generateBtn" class="btn btn-affirm">
+    <button onclick="generateProfile()" id="generateBtn" class="px-3 py-2 border rounded">
       <span id="generateIcon">Generate LinkedIn Profile</span>
     </button>
-    <div id="statusMessage" class="mt-3 p-3 rounded hidden panel"></div>
+    <div id="statusMessage" class="mt-3 p-3 rounded hidden border text-sm"></div>
   </section>
 
   <!-- Step 5: Professional Posting -->
   <section id="step5" data-step="4" class="space-y-4 hidden">
-    <h2 class="text-xl font-bold">Step 5: Professional Presence & Posting</h2>
-    <p class="text-sm">Learn how to maintain a professional LinkedIn presence.</p>
-    <div class="panel rounded p-3">
-      <h3 class="font-medium mb-2">Watch: LinkedIn Networking & Professional Presence</h3>
-      <div class="video-wrap">
-        <iframe 
-          src="https://www.youtube.com/embed/pQFuGIlZOC4" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
+    <h2 class="text-xl font-semibold">Step 5: Professional Presence & Posting</h2>
+    <p class="text-sm text-gray-700">Learn how to maintain a professional LinkedIn presence.</p>
+    <div class="border rounded p-3">
+      <div class="font-medium mb-2">Watch: LinkedIn Networking & Professional Presence</div>
+      <div class="rounded p-6 text-center text-gray-500 border border-dashed">
+        [YouTube Placeholder]<br>Embed URL here
       </div>
     </div>
-    <details class="panel rounded p-3">
-      <summary class="font-medium">How to Post Professionally</summary>
-      <div class="text-sm mt-2 space-y-2">
+    <details class="border rounded p-3">
+      <summary class="font-medium cursor-pointer">How to Post Professionally</summary>
+      <div class="text-sm mt-2 space-y-2 text-gray-700">
         <ul class="list-disc ml-5">
           <li>Project updates & learning notes</li>
           <li>Industry insights, achievements</li>
@@ -284,11 +189,11 @@ date: 2025-10-21
 
   <!-- Step 6: Review -->
   <section id="step6" data-step="5" class="space-y-4 hidden">
-    <h2 class="text-xl font-bold">Step 6: Your Generated LinkedIn Profile</h2>
-    <p class="text-sm">Review your AI-generated profile and copy each section to LinkedIn.</p>
-    <div class="panel rounded p-3">
+    <h2 class="text-xl font-semibold">Step 6: Your Generated LinkedIn Profile</h2>
+    <p class="text-sm text-gray-700">Review your AI-generated profile and copy each section to LinkedIn.</p>
+    <div class="border rounded p-3">
       <div class="font-medium mb-2">How to use this:</div>
-      <ol class="list-decimal ml-5 text-sm space-y-1">
+      <ol class="list-decimal ml-5 text-sm space-y-1 text-gray-700">
         <li>Click "Copy" for each section below</li>
         <li>Go to LinkedIn.com and login</li>
         <li>Click "Me" then "View profile"</li>
@@ -296,52 +201,50 @@ date: 2025-10-21
       </ol>
     </div>
     <!-- LinkedIn Preview -->
-    <div class="panel rounded overflow-hidden mb-3">
-      <div class="linkedin-header"></div>
-      <div class="linkedin-profile-photo" id="profilePhoto">?</div>
-      <div class="p-3 pt-10">
+    <div class="border rounded overflow-hidden mb-3">
+      <div class="p-3">
         <div class="mb-3">
           <h3 id="previewName" class="text-lg font-semibold"></h3>
-          <p id="previewHeadline" class="text-sm"></p>
-          <p id="previewLocation" class="text-xs"></p>
+          <p id="previewHeadline" class="text-sm text-gray-800"></p>
+          <p id="previewLocation" class="text-xs text-gray-600"></p>
         </div>
-        <div class="panel rounded p-3 mb-2">
+        <div class="border rounded p-3 mb-2">
           <div class="flex justify-between items-start mb-1">
             <span class="font-medium text-sm">About</span>
-            <button onclick="copySection('about')" class="btn btn-ghost text-xs">Copy</button>
+            <button onclick="copySection('about')" class="px-3 py-2 border rounded text-xs">Copy</button>
           </div>
-          <p id="previewAbout" class="text-sm whitespace-pre-wrap mt-2"></p>
+          <p id="previewAbout" class="text-sm whitespace-pre-wrap mt-2 text-gray-800"></p>
         </div>
-        <div class="panel rounded p-3 mb-2">
+        <div class="border rounded p-3 mb-2">
           <div class="flex justify-between items-start mb-1">
             <span class="font-medium text-sm">Experience</span>
-            <button onclick="copySection('experience')" class="btn btn-ghost text-xs">Copy</button>
+            <button onclick="copySection('experience')" class="px-3 py-2 border rounded text-xs">Copy</button>
           </div>
-          <p id="previewExperience" class="text-sm whitespace-pre-wrap mt-2"></p>
+          <p id="previewExperience" class="text-sm whitespace-pre-wrap mt-2 text-gray-800"></p>
         </div>
-        <div class="panel rounded p-3 mb-2">
+        <div class="border rounded p-3 mb-2">
           <div class="flex justify-between items-start mb-1">
             <span class="font-medium text-sm">Skills</span>
-            <button onclick="copySection('skills')" class="btn btn-ghost text-xs">Copy</button>
+            <button onclick="copySection('skills')" class="px-3 py-2 border rounded text-xs">Copy</button>
           </div>
           <div id="previewSkills" class="flex flex-wrap gap-1 mt-2"></div>
         </div>
-        <div class="panel rounded p-3">
+        <div class="border rounded p-3">
           <div class="flex justify-between items-start mb-1">
             <span class="font-medium text-sm">Education</span>
-            <button onclick="copySection('education')" class="btn btn-ghost text-xs">Copy</button>
+            <button onclick="copySection('education')" class="px-3 py-2 border rounded text-xs">Copy</button>
           </div>
-          <p id="previewEducation" class="text-sm whitespace-pre-wrap mt-2"></p>
+          <p id="previewEducation" class="text-sm whitespace-pre-wrap mt-2 text-gray-800"></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Nav -->
-  <div class="flex flex-col sm:flex-row gap-3 justify-between items-center mt-6 pt-6 pb-4 nav-footer">
+  <!-- Footer Nav (match Submodule 3: simple, minimal) -->
+  <div class="flex flex-col sm:flex-row gap-3 justify-between items-center mt-6 pt-6 border-t">
     <div class="w-full sm:w-auto flex gap-3">
-      <button id="prevBtn" class="btn btn-secondary" onclick="prevStep()" disabled>← Previous</button>
-      <button id="nextBtn" class="btn" onclick="nextStep()">Next →</button>
+      <button id="prevBtn" class="px-3 py-2 border rounded" onclick="prevStep()" disabled>← Previous</button>
+      <button id="nextBtn" class="px-3 py-2 border rounded" onclick="nextStep()">Next →</button>
     </div>
   </div>
 </div>
@@ -368,12 +271,10 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== Autofill from Submodule 2 & 3 localStorage =====
-// overwrite=false for gentle load fill; overwrite=true for button "Fill with Previously Collected Data"
 function autoFillFromOtherModules(overwrite=false) {
   let found2=false, found3=false;
 
   try {
-    // --- Submodule 2 keys (current + legacy) ---
     const m2raw = localStorage.getItem('resume_builder_no_experience_v2')
                || localStorage.getItem('resume_builder_v2');
     if (m2raw) {
@@ -387,14 +288,12 @@ function autoFillFromOtherModules(overwrite=false) {
       setField('location', personal.location, overwrite);
       if (skillsArr.length) setField('skills', skillsArr.join(', '), overwrite);
 
-      // Education lines
       const eduLines = [];
       if (education.school) eduLines.push(education.school);
       if (education.degree) eduLines.push(education.degree);
       if (education.eduHighlights) eduLines.push(education.eduHighlights);
       if (eduLines.length) setField('education', eduLines.join('\n'), overwrite);
 
-      // Headline helper from degree/school
       const hl = document.getElementById('headline');
       if (hl && (overwrite || !hl.value.trim())) {
         if (education.degree) {
@@ -405,7 +304,6 @@ function autoFillFromOtherModules(overwrite=false) {
       }
     }
 
-    // --- Submodule 3 keys (current + legacy) ---
     const m3raw = localStorage.getItem('resume_builder_module3_v1')
                || localStorage.getItem('impact_exp_v1');
     if (m3raw) {
@@ -437,7 +335,6 @@ function autoFillFromOtherModules(overwrite=false) {
     console.log('Could not auto-fill from modules 2/3:', e);
   }
 
-  // Notes under *every* button row
   document.querySelectorAll('.fillSavedNote').forEach(el=>{
     if (found2 || found3) {
       const parts = [];
@@ -452,7 +349,6 @@ function autoFillFromOtherModules(overwrite=false) {
   saveToLocal();
 }
 
-// Helper to set an input/textarea with overwrite control
 function setField(id, value, overwrite){
   if (value == null) return;
   const el = document.getElementById(id);
@@ -462,13 +358,11 @@ function setField(id, value, overwrite){
   }
 }
 
-// Button handler to force-fill from saved localStorage
 function fillFromSaved(){
-  autoFillFromOtherModules(true); // overwrite = true
+  autoFillFromOtherModules(true);
   alert('Filled from previously collected data.');
 }
 
-// Fill with dummy data (for testing)
 function fillDummyData() {
   document.getElementById('fullName').value = 'Alex Johnson';
   document.getElementById('headline').value = 'Computer Science Student at UC San Diego | Aspiring Software Engineer';
@@ -480,31 +374,30 @@ function fillDummyData() {
   saveToLocal();
 }
 
-// Navigation functions
+// Navigation
 function prevStep(){ if (currentStep > 1) goToStep(currentStep - 1); }
 
 function nextStep(){
   if (currentStep === 1){
     const fullName = document.getElementById('fullName');
     const headline = document.getElementById('headline');
-    if (!fullName?.value?.trim()){ alert('⚠️ Please enter your Full Name'); fullName?.focus(); return; }
-    if (!headline?.value?.trim()){ alert('⚠️ Please enter your Professional Headline'); headline?.focus(); return; }
+    if (!fullName?.value?.trim()){ alert('Please enter your Full Name'); fullName?.focus(); return; }
+    if (!headline?.value?.trim()){ alert('Please enter your Professional Headline'); headline?.focus(); return; }
   } else if (currentStep === 3){
     const aboutPrompt = document.getElementById('aboutPrompt');
-    if (!aboutPrompt?.value?.trim()){ alert('⚠️ Please write your About section'); aboutPrompt?.focus(); return; }
+    if (!aboutPrompt?.value?.trim()){ alert('Please write your About section'); aboutPrompt?.focus(); return; }
   } else if (currentStep === 4){
     const experiencePrompt = document.getElementById('experiencePrompt');
-    if (!experiencePrompt?.value?.trim()){ alert('⚠️ Please add your Experience'); experiencePrompt?.focus(); return; }
+    if (!experiencePrompt?.value?.trim()){ alert('Please add your Experience'); experiencePrompt?.focus(); return; }
     generateProfile(); // stay here until generated, then jump to step 6
     return;
   } else if (currentStep === 6){
-    window.location.href = '/cs-portfolio-quest/resume/submodule_5/';
+    window.location.href = '/cs-portfolio-quest/resume/submodule_6/';
     return;
   }
   if (currentStep < 6) goToStep(currentStep + 1);
 }
 
-// Load saved data from localStorage
 function loadSavedData(){
   try{
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -518,7 +411,6 @@ function loadSavedData(){
   } catch(e){ console.error('Error loading saved data:', e); }
 }
 
-// Save form data to localStorage
 function saveToLocal(){
   try{
     const data = {
@@ -534,17 +426,15 @@ function saveToLocal(){
   } catch(e){ console.error('Error saving data:', e); }
 }
 
-// Navigate between steps (and hide video after Step 1)
 function goToStep(step){
-  // forward gates
   if (step > currentStep){
     if (step === 2){
       const fullName = document.getElementById('fullName').value.trim();
       const headline = document.getElementById('headline').value.trim();
-      if (!fullName || !headline){ showMessage('Please fill in your name and headline before continuing', 'error'); return; }
+      if (!fullName || !headline){ showMessage('Please fill in your name and headline before continuing', 'info'); return; }
     } else if (step === 3){
       const aboutPrompt = document.getElementById('aboutPrompt').value.trim();
-      if (!aboutPrompt){ showMessage('Please describe yourself before continuing', 'error'); return; }
+      if (!aboutPrompt){ showMessage('Please describe yourself before continuing', 'info'); return; }
     }
   }
 
@@ -608,19 +498,18 @@ async function generateProfile(){
   const experiencePrompt = document.getElementById('experiencePrompt').value.trim();
 
   if (!fullName || !headline || !aboutPrompt || !experiencePrompt){
-    showMessage('Please fill in all required fields before generating', 'error');
+    showMessage('Please fill in all required fields before generating', 'info');
     return;
   }
 
   const btn = document.getElementById('generateBtn');
   const icon = document.getElementById('generateIcon');
   btn.disabled = true;
-  icon.innerHTML = '<span class="loading"></span>';
+  icon.textContent = 'Generating...';
 
   showMessage('Generating your LinkedIn profile...', 'info');
 
   try{
-    // Try API first
     const aboutText = await callGeminiAPI(`Write a professional LinkedIn "About" section (3-4 paragraphs, first-person) for:
 Name: ${fullName}
 Headline: ${headline}
@@ -684,7 +573,7 @@ function updateLinkedInPreview(){
   const skills = document.getElementById('skills').value.trim();
   const education = document.getElementById('education').value.trim();
 
-  document.getElementById('profilePhoto').textContent = fullName ? fullName.charAt(0).toUpperCase() : '?';
+  // Simple initials circle replaced by first letter text
   document.getElementById('previewName').textContent = fullName;
   document.getElementById('previewHeadline').textContent = headline;
   document.getElementById('previewLocation').textContent = location || '';
@@ -695,9 +584,9 @@ function updateLinkedInPreview(){
   if (skills){
     const skillsArray = skills.split(',').map(s => s.trim()).filter(Boolean);
     document.getElementById('previewSkills').innerHTML =
-      skillsArray.map(skill => `<span class="skill-badge">${escapeHtml(skill)}</span>`).join('');
+      skillsArray.map(skill => `<span class="px-2 py-1 border rounded text-xs">${escapeHtml(skill)}</span>`).join(' ');
   } else {
-    document.getElementById('previewSkills').innerHTML = '<span style="opacity:.7;">No skills added</span>';
+    document.getElementById('previewSkills').innerHTML = '<span class="text-gray-500 text-sm">No skills added</span>';
   }
 
   document.getElementById('previewEducation').textContent = education || 'No education added';
@@ -711,7 +600,7 @@ async function generateHeaderIdeas(){
   const btn = document.getElementById('headerBtn');
   const icon = document.getElementById('headerIcon');
   btn.disabled = true;
-  icon.innerHTML = '<span class="loading"></span> Generating...';
+  icon.textContent = 'Generating...';
   try{
     const ideas = await callGeminiAPI(`Generate 3-4 creative LinkedIn header image ideas for:
 Name: ${fullName}
@@ -722,10 +611,10 @@ Provide specific ideas for Canva/Unsplash. Format as a numbered list.`);
     document.getElementById('headerIdeas').classList.remove('hidden');
   } catch(error){
     document.getElementById('headerContent').textContent = [
-      '1) Minimal stripes over dark gradient; name in small corner text.',
-      '2) Clean code-screenshot blur with subtle grid overlay.',
-      '3) Campus silhouette with high-contrast monochrome.',
-      '4) Abstract shapes aligned to a simple grid.'
+      '1) Minimal light gradient with subtle grid.',
+      '2) Blurred code screenshot with soft vignette.',
+      '3) Campus silhouette in monochrome.',
+      '4) Simple geometric shapes on neutral background.'
     ].join('\n');
     document.getElementById('headerIdeas').classList.remove('hidden');
   } finally{
@@ -748,10 +637,10 @@ function copySection(section){
   else if (section === 'skills') text = document.getElementById('skills').value;
   else if (section === 'education') text = document.getElementById('education').value;
 
-  if (!text){ showMessage('Nothing to copy from this section', 'error'); return; }
+  if (!text){ showMessage('Nothing to copy from this section', 'info'); return; }
   navigator.clipboard.writeText(text)
     .then(()=> showMessage('Copied to clipboard successfully', 'success'))
-    .catch(()=> showMessage('Failed to copy to clipboard', 'error'));
+    .catch(()=> showMessage('Failed to copy to clipboard', 'info'));
 }
 
 // Status + utils
@@ -759,7 +648,7 @@ function showMessage(message, type){
   const statusEl = document.getElementById('statusMessage');
   if (!statusEl) return;
   statusEl.textContent = message;
-  statusEl.className = 'mt-4 p-4 rounded panel';
+  statusEl.className = 'mt-3 p-3 rounded border text-sm';
   statusEl.classList.remove('hidden');
   if (type !== 'info'){ setTimeout(()=> statusEl.classList.add('hidden'), 5000); }
 }
