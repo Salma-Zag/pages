@@ -284,7 +284,7 @@ class MansionLevel5 {
             const laser = new Character(laserData, this.gameEnv)
     
             // generate lasers in circle
-            laser.velocity = { x: Math.cos((i * Math.PI * 2)/laserNum)*5, y: Math.sin((i * Math.PI * 2)/laserNum)*5 }
+            laser.velocity = { x: Math.cos((i * Math.PI * 2)/laserNum)*15, y: Math.sin((i * Math.PI * 2)/laserNum)*15 }
     
             laser.update = function () {
                 this.position.y += this.velocity.y
@@ -377,7 +377,7 @@ class MansionLevel5 {
 
     // Method to spawn a batch of zombies
     spawnZombieBatch() {
-        const numZombies = 10; // spawn 10 zombies per batch
+        const numZombies = 8; // spawn 10 zombies per batch
         
         for (let i = 0; i < numZombies; i++) {
             const side = Math.floor(Math.random() * 4);
@@ -424,7 +424,7 @@ class MansionLevel5 {
         // Szombies spawn every 2 seconds
         setInterval(() => {
         this.spawnZombieBatch();
-        }, 2000);
+        }, 5000);
     }
 
     start()
@@ -432,8 +432,8 @@ class MansionLevel5 {
         // create kills text
         const kills = document.createElement('div');
         kills.style.position = 'fixed';
-        kills.style.top = '100%';
-        kills.style.left = '1%';
+        kills.style.top = '80%';
+        kills.style.left = '30%';
         kills.style.transform = 'translate(-50%, -50%)';
         kills.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
         kills.style.color = '#00ff0dff';
