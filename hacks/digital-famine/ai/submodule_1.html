@@ -382,6 +382,11 @@ date: 2025-10-30
             </div>
         </div>
     </div>
+    
+    <script type="module">
+        import { queryGemini } from '{{ site.baseurl }}/assets/js/api/gemini.js';
+        window.queryGeminiAPI = queryGemini; // expose to non-module scripts below
+    </script>
 
     <script>
         let score = 0;
@@ -478,23 +483,58 @@ date: 2025-10-30
     </script>
     <!-- Shared JS for AI prompt widgets -->
     <script>
-        function generateResponse(type) {
-            const prompt = (type === 'narrow') ? document.getElementById('prompt-narrow').value.trim()
-                          : (type === 'general') ? document.getElementById('prompt-general').value.trim()
-                          : document.getElementById('prompt-super').value.trim();
-            let out = '';
-            if (!prompt) {
-                out = '(Enter a prompt above and click Generate)';
-            } else {
-                if (type === 'narrow') {
-                    out = `Narrow AI response to: "${prompt}"\n\n- Focused, task-specific result (concise and direct).`;
-                } else if (type === 'general') {
-                    out = `General AI response to: "${prompt}"\n\n- Multi-step plan, reasoning, and suggested alternatives.`;
-                } else {
-                    out = `Super AI response to: "${prompt}"\n\n- Visionary, cross-domain synthesis with long-term predictions and novel ideas.`;
-                }
+        const SYSTEM_PROMPTS = {
+            narrow: [
+            "Act as a narrow/task-specific assistant.",
+            "Keep output short, concrete, and scoped to the user’s request.",
+            "Prefer bullet points or a short paragraph (<=120 words).",
+            "Do not add off-topic info."
+            ].join(" "),
+            general: [
+            "Act as a general reasoning assistant.",
+            "Provide a clear, step-by-step plan or reasoning visible to the user.",
+            "Offer alternatives and trade-offs when appropriate.",
+            "Be concise but complete (≈150–250 words)."
+            ].join(" "),
+            super: [
+            "Act as a speculative, cross-domain strategist (hypothetical superintelligence).",
+            "Synthesize across science, policy, economics, and ethics.",
+            "Label assumptions, avoid fabrications, include risks/limitations.",
+            "Keep it high-level and visionary (≈200–300 words)."
+            ].join(" ")
+        };
+
+        async function generateResponse(type) {
+            const textareaId = type === 'narrow' ? 'prompt-narrow'
+                            : type === 'general' ? 'prompt-general'
+                            : 'prompt-super';
+            const outputId   = 'output-' + type;
+
+            const input = document.getElementById(textareaId)?.value.trim() || '';
+            const outEl = document.getElementById(outputId);
+
+            if (!input) {
+            outEl.textContent = '(Enter a prompt above and click Generate)';
+            return;
             }
-            document.getElementById('output-' + type).textContent = out;
+            outEl.textContent = 'Generating…';
+
+            if (!window.queryGeminiAPI) {
+            outEl.textContent = 'API not loaded yet. Please try again in a moment.';
+            return;
+            }
+
+            try {
+            const result = await window.queryGeminiAPI({
+                prompt: SYSTEM_PROMPTS[type], // mode-specific behavior
+                text: input,                  // user input
+                parseJSON: false
+            });
+            outEl.textContent = result?.text || 'Error: No response from AI';
+            } catch (err) {
+            console.error('Gemini error:', err);
+            outEl.textContent = `Error: ${err.message}\n(Logged in? Flask running? CORS/auth OK?)`;
+            }
         }
 
         function fillAll() {
