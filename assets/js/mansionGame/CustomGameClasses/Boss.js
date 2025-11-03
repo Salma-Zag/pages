@@ -61,6 +61,7 @@ class Boss extends Enemy {
         this.projectileTypes = data?.projectileTypes || ['FIREBALL', 'ARROW'];
 
         // Initialize arms
+        /*
         this.leftArm = new Arm({
             xOffset: -60,
             yOffset: 20,
@@ -76,6 +77,7 @@ class Boss extends Enemy {
             emptySrc: "../../images/mansionGame/ReaperRightHandEmpty.png",
             hasWeapon: true
         }, gameEnv);
+        */
 
         //this.arms = [this.leftArm, this.rightArm];
 
@@ -192,9 +194,17 @@ class Boss extends Enemy {
     performAttack(target) {
         const rand = Math.random();
 
+        /*
         if (this.stage >= 2 && rand < 0.3) {
             this.scytheAttack(target);
         } else if (rand < 0.6) {
+            this.fireballAttack(target);
+        } else {
+            this.arrowAttack(target);
+        }
+        */
+
+        if (rand < 0.5) {
             this.fireballAttack(target);
         } else {
             this.arrowAttack(target);
