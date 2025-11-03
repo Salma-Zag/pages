@@ -459,5 +459,176 @@ public class PostControllerTest {
 - **Spring Boot**: Best for enterprise apps, microservices, large teams
 - **Both are systems that work**, it is important to choose based on the needs of the system.
 
+## Quick Quiz — Module 3 (Interactive)
+
+Answer the five questions below. Pick the best choice (A–D) and click Submit to see your score.
+
+<div id="mc-quiz-3" style="border:1px solid #e0e0e0;padding:12px;border-radius:6px;max-width:900px;">
+  <form id="quiz-form-3">
+    <ol>
+      <li>
+        <div style="margin-bottom:6px">What does this Flask decorator do?
+        <pre style="display:inline-block;margin:6px 0;padding:6px;border-radius:4px;background:#f7f7f7">@app.route('/api/posts', methods=['GET'])</pre>
+        </div>
+        <div><label><input type="radio" name="q0" value="A"> A. Binds a function to that URL and HTTP method (defines an endpoint)</label></div>
+        <div><label><input type="radio" name="q0" value="B"> B. Runs the function only when the server starts</label></div>
+        <div><label><input type="radio" name="q0" value="C"> C. Defines a database table named /api/posts</label></div>
+        <div><label><input type="radio" name="q0" value="D"> D. Automatically secures the route with authentication</label></div>
+      </li>
+
+      <li>
+        <div style="margin-bottom:6px">In Spring Boot's layered architecture, which layer should contain business logic?</div>
+        <div><label><input type="radio" name="q1" value="A"> A. Controller</label></div>
+        <div><label><input type="radio" name="q1" value="B"> B. Service</label></div>
+        <div><label><input type="radio" name="q1" value="C"> C. Repository</label></div>
+        <div><label><input type="radio" name="q1" value="D"> D. Entity</label></div>
+      </li>
+
+      <li>
+        <div style="margin-bottom:6px">What is a primary benefit of IoC / dependency injection?</div>
+        <div><label><input type="radio" name="q2" value="A"> A. Makes code run faster by removing all objects</label></div>
+        <div><label><input type="radio" name="q2" value="B"> B. Easier to test and swap implementations without changing callers</label></div>
+        <div><label><input type="radio" name="q2" value="C"> C. Automatically creates database tables</label></div>
+        <div><label><input type="radio" name="q2" value="D"> D. Forces static typing in the codebase</label></div>
+      </li>
+
+      <li>
+        <div style="margin-bottom:6px">In SQLAlchemy, what is the role of a column declared with primary_key=True?</div>
+        <div><label><input type="radio" name="q3" value="A"> A. It is ignored by the database</label></div>
+        <div><label><input type="radio" name="q3" value="B"> B. Acts as the unique identifier for each row</label></div>
+        <div><label><input type="radio" name="q3" value="C"> C. Encrypts the column values automatically</label></div>
+        <div><label><input type="radio" name="q3" value="D"> D. Prevents that column from being returned in queries</label></div>
+      </li>
+
+      <li>
+        <div style="margin-bottom:6px">Which HTTP status code is most appropriate when a POST request successfully creates a new resource?</div>
+        <div><label><input type="radio" name="q4" value="A"> A. 200 OK</label></div>
+        <div><label><input type="radio" name="q4" value="B"> B. 201 Created</label></div>
+        <div><label><input type="radio" name="q4" value="C"> C. 204 No Content</label></div>
+        <div><label><input type="radio" name="q4" value="D"> D. 404 Not Found</label></div>
+      </li>
+    </ol>
+
+    <div style="margin-top:12px;">
+      <button type="submit" id="quiz-submit-3">Submit</button>
+      <button type="button" id="quiz-reset-3" style="margin-left:8px">Reset</button>
+      <span id="quiz-result-3" style="margin-left:12px;font-weight:600"></span>
+    </div>
+  </form>
+</div>
+
+<script>
+(() => {
+  const form = document.getElementById('quiz-form-3');
+  const resultSpan = document.getElementById('quiz-result-3');
+  const resetBtn = document.getElementById('quiz-reset-3');
+
+  // Hidden answers
+  const answers = ['A','B','B','B','B'];
+
+  function setDisabled(disabled) {
+    document.querySelectorAll('#mc-quiz-3 input').forEach(i => i.disabled = disabled);
+    document.getElementById('quiz-submit-3').disabled = disabled;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let score = 0;
+    for (let i = 0; i < answers.length; i++) {
+      const qName = 'q' + i;
+      const selected = form[qName] ? form[qName].value : null;
+      if (selected === answers[i]) score += 1;
+    }
+    resultSpan.textContent = `You scored ${score} / ${answers.length}`;
+    setDisabled(true);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    form.reset();
+    resultSpan.textContent = '';
+    setDisabled(false);
+  });
+})();
+</script>
+
+## Vocab Picker — Module 3
+
+Three short vocabulary questions. For each, choose the best term from the dropdown and click Submit to see your total score.
+
+<div id="vocab-picker-3" style="border:1px solid #e0e0e0;padding:12px;border-radius:6px;max-width:760px;margin-top:12px;">
+  <form id="vocab-form-3">
+    <ol>
+      <li style="margin-bottom:8px;">
+        <div><strong>1.</strong> Where should HTTP request handling live in a Spring Boot app?</div>
+        <select name="v0" style="margin-top:6px;width:240px;">
+          <option value="">— select —</option>
+          <option value="Controller">Controller</option>
+          <option value="Service">Service</option>
+          <option value="Repository">Repository</option>
+          <option value="Entity">Entity</option>
+        </select>
+      </li>
+
+      <li style="margin-bottom:8px;">
+        <div><strong>2.</strong> What converts objects to database rows and back (library/tool)?</div>
+        <select name="v1" style="margin-top:6px;width:240px;">
+          <option value="">— select —</option>
+          <option value="ORM">ORM</option>
+          <option value="IoC">IoC</option>
+          <option value="REST">REST</option>
+          <option value="Schema">Schema</option>
+        </select>
+      </li>
+
+      <li style="margin-bottom:8px;">
+        <div><strong>3.</strong> Which format is commonly used for API request/response bodies?</div>
+        <select name="v2" style="margin-top:6px;width:240px;">
+          <option value="">— select —</option>
+          <option value="XML">XML</option>
+          <option value="CSV">CSV</option>
+          <option value="JSON">JSON</option>
+          <option value="YAML">YAML</option>
+        </select>
+      </li>
+    </ol>
+
+    <div style="margin-top:10px;">
+      <button id="vocab-picker-submit-3">Submit</button>
+      <button id="vocab-picker-reset-3" type="button" style="margin-left:8px">Reset</button>
+      <span id="vocab-picker-result-3" style="margin-left:12px;font-weight:600"></span>
+    </div>
+  </form>
+</div>
+
+<script>
+(() => {
+  const form = document.getElementById('vocab-form-3');
+  const submitBtn = document.getElementById('vocab-picker-submit-3');
+  const resetBtn = document.getElementById('vocab-picker-reset-3');
+  const resultSpan = document.getElementById('vocab-picker-result-3');
+
+  // correct answers
+  const answers = ['Controller','ORM','JSON'];
+
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const vals = [form.v0.value, form.v1.value, form.v2.value];
+    let score = 0;
+    for (let i = 0; i < answers.length; i++) if (vals[i] === answers[i]) score += 1;
+    resultSpan.textContent = `You scored ${score} / ${answers.length}`;
+    // disable selects and submit
+    form.querySelectorAll('select').forEach(s => s.disabled = true);
+    submitBtn.disabled = true;
+  });
+
+  resetBtn.addEventListener('click', () => {
+    form.reset();
+    resultSpan.textContent = '';
+    form.querySelectorAll('select').forEach(s => s.disabled = false);
+    submitBtn.disabled = false;
+  });
+})();
+</script>
+
 ## Up Next
 In the next submodule, you'll wrap up your learning on the backend. Keep progressing in order to receive a certificate for completing this module.
