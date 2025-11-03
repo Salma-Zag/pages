@@ -896,13 +896,17 @@ Why not: [explanation]" style="min-height: 200px;"></textarea>
         </div>
     </div>
 
-    <div class="navigation">
+    <div class="navigation" id="pageNav">
         <button class="nav-button" id="prevBtn" onclick="changePage(-1)">← Previous</button>
         <div class="page-indicator">
             Page <span id="currentPage">1</span> of <span id="totalPages">3</span>
         </div>
-        <div class="navigation" id="moduleNav" style="display: none;">
-        <a href="{{site.baseurl}}/cs-portfolio-quest/ai/" class="nav-button" style="text-decoration: none; display: inline-block;">← Back to AI Module</a>
+        <button class="nav-button" id="nextBtn" onclick="changePage(1)">Next →</button>
+    </div>
+
+    <!-- Module Navigation (only shows on page 3) -->
+    <div class="navigation" id="moduleNav" style="display: none;">
+        <a href="{{site.baseurl}}/cs-portfolio-quest/ai/" class="nav-button" style="text-decoration: none; display: inline-block; width: auto;">← Back to AI Module</a>
     </div>
 </div>
 
