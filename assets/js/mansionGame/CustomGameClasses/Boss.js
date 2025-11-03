@@ -30,7 +30,7 @@ class Boss extends Enemy {
         this.lastAttackTime = Date.now();
         this.attackInterval = data?.attackInterval || 2000;
         this.angerModifier = 1;
-        this.attackProbShift = 0.1;
+        this.attackProbShift = 0.05;
 
         // Debug/cheat key code - uncomment to enable
         // Add a debug/cheat key ('p') that instantly defeats this boss
@@ -194,7 +194,7 @@ class Boss extends Enemy {
     // Randomize attack chances
     performAttack(target) {
         const rand = Math.random();
-        const attackProbModifier = attackProbShift * (this.stage >= 3);
+        const attackProbModifier = attackProbShift * (this.stage - 1);
         
         if (this.stage >= 2 && rand < 0.3 + attackProbModifier) {
             this.scytheAttack(target);
