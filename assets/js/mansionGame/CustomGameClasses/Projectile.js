@@ -168,7 +168,7 @@ class Projectile extends Character {
         const PLAYER_HIT_DISTANCE = 50;
         const REAPER_HIT_DISTANCE = 50;
         const ARROW_DAMAGE = 10;
-        const PLAYER_DAMAGE = 300;  // This is a test value
+        const PLAYER_DAMAGE = 75;  // Control how much damage per hit the player does
         const FIREBALL_DAMAGE = 15;
         const DAMAGE_DEALT = this.type == "FIREBALL" ? FIREBALL_DAMAGE : this.type == "ARROW" ? ARROW_DAMAGE : PLAYER_DAMAGE;
         if (this.type === 'PLAYER') {
