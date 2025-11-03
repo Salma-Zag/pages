@@ -47,7 +47,7 @@ class MansionLevel5 {
 		upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
 		upRight: {row: 1, start: 0, columns: 3, mirror: true, rotate: Math.PI/-16},
 		hitbox: {widthPercentage: 0.45, heightPercentage: 0.2},
-		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 32},
+		keypress: {up: 87, left: 65, down: 83, right: 68, shoot: 67},
         shoot: {row: 2, columns: 25}
 	};
 
@@ -284,7 +284,7 @@ class MansionLevel5 {
             const laser = new Character(laserData, this.gameEnv)
     
             // generate lasers in circle
-            laser.velocity = { x: Math.cos((i * Math.PI * 2)/laserNum)*25, y: Math.sin((i * Math.PI * 2)/laserNum)*25 }
+            laser.velocity = { x: Math.cos((i * Math.PI * 2)/laserNum)*5, y: Math.sin((i * Math.PI * 2)/laserNum)*5 }
     
             laser.update = function () {
                 this.position.y += this.velocity.y
@@ -377,7 +377,7 @@ class MansionLevel5 {
 
     // Method to spawn a batch of zombies
     spawnZombieBatch() {
-        const numZombies = 5; // spawn 2 zombies per batch
+        const numZombies = 10; // spawn 10 zombies per batch
         
         for (let i = 0; i < numZombies; i++) {
             const side = Math.floor(Math.random() * 4);
@@ -421,16 +421,43 @@ class MansionLevel5 {
 
     // Method to start the zombie spawning timer
     startZombieSpawner() {
-        // Set up interval to spawn zombies every 5 seconds
+        // Szombies spawn every 2 seconds
         setInterval(() => {
         this.spawnZombieBatch();
-        }, 5000);
+        }, 2000);
     }
 
     start()
     {
+        // create kills text
+        const kills = document.createElement('div');
+        kills.style.position = 'fixed';
+        kills.style.top = '100%';
+        kills.style.left = '1%';
+        kills.style.transform = 'translate(-50%, -50%)';
+        kills.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        kills.style.color = '#00ff0dff';
+        kills.style.padding = '10px';
+        kills.style.borderRadius = '10px';
+        kills.style.fontFamily = "'Press Start 2P', sans-serif";
+        kills.style.fontSize = '12px';
+        kills.style.textAlign = 'center';
+        kills.style.zIndex = '10000';
+        kills.style.border = '1px solid #139b5cff';
+        kills.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+        kills.style.width = '200px';
+        kills.innerHTML = `
+            <div style="font-size: 14px;">${0} zombie kills</div>
+        `;
+        
+        document.body.appendChild(kills);
+
+        // update and collisions every 10 milliseconds
         setInterval(() => {
             this.checkCollisions();
+            kills.innerHTML = `
+                <div style="font-size: 14px;">${this.zombiesKilled} zombie kills</div>
+            `;
         }, 10);
     }
 }
