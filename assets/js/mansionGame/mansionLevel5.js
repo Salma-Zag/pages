@@ -270,7 +270,6 @@ class MansionLevel5 {
     this.enemyTemplate = sprite_data_enemy;
     this.playerRef = player;
 
-    // Track kills for this level (only stored on the level instance)
     this.zombiesKilled = 0;
     this.zombies = 0;
     this.spawnZombies = true;
@@ -532,6 +531,7 @@ class MansionLevel5 {
 
             if (this.zombiesKilled >= 80) 
             {
+                console.log("Level completed")
                 this.spawnZombies = false;
                 const finishDoor = new Npc(this.finishDoorData, this.gameEnv);
                 this.gameEnv.gameObjects.push(finishDoor);
