@@ -10,6 +10,9 @@ categories: [CSP, Submodule, AIUsage]
 tags: [ai, submodule, thinkers]
 author: "Thinkers Team"
 date: 2025-10-21
+show_next: false
+breadcrumb: true
+microblog: true
 ---
 
 <style>
@@ -899,14 +902,9 @@ Why not: [explanation]" style="min-height: 200px;"></textarea>
         <div class="page-indicator">
             Page <span id="currentPage">1</span> of <span id="totalPages">3</span>
         </div>
-        <button class="nav-button" id="nextBtn" onclick="changePage(1)">Next →</button>
-    </div>
-
-    <!-- Back to Module button (only shows on last page) -->
-    <div class="navigation" id="moduleNav" style="display: none;">
+        <div class="navigation" id="moduleNav" style="display: none;">
         <a href="{{site.baseurl}}/cs-portfolio-quest/ai/" class="nav-button" style="text-decoration: none; display: inline-block;">← Back to AI Module</a>
     </div>
-
 </div>
 
 <script>
