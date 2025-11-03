@@ -325,7 +325,7 @@ code{color:#fff;font-size:14px;font-family:'Courier New',monospace}
 <h2>Audio you will be working with: Balboa Park Organ Pavilion</h2>
 <p>Listen to the majestic sounds of the Spreckels Organ — one of the world's largest outdoor pipe organs, filling Balboa Park with rich, powerful tones.</p>
 <audio controls>
-<source src= "/hacks/west-coast/travel/sandiego/gentle-ocean-waves-3-300839.mp3" type="audio/mpeg">
+<source src= "/hacks/west-coast/travel/sandiego/funny-organ-intro-outro-5008.mp3" type="audio/mpeg">
 
 </audio>
 <p class="source-text">Source: Organ performance and classical music</p>
