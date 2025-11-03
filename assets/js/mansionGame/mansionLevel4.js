@@ -1,43 +1,25 @@
 // To build GameLevels, each contains GameObjects from below imports
 import GameEnvBackground from './GameEngine/GameEnvBackground.js';
 import Player from './GameEngine/Player.js';
+import GameObject from './GameEngine/GameObject.js';
 
-class Barrier {
-    constructor(data) {
-        this.x = data.x;
-        this.y = data.y;
-        this.width = data.width;
-        this.height = data.height;
-        this.color = data.color || 'rgba(255, 0, 0, 0.3)';
-        this.visible = data.visible !== undefined ? data.visible : false;
-    }
-
-    draw() {
-        if (!this.visible) return;
-        const ctx = GameEnvBackground.ctx;
-        ctx.fillStyle = this.color;
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
-        ctx.strokeStyle = 'rgba(225, 0, 0, 0.8)';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
-    }
-
-    checkCollision(player) {
-        const playerHitbox = player.getHitbox();
-        return !(
-            playerHitbox.x > this.x + this.width ||
-            playerHitbox.x + playerHitbox.width < this.x ||
-            playerHitbox.y > this.y + this.height ||
-            playerHitbox.y + playerHitbox.height < this.y
-        );
-    }
-}
+//Import custom classes from select files
+import Barrier from './CustomGameClasses/Barrier.js';
+import BlackjackGameManager from './CustomGameClasses/Blackjack.js';
+import TriggerZone from './CustomGameClasses/TriggerZone.js';
 
 class MansionLevel4 {
     constructor(gameEnv) {
         let width = gameEnv.innerWidth;
         let height = gameEnv.innerHeight;
         let path = gameEnv.path;
+
+        // Initialize blackjack manager
+        this.blackjackManager = new BlackjackGameManager(gameEnv);
+        
+        // Track if player is in trigger zone
+        this.inTriggerZone = false;
+        this.promptVisible = false;
 
         // Background data
         const image_background = path + "/images/mansionGame/image_lvl4.png";
@@ -69,123 +51,138 @@ class MansionLevel4 {
             upLeft: {row: 0, start: 0, columns: 3, rotate: Math.PI/16},
             upRight: {row: 1, start: 0, columns: 3, rotate: -Math.PI/16},
             hitbox: { widthPercentage: 0.45, heightPercentage: 0.2 },
-            // Use WASD for movement (will modify Player to support arrows)
-            keypress: { 
-                up: 87,    // W key (default)
-                left: 65,  // A key
-                down: 83,  // S key
-                right: 68  // D key
+            keypress: {up: 87, left: 65, down: 83, right: 68} // W, A, S, D
+        };
+
+        // Store reference to blackjack manager for use in trigger zone
+        const blackjackManager = this.blackjackManager;
+        const levelContext = this;
+
+        // Define trigger zone in the illuminated center area
+        const triggerZoneData = {
+            x: width * 0.35,
+            y: height * 0.15,
+            width: width * 0.30,
+            height: height * 0.40,
+            color: 'rgba(255, 215, 0, 0.2)',
+            visible: false,
+            message: '🎰 Welcome to the Casino! Step into the light to start gambling!',
+            onEnter: () => {
+                levelContext.inTriggerZone = true;
+                levelContext.showPrompt();
             },
-            // Add coordinate tracking with visual display
-            hasLoggedStart: false,
-            init: function() {
-                // Create coordinate display if it doesn't exist
-                if (!document.getElementById('coordDisplay')) {
-                    const display = document.createElement('div');
-                    display.id = 'coordDisplay';
-                    display.style.position = 'fixed';
-                    display.style.top = '10px';
-                    display.style.left = '10px';
-                    display.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                    display.style.color = 'white';
-                    display.style.padding = '10px';
-                    display.style.fontFamily = 'monospace';
-                    display.style.zIndex = '1000';
-                    document.getElementById('gameContainer').appendChild(display);
-                }
-            },
-            update: function() {
-                const display = document.getElementById('coordDisplay');
-                if (!display) {
-                    this.init();
-                }
-                
-                // Log starting position once
-                if (!this.hasLoggedStart) {
-                    document.getElementById('coordDisplay').innerHTML = 
-                        `Starting Position: (${Math.round(this.x)}, ${Math.round(this.y)})`;
-                    this.hasLoggedStart = true;
-                }
-                
-                // Update current position when moving
-                if (this.moved) {
-                    document.getElementById('coordDisplay').innerHTML = 
-                        `Current Position: (${Math.round(this.x)}, ${Math.round(this.y)})`;
-                }
+            onExit: () => {
+                levelContext.inTriggerZone = false;
+                levelContext.hidePrompt();
             }
         };
-        // Define barrier locations
+
+        // Define barrier locations - Creating a simple pathway to the center
         const barrierData = [
-            // Outer walls
-            { x: 0, y: 0, width: width, height: 40 }, // Top wall
-            { x: 0, y: height - 40, width: width, height: 40 }, // Bottom wall
-            { x: 0, y: 0, width: 40, height: height }, // Left wall
-            { x: width - 40, y: 0, width: 40, height: height }, // Right wall
-
-            // Blackjack Tables
-            { x: width * 0.05, y: height * 0.12, width: width * 0.18, height: height * 0.15 },
-            { x: width * 0.77, y: height * 0.12, width: width * 0.18, height: height * 0.15 },
-
-            // Slot Machines
-            { x: width * 0.02, y: height * 0.35, width: width * 0.08, height: height * 0.12 },
-            { x: width * 0.05, y: height * 0.65, width: width * 0.18, height: height * 0.18 },
-            { x: width * 0.02, y: height * 0.88, width: width * 0.06, height: height * 0.08 },
-            { x: width * 0.28, y: height * 0.52, width: width * 0.14, height: height * 0.15 },
-            { x: width * 0.58, y: height * 0.52, width: width * 0.14, height: height * 0.15 },
-            { x: width * 0.90, y: height * 0.35, width: width * 0.08, height: height * 0.12 },
-            { x: width * 0.77, y: height * 0.65, width: width * 0.18, height: height * 0.18 },
-            { x: width * 0.92, y: height * 0.88, width: width * 0.06, height: height * 0.08 },
-            { x: width * 0.12, y: height * 0.38, width: width * 0.06, height: height * 0.08 },
-            { x: width * 0.82, y: height * 0.38, width: width * 0.06, height: height * 0.08 },
-            { x: width * 0.46, y: height * 0.02, width: width * 0.08, height: height * 0.05 },
-            { x: width * 0.45, y: height * 0.45, width: width * 0.10, height: height * 0.08 },
-            { x: width * 0.05, y: height * 0.28, width: width * 0.18, height: height * 0.05 },
-            { x: width * 0.77, y: height * 0.28, width: width * 0.18, height: height * 0.05 },
-            { x: width * 0.02, y: height * 0.02, width: width * 0.06, height: height * 0.08 },
-            { x: width * 0.92, y: height * 0.02, width: width * 0.06, height: height * 0.08 }
+            // Outer walls only - keep player contained
+            { x: 0, y: 0, width: width, height: 20, visible: true },                    // Top wall
+            { x: 0, y: height - 20, width: width, height: 20, visible: true },          // Bottom wall
+            { x: 0, y: 0, width: 20, height: height, visible: true },                   // Left wall
+            { x: width - 20, y: 0, width: 20, height: height, visible: true }           // Right wall
         ];
 
         // Initialize game objects
         this.classes = [
             { class: GameEnvBackground, data: image_data_background },
             { class: Player, data: sprite_data_chillguy },
+            { class: TriggerZone, data: triggerZoneData },
             ...barrierData.map(data => ({ class: Barrier, data }))
         ];
+
+        this.gameEnv = gameEnv;
+        
+        // Adding Music
+        this.backgroundMusic = new Audio(path + '/audio/mansionGame/SpookieDookie.mp3');
+        this.backgroundMusic.loop = true;
+        this.backgroundMusic.volume = 0.3;
+        this.backgroundMusic.play();
+        
+        // Setup E key listener
+        this.setupKeyListener();
     }
 
-    // Handle collisions between player and barriers
-    checkCollisions(player, barriers) {
-        for (const barrier of barriers) {
-            if (barrier.checkCollision(player)) {
-                const overlapLeft = (player.x + player.width) - barrier.x;
-                const overlapRight = (barrier.x + barrier.width) - player.x;
-                const overlapTop = (player.y + player.height) - barrier.y;
-                const overlapBottom = (barrier.y + barrier.height) - player.y;
-
-                const minOverlapX = Math.min(overlapLeft, overlapRight);
-                const minOverlapY = Math.min(overlapTop, overlapBottom);
-
-                if (minOverlapX < minOverlapY) {
-                    // Horizontal collision
-                    if (overlapLeft < overlapRight) {
-                        player.x -= overlapLeft;  // Collision from left
-                    } else {
-                        player.x += overlapRight; // Collision from right
-                    }
-                } else {
-                    // Vertical collision
-                    if (overlapTop < overlapBottom) {
-                        player.y -= overlapTop;   // Collision from top
-                    } else {
-                        player.y += overlapBottom; // Collision from bottom
-                    }
-                }
-                player.velocity = { x: 0, y: 0 }; // Stop movement on collision
-                return true;
+    setupKeyListener() {
+        this.keyHandler = (e) => {
+            // Check if E key is pressed (key code 69)
+            if (e.keyCode === 69 && this.inTriggerZone && !this.blackjackManager.gameActive) {
+                this.blackjackManager.startGame();
+                this.hidePrompt();
             }
+        };
+        
+        document.addEventListener('keydown', this.keyHandler);
+    }
+
+    showPrompt() {
+        if (this.promptVisible || this.blackjackManager.gameActive) return;
+        
+        this.promptVisible = true;
+        
+        // Create prompt overlay
+        this.promptElement = document.createElement('div');
+        this.promptElement.id = 'casino-prompt';
+        this.promptElement.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #f39c12;
+            border-radius: 15px;
+            padding: 30px 50px;
+            z-index: 9999;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(243, 156, 18, 0.8);
+            animation: pulse 2s infinite;
+        `;
+        
+        this.promptElement.innerHTML = `
+            <style>
+                @keyframes pulse {
+                    0%, 100% { box-shadow: 0 0 30px rgba(243, 156, 18, 0.8); }
+                    50% { box-shadow: 0 0 50px rgba(243, 156, 18, 1); }
+                }
+            </style>
+            <div style="font-size: 48px; margin-bottom: 15px;">🎰</div>
+            <h2 style="color: #f39c12; font-size: 32px; margin: 0 0 15px 0; font-weight: bold;">BLACKJACK TABLE</h2>
+            <p style="color: white; font-size: 20px; margin: 10px 0;">Win $25,000 to escape!</p>
+            <div style="margin-top: 25px; padding: 15px; background: #f39c12; border-radius: 10px;">
+                <p style="color: white; font-size: 24px; margin: 0; font-weight: bold;">Press [E] to Enter</p>
+            </div>
+        `;
+        
+        document.body.appendChild(this.promptElement);
+    }
+
+    hidePrompt() {
+        if (!this.promptVisible) return;
+        
+        this.promptVisible = false;
+        
+        if (this.promptElement && this.promptElement.parentNode) {
+            document.body.removeChild(this.promptElement);
+            this.promptElement = null;
         }
-        return false;
+    }
+
+    update() {
+        // Collision detection removed - it was causing player to be stuck
+        // The player now moves freely, only blocked by canvas boundaries
+    }
+    
+    // Clean up when level is destroyed
+    destroy() {
+        document.removeEventListener('keydown', this.keyHandler);
+        this.hidePrompt();
+        if (this.backgroundMusic) {
+            this.backgroundMusic.pause();
+        }
     }
 }
 
-export default MansionLevel4
+export default MansionLevel4;
