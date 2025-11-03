@@ -1,7 +1,7 @@
 ---
 layout: cs-portfolio-lesson
-title: "Submodule 5"
-description: "Submodule 5 of Resume Building Mini-Quest"
+title: "Linkden Walkthrough"
+description: "Generate a personalized linkden page based on the info you filled out throughout the lesson"
 permalink: /cs-portfolio-quest/resume/submodule_5/
 parent: "Resume Building"
 team: "Grinders"

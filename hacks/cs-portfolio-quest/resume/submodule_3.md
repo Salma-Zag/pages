@@ -1,7 +1,7 @@
 ---
 layout: cs-portfolio-lesson
-title: "Submodule 3"
-description: "Submodule 3 of Resume Building Mini-Quest"
+title: "Experiences and Achievments"
+description: "Learn about why you need experiences/achievments on your resume and add your own"
 permalink: /cs-portfolio-quest/resume/submodule_3/
 parent: "Resume Building"
 team: "Grinders"

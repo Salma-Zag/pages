@@ -1,7 +1,7 @@
 ---
 layout: cs-portfolio-lesson
-title: "Submodule 2"
-description: "Submodule 2 of Resume Building Mini-Quest"
+title: "Personal Info and Skills"
+description: "Learn about why you need personal info and skills on your resume and add your own"
 permalink: /cs-portfolio-quest/resume/submodule_2/
 parent: "Resume Building"
 team: "Grinders"

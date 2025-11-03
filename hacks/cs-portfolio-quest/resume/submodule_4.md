@@ -1,7 +1,7 @@
 ---
 layout: cs-portfolio-lesson
-title: "Submodule 4"
-description: "Submodule 4 of Resume Building Mini-Quest"
+title: "Resume Generator"
+description: "Generate a resume based on the info previously entered"
 permalink: /cs-portfolio-quest/resume/submodule_4/
 parent: "Resume Building"
 team: "Grinders"

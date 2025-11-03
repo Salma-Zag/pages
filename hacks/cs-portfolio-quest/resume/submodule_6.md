@@ -1,7 +1,7 @@
 ---
 layout: cs-portfolio-lesson
-title: "Submodule 6"
-description: "Submodule 6 of Resume Building Mini-Quest"
+title: "Interview"
+description: "Test your skills against an interview bot"
 permalink: /cs-portfolio-quest/resume/submodule_6/
 parent: "Resume Building"
 team: "Grinders"
