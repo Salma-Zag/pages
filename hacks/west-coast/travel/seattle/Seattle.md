@@ -2321,5 +2321,6 @@ landmarks.forEach(landmark => {
   });
 });
 </script>
+Share your experiences in the mircoblog!
 </body>
 </html>
