@@ -74,7 +74,7 @@ class MansionLevel6 {
         const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
         const sprite_greet_zombie = "Hi, I'm a zombie.";
         const sprite_data_zombie1 = {
-            id: 'ZombieNPC',
+            id: 'ZombieNPC1',
             greeting: sprite_greet_zombie,
             src: sprite_src_zombie,
             SCALE_FACTOR: 4,
@@ -123,7 +123,7 @@ class MansionLevel6 {
         };
 
         const sprite_data_zombie2 = {
-            id: 'ZombieNPC',
+            id: 'ZombieNPC2',
             greeting: sprite_greet_zombie,
             src: sprite_src_zombie,
             SCALE_FACTOR: 4,
