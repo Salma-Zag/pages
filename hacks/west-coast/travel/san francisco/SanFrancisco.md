@@ -8,6 +8,7 @@ team: "Cool Collaborators"
 submodule: 2
 author: "Cool Collaborators"
 date: 2025-10-21
+microblog: true
 footer: 
     previous:  /west-coast/analytics/sandiego/
     home: /west-coast/travel/
