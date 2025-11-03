@@ -1,4 +1,5 @@
 import Character from '../GameEngine/Character.js';
+import showDeathScreen from './DeathScreen.js';
 import { updatePlayerHealthBar } from "./HealthBars.js";
 
 class Boomerang extends Character {
@@ -125,6 +126,92 @@ class Boomerang extends Character {
     destroy() {
         super.destroy();
     }
-}
 
+    // Deal damage to the player
+    execDamage() {
+        // Do not apply damage while the battleroom intro/fade is running.
+        // The level code sets `window.__battleRoomFadeComplete = true` when
+        // the intro finishes. Guarding here ensures projectiles can't harm
+        // the player during the loading/intro sequence.
+        if (typeof window !== 'undefined' && window.__battleRoomFadeComplete === false) {
+            return;
+        }
+
+        // If the player is too close...
+        const HIT_DISTANCE = 50;
+        const SCYTHE_DAMAGE = 10;
+        
+        const players = this.gameEnv.gameObjects.filter(obj => obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer');
+        if (players.length === 0) return null;
+
+        let nearest = players[0];
+        let minDist = Infinity;
+
+        // Find the closest player
+        for (const player of players) {
+            const dx = player.position.x - this.position.x;
+            const dy = player.position.y - this.position.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < minDist) {
+                minDist = dist;
+                nearest = player;
+            }
+        }
+
+        // Do distance formula calculation
+        const xDiff = nearest.position.x - this.position.x;
+        const yDiff = nearest.position.y - this.position.y;
+        const distanceFromPlayer = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+        if (distanceFromPlayer <= HIT_DISTANCE) {
+            this.revComplete = true;
+            this.destroy();
+            if (!nearest.data) nearest.data = { health: 100 }; // Initialize health if not exists
+            nearest.data.health -= SCYTHE_DAMAGE;
+            console.log("Player Health:", nearest.data.health);
+            if (nearest.data.health <= 0) {
+                console.log("Game over -- the player has been defeated!");
+                // Show death screen
+                showDeathScreen(nearest);
+            }
+        }
+
+        // Update the player health bar to accurately show the new health (if available)
+        try {
+            if (nearest && nearest.data && typeof updatePlayerHealthBar === 'function') {
+                const pct = Math.max(0, Math.min(100, nearest.data.health || 0));
+                updatePlayerHealthBar(pct);
+            }
+        } catch (e) {
+            console.warn('Failed to update player health bar:', e);
+        }
+        
+    }
+
+    die() {
+        // Find all player objects
+        const players = this.gameEnv.gameObjects.filter(obj => 
+            obj.constructor.name === 'Player'
+        );
+        
+        if (players.length === 0) return;
+        
+        // Find nearest player
+        let nearest = players[0];
+        let minDist = Infinity;
+
+        for (const player of players) {
+            const dx = player.position.x - this.position.x;
+            const dy = player.position.y - this.position.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < minDist) {
+                minDist = dist;
+                nearest = player;
+            }
+        }
+
+        let player = nearest;
+        showDeathScreen(player);
+    }
+}
 export default Boomerang;
