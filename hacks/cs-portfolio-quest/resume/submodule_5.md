@@ -1,7 +1,7 @@
 ---
 layout: cs-portfolio-lesson
 title: "Submodule 5"
-description: "Submodule 5 of Resume Building Mini-Quest"
+description: "Submodule 3 of Resume Building Mini-Quest"
 permalink: /cs-portfolio-quest/resume/submodule_5/
 parent: "Resume Building"
 team: "Grinders"
@@ -119,7 +119,7 @@ date: 2025-10-21
   <section id="step1" data-step="0" class="space-y-4">
     <h2 class="text-xl font-bold">Step 1: LinkedIn Profile Basics</h2>
     <p class="text-sm">We've pre-filled data from your resume. Review and adjust for LinkedIn.</p>
-    <!-- Video: How to Create a LinkedIn Profile (only visible on Step 1) -->
+    <!-- Video only on Step 1 -->
     <div class="panel rounded p-3">
       <h3 class="font-medium mb-2">Watch: How to Create a LinkedIn Profile</h3>
       <div class="video-wrap">
@@ -131,14 +131,13 @@ date: 2025-10-21
         </iframe>
       </div>
     </div>
-    <!-- /video -->
     <div class="panel p-4">
       <p class="text-sm font-bold">✓ Auto-filled from Resume Builder</p>
       <p class="text-xs mt-1">Your name, location, and education were imported. Add a professional headline.</p>
     </div>
     <div>
       <label class="block text-sm font-medium">Full Name *</label>
-      <input id="fullName" class="w-full rounded px-3 py-2" placeholder="john doe...">
+      <input id="fullName" class="w-full rounded px-3 py-2" placeholder="john doe..">
     </div>
     <div>
       <label class="block text-sm font-medium">Professional Headline *</label>
@@ -157,8 +156,10 @@ date: 2025-10-21
       <label class="block text-sm font-medium">Education</label>
       <textarea id="education" rows="2" class="w-full rounded px-3 py-2" placeholder="ex: B.S. in computer science at _ college..."></textarea>
     </div>
-    <div class="pt-2">
+    <div class="pt-2 flex gap-2 flex-wrap items-center">
       <button onclick="fillDummyData()" class="btn">Fill with Demo Data</button>
+      <button onclick="fillFromSaved()" id="fillSavedBtn" class="btn btn-secondary">Fill with Previously Collected Data</button>
+      <span id="fillSavedNote" class="text-xs" style="opacity:.75;"></span>
     </div>
   </section>
 
@@ -320,7 +321,7 @@ date: 2025-10-21
         </div>
       </div>
     </div>
-    <!-- Removed the "Back to Lessons" button per request -->
+    <!-- No "Back to Lessons" button -->
   </section>
 
   <!-- Nav -->
@@ -334,7 +335,6 @@ date: 2025-10-21
 
 <script>
 // ================= Configuration =================
-// If you keep using the Gemini API from the browser, make sure the key is unrestricted for testing or use a server proxy.
 const API_KEY = 'AIzaSyACXPXKEgZ_9P6ikvDiFnNpDZe1cXUR3jY';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 const STORAGE_KEY = 'linkedin_profile_v3';
@@ -345,7 +345,7 @@ let profileData = { about: '', experience: '', headerIdeas: '' };
 // Initialize on load
 window.addEventListener('DOMContentLoaded', () => {
   loadSavedData();
-  autoFillFromOtherModules();
+  autoFillFromOtherModules(false); // only fill if empty on load
   setTimeout(() => {
     document.querySelectorAll('input, textarea').forEach(el => {
       el.addEventListener('input', () => { saveToLocal(); });
@@ -354,35 +354,108 @@ window.addEventListener('DOMContentLoaded', () => {
   goToStep(1);
 });
 
-// Auto-fill from module 2 and 3 localStorage
-function autoFillFromOtherModules() {
+// ===== Autofill from Submodule 2 & 3 localStorage =====
+// overwrite=false for gentle load fill; overwrite=true for button "Fill with Previously Collected Data"
+function autoFillFromOtherModules(overwrite=false) {
+  let found2=false, found3=false;
+
   try {
-    const fullNameField = document.getElementById('fullName');
-    const locationField = document.getElementById('location');
-    const skillsField = document.getElementById('skills');
-    const educationField = document.getElementById('education');
-    const experienceField = document.getElementById('experiencePrompt');
-    
-    // Resume Builder (Module 2)
-    const module2Data = localStorage.getItem('resume_builder_v2');
-    if (module2Data) {
-      const data = JSON.parse(module2Data);
-      if (data.fullName && fullNameField && fullNameField.value.trim() === '') fullNameField.value = data.fullName.trim();
-      if (data.location && locationField && locationField.value.trim() === '') locationField.value = data.location.trim();
-      if (data.skills && skillsField && skillsField.value.trim() === '') skillsField.value = data.skills.trim();
-      if (data.education && educationField && educationField.value.trim() === '') educationField.value = data.education.trim();
+    // --- Submodule 2 ---
+    const m2raw = localStorage.getItem('resume_builder_no_experience_v2');
+    if (m2raw) {
+      found2 = true;
+      const m2 = JSON.parse(m2raw) || {};
+      const personal = m2.personal || {};
+      const education = m2.education || {};
+      const skillsArr = Array.isArray(m2.skills) ? m2.skills : [];
+
+      setField('fullName', personal.fullName, overwrite);
+      setField('location', personal.location, overwrite);
+      if (skillsArr.length) setField('skills', skillsArr.join(', '), overwrite);
+
+      // Education lines
+      const eduLines = [];
+      if (education.school) eduLines.push(education.school);
+      if (education.degree) eduLines.push(education.degree);
+      if (education.eduHighlights) eduLines.push(education.eduHighlights);
+      if (eduLines.length) setField('education', eduLines.join('\n'), overwrite);
+
+      // Headline helper if blank or overwrite requested
+      const hl = document.getElementById('headline');
+      if (hl) {
+        if (overwrite || !hl.value.trim()) {
+          if (education.degree) {
+            hl.value = `${education.degree} | ${education.school || 'Student'}`;
+          } else if (education.school) {
+            hl.value = `Student at ${education.school}`;
+          }
+        }
+      }
     }
-    // Experience Builder (Module 3)
-    const module3Data = localStorage.getItem('impact_exp_v1');
-    if (module3Data && experienceField && experienceField.value.trim() === '') {
-      const data = JSON.parse(module3Data);
-      let expText = '';
-      if (data.exp1) expText += data.exp1.trim() + '\n\n';
-      if (data.exp2) expText += data.exp2.trim() + '\n\n';
-      if (data.exp3) expText += data.exp3.trim();
-      experienceField.value = expText.trim();
+
+    // --- Submodule 3 ---
+    const m3raw = localStorage.getItem('resume_builder_module3_v1');
+    if (m3raw) {
+      found3 = true;
+      const m3 = JSON.parse(m3raw) || {};
+      const sum = (m3.summary || '').trim();
+      const exps = Array.isArray(m3.experiences) ? m3.experiences : [];
+
+      // About
+      if (sum) setField('aboutPrompt', sum, overwrite);
+
+      // Experience: format into header + bullets
+      if (exps.length) {
+        const blocks = exps.map(e => {
+          const title = e.title || 'Title';
+          const company = e.company || 'Company';
+          const dates = e.dates || 'Dates';
+          const bullets = (e.bullets || '').trim();
+          const cleanBullets = bullets
+            .split(/\r?\n/)
+            .map(s => s.trim())
+            .filter(Boolean)
+            .map(b => (b.startsWith('•') ? b : `• ${b}`))
+            .join('\n');
+          return `${title} | ${company} | ${dates}\n${cleanBullets}`;
+        });
+        setField('experiencePrompt', blocks.join('\n\n'), overwrite);
+      }
     }
-  } catch(e) { console.log('Could not auto-fill:', e); }
+  } catch (e) {
+    console.log('Could not auto-fill from modules 2/3:', e);
+  }
+
+  // Little note under the button
+  const note = document.getElementById('fillSavedNote');
+  if (note) {
+    if (found2 || found3) {
+      const parts = [];
+      if (found2) parts.push('Submodule 2');
+      if (found3) parts.push('Submodule 3');
+      note.textContent = `Loaded data from: ${parts.join(' & ')}`;
+    } else {
+      note.textContent = 'No previously collected data found.';
+    }
+  }
+
+  saveToLocal();
+}
+
+// Helper to set an input/textarea with overwrite control
+function setField(id, value, overwrite){
+  if (value == null) return;
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (overwrite || !el.value.trim()) {
+    el.value = value;
+  }
+}
+
+// Button handler to force-fill from saved localStorage
+function fillFromSaved(){
+  autoFillFromOtherModules(true); // overwrite = true
+  alert('Filled from previously collected data.');
 }
 
 // Fill with dummy data (for testing)
@@ -392,7 +465,7 @@ function fillDummyData() {
   document.getElementById('location').value = 'San Diego, California';
   document.getElementById('skills').value = 'Python, JavaScript, React, Node.js, SQL, Git, Machine Learning';
   document.getElementById('aboutPrompt').value = 'I am a junior computer science student at UC San Diego with a passion for full-stack development and AI...';
-  document.getElementById('experiencePrompt').value = 'Software Engineering Intern at TechStart Inc (June 2024 - August 2024): ...';
+  document.getElementById('experiencePrompt').value = 'Software Engineering Intern | TechStart Inc | June 2024 - August 2024\n• Built a React dashboard...\n• Collaborated with a team of 5...\n• Improved load times by 40%';
   document.getElementById('education').value = 'B.S. Computer Science, UC San Diego\nExpected Graduation: June 2026\nGPA: 3.7/4.0';
   saveToLocal();
 }
@@ -413,11 +486,10 @@ function nextStep(){
   } else if (currentStep === 4){
     const experiencePrompt = document.getElementById('experiencePrompt');
     if (!experiencePrompt?.value?.trim()){ alert('Please add your Experience'); experiencePrompt?.focus(); return; }
-    generateProfile(); // stay here until generated, then we jump to step 6
+    generateProfile(); // stay here until generated, then jump to step 6
     return;
   } else if (currentStep === 6){
-    // Final step -> go back to lesson hub or next module; adjust as needed
-    window.location.href = '/cs-portfolio-quest/resume/submodule_6/';
+    window.location.href = '/cs-portfolio-quest/resume/submodule_6';
     return;
   }
 
@@ -456,7 +528,7 @@ function saveToLocal(){
 
 // Navigate between steps
 function goToStep(step){
-  // Forward validation gates
+  // forward gates
   if (step > currentStep){
     if (step === 2){
       const fullName = document.getElementById('fullName').value.trim();
@@ -510,12 +582,11 @@ function synthAbout({fullName, headline, aboutPrompt}){
 }
 
 function synthExperience(experiencePrompt){
-  // Split blocks by blank lines; add bullet formatting if missing
   const blocks = experiencePrompt.split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
   return blocks.map(b => {
-    const firstLine = b.split('\n')[0];
-    const rest = b.split('\n').slice(1);
-    const header = firstLine.includes('|') ? firstLine : `${firstLine}`;
+    const lines = b.split('\n');
+    const header = lines[0];
+    const rest = lines.slice(1);
     const bullets = rest.length ? rest : ['• Built features and collaborated in a team environment', '• Improved performance and reliability'];
     const formattedBullets = bullets.map(x => x.trim().startsWith('•') ? x.trim() : `• ${x.trim()}`).join('\n');
     return `${header}\n${formattedBullets}`;
@@ -570,7 +641,7 @@ Format each position as: Job Title | Company | Dates, then bullet points. Return
   icon.textContent = 'Generate LinkedIn Profile';
 }
 
-// Call Gemini API (with clearer errors)
+// Call Gemini API
 async function callGeminiAPI(prompt){
   const requestBody = {
     contents:[{ parts:[{ text: prompt }]}],
@@ -656,20 +727,13 @@ Provide specific ideas for Canva/Unsplash. Format as a numbered list.`);
   }
 }
 
-// Copy header ideas
+// Copy helpers
 function copyHeaderIdeas(){
-  if (!profileData.headerIdeas){ 
-    const fallback = document.getElementById('headerContent').textContent || '';
-    if (!fallback.trim()){ alert('Nothing to copy'); return; }
-    navigator.clipboard.writeText(fallback).then(()=> alert('Header ideas copied!')).catch(()=> alert('Failed to copy'));
-    return;
-  }
-  navigator.clipboard.writeText(profileData.headerIdeas)
-    .then(()=> alert('Header ideas copied!'))
-    .catch(()=> alert('Failed to copy'));
+  const text = profileData.headerIdeas || document.getElementById('headerContent').textContent || '';
+  if (!text.trim()){ alert('Nothing to copy'); return; }
+  navigator.clipboard.writeText(text).then(()=> alert('Header ideas copied!')).catch(()=> alert('Failed to copy'));
 }
 
-// Copy individual section
 function copySection(section){
   let text = '';
   if (section === 'about') text = profileData.about;
@@ -683,7 +747,7 @@ function copySection(section){
     .catch(()=> showMessage('Failed to copy to clipboard', 'error'));
 }
 
-// Show status message
+// Status + utils
 function showMessage(message, type){
   const statusEl = document.getElementById('statusMessage');
   if (!statusEl) return;
@@ -693,6 +757,5 @@ function showMessage(message, type){
   if (type !== 'info'){ setTimeout(()=> statusEl.classList.add('hidden'), 5000); }
 }
 
-// Escape HTML
 function escapeHtml(text){ const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 </script>
