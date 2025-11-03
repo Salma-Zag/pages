@@ -349,7 +349,7 @@ class MansionLevel5 {
                     this.collisionWidth = 0;
                     this.collisionHeight = 0;
                     this.destroy()
-                }, 1000);
+                }, 2000);
     
                 this.draw()
             }
