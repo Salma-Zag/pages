@@ -214,12 +214,12 @@ class MansionLevel5 {
         id: 'Level6Door',
         greeting: sprite_greet_level6door,
         src: sprite_src_level6door,
-        SCALE_FACTOR: 2,
+        SCALE_FACTOR: 1,
         ANIMATION_RATE: 100,
         pixels: {width: 256, height: 256},
         INIT_POSITION: { x: (width / 2), y: (height / 2) },
         orientation: {rows: 1, columns: 1},
-        down: {row: 0, start: 0, columns: 1, rotate: Math.PI / 2},
+        down: {row: 0, start: 0, columns: 1},
         hitbox: {widthPercentage: 0.2, heightPercentage: 0.3},
         dialogues: ["Level 6 awaits. Do you wish to enter?"],
         reaction: function() {},
@@ -420,7 +420,7 @@ class MansionLevel5 {
 
     // Method to spawn a batch of zombies
     spawnZombieBatch() {
-        const numZombies = 6; // spawn zombies per batch
+        const numZombies = 4; // spawn zombies per batch
         
         for (let i = 0; i < numZombies; i++) {
             const side = Math.floor(Math.random() * 4);
