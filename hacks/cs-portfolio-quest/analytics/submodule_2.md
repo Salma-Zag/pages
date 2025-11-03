@@ -343,7 +343,7 @@ date: 2025-10-21
       <div class="cert-date">November 2025</div>
       <div class="cert-actions">
         <button class="btn btn-download" onclick="downloadCert('AI Usage', 'Open Coding Society', 'November 2025')">⬇ Download</button>
-        <button class="btn btn-share"> Share</button>
+        <button class="btn btn-share">🔗 Share</button>
       </div>
     </div>
     <div class="cert-card cert-green" >
