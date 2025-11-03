@@ -15,16 +15,25 @@ class MansionLevel6 {
         let height = gameEnv.innerHeight;
         let path = gameEnv.path;
 
-    // Level music: play Legend of Zelda theme when entering this level
-    // update: now changed to mario castle theme
-    // Will be stopped when transitioning to the battle room below
-    let randomSong = ["marioCastle.mp3", "legendZelda.mp3"][Math.floor(Math.random()*2)]
-    const levelMusic = new Audio(path + `/assets/sounds/mansionGame/${randomSong}`);
-    levelMusic.loop = true;
-    levelMusic.volume = 0.3;
-    levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
-    // Expose the level music so other modules (end screen, etc.) can stop it
-    try { if (typeof window !== 'undefined') window._levelMusic = levelMusic; } catch (e) {}
+
+        // Pause DOM audio elements
+        try {
+            const audioElements = document.querySelectorAll('audio'); // Selects all <audio> elements
+            audioElements.forEach(audio => {
+                try { if (!audio.paused) audio.pause(); } catch (e) {}
+            });
+        } catch (e) { /* ignore */ }
+
+        // Level music: play Legend of Zelda theme when entering this level
+        // update: now changed to mario castle theme
+        // Will be stopped when transitioning to the battle room below
+        let randomSong = ["marioCastle.mp3", "legendZelda.mp3"][Math.floor(Math.random()*2)]
+        const levelMusic = new Audio(path + `/assets/sounds/mansionGame/${randomSong}`);
+        levelMusic.loop = true;
+        levelMusic.volume = 0.3;
+        levelMusic.play().catch(err => console.warn('Level music failed to play:', err));
+        // Expose the level music so other modules (end screen, etc.) can stop it
+        try { if (typeof window !== 'undefined') window._levelMusic = levelMusic; } catch (e) {}
 
         // This is the background image data
         const image_src_chamber = path + "/images/mansionGame/bgBossIntroChamber.png"
