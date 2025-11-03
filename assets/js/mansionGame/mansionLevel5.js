@@ -292,6 +292,8 @@ class MansionLevel5 {
     
                 setTimeout(() => {
                     this.destroy()
+                    this.collisionWidth = 0;
+                    this.collisionHeight = 0;
                     const index = this.gameEnv.gameObjects.indexOf(this)
                     if (index !== -1) {
                         this.gameEnv.gameObjects.splice(index, 1)
@@ -299,6 +301,7 @@ class MansionLevel5 {
                 }, 1000);
     
                 this.draw()
+                this.coll
             }
     
             this.lasers.push(laser)
@@ -326,6 +329,12 @@ class MansionLevel5 {
             if (this.isColliding(laser, zombie)) {
                 laser.destroy();
                 zombie.destroy();
+
+                // kinda funny solution to disable colliders
+                laser.collisionHeight = 0;
+                laser.collisionWidth = 0;
+                zombie.collisionHeight = 0;
+                zombie.collisionWidth = 0;
 
                 this.zombiesKilled += 1;
                 break;
