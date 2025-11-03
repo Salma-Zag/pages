@@ -181,7 +181,7 @@ date: 2025-10-21
   </div>
 
   <!-- ✅ Floating Selected Sprite -->
-<video id="floating-sprite" width="120" height="200" loop muted playsinline style="
+<video id="floating-sprite" width="150" height="160" loop muted playsinline style="
   position: fixed;
   bottom: 20px;
   right: 40px;
@@ -625,9 +625,9 @@ if (savedCharacter) {
 
 function showFloatingSprite(charId) {
   const spriteMap = {
-    "char1": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant_3.mp4",
-    "char2": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster_3.mp4",
-    "char3": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey_3.mp4"
+    "char1": "{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/elephant_3.mp4",
+    "char2": "{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/hamster_3.mp4",
+    "char3": "{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/monkey_3.mp4"
   };
 
   const src = spriteMap[charId];

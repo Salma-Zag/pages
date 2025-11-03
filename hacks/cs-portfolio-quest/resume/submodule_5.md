@@ -248,7 +248,7 @@ date: 2025-10-21
     </div>
   </div>
   <!-- ✅ Floating Selected Sprite -->
-<video id="floating-sprite" width="120" height="200" loop muted playsinline style="
+<video id="floating-sprite" width="150" height="160" loop muted playsinline style="
   position: fixed;
   bottom: 20px;
   right: 40px;
@@ -259,6 +259,7 @@ date: 2025-10-21
 ">
   <source id="floating-source" src="" type="video/mp4">
 </video>
+
 </div>
 
 <script>
@@ -679,9 +680,9 @@ if (savedCharacter) {
 
 function showFloatingSprite(charId) {
   const spriteMap = {
-    "char1": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/elephant_5.mp4",
-    "char2": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/hamster_5.mp4",
-    "char3": "{{site.baseurl}}/cs-portfolio-quest/resume/sprites/monkey_5.mp4"
+    "char1": "{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/elephant_5.mp4",
+    "char2": "{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/hamster_5.mp4",
+    "char3": "{{site.baseurl}}/hacks/cs-portfolio-quest/resume/sprites/monkey_5.mp4"
   };
 
   const src = spriteMap[charId];
