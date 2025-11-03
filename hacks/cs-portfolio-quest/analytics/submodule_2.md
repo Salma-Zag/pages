@@ -571,6 +571,7 @@ window.downloadCert = async function () {
     }
 
     // replace the stub with the real implementation
+    window.downloadCert = downloadCert;
     window.addToLinkedIn = addToLinkedIn;
 
   } catch (err) {
