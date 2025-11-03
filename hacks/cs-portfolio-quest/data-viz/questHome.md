@@ -51,7 +51,7 @@ lxdData:
     btn.disabled = true;
     fb.innerHTML = 'Grading...';
     try {
-      const res = await fetch(`${javaURI}/api/grade`, {
+      const res = await fetch(`${javaURI}/api/gemini-frq/grade`, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
