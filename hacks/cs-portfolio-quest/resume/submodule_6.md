@@ -42,9 +42,14 @@ date: 2025-10-29
     </details>
     <div class="border rounded p-3">
       <div class="font-medium mb-2">Watch: Interview Mindset Tips</div>
-      <div class="rounded p-6 text-center text-gray-500 border border-dashed">
-        [YouTube Placeholder]<br>Embed URL here
-      </div>
+      <iframe
+        class="w-full rounded"
+        style="aspect-ratio: 16/9;"
+        src="https://www.youtube.com/embed/ZdjJdoEwCY4"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
     <div>
       <label class="block text-sm font-medium">Your reflection</label>
@@ -68,8 +73,21 @@ date: 2025-10-29
     </details>
     <div class="border rounded p-3">
       <div class="font-medium mb-2">Watch: Vocal Communication</div>
-      <div class="rounded p-6 text-center text-gray-500 border border-dashed">
-        [YouTube Placeholder]<br>Embed URL here
+      <div id="vocalVideoContainer">
+        <iframe
+          id="vocalVideoFrame"
+          class="w-full rounded"
+          style="aspect-ratio: 9/16; max-height: 500px;"
+          src="https://www.youtube.com/embed/OIpb3FSWXK0"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="flex justify-between mt-2">
+        <button id="prevVocalVideo" class="px-3 py-2 border rounded text-sm" style="visibility: hidden;">← Previous Video</button>
+        <span id="vocalVideoCounter" class="text-sm self-center">Video 1 / 2</span>
+        <button id="nextVocalVideo" class="px-3 py-2 border rounded text-sm">Next Video →</button>
       </div>
     </div>
     <div>
@@ -346,6 +364,50 @@ date: 2025-10-29
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // --------- Vocal Video Navigation ----------
+  const vocalVideos = [
+    "https://www.youtube.com/embed/OIpb3FSWXK0",
+    "https://www.youtube.com/embed/ZW4CfKuumUs"
+  ];
+  let currentVocalVideoIndex = 0;
+
+  const vocalVideoFrame = document.getElementById('vocalVideoFrame');
+  const prevVocalBtn = document.getElementById('prevVocalVideo');
+  const nextVocalBtn = document.getElementById('nextVocalVideo');
+  const vocalVideoCounter = document.getElementById('vocalVideoCounter');
+
+  function updateVocalVideo() {
+    vocalVideoFrame.src = vocalVideos[currentVocalVideoIndex];
+    vocalVideoCounter.textContent = `Video ${currentVocalVideoIndex + 1} / ${vocalVideos.length}`;
+
+    // Hide/show buttons based on position
+    if (currentVocalVideoIndex === 0) {
+      prevVocalBtn.style.visibility = 'hidden';
+    } else {
+      prevVocalBtn.style.visibility = 'visible';
+    }
+
+    if (currentVocalVideoIndex === vocalVideos.length - 1) {
+      nextVocalBtn.style.visibility = 'hidden';
+    } else {
+      nextVocalBtn.style.visibility = 'visible';
+    }
+  }
+
+  prevVocalBtn?.addEventListener('click', () => {
+    if (currentVocalVideoIndex > 0) {
+      currentVocalVideoIndex--;
+      updateVocalVideo();
+    }
+  });
+
+  nextVocalBtn?.addEventListener('click', () => {
+    if (currentVocalVideoIndex < vocalVideos.length - 1) {
+      currentVocalVideoIndex++;
+      updateVocalVideo();
+    }
+  });
+
   // --------- State & storage (Submodule 3 pattern) ----------
   const STORAGE_KEY = "interview_prep_module6_v1";
   const state = { step: 0, submitted: false };
