@@ -5,6 +5,12 @@ export default function showEndScreen(gameEnv) {
     // Prevent adding multiple overlays
     if (document.getElementById('mansion-victory-overlay')) return;
 
+    const playerBar = document.getElementById('player-health-bar');  // player health bar
+    const bossBar = document.getElementById('boss-health-bar');      // boss health bar
+
+    if (playerBar) playerBar.style.display = 'none';  
+    if (bossBar) bossBar.style.display = 'none';   
+
     const overlay = document.createElement('div');
     overlay.id = 'mansion-victory-overlay';
     overlay.style.position = 'fixed';
