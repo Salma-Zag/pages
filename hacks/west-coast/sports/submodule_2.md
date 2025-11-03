@@ -515,70 +515,7 @@ footer:
 
         <div class="practice-section">
             <h2>✏️ Practice: Build Your Own URL</h2>
-            
-            <div class="build-area" id="practice-area-1">
-                <p>Now it's your turn! Fill in the blanks to create an API URL for the LA Clippers.</p>
-                
-                <div class="build-step">
-                    <div class="step-label">Step 1: Base URL</div>
-                    <input type="text" class="step-input" id="base-url-1" placeholder="Enter the base URL...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Step 2: API Key</div>
-                    <input type="text" class="step-input" id="api-key-1" placeholder="Enter your API key...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Step 3: Endpoint</div>
-                    <input type="text" class="step-input" id="endpoint-1" placeholder="Enter the endpoint...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Step 4: Team Parameter</div>
-                    <input type="text" class="step-input" id="parameter-1" placeholder="Enter ?t=TeamName...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Your Complete URL:</div>
-                    <div class="url-output" id="built-url-1">Fill in the fields above to build your URL...</div>
-                </div>
-
-                <button class="check-button" onclick="checkBuiltURL(1)">✅ Check My URL</button>
-                <div class="feedback" id="build-feedback-1"></div>
-            </div>
-
-            <div class="build-area" id="practice-area-2">
-                <p>Now it's your turn! Fill in the blanks to create an API URL for the LA Dodgers.</p>
-                
-                <div class="build-step">
-                    <div class="step-label">Step 1: Base URL</div>
-                    <input type="text" class="step-input" id="base-url-2" placeholder="Enter the base URL...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Step 2: API Key</div>
-                    <input type="text" class="step-input" id="api-key-2" placeholder="Enter your API key...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Step 3: Endpoint</div>
-                    <input type="text" class="step-input" id="endpoint-2" placeholder="Enter the endpoint...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Step 4: Team Parameter</div>
-                    <input type="text" class="step-input" id="parameter-2" placeholder="Enter ?t=TeamName...">
-                </div>
-
-                <div class="build-step">
-                    <div class="step-label">Your Complete URL:</div>
-                    <div class="url-output" id="built-url-2">Fill in the fields above to build your URL...</div>
-                </div>
-
-                <button class="check-button" onclick="checkBuiltURL(2)">✅ Check My URL</button>
-                <div class="feedback" id="build-feedback-2"></div>
-            </div>
+            <div id="practice-container"></div>
         </div>
 
         <div class="challenge-section">
@@ -700,7 +637,7 @@ footer:
                     
                     if (userTeams.length === 2) {
                         displayUserTeams();
-                        updatePracticeAreas();
+                        createPracticeAreas();
                     }
                 }
             } catch (error) {
@@ -730,15 +667,58 @@ footer:
             grid.innerHTML = html;
         }
 
-        // Update practice areas based on user teams
-        function updatePracticeAreas() {
-            if (userTeams.length >= 2) {
-                const area1 = document.getElementById('practice-area-1');
-                const area2 = document.getElementById('practice-area-2');
-                
-                area1.querySelector('p').textContent = `Now it's your turn! Fill in the blanks to create an API URL for the ${userTeams[0].name}.`;
-                area2.querySelector('p').textContent = `Now it's your turn! Fill in the blanks to create an API URL for the ${userTeams[1].name}.`;
-            }
+        // Create practice areas dynamically based on user teams
+        function createPracticeAreas() {
+            const container = document.getElementById('practice-container');
+            let html = '';
+
+            userTeams.forEach((team, index) => {
+                const num = index + 1;
+                html += `
+                    <div class="build-area">
+                        <p>Now it's your turn! Fill in the blanks to create an API URL for the ${team.name}.</p>
+                        
+                        <div class="build-step">
+                            <div class="step-label">Step 1: Base URL</div>
+                            <input type="text" class="step-input" id="base-url-${num}" placeholder="Enter the base URL...">
+                        </div>
+
+                        <div class="build-step">
+                            <div class="step-label">Step 2: API Key</div>
+                            <input type="text" class="step-input" id="api-key-${num}" placeholder="Enter your API key...">
+                        </div>
+
+                        <div class="build-step">
+                            <div class="step-label">Step 3: Endpoint</div>
+                            <input type="text" class="step-input" id="endpoint-${num}" placeholder="Enter the endpoint...">
+                        </div>
+
+                        <div class="build-step">
+                            <div class="step-label">Step 4: Team Parameter</div>
+                            <input type="text" class="step-input" id="parameter-${num}" placeholder="Enter ?t=TeamName...">
+                        </div>
+
+                        <div class="build-step">
+                            <div class="step-label">Your Complete URL:</div>
+                            <div class="url-output" id="built-url-${num}">Fill in the fields above to build your URL...</div>
+                        </div>
+
+                        <button class="check-button" onclick="checkBuiltURL(${num})">✅ Check My URL</button>
+                        <div class="feedback" id="build-feedback-${num}"></div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            // Add event listeners for dynamic inputs
+            userTeams.forEach((team, index) => {
+                const num = index + 1;
+                document.getElementById(`base-url-${num}`)?.addEventListener('input', () => updateBuiltURL(num));
+                document.getElementById(`api-key-${num}`)?.addEventListener('input', () => updateBuiltURL(num));
+                document.getElementById(`endpoint-${num}`)?.addEventListener('input', () => updateBuiltURL(num));
+                document.getElementById(`parameter-${num}`)?.addEventListener('input', () => updateBuiltURL(num));
+            });
         }
 
         function copyURL(elementId) {
@@ -752,19 +732,11 @@ footer:
             });
         }
 
-        // Update built URL as user types
-        for (let i = 1; i <= 2; i++) {
-            document.getElementById(`base-url-${i}`)?.addEventListener('input', () => updateBuiltURL(i));
-            document.getElementById(`api-key-${i}`)?.addEventListener('input', () => updateBuiltURL(i));
-            document.getElementById(`endpoint-${i}`)?.addEventListener('input', () => updateBuiltURL(i));
-            document.getElementById(`parameter-${i}`)?.addEventListener('input', () => updateBuiltURL(i));
-        }
-
         function updateBuiltURL(num) {
-            const base = document.getElementById(`base-url-${num}`).value;
-            const key = document.getElementById(`api-key-${num}`).value;
-            const endpoint = document.getElementById(`endpoint-${num}`).value;
-            const param = document.getElementById(`parameter-${num}`).value;
+            const base = document.getElementById(`base-url-${num}`)?.value || '';
+            const key = document.getElementById(`api-key-${num}`)?.value || '';
+            const endpoint = document.getElementById(`endpoint-${num}`)?.value || '';
+            const param = document.getElementById(`parameter-${num}`)?.value || '';
             
             let url = '';
             if (base) url += base;
@@ -772,31 +744,69 @@ footer:
             if (endpoint) url += endpoint;
             if (param) url += param;
             
-            document.getElementById(`built-url-${num}`).textContent = url || 'Fill in the fields above to build your URL...';
+            const outputElement = document.getElementById(`built-url-${num}`);
+            if (outputElement) {
+                outputElement.textContent = url || 'Fill in the fields above to build your URL...';
+            }
         }
 
         function checkBuiltURL(num) {
             const builtURL = document.getElementById(`built-url-${num}`).textContent.trim();
             const feedback = document.getElementById(`build-feedback-${num}`);
             
-            let correctURL = '';
-            let teamName = '';
-            
-            if (userTeams.length >= 2) {
+            if (num <= userTeams.length) {
                 const team = userTeams[num - 1];
-                correctURL = `https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=${team.searchName}`;
-                teamName = team.name;
-            } else {
-                // Default teams
-                const defaults = {
-                    1: { url: 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Los%20Angeles%20Clippers', name: 'Clippers' },
-                    2: { url: 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Dodgers', name: 'Dodgers' }
-                };
-                correctURL = defaults[num].url;
-                teamName = defaults[num].name;
+                const correctURL = `https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=${team.searchName}`;
+                const teamName = team.name;
+                
+                const alt1 = correctURL.replace(/%20/g, '+');
+                const alt2 = correctURL.replace(/%20/g, ' ');
+                
+                if (builtURL.toLowerCase() === correctURL.toLowerCase() || 
+                    builtURL.toLowerCase() === alt1.toLowerCase() || 
+                    builtURL.toLowerCase() === alt2.toLowerCase()) {
+                    feedback.className = 'feedback correct';
+                    feedback.textContent = `🎉 Perfect! You built the ${teamName} API URL correctly! Try copying and testing it in your browser.`;
+                } else {
+                    feedback.className = 'feedback incorrect';
+                    feedback.textContent = `❌ Not quite right. The correct answer is: ${correctURL}`;
+                }
             }
+        }
+
+        function checkChallenge(challengeNum) {
+            const input = document.getElementById(`challenge${challengeNum}`).value.trim();
+            const feedback = document.getElementById(`feedback${challengeNum}`);
             
-            const alt1 = correctURL.replace(/%20/g, '+');
-            const alt2 = correctURL.replace(/%20/g, ' ');
-            
-            if (builtURL.
+            let correct = false;
+            let correctAnswer = '';
+
+            switch(challengeNum) {
+                case 1:
+                    correctAnswer = 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Rams';
+                    correct = input.toLowerCase() === correctAnswer.toLowerCase();
+                    break;
+                case 2:
+                    correctAnswer = 'https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=NBA';
+                    correct = input.toLowerCase() === correctAnswer.toLowerCase();
+                    break;
+                case 3:
+                    correctAnswer = 'https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?t=USC_Trojans';
+                    correct = input.toLowerCase() === correctAnswer.toLowerCase();
+                    break;
+            }
+
+            if (correct) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Correct! Great job! Copy this URL and test it in your browser to see the data.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `❌ Not quite right. The correct answer is: ${correctAnswer}`;
+            }
+        }
+
+        // Load user's itinerary on page load
+        document.addEventListener('DOMContentLoaded', loadUserItinerary);
+    </script>
+</body>
+</html>
