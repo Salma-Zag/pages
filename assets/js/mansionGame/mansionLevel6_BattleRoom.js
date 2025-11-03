@@ -274,11 +274,29 @@ class MansionLevel6_BattleRoom {
         ];
 
         // Create health bar when battle room loads
-       if (typeof window !== 'undefined' && !window.__mansionLevelEnded) {
-    createBossHealthBar();
-    createPlayerHealthBar();
-       }
-
+        if (typeof window !== 'undefined' && !window.__mansionLevelEnded) {
+            createBossHealthBar();
+            createPlayerHealthBar();
+        }
+        
+        // Create instructions (space to attack)
+        const container = document.createElement('div');
+        container.id = 'instructions-container';
+        Object.assign(container.style, {
+            position: 'absolute',
+            bottom: '80px',  // Moved further down in the battle room
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '5px',
+            width: '60%',
+            zIndex: '100'  // Lower z-index to keep it in the battle room
+        });
+        container.textContent = "WASD to move, SPACE to shoot";
+        const gameContainer = document.querySelector('canvas')?.parentElement || document.body;
+        gameContainer.appendChild(container);
     }
 }
 
