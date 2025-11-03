@@ -424,8 +424,7 @@ date: 2025-10-21
   <div class="footer-quote">
       “Your resume is your first interview — make it unforgettable.”
     </div>
-
-    <!-- ✅ Added Next Module Button -->
+  <!-- ✅ Added Next Module Button -->
   <div class="next-module">
       <a href="{{site.baseurl}}/cs-portfolio-quest/resume/submodule_2/">Next Module →</a>
     </div>
