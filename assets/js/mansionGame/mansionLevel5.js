@@ -5,6 +5,7 @@ import Enemy from './GameEngine/Enemy.js';
 import GameControl from './GameEngine/GameControl.js';
 import Character from './GameEngine/Character.js';
 import Npc from './GameEngine/Npc.js';
+import GameLevel6 from './mansionLevel6.js';
 
 
 class MansionLevel5 {
@@ -498,7 +499,7 @@ class MansionLevel5 {
         const tutorial = document.createElement('div');
         tutorial.style.position = 'fixed';
         tutorial.style.top = '90%';
-        tutorial.style.left = '80%';
+        tutorial.style.right = '10%';
         tutorial.style.transform = 'translate(-50%, -50%)';
         tutorial.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
         tutorial.style.color = '#3700ffff';
