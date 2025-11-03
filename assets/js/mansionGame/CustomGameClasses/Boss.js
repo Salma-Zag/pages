@@ -194,7 +194,7 @@ class Boss extends Enemy {
     performAttack(target) {
         const rand = Math.random();
 
-        /*
+        
         if (this.stage >= 2 && rand < 0.3) {
             this.scytheAttack(target);
         } else if (rand < 0.6) {
@@ -202,9 +202,10 @@ class Boss extends Enemy {
         } else {
             this.arrowAttack(target);
         }
-        */
+        
 
-        this.scytheAttack(target);
+        // shoots only scythes for debugging
+        // this.scytheAttack(target);
     }
 
     // Move towards a certian location
