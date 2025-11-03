@@ -12,8 +12,6 @@ footer:
     home: /west-coast/travel/
     next: /west-coast/analytics/sandiego/
 ---
-
-
 <html lang="en">
 <head>
 <meta charset="utf-8">

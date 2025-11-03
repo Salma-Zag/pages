@@ -792,7 +792,6 @@ setTimeout(function(){
 </body>
 </html>
 
-<<<<<<< HEAD
 <!-- Quiz Section -->
 <div class="quiz-section">
   <h1>🦁 Build Your Audio Player</h1>
@@ -868,7 +867,6 @@ body {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-=======
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -889,7 +887,6 @@ body {
   color: #fff;
   position: relative;
   overflow: hidden;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
 }
 
 .quiz-section::before {
@@ -910,7 +907,6 @@ body {
 }
 
 .quiz-section h1 {
-<<<<<<< HEAD
   font-size: 2.8em;
   background: linear-gradient(135deg, #4a9eff, #7ec8ff);
   -webkit-background-clip: text;
@@ -927,7 +923,6 @@ body {
   text-align: center;
   margin-bottom: 50px;
   font-size: 1.3em;
-=======
   font-size: 2.2em;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   -webkit-background-clip: text;
@@ -945,22 +940,18 @@ body {
   text-align: center;
   margin-bottom: 35px;
   font-size: 1.1em;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   position: relative;
   z-index: 1;
 }
 
 .question {
   background: rgba(255,255,255,.97);
-<<<<<<< HEAD
   padding: 35px;
   border-radius: 16px;
   margin-bottom: 25px;
-=======
   padding: 28px;
   border-radius: 16px;
   margin-bottom: 20px;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   border: none;
   box-shadow: 0 10px 40px rgba(0,0,0,.25);
   transition: all 0.3s ease;
@@ -979,24 +970,20 @@ body {
 }
 
 .question-number {
-<<<<<<< HEAD
   color: #1e3a5f;
   font-weight: 800;
   font-size: 1.1em;
   margin-bottom: 15px;
-=======
   color: #2d5016;
   font-weight: 800;
   font-size: 1em;
   margin-bottom: 12px;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .question-text {
   color: #333;
-<<<<<<< HEAD
   font-size: 1.15em;
   line-height: 1.7;
   margin-bottom: 20px;
@@ -1034,7 +1021,6 @@ body {
   color: #333;
   font-size: 1em;
   min-width: 140px;
-=======
   font-size: 1em;
   line-height: 1.6;
   margin-bottom: 0;
@@ -1074,17 +1060,13 @@ body {
   font-size: 0.95em;
   width: 100%;
   max-width: 200px;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   text-align: center;
   outline: none;
   transition: all 0.3s ease;
   font-weight: 600;
-<<<<<<< HEAD
   font-family: 'Courier New', monospace;
-=======
   margin-top: 12px;
   box-sizing: border-box;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
 }
 
 .fill-blank::placeholder {
@@ -1092,15 +1074,12 @@ body {
 }
 
 .fill-blank:focus {
-<<<<<<< HEAD
   border-color: #7ec8ff;
   background: #fff;
   box-shadow: 0 0 0 4px rgba(74,158,255,.15);
-=======
   border-color: #2d5016;
   background: #fff;
   box-shadow: 0 0 0 4px rgba(74,124,78,.15);
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   transform: scale(1.05);
 }
 
@@ -1110,21 +1089,18 @@ body {
 }
 
 .feedback {
-<<<<<<< HEAD
   margin-top: 20px;
   padding: 16px 20px;
   border-radius: 10px;
   font-weight: 700;
   display: none;
   font-size: 1.05em;
-=======
   margin-top: 15px;
   padding: 14px 18px;
   border-radius: 10px;
   font-weight: 700;
   display: none;
   font-size: 0.95em;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
 }
 
 .feedback.show {
@@ -1153,52 +1129,40 @@ body {
 
 .check-button-container {
   text-align: center;
-<<<<<<< HEAD
   margin-top: 35px;
-=======
   margin-top: 30px;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   position: relative;
   z-index: 1;
 }
 
 .check-answers-btn {
-<<<<<<< HEAD
   padding: 18px 50px;
   font-size: 1.2em;
   font-weight: 700;
   color: white;
   background: linear-gradient(135deg, #4a9eff, #1e3a5f);
-=======
   padding: 16px 45px;
   font-size: 1.1em;
   font-weight: 700;
   color: white;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #1a3d1b;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-<<<<<<< HEAD
   box-shadow: 0 8px 25px rgba(74,158,255,.4);
-=======
   box-shadow: 0 8px 25px rgba(255,215,0,.4);
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
 
 .check-answers-btn:hover:not(:disabled) {
   transform: translateY(-3px);
-<<<<<<< HEAD
   box-shadow: 0 12px 35px rgba(74,158,255,.5);
   background: linear-gradient(135deg, #7ec8ff, #4a9eff);
-=======
   box-shadow: 0 12px 35px rgba(255,215,0,.5);
   background: linear-gradient(135deg, #ffed4e, #ffd700);
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
 }
 
 .check-answers-btn:disabled {
@@ -1208,19 +1172,16 @@ body {
 
 .completion-message {
   background: linear-gradient(135deg, #4caf50, #66bb6a);
-<<<<<<< HEAD
   padding: 50px;
   border-radius: 18px;
   text-align: center;
   display: none;
   margin-top: 40px;
-=======
   padding: 40px;
   border-radius: 18px;
   text-align: center;
   display: none;
   margin-top: 35px;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   box-shadow: 0 20px 60px rgba(76,175,80,.4);
   position: relative;
   z-index: 1;
@@ -1239,19 +1200,15 @@ body {
 
 .completion-message h2 {
   color: #ffffff;
-<<<<<<< HEAD
   margin-bottom: 35px;
   font-size: 2.3em;
-=======
   margin-bottom: 30px;
   font-size: 2em;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
   text-shadow: 0 2px 10px rgba(0,0,0,.2);
 }
 
 .completion-message p {
   color: #ffffff;
-<<<<<<< HEAD
   font-size: 1.25em;
 }
 
@@ -1274,7 +1231,6 @@ body {
 .audio-demo audio {
   width: 100%;
   border-radius: 10px;
-=======
   font-size: 1.1em;
 }
 
@@ -1294,12 +1250,10 @@ body {
 .animal-icon {
   font-size: 3em;
   margin: 20px 0;
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
 }
 
 @media (max-width: 768px) {
   .quiz-section {
-<<<<<<< HEAD
     padding: 40px 20px;
   }
   
@@ -1316,7 +1270,6 @@ body {
   }
 }
 </style>
-=======
     padding: 35px 20px;
   }
   
@@ -1396,7 +1349,6 @@ body {
     <p style="margin-top: 25px;">The animals are roaring with pride! 🐾</p>
   </div>
 </div>
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
 
 <script>
 document.getElementById('checkBtn').addEventListener('click', function() {
@@ -1416,71 +1368,53 @@ document.getElementById('checkBtn').addEventListener('click', function() {
   
   let allCorrect = true;
   
-<<<<<<< HEAD
   // Check answer 1 - controls
   if (answer1 === 'controls') {
     feedback1.textContent = '✓ Correct! "controls" shows the audio controls!';
-=======
   // Check answer 1 - controls attribute
   if (answer1 === 'controls') {
     feedback1.textContent = '🦁 Perfect! The controls attribute shows play, pause, and volume buttons!';
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
     feedback1.className = 'feedback correct show';
     input1.className = 'fill-blank correct';
     question1.className = 'question correct';
     input1.disabled = true;
   } else {
-<<<<<<< HEAD
     feedback1.textContent = '✗ Try again! Think about what shows play/pause buttons.';
-=======
     feedback1.textContent = '✗ Not quite! You need to add the "controls" attribute to show playback controls.';
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
     feedback1.className = 'feedback incorrect show';
     allCorrect = false;
   }
   
-<<<<<<< HEAD
   // Check answer 2 - source
   if (answer2 === 'source') {
     feedback2.textContent = '✓ Perfect! The <source> tag specifies the audio file!';
-=======
   // Check answer 2 - source tag
   if (answer2 === 'source') {
     feedback2.textContent = '🦒 Great job! The <source> tag specifies the audio file location!';
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
     feedback2.className = 'feedback correct show';
     input2.className = 'fill-blank correct';
     question2.className = 'question correct';
     input2.disabled = true;
   } else {
-<<<<<<< HEAD
     feedback2.textContent = '✗ Not quite! What tag links to the audio file?';
-=======
     feedback2.textContent = '✗ Try again! The tag that specifies the audio file is called "source".';
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
     feedback2.className = 'feedback incorrect show';
     allCorrect = false;
   }
   
-<<<<<<< HEAD
   // Check answer 3 - mpeg
   if (answer3 === 'mpeg') {
     feedback3.textContent = '✓ Excellent! MP3 files use "mpeg" as their type!';
-=======
   // Check answer 3 - mpeg type
   if (answer3 === 'mpeg') {
     feedback3.textContent = '🐼 Excellent! audio/mpeg is the correct MIME type for MP3 files!';
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
     feedback3.className = 'feedback correct show';
     input3.className = 'fill-blank correct';
     question3.className = 'question correct';
     input3.disabled = true;
   } else {
-<<<<<<< HEAD
     feedback3.textContent = '✗ Try again! What format type is used for .mp3 files?';
-=======
     feedback3.textContent = '✗ Not quite! For .mp3 files, use "mpeg" as the type (audio/mpeg).';
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
     feedback3.className = 'feedback incorrect show';
     allCorrect = false;
   }
@@ -1493,7 +1427,6 @@ document.getElementById('checkBtn').addEventListener('click', function() {
       
       // Disable the button
       this.disabled = true;
-<<<<<<< HEAD
       this.textContent = '✓ Audio Player Built!';
       this.style.background = 'linear-gradient(135deg, #4caf50, #66bb6a)';
       
@@ -1505,7 +1438,6 @@ document.getElementById('checkBtn').addEventListener('click', function() {
   }
 });
 </script>
-=======
       this.textContent = '✓ Wild Adventure Complete! 🦁';
       this.style.background = 'linear-gradient(135deg, #4caf50, #66bb6a)';
       this.style.color = 'white';
@@ -1519,4 +1451,3 @@ document.getElementById('checkBtn').addEventListener('click', function() {
 
 </body>
 </html>
->>>>>>> 283ea59adc84daf81660d154a35acf789eae964a
