@@ -41,7 +41,11 @@ body {
   display: none;
 }
 
-/* ===== Truck Intro Animation ===== */
+/* ===== Truck Intro Animation (3s + fade out) ===== */
+:root{
+  --intro-duration: 3s;
+}
+
 .intro-section {
   position: fixed;
   inset: 0;
@@ -49,13 +53,16 @@ body {
   place-items: center;
   background: var(--intro-bg);
   z-index: 10;
+  /* Fade the entire intro away by the end of the timeline */
+  animation: introFade var(--intro-duration) ease-in forwards;
 }
 
+/* Keep the caption; it will inherit the fade from the parent */
 .intro-section p {
   color: #fff;
   font-weight: 800;
   margin-top: 18px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
 }
 
 .loop-wrapper {
@@ -76,7 +83,7 @@ body {
   bottom: -20px;
   width: 2px;
   height: 2px;
-  box-shadow: 
+  box-shadow:
     0 0 0 50px var(--teal-light),
     60px 50px 0 70px var(--teal-light),
     90px 90px 0 50px var(--teal-light),
@@ -84,7 +91,7 @@ body {
     290px 320px 0 50px var(--teal-light),
     320px 400px 0 50px var(--teal-light);
   transform: rotate(130deg);
-  animation: mtn 4s linear;
+  animation: mtn var(--intro-duration) linear;
 }
 
 .hill {
@@ -94,14 +101,14 @@ body {
   width: 400px;
   border-radius: 50%;
   height: 20px;
-  box-shadow: 
+  box-shadow:
     0 0 0 50px var(--teal-light),
     -20px 0 0 20px var(--teal-light),
     -90px 0 0 50px var(--teal-light),
     250px 0 0 50px var(--teal-light),
     290px 0 0 50px var(--teal-light),
     620px 0 0 50px var(--teal-light);
-  animation: hill 4s 0s linear;
+  animation: hill var(--intro-duration) linear;
 }
 
 .tree {
@@ -110,16 +117,10 @@ body {
   width: 35px;
   bottom: 0;
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/tree.svg) no-repeat;
-  animation: tree 4s 0s linear;
+  animation: tree var(--intro-duration) linear;
 }
-
-.tree:nth-child(2) {
-  animation: tree2 4s 0.15s linear;
-}
-
-.tree:nth-child(3) {
-  animation: tree3 4s 0.05s linear;
-}
+.tree:nth-child(2){ animation: tree2 var(--intro-duration) linear .15s; }
+.tree:nth-child(3){ animation: tree3 var(--intro-duration) linear .05s; }
 
 .rock {
   margin-top: -17%;
@@ -129,7 +130,7 @@ body {
   border-radius: 20px;
   position: absolute;
   background: #ddd;
-  animation: rock 4s 0s linear;
+  animation: rock var(--intro-duration) linear;
 }
 
 /* Vehicle */
@@ -138,7 +139,7 @@ body {
   transition: all ease;
   width: 85px;
   margin-right: -60px;
-  bottom: 0px;
+  bottom: 0;
   right: 50%;
   position: absolute;
   background: #eee;
@@ -148,67 +149,50 @@ body {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/truck.svg) no-repeat;
   background-size: contain;
   height: 60px;
-  animation: truck 4s 0.08s ease;
+  animation: truck var(--intro-duration) ease .08s;
 }
 
 .truck::before {
   content: " ";
   position: absolute;
   width: 25px;
-  box-shadow: 
+  box-shadow:
     -30px 28px 0 1.5px #fff,
     -35px 18px 0 1.5px #fff;
-  animation: wind 1.5s 0s ease 3;
+  /* 2 quick gusts within the 3s window */
+  animation: wind 1s ease 2;
 }
 
 .wheels {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/wheels.svg) no-repeat;
   height: 15px;
   margin-bottom: 0;
-  animation: truck 4s 0.001s ease;
+  animation: truck var(--intro-duration) ease .001s;
 }
 
-/* ===== Keyframe Animations - Intro ===== */
-@keyframes tree {
-  0% { transform: translate(1350px); }
-  100% { transform: translate(-50px); }
-}
-
-@keyframes tree2 {
-  0% { transform: translate(650px); }
-  100% { transform: translate(-50px); }
-}
-
-@keyframes tree3 {
-  0% { transform: translate(2750px); }
-  100% { transform: translate(-50px); }
-}
-
-@keyframes rock {
-  0% { right: -200px; }
-  100% { right: 2000px; }
-}
+/* ===== Keyframes ===== */
+@keyframes tree   { 0% { transform: translate(1350px); } 100% { transform: translate(-50px); } }
+@keyframes tree2  { 0% { transform: translate(650px);  } 100% { transform: translate(-50px); } }
+@keyframes tree3  { 0% { transform: translate(2750px); } 100% { transform: translate(-50px); } }
+@keyframes rock   { 0% { right: -200px; } 100% { right: 2000px; } }
 
 @keyframes truck {
-  0%, 100% { transform: translateY(0); }
-  6% { transform: translateY(0); }
-  7% { transform: translateY(-6px); }
-  9% { transform: translateY(0); }
+  0%,100% { transform: translateY(0); }
+  6%  { transform: translateY(0); }
+  7%  { transform: translateY(-6px); }
+  9%  { transform: translateY(0); }
   10% { transform: translateY(-1px); }
   11% { transform: translateY(0); }
 }
 
-@keyframes wind {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
-}
+@keyframes wind { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+@keyframes mtn  { 100% { transform: translateX(-2000px) rotate(130deg); } }
+@keyframes hill { 100% { transform: translateX(-2000px); } }
 
-@keyframes mtn {
-  100% { transform: translateX(-2000px) rotate(130deg); }
-}
-
-@keyframes hill {
-  100% { transform: translateX(-2000px); }
+/* Fade the entire intro out and make it non-interactive afterward */
+@keyframes introFade {
+  0%, 80% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; visibility: hidden; }
 }
 
 /* ===== GRIFFITH OBSERVATORY SCENE ===== */
