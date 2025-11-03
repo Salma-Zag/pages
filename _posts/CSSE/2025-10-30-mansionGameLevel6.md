@@ -94,37 +94,60 @@ This level will provide the player with the final key that they need to escape t
 </details>
 
 <details>
-<summary><strong>The Reaper</strong></summary>
+  <summary><strong>The Reaper</strong></summary>
 
-The boss of this level is the skeleton reaper. 
+  <p>The boss of this level is the skeleton reaper.</p>
 
-![]({{site.baseurl}}/images/mansionGame/Reaper.png)
+  <img src="{{site.baseurl}}/images/mansionGame/Reaper.png" alt="Reaper">
 
-As you can see in the image, the boss is a hooded skeleton with 4 floating arms around him. In the game, he chases you around and if he collides with you, you will die. 
+  <p>As you can see in the image, the boss is a hooded skeleton with 4 floating arms around him. In the game, he chases you around and if he collides with you, you will die.</p>
 
-#### Attacks ⚔️
+  <h4>Attacks ⚔️</h4>
 
-The boss uses 2 long range weapons in this fight- arrows and fireballs. We were planning to implement a scythe, but were unable to do so within the time alloted for this project. 
+  <p>
+    The boss uses 2 long range weapons in this fight—arrows and fireballs. We were planning to implement a scythe, but were unable to do so within the time allotted for this project.
+  </p>
 
-![]({{site.baseurl}}/images/mansionGame/arrow.png)
-![]({{site.baseurl}}/images/mansionGame/fireball.png)
-![]({{site.baseurl}}/images/MansionGameBlog/ScytheForBlog.jpg)
+  <img src="{{site.baseurl}}/images/mansionGame/arrow.png" alt="Arrow">
+  <img src="{{site.baseurl}}/images/mansionGame/fireball.png" alt="Fireball">
+  <img src="{{site.baseurl}}/images/MansionGameBlog/ScytheForBlog.jpg" alt="Scythe">
 
-The arrow and fireball just move straight towards where the player was when it was shot. The scythe is more complicated as it is an elliptical path towards the player. This path is shown [here.](https://www.desmos.com/calculator/9nzlkqn87k)
+  <p>
+    The arrow and fireball just move straight towards where the player was when it was shot. The scythe is more complicated as it is an elliptical path towards the player. This path is shown
+    <a href="https://www.desmos.com/calculator/9nzlkqn87k" target="_blank" rel="noopener noreferrer">here</a>.
+  </p>
 
 </details>
 
-## Our team's challenges 💀
+<h2>Our team's challenges 💀</h2>
 
-The OpenCS Game Engine is an amazing game engine, but it's not designed for a fast-paced combat level like this. It is designed for adventure-like games, so creating a boss fight with it was a unique challenge.
+<p>
+  The OpenCS Game Engine is an amazing game engine, but it's not designed for a fast-paced combat level like this. It is designed for adventure-like games, so creating a boss fight with it was a unique challenge.
+</p>
 <!-- ADD ONTO CHALLENGES -->
+<ul>
+    <li>Often times, we needed to read through the game engine's code to find bugs.</li>
+    <li>We ran out of GitHub Copilot uses, which slowed down development</li>
+    <li>We had lots of issues with creating the equation to calculate the scythe's elliptical orbit.</li>
+</ul>
 
-## Organization/Planning 📓
-We did the preliminary ideaton for our level on [this Google Doc](https://docs.google.com/document/d/1Mc77JEsYcTKB2S5DKD96scVaUmgesCg-mYmKgBUQ8_U/edit?usp=sharing). Then, we took our ideas and put them onto a kanban board on GitHub which you can view [here](https://github.com/orgs/CompSciTeam/projects/17).
+<h2>Organization/Planning 📓</h2>
 
-We assigned team members to each task to keep ourselves organized, and we marked things as completed/in progress/scrapped to know what we had to do next. We also kept track of our problems and objectives each time we encountered issues. Below is an example of issues we identified and debugged on 11/2/2025:
+<p>
+  We did the preliminary ideation for our level on
+  <a href="https://docs.google.com/document/d/1Mc77JEsYcTKB2S5DKD96scVaUmgesCg-mYmKgBUQ8_U/edit?usp=sharing" target="_blank" rel="noopener noreferrer">
+    this Google Doc
+  </a>.
+  Then, we took our ideas and put them onto a kanban board on GitHub which you can view
+  <a href="https://github.com/orgs/CompSciTeam/projects/17" target="_blank" rel="noopener noreferrer">here</a>.
+</p>
 
-![]({{site.baseurl}}/images/MansionGameBlog/ExampleGitHubIssue.png)
+<p>
+  We assigned team members to each task to keep ourselves organized, and we marked things as completed/in progress/scrapped to know what we had to do next. We also kept track of our problems and objectives each time we encountered issues. Below is an example of issues we identified and debugged on 11/2/2025:
+</p>
+
+<img src="{{site.baseurl}}/images/MansionGameBlog/ExampleGitHubIssue.png" alt="Example GitHub Issue">
+
 
 ## Key Files 🔑
 All of the code for all of the levels were in /assets/js/mansionGame.
