@@ -495,7 +495,32 @@ class MansionLevel5 {
         kills.innerHTML = `
             <div style="font-size: 14px;">${0} zombie kills</div>
         `;
+
+        const tutorial = document.createElement('div');
+        tutorial.style.position = 'fixed';
+        tutorial.style.top = '90%';
+        tutorial.style.left = '80%';
+        tutorial.style.transform = 'translate(-50%, -50%)';
+        tutorial.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        tutorial.style.color = '#3700ffff';
+        tutorial.style.padding = '10px';
+        tutorial.style.borderRadius = '10px';
+        tutorial.style.fontFamily = "'Press Start 2P', sans-serif";
+        tutorial.style.fontSize = '12px';
+        tutorial.style.textAlign = 'center';
+        tutorial.style.zIndex = '10000';
+        tutorial.style.border = '1px solid #581066ff';
+        tutorial.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+        tutorial.style.width = '200px';
+        tutorial.innerHTML = `
+            <div>
+            'W','A','S','D' to move around <br>
+            'C' to shoot <br>
+            Kill 80 zombies to progress <br>
+            </div>
+        `
         
+        document.body.appendChild(tutorial);
         document.body.appendChild(kills);
 
         // update and collisions every 10 milliseconds
