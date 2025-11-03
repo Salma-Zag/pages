@@ -15,7 +15,6 @@ lxdData:
       Level: 1
       Description: "Spring Boot RESTful Company Profile System"
       Categories: ["Visualization", "ML", "Collation"]
-      Video: "/cs-portfolio-quest/data-viz/submodule_1-video"
       Lessons: "/cs-portfolio-quest/data-viz/submodule_1/"
       Image: "/images/cs-portfolio-quest/data-viz/s1.png"
       Alt: "Data Viz Submodule 1"
@@ -24,7 +23,6 @@ lxdData:
       Level: 2
       Description: "Search & Data Filtering with Spring Boot"
       Categories: ["Visualization", "ML", "Collation"]
-      Video: "/cs-portfolio-quest/data-viz/submodule_2-video"
       Lessons: "/cs-portfolio-quest/data-viz/submodule_2/"
       Image: "/images/cs-portfolio-quest/data-viz/s2.png"
       Alt: "Data Viz Submodule 2"
