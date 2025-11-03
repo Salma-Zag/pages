@@ -226,37 +226,6 @@ console.log(z);
   </div>
 </div>
 
-<script>
-const codeKey = "jsCheckpointCode";
-
-function saveCode() {
-  const code = document.getElementById("codeInput").value;
-  localStorage.setItem(codeKey, code);
-  alert("Code saved.");
-}
-
-function loadCode() {
-  const saved = localStorage.getItem(codeKey);
-  if (saved) {
-    document.getElementById("codeInput").value = saved;
-    alert("Code loaded from local storage.");
-  } else {
-    alert("No saved code found.");
-  }
-}
-
-function clearCode() {
-  document.getElementById("codeInput").value = "";
-  localStorage.removeItem(codeKey);
-  alert("Code cleared.");
-}
-</script>
-
-
-
-
-
-
 ## Function
 Functions are reusable blocks of code that code to be more efficiently and concisely managed. In JavaScript, they are formatted like the following:
 
@@ -332,5 +301,29 @@ console.log() is used in many applications beyond this, and is helpful for debug
     function showAnswer() {
         const exampleAnswer = document.getElementById("example-answer");
         exampleAnswer.innerHTML = "x=5<br>y=2<br>z=x*2<br>console.log(z)";
+    }
+
+    const codeKey = "jsCheckpointCode";
+
+    function saveCode() {
+    const code = document.getElementById("codeInput").value;
+    localStorage.setItem(codeKey, code);
+    alert("Code saved.");
+    }
+
+    function loadCode() {
+    const saved = localStorage.getItem(codeKey);
+    if (saved) {
+        document.getElementById("codeInput").value = saved;
+        alert("Code loaded from local storage.");
+    } else {
+        alert("No saved code found.");
+    }
+    }
+
+    function clearCode() {
+    document.getElementById("codeInput").value = "";
+    localStorage.removeItem(codeKey);
+    alert("Code cleared.");
     }
 </script>
