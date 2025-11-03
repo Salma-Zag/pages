@@ -7,6 +7,7 @@ export default function showEndScreen(gameEnv) {
     // Prevent adding multiple overlays
     if (document.getElementById('mansion-victory-overlay')) return;
 
+    window.__mansionLevelEnded = true;
 
     removePlayerHealthBar();
     removeBossHealthBar();

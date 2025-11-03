@@ -274,10 +274,10 @@ class MansionLevel6_BattleRoom {
         ];
 
         // Create health bar when battle room loads
-        if (typeof window !== 'undefined') {
-            createBossHealthBar();
-            createPlayerHealthBar();
-        }
+       if (typeof window !== 'undefined' && !window.__mansionLevelEnded) {
+    createBossHealthBar();
+    createPlayerHealthBar();
+       }
 
     }
 }
