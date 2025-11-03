@@ -42,6 +42,7 @@ class Boomerang extends Character {
 
         // Check for colision
         const BOOMERANG_KILL_DISTANCE = 40;
+        const SCYTHE_DAMAGE = 20;
         const players = this.gameEnv.gameObjects.filter(obj =>  // Find all player objects
             obj.constructor.name === 'Player' || obj.constructor.name === 'FightingPlayer'
         );
@@ -53,7 +54,9 @@ class Boomerang extends Character {
             if (dist <= BOOMERANG_KILL_DISTANCE) {
                 this.revComplete = true;
                 this.destroy();
-                player.data.health -= 
+                player.data.health -= SCYTHE_DAMAGE;
+                const pct = Math.max(0, Math.min(100, player.data.health || 0));
+                updatePlayerHealthBar(pct);
                 break;
             }
         }
