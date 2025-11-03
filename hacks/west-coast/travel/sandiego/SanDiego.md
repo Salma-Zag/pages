@@ -1325,11 +1325,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>🦁 San Diego Zoo Lion Roar</h3>
       <p>Listen to the powerful roar of the king of the jungle:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" type="audio/mpeg">
+        <source src="/hacks/west-coast/travel/sandiego/tiger-roar-wildlife-sfx-376158.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Lion roar and wildlife sounds</p>
     </div>
@@ -1381,12 +1381,12 @@ body {
       <button class="check-answers-btn" id="zoo-check">Hear the Roar! 🦁</button>
     </div>
     
-    <div class="completion-message" id="zoo-complete">
+   <div class="completion-message" id="zoo-complete">
       <h3>🦁 Wild Success!</h3>
       <div class="audio-player">
         <p>🦁 King of the Jungle - Lion Roar</p>
         <audio controls>
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+          <source src= "/hacks/west-coast/travel/sandiego/tiger-roar-wildlife-sfx-376158.mp3" type="audio/mpeg">
         </audio>
       </div>
       <p>The animals are roaring with pride! 🐾</p>
