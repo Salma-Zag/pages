@@ -73,7 +73,7 @@ class MansionLevel6 {
         // This is the zombie npc
         const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
         const sprite_greet_zombie = "Hi, I'm a zombie.";
-        const sprite_data_zombie = {
+        const sprite_data_zombie1 = {
             id: 'ZombieNPC',
             greeting: sprite_greet_zombie,
             src: sprite_src_zombie,
@@ -121,6 +121,55 @@ class MansionLevel6 {
                 );
             }
         };
+
+        const sprite_data_zombie2 = {
+            id: 'ZombieNPC',
+            greeting: sprite_greet_zombie,
+            src: sprite_src_zombie,
+            SCALE_FACTOR: 4,
+            ANIMATION_RATE: 30,
+            pixels: {width: 3600, height: 1200},
+            INIT_POSITION: {x: (width * 7 / 16), y: (height * 1 / 4)},
+            orientation: {rows: 1, columns: 3 },
+            down: {row: 0, start: 0, columns: 3 , mirror: true},
+            hitbox: {widthPercentage: 0.2, heightPercentage: 0.2},
+            // Add dialogues array for random messages
+            dialogues: [
+                "Boss.js inherits and extends Enemy.js to add more danger.",
+                "When you enter the battle room, your player becomes a FightingPlayer object, which extends the Player class.",
+                "The arrows and fireballs that you fight with are all Projectile objects.",
+                "The Reaper's scythe is a Boomerang object- meaning, it moves in an ellipse.",
+                "I was supposed to be a harmless NPC... then they gave me dialogue arrays.",
+                "All of this runs in a continuous update loop — one tick at a time.",
+                "Both the arrows and fireballs are Projectile objects. Code reuse is peak!",
+                "If I ever freeze, check the console. I might've thrown an error.",
+                "The Reaper's attack is so powerful, it takes a Desmos graph to understand its power.", // reference to the desmos graph we used to calculate the scythe path!
+                "*brains*"
+            ],
+            reaction: function() {
+                // Don't do anything on touch
+                // The Zombie only speaks when interacted with
+            },
+            interact: function() {
+                // Clear any existing dialogue first to prevent duplicates
+                if (this.dialogueSystem && this.dialogueSystem.isDialogueOpen()) {
+                    this.dialogueSystem.closeDialogue();
+                }
+                
+                // Create a new dialogue system if needed
+                if (!this.dialogueSystem) {
+                    this.dialogueSystem = new DialogueSystem();
+                }
+                
+                // Show portal dialogue with buttons
+                const whattosay = this.data.dialogues[Math.floor(Math.random() * this.data.dialogues.length)];
+                this.dialogueSystem.showDialogue(
+                    whattosay,
+                    "Coding God Zombie",
+                    this.spriteData.src
+                );
+            }
+        }; 
         
 
         // invisible sprite for door collision that handles going to lv6 battle room
@@ -404,7 +453,8 @@ class MansionLevel6 {
         this.classes = [
             {class: GameEnvBackground, data: image_data_chamber},
             {class: Player, data: sprite_data_mc},
-            {class: Npc, data: sprite_data_zombie},
+            {class: Npc, data: sprite_data_zombie1},
+            {class: Npc, data: sprite_data_zombie2}, // The second zombie is the one that talks about the code
             {class: Npc, data: sprite_data_bossdoor},
             {class: Npc, data: sprite_data_chair},
             {class: Npc, data: sprite_data_chair2}
