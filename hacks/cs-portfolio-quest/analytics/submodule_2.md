@@ -346,7 +346,7 @@ date: 2025-10-21
         <button class="btn btn-share"> Share</button>
       </div>
     </div>
-    <div class="cert-card cert-purple" >
+    <div class="cert-card cert-green" >
       <span class="cert-badge">Verified</span>
       <h3 class="cert-title">Overall CS Portfolio Certificate</h3>
       <div class="cert-org">Open Coding Society</div>
