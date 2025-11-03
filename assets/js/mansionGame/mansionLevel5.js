@@ -56,7 +56,6 @@ class MansionLevel5 {
     // add player to game
     this.gameEnv.gameObjects.push(player);
 
-
     const sprite_src_zombie = path + "/images/mansionGame/zombieNpc.png";
 
 	const sprite_data_enemy = {
@@ -235,15 +234,20 @@ class MansionLevel5 {
     this.zombiesKilled = 0;
     this.zombies = 0;
 
+    this.zombieList = [];
+
     // zombie spawner
     this.startZombieSpawner();
     // shoot key
     this.bindShootKey();
+
+    // start checking for collisions
+    this.start();
   }
 
     bindShootKey() {
         window.addEventListener("keydown", (event) => {
-            if (event.code === "Space") {
+            if (event.code === "KeyC") {
                 this.shootLaser();
             }
         })
@@ -264,7 +268,7 @@ class MansionLevel5 {
 
         console.log("Shooting lasers")
 
-        let laserNum = 8;
+        const laserNum = 8;
 
         for (let i = 0; i < laserNum; i++)
         {
@@ -280,25 +284,52 @@ class MansionLevel5 {
             const laser = new Character(laserData, this.gameEnv)
     
             // generate lasers in circle
-            laser.velocity = { x: Math.sin((i * Math.PI * 2)/laserNum+1), y: Math.cos((i * Math.PI * 2)/laserNum+1) }
+            laser.velocity = { x: Math.sin((i * Math.PI * 2)/laserNum+1)*5, y: Math.cos((i * Math.PI * 2)/laserNum+1)*5 }
     
             laser.update = function () {
                 this.position.y += this.velocity.y
     
-                if (this.position.y < -this.height) {
+                setTimeout(() => {
                     const index = this.gameEnv.gameObjects.indexOf(this)
                     if (index !== -1) {
                         this.gameEnv.gameObjects.splice(index, 1)
-                        this.destroy()
                     }
-                    return
-                }
+                    this.destroy()
+                }, 1000);
     
                 this.draw()
             }
     
             this.lasers.push(laser)
             this.gameEnv.gameObjects.push(laser)
+        }
+    }
+
+    isColliding(obj1, obj2) {
+        return (
+          obj1.position.x < obj2.position.x + obj2.width &&
+          obj1.position.x + obj1.width > obj2.position.x &&
+          obj1.position.y < obj2.position.y + obj2.height &&
+          obj1.position.y + obj1.height > obj2.position.y
+        )
+    }
+
+    checkCollisions() {
+        // Check for laser-meteor collisions
+        for (let i = this.lasers.length - 1; i >= 0; i--) {
+            const laser = this.lasers[i]
+
+            for (let j = this.zombieList.length - 1; j >= 0; j--) {
+            const zombie = this.zombieList[j]
+
+            if (this.isColliding(laser, zombie)) {
+                laser.destroy();
+                zombie.destroy();
+
+                this.zombiesKilled += 1;
+                break;
+            }
+            }
         }
     }
 
@@ -330,6 +361,7 @@ class MansionLevel5 {
             }
             
             this.zombies += 1;
+
             // Create new enemy with the spawning position
             const zombieData = {
                 ...this.enemyTemplate,
@@ -341,6 +373,7 @@ class MansionLevel5 {
 
             // Add the new zombie to the game
             this.gameEnv.gameObjects.push(zombie);
+            this.zombieList.push(zombie);
         }
     }
 
@@ -350,6 +383,13 @@ class MansionLevel5 {
         setInterval(() => {
         this.spawnZombieBatch();
         }, 5000);
+    }
+
+    start()
+    {
+        setInterval(() => {
+            this.checkCollisions();
+        }, 10);
     }
 }
 
