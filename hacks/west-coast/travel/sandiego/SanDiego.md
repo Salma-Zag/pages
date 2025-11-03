@@ -981,11 +981,11 @@ body {
   &lt;source src="path/to/audio.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</code></pre>
     
-    <div class="example-section">
+   <div class="example-section">
       <h3>🎵 Example Audio Player</h3>
       <p>This is a sample audio player showing the controls attribute in action:</p>
       <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src= "/hacks/west-coast/travel/sandiego/funny-organ-intro-outro-5008.mp3" type="audio/mpeg">
       </audio>
       <p class="source-text">Sample audio for demonstration</p>
     </div>
