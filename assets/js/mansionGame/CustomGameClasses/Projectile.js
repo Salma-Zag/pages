@@ -192,7 +192,7 @@ class Projectile extends Character {
 
             // Do distance formula calculation and return
             const xDiff = Math.abs(nearestBoss.position.x - this.position.x);
-            const yDiff = Math.abs((nearestBoss.position.y + 80) - this.position.y); // +50 accounts for the center of the boss being offset
+            const yDiff = Math.abs((nearestBoss.position.y + 85) - this.position.y); // +50 accounts for the center of the boss being offset
             // console.log(`Boss Y: ${nearestBoss.position.y}, Projectile Y: ${this.position.y}, YDiff: ${yDiff}`);
 
             if (xDiff <= REAPER_HORIZONTAL_HIT_DISTANCE && yDiff <= REAPER_VERTICAL_HIT_DISTANCE) {
