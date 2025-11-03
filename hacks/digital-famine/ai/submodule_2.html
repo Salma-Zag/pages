@@ -576,7 +576,6 @@ date: 2025-10-30
 
         // Define generate functions
         window.generateBadPrompt = async function() {
-            console.log('generateBadPrompt called');
             const badPrompt = document.getElementById('bad-prompt').value.trim();
             const outputEl = document.getElementById('output-bad');
 
@@ -586,7 +585,6 @@ date: 2025-10-30
             }
 
             outputEl.textContent = 'Generating response...';
-            console.log('Generating bad prompt response:', badPrompt);
 
             // Wait for queryGeminiAPI to be available
             if (!window.queryGeminiAPI) {
@@ -597,10 +595,10 @@ date: 2025-10-30
             try {
                 const result = await window.queryGeminiAPI({
                     prompt: "You are an AI assistant. Respond to this user prompt as you normally would, but because the prompt is vague or poorly structured, your response will naturally be less helpful or generic.",
-                    text: badPrompt
+                    text: badPrompt,
+                    parseJSON: false  // We want plain text response
                 });
 
-                console.log('Bad prompt result:', result);
                 if (result.text) {
                     outputEl.textContent = result.text;
                 } else {
@@ -608,16 +606,11 @@ date: 2025-10-30
                 }
             } catch (error) {
                 console.error('Gemini API error:', error);
-                if (error.message.includes('Failed to fetch') || error.message.includes('HTTP')) {
-                    outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint at flask.opencodingsociety.com';
-                } else {
-                    outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
-                }
+                outputEl.textContent = `Error: ${error.message}`;
             }
         };
 
         window.generateGoodPrompt = async function() {
-            console.log('generateGoodPrompt called');
             const goodPrompt = document.getElementById('good-prompt').value.trim();
             const outputEl = document.getElementById('output-good');
 
@@ -627,7 +620,6 @@ date: 2025-10-30
             }
 
             outputEl.textContent = 'Generating response...';
-            console.log('Generating good prompt response:', goodPrompt);
 
             // Wait for queryGeminiAPI to be available
             if (!window.queryGeminiAPI) {
@@ -638,10 +630,10 @@ date: 2025-10-30
             try {
                 const result = await window.queryGeminiAPI({
                     prompt: "You are an AI assistant. Respond to this well-structured user prompt with a comprehensive, clear, and helpful response that addresses all aspects of the request.",
-                    text: goodPrompt
+                    text: goodPrompt,
+                    parseJSON: false  // We want plain text response
                 });
 
-                console.log('Good prompt result:', result);
                 if (result.text) {
                     outputEl.textContent = result.text;
                 } else {
@@ -649,11 +641,7 @@ date: 2025-10-30
                 }
             } catch (error) {
                 console.error('Gemini API error:', error);
-                if (error.message.includes('Failed to fetch') || error.message.includes('HTTP')) {
-                    outputEl.textContent = 'Error: Cannot connect to backend server.\n\n⚠️ The Gemini API requires a backend server.\n\nTo test locally:\n1. Run Flask backend on port 8587 with Gemini API key\n\nFor deployed site:\n1. Contact admin to enable /api/gemini endpoint at flask.opencodingsociety.com';
-                } else {
-                    outputEl.textContent = `Error: ${error.message}\n\nPlease check the browser console (F12) for more details.`;
-                }
+                outputEl.textContent = `Error: ${error.message}`;
             }
         };
 
