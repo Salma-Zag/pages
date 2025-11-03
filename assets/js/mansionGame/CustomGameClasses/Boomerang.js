@@ -57,6 +57,7 @@ class Boomerang extends Character {
                 this.destroy();
                 player.data.health -= SCYTHE_DAMAGE;
                 const pct = Math.max(0, Math.min(100, player.data.health || 0));
+                console.log(`Player ${player.id} hit by boomerang! Health now at ${pct}.`);
                 updatePlayerHealthBar(pct);
                 break;
             }
